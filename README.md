@@ -61,7 +61,10 @@ To clone the frontend from the repository https://github.com/cecomp-rp/site-fron
 ~~~
 npm run build-front-win
 ~~~
->*Note: For now, windows only ;(*
+Or, if you are using Linux:
+~~~
+npm run build-front-linux
+~~~
 
 #### | Configuration
 
