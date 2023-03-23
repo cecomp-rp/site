@@ -4,7 +4,7 @@ const path                  = require('path');
 const express               = require('express');
 const helmet                = require('helmet')
 const redirectToHTTPS       = require('express-http-to-https').redirectToHTTPS
-const routerEndpoints       = require("./routers/routerEndpoints")
+const routers               = require("./routing/routers")
 
 //Dirs
 const sslDirectory = process.env.SSLDIR || path.join(__dirname, "../ssl");
@@ -29,8 +29,8 @@ exp.use(helmet({contentSecurityPolicy: false}))
 //Load angular project
 exp.use(express.static(frontEndDirectory));
 
-//Load endpoints
-exp.use(routerEndpoints)
+//Load routers
+for (let i = 0; i < routers.length; i++) {exp.use(routers[i])}
 
 //Load angular project - redirects
 exp.get('/*', (req, res) => res.sendFile(frontEndDirectory + '/index.html'));

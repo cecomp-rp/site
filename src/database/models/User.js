@@ -11,10 +11,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    password: {
-        type: String
-    },
-    admin: {
+    access_level: {
         type: Number,
         default: 0
     },
