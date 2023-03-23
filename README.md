@@ -14,6 +14,7 @@
 ##### **External:**
 >- NodeJS: https://nodejs.org/en/ (LTS version)
 >- Git:    https://git-scm.com/downloads *(of course...)*
+>- MongoDB: https://www.mongodb.com/download-center/community
 
 >*Note: Don't forget to add to PATH during installation. Also, install NPM.*
 
@@ -90,6 +91,7 @@ For **localhost**:
 
 >- PORT_HTTPS=443
 >- PORT_HTTP=80
+>- DATABASE_URL=
 
 >*Note: Default values included.*
 
@@ -102,6 +104,7 @@ For **production**:
 >- PORT_HTTPS=443
 >- PORT_HTTP=80
 >- SSLDIR=/etc/letsencrypt/live/your_certbot_url
+>- DATABASE_URL=
 
 >*Note: Default values included.*
 
@@ -128,3 +131,14 @@ npm start
 ~~~
 
 >*Note: Use SUDO in linux.*
+
+
+## Database
+
+
+
+
+## Endpoints
+
+
+

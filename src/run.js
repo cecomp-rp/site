@@ -38,6 +38,9 @@ exp.get('/*', (req, res) => res.sendFile(frontEndDirectory + '/index.html'));
 //Listen to http and redirect to https
 exp.listen(httpport);
 
+//Open database connection
+require("./database/database")
+
 //Listen to https
 server.listen(httpsport, () => {
     console.log("Server is up!")
