@@ -1,4 +1,4 @@
-// Xuxulo v2.1
+# Xuxulo v2.1
 
 import discord
 import openai
@@ -11,6 +11,10 @@ TOKEN           = sys.argv[2]
 
 def main():
     client = discord.Client()
+
+    @client.event
+    async def on_ready():
+        await client.change_presence(activity=discord.Game(name="Universe-engine v0.9.887.2"))
 
     @client.event
     async def on_message(textoRecebido):
