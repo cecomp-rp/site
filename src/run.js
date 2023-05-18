@@ -8,6 +8,9 @@ const loadRouters           = require("./routing/routers")
 const loadApps              = require("../apps/apps")
 const loadHbsHelpers        = require("./utils/loadHbsHelpers")
 const hbs                   = require("hbs")
+const passport              = require('passport')
+const cookieSession         = require("cookie-session")
+const { sanitizeObject }    = require("./utils/sanitizeInput")
 
 //Open database connection
 require("./database/database")
@@ -31,6 +34,22 @@ const server = https.createServer(httpsOptions, exp)
 //middleware
 exp.use(redirectToHTTPS([], [], 301));
 exp.use(helmet({contentSecurityPolicy: false}))
+exp.use(express.json({limit: '20mb'}))
+
+//sanitize body
+exp.use((req, res, next) =>{
+  req.body = sanitizeObject(req.body)
+  next()
+})
+
+//Session and passport
+const session = cookieSession({
+  name: 'session',
+  keys: [process.env.SESSION_KEY_1, process.env.SESSION_KEY_1]
+})
+exp.use(session)
+exp.use(passport.initialize());
+exp.use(passport.session());
 
 //Load frontend project (hbs and public)
 exp.use(express.static(frontEndDirectory + "/public"));
