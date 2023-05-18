@@ -1,8 +1,7 @@
 const User              = require("../database/models/User")
+const roles             = require("../utils/auth/roles")
 
-const logged = function(x){
-
-    //x is adminLevel needed!
+const logged = function(permissions_needed){
 
     return async (req, res, next) => {
 
@@ -19,18 +18,34 @@ const logged = function(x){
                 if(redirect == "/logout"){redirect = "/"}
                 req.session.redirect = redirect
 
-                console.log('warning', 'Redirecting non-auth user')
+                console.log('warning', 'Redirecting unlogged user')
                 req.user = {}
                 return res.redirect("/login")
             }
 
-            //Admin level is enough?
-            if(req.user.admin < x){
-                console.log('warning', 'Redirecting non-admin user')
+            //Does user have the permissions?
+            var hasPermission = false;
+            user_roles = req.user.roles;
+            user_permissions = [];
+
+            for(var i = 0; i < roles.length; i++){ //Get all permissions from user roles
+                if(user_roles.includes(roles[i].name)){
+                    user_permissions = user_permissions.concat(roles[i].permissions)
+                }
+            }
+
+            hasPermission = permissions_needed.every(element => { //Test elements of permissions_needed
+                return user_permissions.includes(element);
+            });
+
+            if(user_roles.includes("admin")){ hasPermission = true; } //Admin has all permissions
+
+            if(!hasPermission){
+                console.log('warning', 'Redirecting non-authorized user')
                 req.user = {}
                 return res.redirect("/")
             }
-
+            
 
             //Add IP to session ---------------------------------------------
 

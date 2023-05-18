@@ -1,10 +1,10 @@
 const express                                 = require("express")
 const passport                                = require('passport')
 const logged                                  = require("../../middleware/logged")
-const { sanitizeInput }                       = require("../../utils/sanitizeInput.js")
+const { sanitizeInput }                       = require("../../utils/other/sanitizeInput.js")
 const logout                                  = require("../../utils/auth/logout.js")
 const { deleteOneSession, deleteAllSessions } = require("../../utils/auth/deleteSession")
-require("../../utils/passport")
+require("../../utils/auth/passport")
 
 const router = new express.Router()
 
@@ -13,7 +13,7 @@ const router = new express.Router()
 //The other stuff here are endpoints ;)
 
 //Logout
-router.get("/logout", logged(0), async (req, res) => {
+router.get("/logout", logged(['basic_functions']), async (req, res) => {
   const codeRes = await logout(req) 
   if(codeRes.redirect){
       res.redirect(codeRes.redirect)
@@ -22,13 +22,13 @@ router.get("/logout", logged(0), async (req, res) => {
 })
 
 //Remove One Session
-router.delete("/session", logged(0), async (req, res) => {
+router.delete("/session", logged(['basic_functions']), async (req, res) => {
   const codeRes = await deleteOneSession(req) 
   res.status(codeRes.status).send()
 })
 
 //Remove All Sessions
-router.delete("/session/all", logged(0), async (req, res) => {
+router.delete("/session/all", logged(['basic_functions']), async (req, res) => {
   const codeRes = await deleteAllSessions(req) 
   res.status(codeRes.status).send()
 })
@@ -42,7 +42,7 @@ router.get('/auth/google',
 
 router.get('/auth/google/redirect', 
   passport.authenticate('google', { failureRedirect: '/logout' }), 
-  logged(0),
+  logged(['basic_functions']),
   function(req, res) {
 
     res.redirect(sanitizeInput(req.session.redirect));

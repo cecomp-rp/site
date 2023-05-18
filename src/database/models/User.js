@@ -11,10 +11,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    access_level: {
-        type: Number,
-        default: 0
-    },
+    roles: [{
+        type: String
+    }],
     googleId: {
         type: String
     },

@@ -2,13 +2,11 @@ const jwt               = require("jsonwebtoken")
 const os                = require("os")
 const passport          = require('passport')
 const GoogleStrategy    = require('passport-google-oauth20').Strategy;
-const User              = require("../database/models/User")
-const getProfilePic     = require("./getProfilePicture")
+const User              = require("../../database/models/User")
+const getProfilePic     = require("../profile/getProfilePicture")
 
 
 passport.serializeUser(async function(user, done) {
-
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAA")
 
     try{
 
@@ -67,13 +65,15 @@ passport.use( new GoogleStrategy({
 
       const dataPic = await getProfilePic(profile.photos[0].value)
 
+      //New user
       if(!userDb){
-        const user = await User.create({googleId, email, name, admin: 0, profilePic: dataPic, nick: Date.now().toString(16)})
+        const user = await User.create({googleId, email, name, roles: ['default'], profilePic: dataPic, nick: Date.now().toString(16)})
         console.log('session', 'Created new user: ', email + " (Google)", '')
         return cb(null, user)
       }
 
-      await User.updateOne({email},{googleId, email, name})
+      //Existing user
+      await User.updateOne({email}, {googleId, email, name, profilePic: dataPic})
       console.log('session', 'Login: ', email + " (Google)", '')
       return cb(null, userDb)
  
