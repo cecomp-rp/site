@@ -5,10 +5,6 @@ const express               = require('express');
 const helmet                = require('helmet')
 const redirectToHTTPS       = require('express-http-to-https').redirectToHTTPS
 const routers               = require("./routing/routers")
-const Assistente            = require('../Apps/Xuxulo/Xuxulo');
-// const bot                   = require('../Apps/DiscordBot/Bot')
-let {PythonShell} = require('python-shell');
-let resolve = require('path').resolve
 
 //Dirs
 const sslDirectory = process.env.SSLDIR || path.join(__dirname, "../ssl");
@@ -48,13 +44,4 @@ require("./database/database")
 //Listen to https
 server.listen(httpsport, () => {
     console.log("Server is up!")
-});
-
-let options = {
-  mode: 'text',
-  args: [process.env['OPENAI_KEY'], process.env['DISCORD_TOKEN']]
-};
-
-PythonShell.run(resolve('Apps/Xuxulo/Xuxulo.py'), options, function (err) {
-  if (err) throw err;
 });
