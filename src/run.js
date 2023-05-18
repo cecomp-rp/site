@@ -4,8 +4,8 @@ const path                  = require('path');
 const express               = require('express');
 const helmet                = require('helmet')
 const redirectToHTTPS       = require('express-http-to-https').redirectToHTTPS
-const routers               = require("./routing/routers")
-const apps_to_load          = require("../apps/apps")
+const loadRouters           = require("./routing/routers")
+const loadApps              = require("../apps/apps")
 
 //Dirs
 const sslDirectory = process.env.SSLDIR || path.join(__dirname, "../ssl");
@@ -31,7 +31,7 @@ exp.use(helmet({contentSecurityPolicy: false}))
 exp.use(express.static(frontEndDirectory));
 
 //Load routers
-for (let i = 0; i < routers.length; i++) {exp.use(routers[i])}
+loadRouters(exp);
 
 //Listen to http and redirect to https
 exp.listen(httpport);
@@ -45,4 +45,7 @@ server.listen(httpsport, () => {
 });
 
 //Load apps
-for (let i = 0; i < apps_to_load.length; i++) {apps_to_load[i]();}
+loadApps();
+
+
+

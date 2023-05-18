@@ -4,4 +4,4 @@ mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true, useUnifiedTop
 const db = mongoose.connection;
 
 db.on('error',  function() { console.log("Database could not connect.")})
-db.once('open', function() { console.log("Database is up!") })
+db.once('open', function() { console.log("Database is running!") })

@@ -1,17 +1,22 @@
-const auth = require("./routers/auth")
-const news = require("./routers/news")
-const polls = require("./routers/polls")
-const certificates = require("./routers/certificates")
-const contactForm = require("./routers/contactForm")
-const transparency = require("./routers/transparency")
+const fs = require('fs');
 
-routers = [
-    auth,
-    news,
-    polls,
-    certificates,
-    contactForm,
-    transparency
-]
+//Automatically load all routers in the routers folder
+//USE THE TEMPLATE!
+const loadRouters = (exp) => {
 
-module.exports = routers
+    fs.readdir("./src/routing/routers", { withFileTypes: true }, (error, files) => {
+
+        const directoriesInDIrectory = files
+            .map((item) => item.name);
+
+        directoriesInDIrectory.forEach((directory) => {
+            var router = require(`./routers/${directory}`);
+            exp.use(router);
+        });
+        
+    });
+
+}
+
+module.exports = loadRouters;
+
