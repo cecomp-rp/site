@@ -5,9 +5,7 @@
   "main": "src/run.js",
   "scripts": {
     "dev": "env-cmd -f ./config/dev.env nodemon src/run.js -e hbs,js",
-    "prod": "env-cmd -f ./config/prod.env node src/run.js",
-    "build-front-win": "cd static && git clone https://github.com/cecomp-rp/site-front && cd site-front && npm i && ng build && cd dist && xcopy /e /v site-cecomp ..\\..\\ && cd ../../ && rmdir /s site-front",
-    "build-front-linux": "cd static && git clone https://github.com/cecomp-rp/site-front && cd site-front && npm i && ng build && cd dist && cp -R site-cecomp/* ../../ && cd ../../ && sudo rm -r site-front && cd ../"
+    "prod": "env-cmd -f ./config/prod.env node src/run.js"
   },
   "repository": {
     "type": "git",
