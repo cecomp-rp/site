@@ -5,7 +5,9 @@ const path                  = require('path');
 const router = new express.Router()
 
 router.get("/*", (req, res) => {
-    res.send("Oi");
+    res.render("index", {
+        title: "Home"
+    })
 
 })
 

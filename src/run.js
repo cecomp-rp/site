@@ -6,6 +6,11 @@ const helmet                = require('helmet')
 const redirectToHTTPS       = require('express-http-to-https').redirectToHTTPS
 const loadRouters           = require("./routing/routers")
 const loadApps              = require("../apps/apps")
+const loadHbsHelpers        = require("./utils/loadHbsHelpers")
+const hbs                   = require("hbs")
+
+//Open database connection
+require("./database/database")
 
 //Dirs
 const sslDirectory = process.env.SSLDIR || path.join(__dirname, "../ssl");
@@ -27,17 +32,18 @@ const server = https.createServer(httpsOptions, exp)
 exp.use(redirectToHTTPS([], [], 301));
 exp.use(helmet({contentSecurityPolicy: false}))
 
-//Load angular project
-exp.use(express.static(frontEndDirectory));
+//Load frontend project (hbs and public)
+exp.use(express.static(frontEndDirectory + "/public"));
+exp.set("view engine", "hbs");
+exp.set("views", frontEndDirectory + "/views");
+hbs.registerPartials(frontEndDirectory + "/partials");
+loadHbsHelpers();
 
 //Load routers
 loadRouters(exp);
 
 //Listen to http and redirect to https
 exp.listen(httpport);
-
-//Open database connection
-require("./database/database")
 
 //Listen to https
 server.listen(httpsport, () => {
