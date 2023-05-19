@@ -10,7 +10,7 @@ const loadHbsHelpers        = require("./utils/other/loadHbsHelpers")
 const hbs                   = require("hbs")
 const passport              = require('passport')
 const cookieSession         = require("cookie-session")
-const { sanitizeObject }    = require("./utils/other/sanitizeInput")
+const { sanitizeObject }    = require("./utils/other/sanitizeInput");
 
 //Open database connection
 require("./database/database")

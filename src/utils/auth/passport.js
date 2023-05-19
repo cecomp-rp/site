@@ -3,17 +3,21 @@ const os                = require("os")
 const passport          = require('passport')
 const GoogleStrategy    = require('passport-google-oauth20').Strategy;
 const User              = require("../../database/models/User")
-const getProfilePic     = require("../profile/getProfilePicture")
-
+const getProfilePic         = require("../profile/getProfilePicture")
+const {verifyUspMember}     = require("../profile/verifyMember");
+const { verify } = require("crypto");
 
 passport.serializeUser(async function(user, done) {
 
     try{
-
         const token = jwt.sign({_id: user._id.toString()},process.env.JWT_SECRET, {expiresIn:'100 days'})
 
         user.tokens = user.tokens.concat({token, machine: os.hostname(), os: os.type() + os.release()})
         await user.save()
+
+        //Verifications for Roles
+        verifyUspMember(user.email)
+        verifyBccMember(user.email)
 
         done(null, token)
 
@@ -61,10 +65,9 @@ passport.use( new GoogleStrategy({
 
     try{
 
-      const userDb = await User.findOne({email})
-
-      const dataPic = await getProfilePic(profile.photos[0].value)
-
+      const userDb    = await User.findOne({email})
+      const dataPic   = await getProfilePic(profile.photos[0].value)
+      
       //New user
       if(!userDb){
         const user = await User.create({googleId, email, name, roles: ['default'], profilePic: dataPic, nick: Date.now().toString(16)})

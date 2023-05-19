@@ -13,6 +13,15 @@ roles = [
 
     },
 
+    //USP member
+    {   name: 'usp_member',
+        description: 'A USP member',
+        permissions: [
+            "basic_functions",
+            "usp_member_functions"
+        ]
+    },
+
     //BCC member
     {   name: 'bcc_member',
         description: 'A computer science student from USP RP',
