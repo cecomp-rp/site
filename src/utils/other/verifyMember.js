@@ -25,4 +25,4 @@ const verifyBccMember = async (email) => {
     return true
 }
 
-module.exports = {verifyUspMember};
+module.exports = {verifyUspMember, verifyBccMember};

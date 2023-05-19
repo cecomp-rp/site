@@ -10,8 +10,11 @@
     <h3 class="light">also known as {{user.nick}}</h3>
     <h2 class="light">{{user.email}}</h2>
 
-    <a href="/logout">
-    <button class="" type="button" style="">logout</button>  
-    </a>
+    <!--Buttons-->
+    <a href="/">home</a>
+    <a href="/logout">logout</a>
+
+    <!--Sessions-->
+    {{>account_sessions}}
 
 </body>

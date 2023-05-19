@@ -3,9 +3,8 @@ const os                = require("os")
 const passport          = require('passport')
 const GoogleStrategy    = require('passport-google-oauth20').Strategy;
 const User              = require("../../database/models/User")
-const getProfilePic         = require("../profile/getProfilePicture")
-const {verifyUspMember}     = require("../profile/verifyMember");
-const { verify } = require("crypto");
+const getProfilePic                           = require("../profile/getProfilePicture")
+const {verifyUspMember, verifyBccMember}      = require("../other/verifyMember");
 
 passport.serializeUser(async function(user, done) {
 

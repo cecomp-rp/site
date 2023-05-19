@@ -21,9 +21,14 @@ router.get("/login", not_logged, (req, res) => {
 
 //Account Page
 router.get("/account", logged(['basic_functions']), (req, res) => {
-    res.render("account",{
-        title: "Account",
-        user: req.user
+    const token         = req.user.token
+    const openSessions  = req.user.tokens.filter((tokenFound)=> {return token !== tokenFound.token})
+    const yourSession   = req.user.tokens.filter((tokenFound)=> {return token == tokenFound.token})
+
+    res.render("account", { 
+        user: req.user,
+        openSessions,
+        yourSession: yourSession[0]
     })
 });
 
