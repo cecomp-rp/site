@@ -9,7 +9,7 @@ require("../../utils/auth/passport")
 const router = new express.Router()
 
 //Login
-//It's a page. So, in the CONTENT router
+//It's a page. So, in the PAGES router
 //The other stuff here are endpoints ;)
 
 //Logout
