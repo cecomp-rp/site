@@ -2,7 +2,6 @@ const express               = require("express")
 const logged                = require("../../middleware/logged")
 const Transparency         = require("../../database/models/Transparency")
 
-
 const router = new express.Router()
 
 //GET transparency items
@@ -11,7 +10,7 @@ router.get("/api/transparency/item/:page", logged(['bcc_member_functions']), (re
     //Sort by dateOfTransacation - newest first
     //Limit 50 items per page
 
-    const page_limit = 5;
+    const page_limit = 10;
 
     Transparency.find()
     .sort({dateOfTransaction: -1})

@@ -21,6 +21,11 @@ router.get("/account", logged(['basic_functions']), (req, res) => {
     res.render("account")
 });
 
+//News Page
+router.get("/news/:id", (req, res) => {
+    res.render("news")
+})
+
 //BCC MEMBERS ----------------------------
 
 //Transparency Page

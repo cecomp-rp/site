@@ -36,12 +36,6 @@ exp.use(redirectToHTTPS([], [], 301));
 exp.use(helmet({contentSecurityPolicy: false}))
 exp.use(express.json({limit: '20mb'}))
 
-//sanitize body
-exp.use((req, res, next) =>{
-  req.body = sanitizeObject(req.body)
-  next()
-})
-
 //Session and passport
 const session = cookieSession({
   name: 'session',

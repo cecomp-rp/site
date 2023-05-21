@@ -3,5 +3,9 @@ body {
 }
 
 p {
+    font-family: 'Open Sans', sans-serif;
+}
 
+.ql-editor {
+    font-family: 'Open Sans', sans-serif;
 }

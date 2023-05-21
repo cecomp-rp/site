@@ -27,7 +27,6 @@ function transparency_list_list(page){
                 <p id="transparency_list_value">Value: ${element.value}</p>
                 <p id="transparency_list_dateOfTransaction">Date Of Transaction: ${element.dateOfTransaction}</p>
                 <p id="transparency_list_dateOfTransaction">Date Of Addition: ${element.createdAt}</p>
-                <p id="transparency_list_dateOfTransaction">Date Of Last Modification: ${element.updatedAt}</p>
                 <p id="transparency_list_id">ID: ${element._id}</p>
             </div>
             `;	

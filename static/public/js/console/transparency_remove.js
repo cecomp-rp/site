@@ -22,13 +22,12 @@ function transparency_remove_list(page){
             var item_template = 
             `
             <div id=${element._id}>
-                <p id="transparency_remove_title">Title: ${element.title}</p>
-                <p id="transparency_remove_description">Description: ${element.description}</p>
-                <p id="transparency_remove_value">Value: ${element.value}</p>
-                <p id="transparency_remove_dateOfTransaction">Date Of Transaction: ${element.dateOfTransaction}</p>
-                <p id="transparency_remove_dateOfTransaction">Date Of Addition: ${element.createdAt}</p>
-                <p id="transparency_remove_dateOfTransaction">Date Of Last Modification: ${element.updatedAt}</p>
-                <p id="transparency_remove_id">ID: ${element._id}</p>
+                <p class="transparency_remove_title">Title: ${element.title}</p>
+                <p class="transparency_remove_description">Description: ${element.description}</p>
+                <p class="transparency_remove_value">Value: ${element.value}</p>
+                <p class="transparency_remove_dateOfTransaction">Date Of Transaction: ${element.dateOfTransaction}</p>
+                <p class="transparency_remove_dateOfTransaction">Date Of Addition: ${element.createdAt}</p>
+                <p class="transparency_remove_id">ID: ${element._id}</p>
                 <button onclick="transparency_remove_delete('${element._id}')">Delete</button>
             </div>
             `;	
@@ -57,6 +56,8 @@ function transparency_remove_delete(id){
 
         if(response.status == 200){
             $("#" + id).remove();
+            $("#transparency_remove_div").empty();
+            transparency_remove_list(transparency_remove_page);
         }else{
             alert("Error deleting item!");
         }
