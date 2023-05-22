@@ -1,0 +1,23 @@
+<head>
+
+    {{>common_head}}
+
+</head>
+
+<body>
+
+    <div>
+        <script src="\js/polls/poll_fetch_multiple.js"></script>
+        
+        <h1>Polls</h1>
+
+        <button onclick="poll_fetch_next_page()">Next</button>
+        <p id="poll_fetch_page_display">1</p>
+        <button onclick="poll_fetch_previous_page()">Previous</button>
+
+        <div id="poll_fetch_div">
+        </div>
+
+    </div>
+
+</body>

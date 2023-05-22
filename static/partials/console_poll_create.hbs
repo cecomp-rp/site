@@ -1,0 +1,26 @@
+<div>
+    <script src="js/console/poll_create.js"></script>
+    
+    <h2>Create poll</h2>
+
+    <p>Title (required)</p>
+    <input id="poll_create_title" type="text">
+
+    <p>Description</p>
+    <textarea id="poll_create_description" type="text"></textarea>
+
+    <p>Options (required)</p>
+    <button id="poll_create_add_option" onclick="poll_create_add_option()">Add option</button>
+    <div id="poll_create_options">
+    </div>
+
+    <p>End date (required)</p>
+    <input id="poll_create_end_date" type="date">
+
+    <p></p>
+    <input id="poll_create_submit" type="button" value="Create poll">
+
+    <p id="poll_create_message"></p>
+        
+
+</div>

@@ -11,6 +11,11 @@ router.get("/", (req, res) => {
     res.render("index")
 })
 
+//News Page
+router.get("/news/:id", (req, res) => {
+    res.render("news")
+})
+
 //Login Page
 router.get("/login", not_logged, (req, res) => {
     res.render("login")
@@ -21,12 +26,17 @@ router.get("/account", logged(['basic_functions']), (req, res) => {
     res.render("account")
 });
 
-//News Page
-router.get("/news/:id", (req, res) => {
-    res.render("news")
-})
-
 //BCC MEMBERS ----------------------------
+
+//Polls Page
+router.get("/polls", logged(['bcc_member_functions']), (req, res) => {
+    res.render("polls")
+});
+
+//Polls Page - Unique Poll
+router.get("/polls/:id", logged(['bcc_member_functions']), (req, res) => {
+    res.render("poll")
+});
 
 //Transparency Page
 router.get("/transparency", logged(['bcc_member_functions']), (req, res) => {
