@@ -21,6 +21,7 @@ router.get("/api/transparency/item/:page", logged(['bcc_member_functions']), (re
         res.status(200).json(items)
     }).catch((err) => {
         res.status(400).send()
+        return;
     })
 
 })
@@ -45,6 +46,7 @@ router.get("/api/transparency/summary", logged(['bcc_member_functions']), (req, 
         res.status(200).json(summary[0])
     }).catch((err) => {
         res.status(400).send()
+        return;
     })
 
 })
@@ -57,6 +59,7 @@ router.post("/api/transparency/item", logged(['admin']), (req, res) => {
         res.status(201).send()
     }).catch((err) => {
         res.status(400).send()
+        return;
     })
     
 })
@@ -69,6 +72,7 @@ router.delete("/api/transparency/item/:id", logged(['admin']), (req, res) => {
         res.status(200).send()
     }).catch((err) => {
         res.status(400).send()
+        return;
     })
 
 })

@@ -12,7 +12,6 @@ function poll_remove_list(poll_remove_page){
     .then((response) => {
         return response.json()
     }).then((polls) => {
-        console.log(polls)
 
         polls.forEach(element => {
 

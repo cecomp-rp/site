@@ -40,6 +40,7 @@ router.get("/api/news/by_page/:page", (req, res) => {
     }).catch((error) => {
         console.log(error)
         res.status(400).send()
+        return;
     })
 
 })
@@ -60,6 +61,7 @@ router.get("/api/news/by_id/:id", (req, res) => {
 
     }).catch((error) => {
         res.status(400).send()
+        return;
     })
 
 })
@@ -75,6 +77,7 @@ router.post("/api/news", logged(['admin']), (req, res) => {
     }).catch((error) => {
         res.status(400).send()
         console.log(error)
+        return;
     })
 
 })
@@ -82,11 +85,12 @@ router.post("/api/news", logged(['admin']), (req, res) => {
 //PATCH news (update)
 router.patch("/api/news/:id", logged(['admin']), (req, res) => {
 
-    News.findOneAndUpdate({_id: req.params.id}, req.body)
+    News.findOneAndUpdate({_id: req.params.id}, req.body, {runValidators: true})
     .then((news) => {
         res.status(200).send()
     }).catch((error) => {
         res.status(400).send()
+        return;
     })
 
 })
@@ -99,6 +103,7 @@ router.delete("/api/news/:id", logged(['admin']), (req, res) => {
         res.status(200).send()
     }).catch((error) => {
         res.status(400).send()
+        return;
     })
 
 })

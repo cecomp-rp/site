@@ -22,13 +22,13 @@ router.get("/logout", logged(['basic_functions']), async (req, res) => {
 })
 
 //Remove One Session
-router.delete("/session", logged(['basic_functions']), async (req, res) => {
+router.delete("/api/session", logged(['basic_functions']), async (req, res) => {
   const codeRes = await deleteOneSession(req) 
   res.status(codeRes.status).send()
 })
 
 //Remove All Sessions
-router.delete("/session/all", logged(['basic_functions']), async (req, res) => {
+router.delete("/api/session/all", logged(['basic_functions']), async (req, res) => {
   const codeRes = await deleteAllSessions(req) 
   res.status(codeRes.status).send()
 })

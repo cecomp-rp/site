@@ -30,7 +30,7 @@ var poll_create_editors = [];
 
 //Functions
 function poll_create_add_option(){
-    var uniq = 'id' + (new Date()).getTime();
+    var uniq = 'id' + (new Date()).getTime() + parseInt(Math.random() * 1000);
 
     var append_model = 
     `

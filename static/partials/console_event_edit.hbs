@@ -1,0 +1,31 @@
+<div>
+    <script src="js/console/event_edit.js"></script>
+    
+    <h2>Edit events</h2>
+    
+    <p>Event ID (required)</p>
+    <input id="event_edit_id" type="text"></input>
+
+    <p id="event_edit_fetch_message"></p>
+
+    <p>Name (required)</p>
+    <input id="event_edit_name" type="text"></input>
+
+    <p>Description</p>
+    <textarea id="event_edit_description" type="text"></textarea>
+
+    <p>Start date (required)</p>
+    <input id="event_edit_start_date" type="date"></input>
+
+    <p>End date (required)</p>
+    <input id="event_edit_end_date" type="date"></input>
+
+    <p>Activities</p>
+    <button id="event_edit_activity_create" onclick="event_edit_activity_add()">Add activity</button>
+    <div id="event_edit_activity_div"></div>
+    
+    <p></p>
+    <button id="event_edit_submit">Edit event</button>
+    <p id="event_edit_message"></p>
+
+</div>

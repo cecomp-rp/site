@@ -1,0 +1,27 @@
+<div>
+    <script src="js/console/event_create.js"></script>
+    
+    <h2>Create events</h2>
+
+    <p>Name (required)</p>
+    <input id="event_create_name" type="text"></input>
+
+    <p>Description</p>
+    <textarea id="event_create_description" type="text"></textarea>
+
+    <p>Start date (required)</p>
+    <input id="event_create_start_date" type="date"></input>
+
+    <p>End date (required)</p>
+    <input id="event_create_end_date" type="date"></input>
+
+    <p>Activities</p>
+    <button id="event_create_activity_create" onclick="event_create_activity_add()">Add activity</button>
+    <div id="event_create_activity_div"></div>
+    
+    <p></p>
+    <button id="event_create_submit">Create event</button>
+    <p id="event_create_message"></p>
+
+
+</div>

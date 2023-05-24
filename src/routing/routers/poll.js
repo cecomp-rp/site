@@ -45,6 +45,7 @@ router.get("/api/polls/by_page/:page", logged(['bcc_member_functions']), (req, r
     }).catch((error) => {
         console.log(error)
         res.status(400).send()
+        return;
     })
 
 })
@@ -75,6 +76,7 @@ router.get("/api/polls/by_id/:id", logged(['bcc_member_functions']), (req, res) 
     }).catch((error) => {
         console.log(error)
         res.status(400).send()
+        return;
     })
 
 })
@@ -113,6 +115,7 @@ router.post("/api/polls/vote/:id", logged(['bcc_member_functions']), async (req,
     }).catch((error) => {
         console.log(error)
         res.status(400).send()
+        return;
     })
 
 })
@@ -128,6 +131,7 @@ router.post("/api/polls", logged(['admin']), async (req, res) => {
     }).catch((error) => {
         console.log(error)
         res.status(400).send()
+        return;
     })
 
 })
@@ -141,6 +145,7 @@ router.delete("/api/polls/:id", logged(['admin']), async (req, res) => {
     }).catch((error) => {
         console.log(error)
         res.status(400).send()
+        return;
     })
 
 })

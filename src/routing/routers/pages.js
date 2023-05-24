@@ -26,6 +26,16 @@ router.get("/account", logged(['basic_functions']), (req, res) => {
     res.render("account")
 });
 
+//Events Page
+router.get("/events", logged(['basic_functions']), (req, res) => {
+    res.render("events")
+});
+
+//Events Page - Unique Event
+router.get("/events/:id", logged(['basic_functions']), (req, res) => {
+    res.render("event")
+});
+
 //BCC MEMBERS ----------------------------
 
 //Polls Page
