@@ -1,4 +1,3 @@
-const event_enable_activities = false;
 var event_page = 1;
 
 $('document').ready(function(){
@@ -27,7 +26,6 @@ function event_list(){
             
                 <p class="event_createdAt">Created At: ${element.createdAt}</p>
                 <p class="event_updatedAt">Updated At: ${element.updatedAt}</p>
-                <div class="activities" id="${element._id}_activities"></div>
 
                 <a href="/events/${element.name}">See page...</a>
             </div>
@@ -35,24 +33,6 @@ function event_list(){
 
             $("#event_div").append(append_model);
 
-            //Append activities from element
-            if(event_enable_activities){
-                element.activities.forEach(activity => {
-
-                    var append_activity = 
-                    `
-                    <p>Title: ${activity.title}</p>
-                    <p>Description: ${activity.description}</p>
-                    <p>End Date: ${activity.date}</p>
-                    <p>Duration: ${activity.duration}</p>
-                    <br>
-                    `;
-
-                    $("#" + element._id + "_activities").append(append_activity);
-
-                });
-            }
-            
         });
 
     })}).catch((err) => {

@@ -7,8 +7,6 @@ $('document').ready(function () {
         return response.json()
     }).then((event) => {
 
-        console.log(event)
-
         $("#event_title").text(event.title);
         $("#event_name").text(event.name);
         $("#event_description").text(event.description);

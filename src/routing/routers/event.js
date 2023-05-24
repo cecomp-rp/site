@@ -2,6 +2,8 @@ const urlSlug                   = require("url-slug")
 const express                   = require("express")
 const logged                    = require("../../middleware/logged")
 const Event                     = require("../../database/models/Event")
+const { acceleratedmobilepageurl } = require("googleapis/build/src/apis/acceleratedmobilepageurl")
+const e = require("express")
 
 const router = new express.Router()
 
@@ -14,7 +16,7 @@ const router = new express.Router()
 //EVENTS/ACTIVITIES MANAGEMENT
 
 //GET events (list by page)
-router.get("/api/events/by_page/:page", logged(['admin']), (req, res) => {
+router.get("/api/events/by_page/:page", logged(['basic_functions']), (req, res) => {
 
     const page_limit = 5;
 
@@ -25,6 +27,13 @@ router.get("/api/events/by_page/:page", logged(['admin']), (req, res) => {
     .exec()
     .then((events) => {
 
+        //If user is not admin, remove activities
+        if(!req.user.admin){
+            events.forEach((event) => {
+                event.activities = []
+            })
+        }
+        
         res.status(200).json(events)
 
     }).catch((error) => {
@@ -59,7 +68,15 @@ router.get("/api/events/by_id/:id", logged(['admin']), (req, res) => {
 router.get("/api/events/by_name/:name", logged(['basic_functions']), (req, res) => {
 
     Event.findOne({name: req.params.name})
+    .lean()
     .then((event) => {
+
+        //If user is not admin, remove activities ids
+        if(!req.user.admin){
+            event.activities.forEach((activity) => {
+                activity._id = '';
+            })
+        }
 
         res.status(200).json(event)
 
@@ -122,8 +139,8 @@ router.patch("/api/events/:id", logged(['admin']), async (req, res) => {
 
     //If, there's a new name: Name is unique?
     const new_name = req.body.name;
-    const old_name = await Event.findOne({_id: req.params.id});
-    if(new_name != old_name.name){
+    const old_event = await Event.findOne({_id: req.params.id});
+    if(new_name != old_event.name){
         const unique_name = await Event.findOne({name: req.body.name})
         if(unique_name){res.status(400).send(); return;}
     }
@@ -131,6 +148,7 @@ router.patch("/api/events/:id", logged(['admin']), async (req, res) => {
     //Verify dates
     if(req.body.startDate > req.body.endDate){res.status(400).send(); return;}
 
+    //Update the rest
     Event.findOneAndUpdate({_id: req.params.id}, req.body, {runValidators: true})
     .then((event) => {
 
@@ -163,5 +181,6 @@ router.delete("/api/events/:id", logged(['admin']), async (req, res) => {
     })
 
 })
+
 
 module.exports = router

@@ -56,6 +56,7 @@ function event_edit_fetch(id){
                 var append_model =
                 `
                 <div id="${uniq}">
+                    <p id="${uniq}_oldId" style="display:none;">${activity._id}</p>
                     <input type="text" id="${uniq}_title" placeholder="Title (required)" value="${activity.title}"></input>
                     <textarea id="${uniq}_description" placeholder="Description">${activity.description}</textarea>
                     <input type="date" id="${uniq}_date" placeholder="Date" value="${jquery_date}"></input>
@@ -88,12 +89,15 @@ function event_edit_submit(id){
     $('#event_edit_activity_div').children().each(function () {
 
         var id          = $(this).attr('id');
+
+        var oldId       = $(`#${id}_oldId`).text();
         var title       = $(`#${id}_title`).val();
         var description = $(`#${id}_description`).val();
         var date        = $(`#${id}_date`).val();
         var duration    = $(`#${id}_duration`).val();
 
         activities.push({
+            _id: oldId,
             title,
             description,
             date,

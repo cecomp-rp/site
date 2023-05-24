@@ -38,7 +38,11 @@ const logged = function(permissions_needed){
                 return user_permissions.includes(element);
             });
 
-            if(user_roles.includes("admin")){ hasPermission = true; } //Admin has all permissions
+            if(user_roles.includes("admin")){ 
+                req.user.admin = true;
+                hasPermission = true; 
+            
+            } //Admin has all permissions
 
             if(!hasPermission){
                 console.log('warning', 'Redirecting non-authorized user')

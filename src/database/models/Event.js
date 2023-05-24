@@ -43,6 +43,7 @@ const eventsSchema = new mongoose.Schema({
 
         duration: {
             type: Number,
+            default: 0
         }
 
     }],
