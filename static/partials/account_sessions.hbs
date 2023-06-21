@@ -1,8 +1,19 @@
 <div>
     <script src="js/account/account_sessions.js"></script>
 
-    <h2>Your session</h2>
+    <h2>Sessions</h2>
+    <h3>Your session</h3>
+    <p id="acc_session_current_machine"></p>
+    <p id="acc_session_current_os"></p>
+    <p id="acc_session_current_ip"></p>
 
-    <h2>Other session</h2>
+    <h3>Other sessions</h3>
+    <button onclick="acc_session_next_page()">Next</button>
+    <p id="acc_session_page_display">1</p>
+    <button onclick="acc_session_previous_page()">Previous</button>
+    <div id="acc_session_other"></div>
+
+    <h3>End all sessions</h3>
+    <button onclick="acc_session_delete_all()">End all sessions</button>
 
 </div>
