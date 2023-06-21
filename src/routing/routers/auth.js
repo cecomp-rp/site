@@ -21,9 +21,15 @@ router.get("/logout", logged(['basic_functions']), async (req, res) => {
   res.status(codeRes.status).send()
 })
 
+//GET Sessions
+router.get("/api/session", logged(['basic_functions']), async (req, res) => {
+  const sessions = req.user.sessions
+  res.status(200).json(sessions)
+})
+
 //Remove One Session
-router.delete("/api/session", logged(['basic_functions']), async (req, res) => {
-  const codeRes = await deleteOneSession(req) 
+router.delete("/api/session/:id", logged(['basic_functions']), async (req, res) => {
+  const codeRes = await deleteOneSession(req)
   res.status(codeRes.status).send()
 })
 

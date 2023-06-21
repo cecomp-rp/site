@@ -13,7 +13,7 @@ const router = new express.Router()
 //GET certificates (unique by id)
 //In pages router
 
-//GET certificates (list by email and page) OK
+//GET certificates (list by email and page)
 router.get("/api/certificates/by_page_with_email/:email/:page", logged(['admin']), (req, res) => {
 
     const page_limit = 5;
@@ -76,7 +76,7 @@ router.get("/api/certificates/by_page/:page", logged(['basic_functions']), (req,
 
 })
 
-//GET certificates (unique by id) OK
+//GET certificates (unique by id)
 router.get("/api/certificates/by_id/:id", (req, res) => {
 
     Certificate.findOne({_id: req.params.id})
@@ -109,7 +109,7 @@ router.get("/api/certificates/by_id/:id", (req, res) => {
 
 })
 
-//POST certificates OK
+//POST certificates
 router.post("/api/certificates", logged(['admin']), (req, res) => {
 
     req.body.is_event_certificate = false
@@ -154,7 +154,7 @@ router.post("/api/certificates", logged(['admin']), (req, res) => {
     
 })
 
-//PATCH certificates OK
+//PATCH certificates
 router.patch("/api/certificates/:id", logged(['admin']), (req, res) => {
 
     //Check if certificate exists and is not an event certificate
@@ -188,7 +188,7 @@ router.patch("/api/certificates/:id", logged(['admin']), (req, res) => {
 
 })
 
-//DELETE certificates OK
+//DELETE certificates
 router.delete("/api/certificates/:id", logged(['admin']), (req, res) => {
 
     //Check if certificate exists and is not an event certificate
