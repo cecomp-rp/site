@@ -41,6 +41,16 @@ router.get("/events/:id", logged(['basic_functions']), (req, res) => {
     res.render("event")
 });
 
+//Certificates Page
+router.get("/certificates", logged(['basic_functions']), (req, res) => {
+    res.render("certificates")
+})
+
+//Certificates Page - Unique Certificate
+router.get("/certificates/:id", (req, res) => {
+    res.render("certificate")
+})
+
 //BCC MEMBERS ----------------------------
 
 //Polls Page

@@ -1,9 +1,8 @@
-const express               = require("express")
-const logged                = require("../../middleware/logged")
-const Subscription          = require("../../database/models/Subscription")
-const User                  = require("../../database/models/User")
-const Event                 = require("../../database/models/Event")
-const cookieSession = require("cookie-session")
+const express                                               = require("express")
+const logged                                                = require("../../middleware/logged")
+const { createEventCertificate }                            = require("../../utils/certificate/eventCertificate")
+const Subscription                                          = require("../../database/models/Subscription")
+const Event                                                 = require("../../database/models/Event")
 
 const router = new express.Router()
 
@@ -29,6 +28,10 @@ router.get("/sub/:event_name", logged(['basic_functions']), async (req, res) => 
         user_id: req.user._id,
         event_id: event._id
     }).then((sub) => {
+
+        //Create CERTIFICATE
+        createEventCertificate(req.user._id, event._id);
+
         res.redirect("/events/" + req.params.event_name);
     }).catch((err) => {
         console.log(err);
