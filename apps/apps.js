@@ -2,7 +2,7 @@ const fs = require('fs');
 
 //Automatically load all apps in the apps folder
 //USE THE TEMPLATE!
-const loadApps = async () => {
+const loadApps = async (exp) => {
     await fs.readdir("./apps", { withFileTypes: true }, (error, files) => {
         
         const directoriesInDIrectory = files
@@ -11,7 +11,8 @@ const loadApps = async () => {
 
         directoriesInDIrectory.forEach((directory) => {
             var app = require(`./${directory}/run`);
-            app();
+            app(exp);
+            console.log(`Loaded app: ${directory}`);
         });
 
     });

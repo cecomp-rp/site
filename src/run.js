@@ -55,6 +55,9 @@ loadHbsHelpers();
 //Load routers
 loadRouters(exp);
 
+//Load apps
+loadApps(exp);
+
 //Listen to http and redirect to https
 exp.listen(httpport);
 
@@ -63,8 +66,7 @@ server.listen(httpsport, () => {
     console.log("Server is up!")
 });
 
-//Load apps
-loadApps();
+
 
 
 

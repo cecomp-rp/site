@@ -11,11 +11,6 @@ router.get("/", (req, res) => {
     res.render("index")
 })
 
-//Semcomp Page
-router.get("/semcomp", (req, res) => {
-    res.render("semcomp")
-})
-
 //News Page
 router.get("/news/:id", (req, res) => {
     res.render("news")
