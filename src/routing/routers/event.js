@@ -109,7 +109,6 @@ router.post("/api/events", logged(['admin']), async (req, res) => {
     //Verify dates
     if(req.body.startDate > req.body.endDate){res.status(400).send()}
 
-
     Event.create(req.body)
     .then((event) => {
         

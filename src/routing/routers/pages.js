@@ -26,6 +26,12 @@ router.get("/login", not_logged, (req, res) => {
     res.render("login")
 });
 
+//Calendar Page
+router.get("/calendar", (req, res) => {
+    res.render("calendar")
+});
+
+
 //Account Page
 router.get("/account", logged(['basic_functions']), (req, res) => {
     res.render("account")
