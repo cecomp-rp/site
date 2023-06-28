@@ -143,6 +143,11 @@ router.patch("/api/events/:id", logged(['admin']), async (req, res) => {
         const unique_name = await Event.findOne({name: req.body.name})
         if(unique_name){res.status(400).send(); return;}
     }
+
+    //IF _id is '' in activities, remove it
+    req.body.activities.forEach((activity) => {
+        if(activity._id == ''){activity._id = undefined}
+    })
         
     //Verify dates
     if(req.body.startDate > req.body.endDate){res.status(400).send(); return;}
