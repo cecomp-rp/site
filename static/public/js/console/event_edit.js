@@ -59,7 +59,7 @@ function event_edit_fetch(id){
                     <p id="${uniq}_oldId" style="display:none;">${activity._id}</p>
                     <input type="text" id="${uniq}_title" placeholder="Title (required)" value="${activity.title}"></input>
                     <textarea id="${uniq}_description" placeholder="Description">${activity.description}</textarea>
-                    <input type="date" id="${uniq}_date" placeholder="Date" value="${jquery_date}"></input>
+                    <input type="datetime-local" id="${uniq}_date" placeholder="Date" value="${jquery_date}"></input>
                     <input type="number" id="${uniq}_duration" placeholder="Duration" value="${activity.duration}"></input>
                     <button onclick="event_edit_activity_remove('${uniq}')">Remove</button>
                 </div>
