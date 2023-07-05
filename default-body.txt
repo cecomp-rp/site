@@ -1,0 +1,18 @@
+<head>
+    {{>common_head}}
+</head>
+
+<body>
+
+    <!-- NAV -->
+    {{>common_nav}}
+
+    <!-- MAIN -->
+    <div class="main ">
+
+    </div>
+
+    <!-- FOOTER -->
+    {{>common_footer}}
+
+</body>

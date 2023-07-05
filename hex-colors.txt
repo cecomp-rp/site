@@ -1,0 +1,12 @@
+Cinza
+
+#343434 (claro)
+#1d1d1d (escuro)
+
+Branco
+
+#e8e8e8
+
+Roxo
+
+#9500ff

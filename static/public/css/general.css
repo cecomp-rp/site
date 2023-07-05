@@ -1,0 +1,198 @@
+/*GENERAL*/
+body {
+    font-family: 'Open Sans', sans-serif;
+
+    background-color: #1d1d1d;
+    color: #e8e8e8;
+
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h2 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h3 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h4 {
+    font-family: 'Open Sans', sans-serif;
+}
+
+p {
+    font-family: 'Open Sans', sans-serif;
+}
+
+input {
+    font-family: 'Open Sans', sans-serif;
+}
+
+textarea {
+    font-family: 'Open Sans', sans-serif;
+}
+
+button {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    
+    width: 100px;
+    height: 30px;
+
+    border: none;
+    border-radius: 2px;
+
+    color: #e8e8e8;
+    background-color: #343434;
+}
+
+button:hover {
+    cursor: pointer;
+
+    background-color: #9500ff;
+}
+
+a {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+
+    text-decoration: none;
+
+    color: #e8e8e8;
+}
+
+a:hover {
+    color: #9500ff;
+}
+
+img {
+    width: auto;
+    height: 100%;
+}
+
+/*FLEX*/
+
+.flex {
+    display: flex;
+}
+
+.col {
+    flex-direction: column;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.start {
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.end {
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+/*QUILL*/
+.ql-editor {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*STRUCT DIVS*/
+.main {
+    display: flex;
+    flex-direction: column;
+
+    margin: 10px;
+}
+
+/*NAV BAR*/
+.nav {
+    display: flex;
+    flex-direction: row;
+
+    position: fixed;
+
+    width: 100%;
+    height: 80px;
+
+    top: 0px;
+
+    margin: 0;
+    padding: 0;
+
+    background-color: #e8e8e8;
+}
+
+.nav-logo {
+    position: absolute;
+
+    width: auto;
+    height: 80px;
+
+    cursor: pointer;
+
+    top: 0;
+    left: calc( 50% - 40px );
+}
+
+.nav-user-area {
+    width: 100%;
+
+    text-align: right;
+
+    margin-right: 10px;
+
+    color: #9500ff;
+}
+
+.nav-label {
+    width: 100%;
+
+    margin-left: 10px;
+
+    color: #9500ff;
+}
+
+.nav-user-profilePic {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    margin: 8px;
+}
+
+.nav-user-area h3 {
+    font-size: 11pt;
+
+    margin: 0;
+    padding: 0;
+
+    margin-bottom: 5px;
+    margin-right: 10px;
+
+}
+
+.nav-user-area a {
+    color: #9500ff;
+
+
+}
+

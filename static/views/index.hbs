@@ -1,36 +1,48 @@
 <head>
+    <title>Welcome</title>
     {{>common_head}}
 </head>
 
 <body>
 
-    <p>Index</p>
+    <!-- NAV -->
+    {{>common_nav}}
 
-    <!-- Links -->
-    <div style="display: flex; flex-direction:column;">
-        
-        <!-- Account -->
-        <a href="/login">Login</a>
-        <a href="/account">Account</a>
+    <!-- MAIN -->
+    <div class="main">
 
-        <!-- All members -->
-        <a href="/calendar">Calendar</a>
-        <a href="/contact">Contact us</a>
-        <a href="/store">Store</a>
-        <a href="/certificates">Certificates</a>
-        <a href="/about">About us</a>
-        <a href="/events">Events</a>
-        <a href="/semcomp">Semcomp</a>
+        <!-- Links -->
+        <div class="flex col">
+            
+            <!-- All members -->
+            <a href="/calendar">Calendar</a>
+            <a href="/contact">Contact us</a>
+            <a href="/store">Store</a>
+            <a href="/certificates">Certificates</a>
+            <a href="/about">About us</a>
+            <a href="/events">Events</a>
+            <a href="/semcomp">Semcomp</a>
 
-        <!-- BCC members -->
-        <a href="/transparency">Transparency</a>
-        <a href="/polls">Polls</a>
+            <!-- BCC members -->
+            <a href="/transparency">Transparency</a>
+            <a href="/polls">Polls</a>
 
-        <!-- Admin -->
-        <a href="/console">Console</a>
+            <!-- Admin -->
+            <a href="/console">Console</a>
+        </div>
+
+        {{>index_news_list}}
+
+
     </div>
 
-    {{>index_news_list}}
+    <!-- FOOTER -->
+    {{>common_footer}}
+
+
+
+
+    
 
 
 </body>

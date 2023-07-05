@@ -16,6 +16,10 @@ const logged = function(permissions_needed){
                 if(req.originalUrl){redirect = req.originalUrl}else{redirect = "/"}
                 if(redirect == "/login"){redirect = "/"}
                 if(redirect == "/logout"){redirect = "/"}
+
+                //if redirect is starts with /api/*, redirect to / (REGEX)
+                if(redirect.match(/^\/api\/.*/)){redirect = "/"}
+
                 req.session.redirect = redirect
 
                 console.log('warning', 'Redirecting unlogged user')

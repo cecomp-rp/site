@@ -8,7 +8,6 @@ async function main(exp){
 
     //Load public files
     exp.use(express.static(__dirname + "/static/public"));
-    console.log(__dirname + "/public");
     
 }
 
