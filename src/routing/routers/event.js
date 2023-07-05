@@ -2,8 +2,7 @@ const urlSlug                   = require("url-slug")
 const express                   = require("express")
 const logged                    = require("../../middleware/logged")
 const Event                     = require("../../database/models/Event")
-const { acceleratedmobilepageurl } = require("googleapis/build/src/apis/acceleratedmobilepageurl")
-const e = require("express")
+
 
 const router = new express.Router()
 

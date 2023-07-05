@@ -1,0 +1,10 @@
+200 Try Always
+
+json{
+    error: "", => null if not error
+    message: "", => "success"
+    data: {} => data
+}
+
+Other codes 4** and 5**
+Something really bad happened

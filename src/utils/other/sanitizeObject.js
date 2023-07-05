@@ -12,6 +12,12 @@ function sanitizeInput(input1){
 }
 
 function sanitizeObject(data) {
+
+    //If data is string
+    if(typeof data === "string") {
+        return sanitizeInput(data);
+    }
+
     for (let key in data) {
         if(data.hasOwnProperty(key) && data[key]) {
             if(typeof data[key] === "object" && Array.isArray(data[key])) {
@@ -24,6 +30,6 @@ function sanitizeObject(data) {
         }
     }
     return data;
-  }
+}
 
-module.exports = {sanitizeInput, sanitizeObject}
+module.exports = sanitizeObject

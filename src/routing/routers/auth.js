@@ -1,7 +1,6 @@
 const express                                 = require("express")
 const passport                                = require('passport')
 const logged                                  = require("../../middleware/logged")
-const { sanitizeInput }                       = require("../../utils/other/sanitizeInput.js")
 const logout                                  = require("../../utils/auth/logout.js")
 const User                                    = require("../../database/models/User")
 require("../../utils/auth/passport")
@@ -83,7 +82,7 @@ router.get('/auth/google/redirect',
   logged(['basic_functions']),
   function(req, res) {
 
-    res.redirect(sanitizeInput(req.session.redirect));
+    res.redirect(req.session.redirect);
     req.session.redirect = "/"
 });
 

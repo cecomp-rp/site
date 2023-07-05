@@ -1,7 +1,6 @@
 const express                               = require("express")
 const logged                                = require("../../middleware/logged")
 const User                                  = require("../../database/models/User")
-const { route } = require("express/lib/application")
 
 const router = new express.Router()
 
