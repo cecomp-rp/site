@@ -6,7 +6,6 @@ const helmet                = require('helmet')
 const redirectToHTTPS       = require('express-http-to-https').redirectToHTTPS
 const loadRouters           = require("./routing/routers")
 const loadApps              = require("../apps/apps")
-const loadHbsHelpers        = require("./utils/other/loadHbsHelpers")
 const hbs                   = require("hbs")
 const passport              = require('passport')
 const cookieSession         = require("cookie-session")
@@ -49,7 +48,6 @@ exp.use(express.static(frontEndDirectory + "/public"));
 exp.set("view engine", "hbs");
 exp.set("views", frontEndDirectory + "/views");
 hbs.registerPartials(frontEndDirectory + "/partials");
-loadHbsHelpers();
 
 //Load routers
 loadRouters(exp);
