@@ -4,7 +4,7 @@ const logged                = require("../../middleware/logged")
 
 const router = new express.Router()
 
-//ALL MEMBERS ----------------------------
+//ALL MEMBERS  - NOT LOGGED ----------------------------
 
 //Index Page
 router.get("/", (req, res) => {
@@ -26,6 +26,17 @@ router.get("/calendar", (req, res) => {
     res.render("calendar")
 });
 
+//About us Page
+router.get("/about", (req, res) => {
+    res.render("about")
+});
+
+//Contact Page
+router.get("/contact", (req, res) => {
+    res.render("contact")
+});
+
+//ALL MEMBERS - LOGGED ----------------------------
 
 //Account Page
 router.get("/account", logged(['basic_functions']), (req, res) => {

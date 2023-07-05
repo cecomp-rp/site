@@ -5,7 +5,7 @@ Cinza
 
 Branco
 
-#e8e8e8
+#e8e8e8 //mudar para ffffff
 
 Roxo
 
