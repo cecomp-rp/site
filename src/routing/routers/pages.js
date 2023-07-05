@@ -76,5 +76,30 @@ router.get("/console", logged(['admin']), (req, res) => {
     res.render("console")
 });
 
+//Console (certificates) Page
+router.get("/console/certificates", logged(['admin']), (req, res) => {
+    res.render("console-certificates")
+});
+
+//Console (events) Page
+router.get("/console/events", logged(['admin']), (req, res) => {
+    res.render("console-events")
+});
+
+//Console (news) Page
+router.get("/console/news", logged(['admin']), (req, res) => {
+    res.render("console-news")
+});
+
+//Console (polls) Page
+router.get("/console/polls", logged(['admin']), (req, res) => {
+    res.render("console-polls")
+});
+
+//Console (transparency) Page
+router.get("/console/transparency", logged(['admin']), (req, res) => {
+    res.render("console-transparency")
+});
+
 
 module.exports = router

@@ -1,4 +1,5 @@
 <head>
+    <title>Console</title>
     {{>common_head}}
 </head>
 
@@ -7,35 +8,30 @@
     <!-- NAV -->
     {{>common_nav}}
 
-    <!-- Certificates -->
-    <h1>Certificates</h1>
-    {{>console_certificate_create}}
-    {{>console_certificate_edit}}
-    {{>console_certificate_remove}}
+    
+    <!-- MAIN -->
+    <div class="main ">
 
-    <!-- Events -->
-    <h1>Events</h1>
-    {{>console_event_create}}
-    {{>console_event_edit}}
-    {{>console_event_remove}}
+        <!-- Links -->
+        <a href="/console/certificates">Certificates</a>
+        <a href="/console/events">Events</a>
+        <a href="/console/news">News</a>
+        <a href="/console/polls">Polls</a>
+        <a href="/console/transparency">Transparency</a>
+        
+    </div>
 
-    <!-- Polls -->
-    <h1>Polls</h1>
-    {{>console_poll_create}}
-    {{>console_poll_remove}}
-
-    <!-- News -->
-    <h1>News</h1>
-    {{>console_news_create}}
-    {{>console_news_edit}}
-    {{>console_news_remove}}
+    <!-- FOOTER -->
+    {{>common_footer}}
 
     
-    <!-- Transparency -->
-    <h1>Transparency</h1>
-    {{>transparency_summary}}
-    {{>console_transparency_create}}
-    {{>console_transparency_remove}}
+
+    
+
+    
+
+    
+    
 
     
 </body>
