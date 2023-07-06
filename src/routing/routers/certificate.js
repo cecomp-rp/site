@@ -4,6 +4,9 @@ const addFields                     = require("../../utils/certificate/addFields
 const { updateEventCertificate }    = require("../../utils/certificate/eventCertificate")
 const Certificate                   = require("../../database/models/Certificate")
 const User                          = require("../../database/models/User")
+const filterObject                  = require("../../utils/other/filterObject")
+const commonRes                     = require("../../utils/io/commonRes")
+
 
 const router = new express.Router()
 
@@ -14,211 +17,249 @@ const router = new express.Router()
 //In pages router
 
 //GET certificates (list by email and page)
-router.get("/api/certificates/by_page_with_email/:email/:page", logged(['admin']), (req, res) => {
+router.get("/api/certificates/by_page_with_email/:email/:page", logged(['admin']), async (req, res) => {
 
     const page_limit = 5;
+    const page = req.params.page
+    const email = req.params.email
 
     //Change email to user id
-    User.findOne({email: req.params.email})
-    .then((user) => {
+    const user = await User.findOne({email})
+    .catch((error) => {})
 
-        if(!user){
-            res.status(404).send()
-            return;
-        }
+    if(!user){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
-        Certificate.find({owner_id: user._id})
-        .sort({createdAt: -1})
-        .skip((req.params.page - 1) * page_limit)
-        .limit(page_limit)
-        .exec()
-        .then((certificates) => {
+    const certificates = await Certificate.find({owner_id: user._id})
+    .sort({createdAt: -1})
+    .skip((page - 1) * page_limit)
+    .limit(page_limit)
+    .exec()
+    .catch((error) => {})
 
-            res.status(200).json(certificates)
+    if(!certificates){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
-        }).catch((error) => {
+    //Add fields for each certificate
+    certificates.forEach(element => {
+        element = addFields(element, user);
+    });
 
-            console.log(error)
+    const content = filterObject(
+        certificates, //object
+        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'owner_id', 'is_event_certificate', 'event_id', 'content'], //allowed atributes
+        {} //rename atributes
+    );
 
-        })
-
-    }).catch((error) => {
-
-        console.log(error)
-        res.status(400).send()
-        return;
-
-    })
+    commonRes(res, {
+        error: undefined,
+        message: undefined,
+        content: content
+    }); return;  
 
 })
 
 //GET certificates (list by page)
-router.get("/api/certificates/by_page/:page", logged(['basic_functions']), (req, res) => {
+router.get("/api/certificates/by_page/:page", logged(['basic_functions']), async (req, res) => {
 
     const page_limit = 5;
+    const page = req.params.page
 
-    Certificate.find({owner_id: req.user._id})
+    const certificates = await Certificate.find({owner_id: req.user._id})
     .sort({createdAt: -1})
-    .skip((req.params.page - 1) * page_limit)
+    .skip((page - 1) * page_limit)
     .limit(page_limit)
     .exec()
-    .then((certificates) => {
+    .catch((error) => {})
 
-        res.status(200).json(certificates)
+    if(!certificates){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
-    }).catch((error) => {
+    //Add fields for each certificate
+    certificates.forEach(element => {
+        element = addFields(element, req.user);
+    });
 
-        console.log(error)
-        res.status(400).send()
+    const content = filterObject(
+        certificates, //object
+        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'owner_id', 'is_event_certificate', 'event_id', 'content'], //allowed atributes
+        {} //rename atributes
+    );
 
-    })
-
+    commonRes(res, {
+        error: undefined,
+        message: undefined,
+        content: content
+    }); return;
 
 })
 
 //GET certificates (unique by id)
-router.get("/api/certificates/by_id/:id", (req, res) => {
+router.get("/api/certificates/by_id/:id", async (req, res) => {
 
-    Certificate.findOne({_id: req.params.id})
+    const id = req.params.id
 
-    .then((certificate) => {
+    var certificate = await Certificate.findOne({_id: req.params.id})
+    .catch((error) => {})
 
-        //Update if certificate is event certificate
-        if(certificate.is_event_certificate){
-            return updateEventCertificate(certificate.owner_id, certificate.event_id)
-            .then((cert) => {
-                res.status(200).json(cert)
-                return;
-            }).catch((error) => {
-                console.log(error)
-                res.status(400).send()
-                return;
-            })
-        }
+    if(!certificate){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
+
+    //Update if certificate is event certificate
+    if(certificate.is_event_certificate){
+        certificate = await updateEventCertificate(certificate.owner_id, certificate.event_id)  
+    }
+
+    //Add fields for certificate
+    certificate = addFields(certificate, req.user);
             
-        res.status(200).json(certificate)
-        return;
-    
-    }).catch((error) => {
+    const content = filterObject(
+        certificate, //object
+        ['_id', 'title', 'createdAt', 'event_name', 'updatedAt', 'description', 'owner_id', 'is_event_certificate', 'event_id', 'content'], //allowed atributes
+        {} //rename atributes
+    );
 
-        console.log(error);
-        res.status(404).send();
-        return;
-
-    })
+    commonRes(res, {
+        error: undefined,
+        message: undefined,
+        content: content
+    }); return;
 
 })
 
 //POST certificates
-router.post("/api/certificates", logged(['admin']), (req, res) => {
+router.post("/api/certificates", logged(['admin']), async (req, res) => {
 
-    req.body.is_event_certificate = false
+    var certificate = req.body
+
+    certificate.is_event_certificate = false
 
     //Change email to user id
-    User.findOne({email: req.body.email})
-    .then((user) => {
+    const user = await User.findOne({email: certificate.email})
+    .catch((error) => {})
 
-        if(!user){
-            res.status(404).send()
-            return;
-        }
+    if(!user){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
-        req.body.owner_id = user._id
+    certificate.owner_id = user._id
 
-        //Add certificate fields
-        req.body = addFields(req.body, user);
+    const certificateDb = await Certificate.create(certificate)
+    .catch((error) => {})
 
-        const certificate = new Certificate(req.body)
-        certificate.save()
-        .then(() => {
+    if(!certificateDb){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }else{
+        commonRes(res, {
+            error: undefined,
+            message: "Certificate created.",
+            content: undefined
+        }); return;
+    }
 
-            res.status(201).json(certificate)
-
-        }).catch((error) => {
-
-            console.log(error)
-            res.status(400).send()
-            return;
-
-        })
-
-
-    }).catch((error) => {
-
-        console.log(error)
-        res.status(400).send()
-        return;
-
-    })
-
-    
 })
 
 //PATCH certificates
-router.patch("/api/certificates/:id", logged(['admin']), (req, res) => {
+router.patch("/api/certificates/:id", logged(['admin']), async (req, res) => {
+
+    const certificate = req.body
+    const id = req.params.id
 
     //Check if certificate exists and is not an event certificate
-    Certificate.findOne({_id: req.params.id, is_event_certificate: false})
-    .then((certificate) => {
+    const certificateDb = await Certificate.findOne({_id: id, is_event_certificate: false})
+    .catch((error) => {})
 
-        if(!certificate){
-            res.status(404).send()
-            return;
-        }
-    
-    }).catch((error) => {  
-
-        console.log(error)
-        res.status(400).send()
-
-    })
+    if(!certificateDb){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
     //Update certificate
-    Certificate.findOneAndUpdate({_id: req.params.id}, req.body)
-    .then((certificate) => {
+    const certificateUpdated = await Certificate.findOneAndUpdate({_id: id}, certificate)
+    .catch((error) => {})
 
-        res.status(200).json()
-
-    }).catch((error) => {
-
-        console.log(error)
-        res.status(400).send()
-
-    })
+    if(!certificateUpdated){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }else{
+        commonRes(res, {
+            error: undefined,
+            message: "Certificate updated.",
+            content: undefined
+        }); return;
+    }
 
 })
 
 //DELETE certificates
-router.delete("/api/certificates/:id", logged(['admin']), (req, res) => {
+router.delete("/api/certificates/:id", logged(['admin']), async (req, res) => {
+
+    const id = req.params.id
 
     //Check if certificate exists and is not an event certificate
-    Certificate.findOne({_id: req.params.id, is_event_certificate: false})
-    .then((certificate) => {
+    const certificate = await Certificate.findOne({_id: id, is_event_certificate: false})
+    .catch((error) => {})
 
-        if(!certificate){
-            res.status(404).send()
-            return;
-        }
+    if(!certificate){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
-        //Delete certificate
-        Certificate.findOneAndDelete({_id: req.params.id})
-        .then((certificate) => {
+    //Delete certificate
+    const certificateDeleted = Certificate.findOneAndDelete({_id: id})
+    .catch((error) => {})
 
-            res.status(200).send()
-
-        }).catch((error) => {
-
-            console.log(error)
-
-        })
-
-    }).catch((error) => {
-
-        console.log(error)
-        res.status(400).send()
-
-    })
-
+    if(!certificateDeleted){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }else{
+        commonRes(res, {
+            error: undefined,
+            message: "Certificate deleted.",
+            content: undefined
+        }); return;
+    }
+   
 })
 
 

@@ -2,7 +2,8 @@ const urlSlug                   = require("url-slug")
 const express                   = require("express")
 const logged                    = require("../../middleware/logged")
 const Event                     = require("../../database/models/Event")
-
+const commonRes                 = require("../../utils/io/commonRes")
+const filterObject              = require("../../utils/other/filterObject")
 
 const router = new express.Router()
 
@@ -15,173 +16,272 @@ const router = new express.Router()
 //EVENTS/ACTIVITIES MANAGEMENT
 
 //GET events (list by page)
-router.get("/api/events/by_page/:page", logged(['basic_functions']), (req, res) => {
+router.get("/api/events/by_page/:page", logged(['basic_functions']), async (req, res) => {
 
     const page_limit = 5;
+    const page = req.params.page;
 
-    Event.find({})
+    var events = await Event.find({})
     .sort({createdAt: -1})
-    .skip((req.params.page - 1) * page_limit)
+    .skip((page - 1) * page_limit)
     .limit(page_limit)
     .exec()
-    .then((events) => {
+    .catch((error) => {})
 
-        //If user is not admin, remove activities
-        if(!req.user.admin){
-            events.forEach((event) => {
-                event.activities = []
-            })
-        }
-        
-        res.status(200).json(events)
+    if(!events){
+        commonRes(res, {
+            error: "No events found.",
+            message: undefined,
+            content: []
+        }); return;
+    }
 
-    }).catch((error) => {
+    //If user is not admin, remove activities
+    if(!req.user.admin){
+        events = filterObject(
+            events, //object
+            ['name', 'title', 'startDate', 'endDate', 'description', 'createdAt', 'updatedAt', '_id'], //allowed atributes
+            {} //rename atributes
+        );
+    }
 
-        console.log(error)
-        res.status(400).send()
-        return;
+    const content = filterObject(
+        events, //object
+        ['name', 'title', 'startDate', 'endDate', 'activities', 'description', 'createdAt', 'updatedAt', '_id'], //allowed atributes
+        {} //rename atributes
+    );
 
-    })
+    commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content
+    }); return;
 
 })
 
 //GET events (unique by id)
-router.get("/api/events/by_id/:id", logged(['admin']), (req, res) => {
+router.get("/api/events/by_id/:id", logged(['admin']), async (req, res) => {
 
-    Event.findOne({_id: req.params.id})
-    .then((event) => {
-            
-        res.status(200).json(event)
+    const id = req.params.id
+
+    const event = await Event.findOne({_id: id})
+    .catch((error) => {})
+
+    if(!event){
+
+        commonRes(res, {
+            error: "No event found.",
+            message: undefined,
+            content: {}
+        }); return;
     
-    }).catch((error) => {
+    }else{
 
-        console.log(error);
-        res.status(400).send();
-        return;
+        const content = filterObject(
+            event, //object
+            ['name', 'title', 'startDate', 'endDate', 'activities', 'description', 'createdAt', 'updatedAt', '_id'], //allowed atributes
+            {} //rename atributes
+        );
 
-    })
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content
+        }); return;
+
+    }
 
 })
 
 //GET events (unique by name)
-router.get("/api/events/by_name/:name", logged(['basic_functions']), (req, res) => {
+router.get("/api/events/by_name/:name", logged(['basic_functions']), async (req, res) => {
 
-    Event.findOne({name: req.params.name})
+    const name = req.params.name
+
+    var event = await Event.findOne({name: name})
     .lean()
-    .then((event) => {
+    .catch((error) => {})
 
-        //If user is not admin, remove activities ids
-        if(!req.user.admin){
-            event.activities.forEach((activity) => {
-                activity._id = '';
-            })
-        }
+    if(!event){
+        commonRes(res, {
+            error: "No event found.",
+            message: undefined,
+            content: {}
+        }); return;
+    }
 
-        res.status(200).json(event)
+    //If user is not admin, remove activities ids
+    if(!req.user.admin){
+        event = filterObject(
+            event, //object
+            ['name', 'title', 'startDate', 'endDate', 'description', 'createdAt', 'updatedAt', '_id'], //allowed atributes
+            {} //rename atributes
+        );
+    }
 
-    }).catch((error) => {
+    const content = filterObject(
+        event, //object
+        ['name', 'title', 'startDate', 'endDate', 'activities', 'description', 'createdAt', 'updatedAt', '_id'], //allowed atributes
+        {} //rename atributes
+    );
 
-        console.log(error);
-        res.status(400).send();
-        return;
-
-    })
+    commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content
+    }); return;
 
 })
 
 //POST events (create)
 router.post("/api/events", logged(['admin']), async (req, res) => {
 
+    const event = req.body
+
     //Copy name to title
-    req.body.title = req.body.name
+    event.title = event.name
 
     //Normalize name
-    req.body.name = urlSlug(req.body.name, {
+    event.name = urlSlug(event.name, {
         separator: "-",
         camelCase: false
     })
 
     //Name is unique
-    const unique_name = await Event.findOne({name: req.body.name})
-    if(unique_name){res.status(400).send(); return;}
+    const unique_name = await Event.findOne({name: event.name})
+    if(unique_name){
+        commonRes(res, {
+            error: "Name already in use.",
+            message: undefined,
+            content: {}
+        }); return;
+    }
 
     //Verify dates
-    if(req.body.startDate > req.body.endDate){res.status(400).send()}
+    if(event.startDate > event.endDate){
+        commonRes(res, {
+            error: "Invalid dates.",
+            message: undefined,
+            content: {}
+        }); return;
+    }
 
-    Event.create(req.body)
-    .then((event) => {
-        
-        res.status(201).send()
+    //Create
+    const eventDb = await Event.create(event)
+    .catch((error) => {})
 
-    }).catch((error) => {
-
-        res.status(400).send();
-        console.log(error);
-        return;
-
-    })
+    if(!eventDb){
+        commonRes(res, {
+            error: "Error creating event.",
+            message: undefined,
+            content: {}
+        }); return;
+    }else{
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content: {}
+        }); return;
+    }
 
 })
 
 //PATCH events (update)
 router.patch("/api/events/:id", logged(['admin']), async (req, res) => {
 
+    const event = req.body
+    const id = req.params.id
+
     //Copy name to title
-    req.body.title = req.body.name
+    event.title = event.name
 
     //Normalize name
-    req.body.name = urlSlug(req.body.name, {
+    event.name = urlSlug(event.name, {
         separator: "-",
         camelCase: false
     })
 
     //If, there's a new name: Name is unique?
-    const new_name = req.body.name;
-    const old_event = await Event.findOne({_id: req.params.id});
+    const new_name = event.name;
+    const old_event = await Event.findOne({_id: id})
+    .catch((error) => {})
+
+    if(!old_event){
+        commonRes(res, {
+            error: "Event not found.",
+            message: undefined,
+            content: {}
+        }); return;
+    }
+
     if(new_name != old_event.name){
-        const unique_name = await Event.findOne({name: req.body.name})
-        if(unique_name){res.status(400).send(); return;}
+        const unique_name = await Event.findOne({name: event.name})
+        .catch((error) => {})
+
+        if(unique_name){
+            commonRes(res, {
+                error: "Name already in use.",
+                message: undefined,
+                content: {}
+            }); return;
+        }
     }
 
     //IF _id is '' in activities, remove it
-    req.body.activities.forEach((activity) => {
+    event.activities.forEach((activity) => {
         if(activity._id == ''){activity._id = undefined}
     })
         
     //Verify dates
-    if(req.body.startDate > req.body.endDate){res.status(400).send(); return;}
+    if(event.startDate > event.endDate){
+        commonRes(res, {
+            error: "Invalid dates.",
+            message: undefined,
+            content: {} 
+        }); return;
+    }
 
     //Update the rest
-    Event.findOneAndUpdate({_id: req.params.id}, req.body, {runValidators: true})
-    .then((event) => {
+    const eventDb = await Event.findOneAndUpdate({_id: id}, event, {runValidators: true})
+    .catch((error) => {})
 
-        res.status(200).send()
-
-    }).catch((error) => {
-
-        res.status(400).send();
-        console.log(error);
-        return;
-
-    })
+    if(!eventDb){
+        commonRes(res, {
+            error: "Error updating event.",
+            message: undefined,
+            content: {}
+        }); return;
+    }else{
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content: {}
+        }); return;
+    }
 
 })
 
 //DELETE events (delete)
 router.delete("/api/events/:id", logged(['admin']), async (req, res) => {
 
-    Event.findOneAndDelete({_id: req.params.id})
-    .then((event) => {
-            
-        res.status(200).send()
-    
-    }).catch((error) => {
+    const id = req.params.id
 
-        console.log(error)
-        res.status(400).send();
-        return;
+    const event = await Event.findOneAndDelete({_id: id})
+    .catch((error) => {})
 
-    })
+    if(!event){
+        commonRes(res, {
+            error: "Error deleting event.",
+            message: undefined,
+            content: {}
+        }); return;
+    }else{
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content: {}
+        }); return;
+    }
 
 })
 

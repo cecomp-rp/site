@@ -1,4 +1,19 @@
-function filterObject(obj, atributes, rename = {}){
+function filterObject(obj, atributes, rename = {}) {
+
+    //Is it array?
+    if (obj instanceof Array) {
+        let newObjs = [];
+        obj.forEach((obj) => {
+            newObjs.push(filterObject_aux(obj, atributes, rename));
+        });
+        return newObjs;
+    }
+
+    return filterObject_aux(obj, atributes, rename);
+
+}
+
+function filterObject_aux(obj, atributes, rename = {}){
     let newObj = {};
 
     for (let key in obj) {

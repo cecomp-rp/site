@@ -19,29 +19,18 @@ $('document').ready(function() {
 
 function sub_preferences_load(event_name){
 
-    fetch('/api/sub/preferences/' + event_name, {
+    common_fetch('/api/sub/preferences/' + event_name, 'POST').then((data) => {
 
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        if(data){
 
-    }).then(function(response) {
-
-        response.json().then(function(data) {
-
-            if(data.preferences.enable_email_notifications){
+            if(data.enable_email_notifications){
                 $('#sub_enable_email_notifications').attr('checked', 'true');
             }
-            if(data.preferences.enable_email_sharing){
+            if(data.enable_email_sharing){
                 $('#sub_enable_email_sharing').attr('checked', 'true');
             }
 
-        }).catch(function(err) {
-                
-            console.log(err);
-    
-        });
+        }
 
     });
 
@@ -49,33 +38,12 @@ function sub_preferences_load(event_name){
 
 function sub_preferences_update(event_name){
 
-    fetch('/api/sub/preferences/' + event_name, {
+    var data = {
+        enable_email_notifications: $('#sub_enable_email_notifications').is(':checked'),
+        enable_email_sharing: $('#sub_enable_email_sharing').is(':checked')
+    }
 
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            preferences:{
-                            enable_email_notifications: $('#sub_enable_email_notifications').is(':checked'),
-                            enable_email_sharing: $('#sub_enable_email_sharing').is(':checked')
-                        }
-        })
-
-    }).then(function(response) {
-
-        if(response.status == 200){
-            $('#sub_preferences_message').text('Preferences updated successfully.');
-        }else{
-            $('#sub_preferences_message').text('Error updating preferences.');
-        }
-
-    });
-
-
-
-
-
+    common_fetch('/api/sub/preferences/' + event_name, 'PATCH', data, ['sub_preferences_message'])
 
 }
 

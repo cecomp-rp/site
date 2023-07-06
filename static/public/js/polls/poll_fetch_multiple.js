@@ -8,65 +8,62 @@ $('document').ready(function(){
 
 function poll_fetch_list(poll_fetch_page){
 
-    fetch('/api/polls/by_page/' + poll_fetch_page)
-    .then((response) => {
-        return response.json()
-    }).then((polls) => {
+    common_fetch('/api/polls/by_page/' + poll_fetch_page, 'GET').then((data) => {
 
-        polls.forEach(poll => {
+        if(data){
 
-            var append_model = 
-            `
-            <div id="${poll._id}">
-                <p>Title: ${poll.title}</p>
-                <p>Description: ${poll.description}</p>
-                <p>Author: ${poll.author_id}</p>
-                <p>End Date: ${poll.endDate}</p>
-                <p>Created At: ${poll.createdAt}</p>
-                <div id="${poll._id}_poll_options"></div>
+            data.forEach(poll => {
 
-                <a href="/polls/${poll._id}">See page...</a>
-            </div>
-            
-            `;
-
-            $('#poll_fetch_div').append(append_model);
-
-            poll.options.forEach((option, i) => {
-
-                var append_model_options = 
+                var append_model = 
                 `
-                <div id="${option._id}">
-                    <div>${option.content}</div>
-                    <p id="${option._id}_counter">${option.numberOfVotes}</p>
-                    <button class="${poll._id}_button" onclick="poll_vote('${option._id}','${poll._id}')">Vote</button>
+                <div id="${poll._id}">
+                    <p>Title: ${poll.title}</p>
+                    <p>Description: ${poll.description}</p>
+                    <p>Author: ${poll.author_id}</p>
+                    <p>End Date: ${poll.endDate}</p>
+                    <p>Created At: ${poll.createdAt}</p>
+                    <div id="${poll._id}_poll_options"></div>
+
+                    <a href="/polls/${poll._id}">See page...</a>
                 </div>
+                
                 `;
 
-                $(`#${poll._id}_poll_options`).append(append_model_options);
+                $('#poll_fetch_div').append(append_model);
+
+                poll.options.forEach((option, i) => {
+
+                    var append_model_options = 
+                    `
+                    <div id="${option._id}">
+                        <div>${option.content}</div>
+                        <p id="${option._id}_counter">${option.numberOfVotes}</p>
+                        <button class="${poll._id}_button" onclick="poll_vote('${option._id}','${poll._id}')">Vote</button>
+                    </div>
+                    `;
+
+                    $(`#${poll._id}_poll_options`).append(append_model_options);
+
+                });
+
+                //User already voted?
+                if(poll.alreadyVoted == true){
+                    $('.' + poll._id + '_button').attr("disabled", true);
+                    $('.' + poll._id + '_button').text("Already voted");
+                }
+
+                //Poll out of date?
+                var poll_date = Date.parse(poll.endDate);
+                if(poll_date < Date.now()){
+                    $('.' + poll._id + '_button').attr("disabled", true);
+                    $('.' + poll._id + '_button').text("Poll out of date");
+                }
 
             });
 
-            //User already voted?
-            if(poll.alreadyVoted == true){
-                $('.' + poll._id + '_button').attr("disabled", true);
-                $('.' + poll._id + '_button').text("Already voted");
-            }
+        }
 
-            //Poll out of date?
-            var poll_date = Date.parse(poll.endDate);
-            if(poll_date < Date.now()){
-                $('.' + poll._id + '_button').attr("disabled", true);
-                $('.' + poll._id + '_button').text("Poll out of date");
-            }
-
-            
-        });
-
-    }).catch((error) => {
-        console.log(error)
-    })
-
+    });
 }
 
 function poll_fetch_next_page(){
@@ -90,17 +87,16 @@ function poll_fetch_previous_page(){
 
 function poll_vote(option_id, poll_id){
 
-    fetch("/api/polls/vote/" + poll_id, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ option: option_id })
-    })
-    .then((response) => {
-        if(response.status == 200){
+    common_fetch('/api/polls/vote/' + poll_id, 'POST', {option: option_id}).then((data) => {
+
+        if(data){
+
             $('.' + poll_id + '_button').attr("disabled", true);
             $('.' + poll_id + '_button').text("Already voted");
             $('#' + option_id + '_counter').text(parseInt($('#' + option_id + '_counter').text()) + 1)
+
         }
-    })
+
+    });
 
 }

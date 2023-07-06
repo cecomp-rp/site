@@ -40,26 +40,7 @@ function event_create_submit(){
         activities
     }
 
-    fetch('/api/events', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-
-    }).then((response) => {
-            
-        if(response.status == 201){
-            $('#event_create_message').text("Success!")
-        }else{
-            $('#event_create_message').text("Error creating the event!")
-        }
-    
-    }).catch((error) => {
-
-        console.log(error)
-
-    })
+    common_fetch('/api/events', 'POST', data, ['event_create_message'])
 
 }
 

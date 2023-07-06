@@ -1,37 +1,44 @@
 const express               = require("express")
 const logged                = require("../../middleware/logged")
-const Transparency         = require("../../database/models/Transparency")
+const Transparency          = require("../../database/models/Transparency")
+const commonRes             = require("../../utils/io/commonRes")
+const filterObject          = require("../../utils/other/filterObject")
+
 
 const router = new express.Router()
 
 //GET transparency items
-router.get("/api/transparency/item/:page", logged(['bcc_member_functions']), (req, res) => {
+router.get("/api/transparency/item/:page", logged(['bcc_member_functions']), async (req, res) => {
     
-    //Sort by dateOfTransacation - newest first
-    //Limit 50 items per page
-
     const page_limit = 10;
+    const page = parseInt(req.params.page)
 
-    Transparency.find()
+    const items = await Transparency.find()
     .sort({dateOfTransaction: -1})
-    .skip((req.params.page - 1) * page_limit)
+    .skip((page - 1) * page_limit)
     .limit(page_limit)
+    .lean()
     .exec()
-    .then((items) => {
-        res.status(200).json(items)
-    }).catch((err) => {
-        res.status(400).send()
-        return;
-    })
+    .catch((err) => {})
+
+    const content = filterObject(
+        items, //object
+        ['_id', 'title', 'dateOfTransaction', 'value', 'description'], //allowed atributes
+        {} //rename atributes
+    );
+
+    commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content
+    }); return;
 
 })
 
 //GET transparency summary
-router.get("/api/transparency/summary", logged(['bcc_member_functions']), (req, res) => {
+router.get("/api/transparency/summary", logged(['bcc_member_functions']), async (req, res) => {
     
-    //Get total value of all items
-
-    Transparency.aggregate([
+    const items = await Transparency.aggregate([
         {
             $group: {
                 _id: null,
@@ -42,38 +49,67 @@ router.get("/api/transparency/summary", logged(['bcc_member_functions']), (req, 
         }
     ])
     .exec()
-    .then((summary) => {
-        res.status(200).json(summary[0])
-    }).catch((err) => {
-        res.status(400).send()
-        return;
-    })
+    .catch((err) => {})
 
+    const content = filterObject(
+        items[0], //object
+        ['total'], //allowed atributes
+        {} //rename atributes
+    );
+
+    commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content
+    }); return;
+    
 })
 
 //POST transparency item (create)
-router.post("/api/transparency/item", logged(['admin']), (req, res) => {
+router.post("/api/transparency/item", logged(['admin']), async (req, res) => {
 
-    Transparency.create(req.body)
-    .then((item) => {
-        res.status(201).send()
-    }).catch((err) => {
-        res.status(400).send()
-        return;
-    })
+    const item = req.body
+
+    const itemDb = await Transparency.create(item)
+    .catch((err) => {})
+
+    if(itemDb){
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content: undefined
+        }); return;
+    }else{
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
     
 })
 
 //DELETE transparency item (remove)
-router.delete("/api/transparency/item/:id", logged(['admin']), (req, res) => {
+router.delete("/api/transparency/item/:id", logged(['admin']), async (req, res) => {
 
-    Transparency.findByIdAndDelete(req.params.id)
-    .then((item) => {
-        res.status(200).send()
-    }).catch((err) => {
-        res.status(400).send()
-        return;
-    })
+    const id = req.params.id
+
+    const item = await Transparency.findByIdAndDelete(id)
+    .catch((err) => {})
+
+    if(item){
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content: undefined
+        }); return;
+    }else{
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
 })
 

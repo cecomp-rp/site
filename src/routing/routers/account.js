@@ -33,7 +33,8 @@ router.post("/api/account/nick", logged(['basic_functions']), async (req, res) =
     const nick = req.body.nick
 
     const user = await User.findOne({nick})
-        
+    .catch((err) => {})
+
     if(user){
         commonRes(res, {
             error: undefined,
@@ -59,6 +60,7 @@ router.patch("/api/account/nick", logged(['basic_functions']), async (req, res) 
 
     //Verify if the nick is already in use
     const user = await User.findOne({nick})
+    .catch((err) => {})
     if(user){
         commonRes(res, {
             error: "Nick already in use.",
@@ -79,6 +81,7 @@ router.patch("/api/account/nick", logged(['basic_functions']), async (req, res) 
 
     //Update the nick
     await User.findByIdAndUpdate(req.user._id, {nick})
+    .catch((err) => {})
     commonRes(res, {
         error: undefined,
         message: "Nick updated.",

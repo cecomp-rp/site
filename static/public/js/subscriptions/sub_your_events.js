@@ -5,16 +5,9 @@ $('document').ready(function() {
 
 function sub_event_list_load(){
 
-    fetch("/api/sub/", {
+    common_fetch("/api/sub/", "GET", {}, []).then((data) => {
 
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-
-    }).then(function(response) {
-
-        response.json().then(function(data) {
+        if(data){
 
             data.forEach(function(event) {
 
@@ -30,13 +23,8 @@ function sub_event_list_load(){
 
             });
 
-        });
-
-    }).catch(function(err) {
-
-        console.log(err);
+        }
 
     });
-    
-        
+  
 }

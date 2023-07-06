@@ -13,29 +13,16 @@ $('document').ready(function () {
 
 function cert_remove_remove(id){
 
-    fetch("/api/certificates/" + id, {
+    common_fetch('/api/certificates/' + id, 'DELETE').then((data) => {
 
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-
-    }).then((response) => {
-
-        if(response.status != 200){
-            alert("Error removing certificate! (Event certificate cannot be removed)");
-            return;
+        if(data){
+            $("#" + id).remove();
+            cert_remove_list(cert_remove_page);
+        }else{
+            alert("Error removing certificate! (Probably it is an event certificate)");
         }
 
-        $("#" + id).remove();
-        cert_remove_list(cert_remove_page);
-
-    }).catch((error) => {
-
-        console.log(error);
-
-    })
-
+    });
 
 }
 
@@ -59,30 +46,16 @@ function cert_remove_previous_page(){
 }
 
 function cert_remove_list(page){
-
     $("#cert_remove_div").empty();
 
     const email = $("#cert_remove_email").val();
 
-    fetch("/api/certificates/by_page_with_email/" + email + "/" + page, {
+    common_fetch('/api/certificates/by_page_with_email/' + email + '/' + page, 'GET', {}, ['cert_remove_email_message']).then((data) => {
 
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-
-    }).then((response) => {
-
-        if(response.status != 200){
-            $("#cert_remove_email_message").text("Email not found");
-            return;
-        }
-
-        //Parse certificate list
-        response.json().then((certificates) => {
+        if(data){
 
             //For each certificate
-            certificates.forEach((certificate) => {
+            data.forEach((certificate) => {
 
                 var append_model =
                 `
@@ -95,21 +68,22 @@ function cert_remove_list(page){
                     <p>Content: ${certificate.content}</p>
 
                     <button onclick="cert_remove_remove('${certificate._id}')">Remove</button>
+                    <button onclick="cert_remove_edit('${certificate._id}')">Edit</button>
+                    <a href="/certificates/${certificate._id}">See page...</a>
                 </div>
                 `;
 
                 $("#cert_remove_div").append(append_model);
 
-
             });
 
-        })
-    
-    }).catch((error) => {
+        }
 
-        console.log(error);
+    });
 
-    })
+}
 
-
+function cert_remove_edit(id){
+    $("#cert_edit_id").val(id);
+    $("#cert_edit_id").trigger("input");
 }

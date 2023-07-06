@@ -3,6 +3,8 @@ const passport                                = require('passport')
 const logged                                  = require("../../middleware/logged")
 const logout                                  = require("../../utils/auth/logout.js")
 const User                                    = require("../../database/models/User")
+const commonRes                               = require("../../utils/io/commonRes")
+
 require("../../utils/auth/passport")
 
 const router = new express.Router()
@@ -40,7 +42,14 @@ router.get("/api/session/:page", logged(['basic_functions']), async (req, res) =
   const end = page * page_size
   other_sessions = sessions.slice(start, end)
 
-  res.status(200).json({current: your_session, other: other_sessions})
+  commonRes(res, {
+      error: undefined,
+      message: undefined,
+      content: {
+          current: your_session,
+          other: other_sessions
+      }})
+
 })
 
 //Remove One Session
@@ -48,25 +57,45 @@ router.delete("/api/session/by_id/:id", logged(['basic_functions']), async (req,
   const session_id = req.params.id
 
   //Remove the session
-  await User.findByIdAndUpdate(req.user._id, {$pull: {tokens: {_id: session_id}}}).then((user) => {
-      if(!user){return res.status(400).json()}
-      res.status(200).send()
-  }).catch((e) => {
-      res.status(400).json()
-  })
+  const user = await User.findByIdAndUpdate(req.user._id, {$pull: {tokens: {_id: session_id}}})
+  .catch((e) => {})
 
+  if(!user){
+    commonRes(res, {
+      error: "Error.",
+      message: undefined,
+      content: undefined
+    })
+  } else {
+    commonRes(res, {
+      error: undefined,
+      message: "Success.",
+      content: undefined
+    })
+  }
+  
 })
 
 //Remove All Sessions
 router.delete("/api/session/all", logged(['basic_functions']), async (req, res) => {
 
   //Remove all sessions
-  await User.findByIdAndUpdate(req.user._id, {tokens: []}).then((user) => {
-    if(!user){return res.status(400).json()}
-      res.status(200).send()
-  }).catch((e) => {
-      res.status(400).json()
-  })
+  const user = await User.findByIdAndUpdate(req.user._id, {tokens: []})
+  .catch((e) => {})
+
+  if(!user){
+    commonRes(res, {
+      error: "Error.",
+      message: undefined,
+      content: undefined
+    })
+  } else {
+    commonRes(res, {
+      error: undefined,
+      message: "Success.",
+      content: undefined
+    })
+  }
 
 })
 

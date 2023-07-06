@@ -28,25 +28,12 @@ function cert_fetch_list(page){
 
     const email = $("#cert_fetch_email").val();
 
-    fetch("/api/certificates/by_page/" + page, {
+    common_fetch('/api/certificates/by_page/' + page, 'GET').then((data) => {
 
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-
-    }).then((response) => {
-
-        if(response.status != 200){
-            console.log("Error: " + response.status);
-            return;
-        }
-
-        //Parse certificate list
-        response.json().then((certificates) => {
+        if(data){
 
             //For each certificate
-            certificates.forEach((certificate) => {
+            data.forEach((certificate) => {
 
                 var append_model =
                 `
@@ -63,16 +50,10 @@ function cert_fetch_list(page){
 
                 $("#cert_fetch_div").append(append_model);
 
-
             });
 
-        })
-    
-    }).catch((error) => {
+        }
 
-        console.log(error);
-
-    })
-
+    });
 
 }

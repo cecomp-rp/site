@@ -22,32 +22,22 @@ function event_edit_fetch(id){
     $("#event_edit_end_date").val("");
     $("#event_edit_activity_div").empty();
 
-    fetch("/api/events/by_id/" + id , {
-        method: "GET",
-        cache: "default", 
-        headers: {
-            "Content-Type": "application/json",
-        }
-    }).then((response) => {
-        if(response.status == 200){
-            return response.json();
-        }else{
-            return null;
-        }
+    common_fetch('/api/events/by_id/' + id, 'GET', {}, ['event_edit_message']).then((data) => {
 
-    }).then((event) => {
+        if(data){
 
-        if(event != null){
-            $("#event_edit_name").val(event.title);
-            $("#event_edit_description").val(event.description);
+            if(data == null){ return; }//Necessário?
 
-            var jquery_endDate = event.endDate.split('T')[0];
-            var jquery_startDate = event.startDate.split('T')[0];
+            $("#event_edit_name").val(data.title);
+            $("#event_edit_description").val(data.description);
+
+            var jquery_endDate = data.endDate.split('T')[0];
+            var jquery_startDate = data.startDate.split('T')[0];
 
             $("#event_edit_start_date").val(jquery_startDate);
             $("#event_edit_end_date").val(jquery_endDate);
 
-            event.activities.forEach((activity) => {
+            data.activities.forEach((activity) => {
 
                 var uniq = 'id' + (new Date()).getTime() + parseInt(Math.random() * 1000);
                 
@@ -71,10 +61,7 @@ function event_edit_fetch(id){
 
         }
 
-    }).catch((err) => {
-        console.log(err)
     })
-
 }
 
 function event_edit_submit(id){
@@ -114,26 +101,7 @@ function event_edit_submit(id){
         activities
     }
 
-    fetch('/api/events/' + id, {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-        headers:{
-            'Content-Type': 'application/json'
-        }
-
-    }).then((response) => {
-            
-        if(response.status == 200){
-            $('#event_edit_message').text("Success!")
-        }else{
-            $('#event_edit_message').text("Error editing the event!")
-        }
-    
-    }).catch((error) => {
-
-        console.log(error)
-
-    })
+    common_fetch('/api/events/' + id, 'PATCH', data, ['event_edit_message'])
 
 }
 

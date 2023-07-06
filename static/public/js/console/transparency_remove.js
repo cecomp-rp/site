@@ -8,62 +8,45 @@ $(document).ready(function(){
 
 function transparency_remove_list(page){
 
-    fetch("/api/transparency/item/" + page , {
-        method: "GET",
-        cache: "default", 
-        headers: {
-            "Content-Type": "application/json",
+    common_fetch("/api/transparency/item/" + page, "GET").then((data) => {
+
+        if(data){
+
+            data.forEach(element => {
+
+                var item_template = 
+                `
+                <div id=${element._id}>
+                    <p class="transparency_remove_title">Title: ${element.title}</p>
+                    <p class="transparency_remove_description">Description: ${element.description}</p>
+                    <p class="transparency_remove_value">Value: ${element.value}</p>
+                    <p class="transparency_remove_dateOfTransaction">Date Of Transaction: ${element.dateOfTransaction}</p>
+                    <p class="transparency_remove_dateOfTransaction">Date Of Addition: ${element.createdAt}</p>
+                    <p class="transparency_remove_id">ID: ${element._id}</p>
+                    <button onclick="transparency_remove_delete('${element._id}')">Delete</button>
+                </div>
+                `;	
+    
+                $("#transparency_remove_div").append(item_template);
+    
+            });
         }
-
-    }).then((response) => {response.json().then((data) => {
-           
-        data.forEach(element => {
-
-            var item_template = 
-            `
-            <div id=${element._id}>
-                <p class="transparency_remove_title">Title: ${element.title}</p>
-                <p class="transparency_remove_description">Description: ${element.description}</p>
-                <p class="transparency_remove_value">Value: ${element.value}</p>
-                <p class="transparency_remove_dateOfTransaction">Date Of Transaction: ${element.dateOfTransaction}</p>
-                <p class="transparency_remove_dateOfTransaction">Date Of Addition: ${element.createdAt}</p>
-                <p class="transparency_remove_id">ID: ${element._id}</p>
-                <button onclick="transparency_remove_delete('${element._id}')">Delete</button>
-            </div>
-            `;	
-
-            $("#transparency_remove_div").append(item_template);
-
-        });
-
-
-    })}).catch((err) => {
-        console.log(err)
     })
 
 }
 
 function transparency_remove_delete(id){
 
-    fetch("/api/transparency/item/" + id, {
-        method: "DELETE",
-        cache: "default", 
-        headers: {
-            "Content-Type": "application/json",
-        }
+    common_fetch("/api/transparency/item/" + id, "DELETE").then((data) => {
 
-    }).then((response) =>{
-
-        if(response.status == 200){
+        if(data){
             $("#" + id).remove();
             $("#transparency_remove_div").empty();
             transparency_remove_list(transparency_remove_page);
         }else{
             alert("Error deleting item!");
         }
-        
-    }).catch((err) => {
-        console.log(err)
+
     })
 
 }

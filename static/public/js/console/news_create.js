@@ -17,7 +17,7 @@ $(document).ready(function() {
         },
         placeholder: 'Dream here...',
         theme: 'snow'
-      };
+    };
 
 
     var news_create_editor = new Quill('#news_create_editor', options);
@@ -36,25 +36,7 @@ $(document).ready(function() {
             content: content,
         }
 
-        fetch("/api/news", {
-            method: "POST",
-            cache: "default", 
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data), 
-
-        }).then((response) => {
-
-            if(response.status == 201) {
-                $('#news_create_message').text("Success!")
-            } else {
-                $('#news_create_message').text("News creation failed!")
-            }
-
-        }).catch((err) => {
-            console.log(err)
-        })
+        common_fetch("/api/news", "POST", data, ['news_create_message'])
 
     }); 
 

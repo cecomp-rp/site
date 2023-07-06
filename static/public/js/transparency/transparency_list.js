@@ -8,37 +8,32 @@ $(document).ready(function(){
 
 function transparency_list_list(page){
 
-    fetch("/api/transparency/item/" + page , {
-        method: "GET",
-        cache: "default", 
-        headers: {
-            "Content-Type": "application/json",
+    common_fetch("/api/transparency/item/" + page, "GET" ).then((data) => {
+
+        if(data){
+
+            data.forEach(element => {
+
+                var item_template = 
+                `
+                <div id=${element._id}>
+                    <p id="transparency_list_title">Title: ${element.title}</p>
+                    <p id="transparency_list_description">Description: ${element.description}</p>
+                    <p id="transparency_list_value">Value: ${element.value}</p>
+                    <p id="transparency_list_dateOfTransaction">Date Of Transaction: ${element.dateOfTransaction}</p>
+                    <p id="transparency_list_dateOfTransaction">Date Of Addition: ${element.createdAt}</p>
+                    <p id="transparency_list_id">ID: ${element._id}</p>
+                </div>
+                `;	
+
+                $("#transparency_list_div").append(item_template);
+
+            });
+
+
         }
 
-    }).then((response) => {response.json().then((data) => {
-           
-        data.forEach(element => {
-
-            var item_template = 
-            `
-            <div id=${element._id}>
-                <p id="transparency_list_title">Title: ${element.title}</p>
-                <p id="transparency_list_description">Description: ${element.description}</p>
-                <p id="transparency_list_value">Value: ${element.value}</p>
-                <p id="transparency_list_dateOfTransaction">Date Of Transaction: ${element.dateOfTransaction}</p>
-                <p id="transparency_list_dateOfTransaction">Date Of Addition: ${element.createdAt}</p>
-                <p id="transparency_list_id">ID: ${element._id}</p>
-            </div>
-            `;	
-
-            $("#transparency_list_div").append(item_template);
-
-        });
-
-
-    })}).catch((err) => {
-        console.log(err)
-    })
+    });
 
 }
 

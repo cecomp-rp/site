@@ -55,6 +55,7 @@ function common_fetch(url, method, data = {}, msg_objs = []){
 
                 //400 - Error
                 else if(response.status == 400){
+                    console.log("Error: " + data.error);
                     msg_objs.forEach((msg_obj) => {
                         $('#' + msg_obj).text(data.error);
                     })

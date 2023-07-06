@@ -13,6 +13,9 @@ async function createEventCertificate(user_id, event_id){
     const event = await Event.findById(event_id);
     const sub = await Subscription.findOne({user_id: user_id, event_id: event_id});
 
+    //Check if user is subscribed to event
+    if(!sub){return;}
+
     //Activities user did
     var activities = [];
     await sub.activities_done.forEach((activity) => {
@@ -26,7 +29,7 @@ async function createEventCertificate(user_id, event_id){
     })
 
     var certificate_content = `
-    <h2>${user.name} participou do evento ${event.name} perfazendo um total de ${totalHours} horas.</h2>
+    <h2>~name participou do evento ${event.name} perfazendo um total de ${totalHours} horas.</h2>
 
     <h3>${event.title}</h3>
     <h3>${event.description}</h3>
@@ -74,6 +77,9 @@ async function updateEventCertificate(user_id, event_id){
     const event = await Event.findById(event_id);
     const sub = await Subscription.findOne({user_id: user_id, event_id: event_id});
 
+    //Check if user is subscribed to event
+    if(!sub){return cert;}
+
     //Activities user did
     var activities = [];
     await sub.activities_done.forEach((activity) => {
@@ -87,7 +93,7 @@ async function updateEventCertificate(user_id, event_id){
     })
 
     var certificate_content = `
-    <h2>${user.name} participou do evento ${event.name} perfazendo um total de ${totalHours} horas.</h2>
+    <h2>~name participou do evento ${event.name} perfazendo um total de ${totalHours} horas.</h2>
 
     <h3>${event.title}</h3>
     <h3>${event.description}</h3>

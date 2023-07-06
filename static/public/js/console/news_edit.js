@@ -31,7 +31,6 @@ $(document).ready(function() {
         news_edit_fetch(id);
     });
 
-
     //Submit updates
     $("#news_edit_submit").click(function(){
         
@@ -46,27 +45,7 @@ $(document).ready(function() {
             content: content,
         }
 
-        console.log(data)
-
-        fetch("/api/news/" + id, {
-            method: "PATCH",
-            cache: "default",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data)
-        }).then((response) => {
-                
-                if(response.status == 200){
-                    $("#news_edit_message").text("News updated successfully.");
-                }else{
-                    $("#news_edit_message").text("Could not update news.");
-                }
-    
-            }
-        ).catch((err) => {
-            console.log(err)
-        })
+        common_fetch("/api/news/" + id, "PATCH", data, ['news_edit_message'])
 
     }); 
 
@@ -79,33 +58,14 @@ function news_edit_fetch(id){
     $("#news_edit_description").val("");
     news_edit_editor.setContents([]);
 
-    fetch("/api/news/by_id/" + id , {
-        method: "GET",
-        cache: "default", 
-        headers: {
-            "Content-Type": "application/json",
+    common_fetch("/api/news/by_id/" + id, "GET", {}, ['news_edit_fetch_message']).then((data) => {
+
+        if(data){
+            $("#news_edit_title").val(data.title);
+            $("#news_edit_description").val(data.description);
+            news_edit_editor_clipboard.dangerouslyPasteHTML(0, data.content);
         }
 
-    }).then((response) => {
-        
-        if(response.status == 200){
-        
-            response.json().then((data) => {
-
-                $("#news_edit_title").val(data.title);
-                $("#news_edit_description").val(data.description);
-                news_edit_editor_clipboard.dangerouslyPasteHTML(0, data.content);
-
-                $("#news_edit_fetch_message").text("");
-
-            })
-
-        }else{
-            $("#news_edit_fetch_message").text("Could not fetch news with this id.");
-        }
-
-    }).catch((err) => {
-        console.log(err)
     })
 
 }

@@ -2,42 +2,40 @@ $('document').ready(function () {
 
     var id = get_last_param_from_URL()
 
-    fetch("/api/events/by_name/" + id)
-    .then((response) => {
-        return response.json()
-    }).then((event) => {
+    common_fetch("/api/events/by_name/" + id, "GET", {}).then((data) => {
 
-        $("#event_title").text(event.title);
-        $("#event_name").text(event.name);
-        $("#event_description").text(event.description);
-        $("#event_startDate").text(event.startDate);
-        $("#event_endDate").text(event.endDate);
+        if(data){
 
-        //Created at and updated at
-        $("#event_createdAt").text(event.createdAt)
-        $("#event_updatedAt").text(event.updatedAt)
+            $("#event_title").text(data.title);
+            $("#event_name").text(data.name);
+            $("#event_description").text(data.description);
+            $("#event_startDate").text(data.startDate);
+            $("#event_endDate").text(data.endDate);
+    
+            //Created at and updated at
+            $("#event_createdAt").text(data.createdAt)
+            $("#event_updatedAt").text(data.updatedAt)
+    
+            //Activities
+            data.activities.forEach((activity) => {
+                
+                var append_model = 
+                `
+                <br>
+                <p>Title: ${activity.title}</p>
+                <p>Description: ${activity.description}</p>
+                <p>End Date: ${activity.date}</p>
+                <p>Duration: ${activity.duration}</p>
+    
+                `;
+    
+                $("#event_activities").append(append_model);
+    
+            })
 
-        //Activities
-        event.activities.forEach((activity) => {
-            
-            var append_model = 
-            `
-            <br>
-            <p>Title: ${activity.title}</p>
-            <p>Description: ${activity.description}</p>
-            <p>End Date: ${activity.date}</p>
-            <p>Duration: ${activity.duration}</p>
+        }
 
-            `;
-
-            $("#event_activities").append(append_model);
-
-        })
-
-    }).catch((err) => {
-        console.log(err)
     })
-
 
 })
 

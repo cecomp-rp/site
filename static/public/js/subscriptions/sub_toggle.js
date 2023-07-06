@@ -1,85 +1,50 @@
 $('document').ready(function(){
 
     const last_param = common_URL_get_last_param()
-
     $("#sub_subscribe").attr("href", "/sub/" + last_param);
     $("#sub_unsubscribe").attr("href", "/unsub/" + last_param);
 
-    isSubscribed().then((subscribed) => {
-        if(subscribed){
-            $("#sub_subscribe").hide();
-            $("#sub_unsubscribe").show();
-        }else{
-            $("#sub_subscribe").show();
-            $("#sub_unsubscribe").hide();
-        }
-
-    })
-
-    isOver().then((over) => {
-        if(over){
-            $("#sub_subscribe").hide();
-            $("#sub_unsubscribe").hide();
-            $("#sub_warning").text("This event is over.");
-        }
-    })
+    isSubscribed();
+    isOver();
 
 });
 
-function isSubscribed(){
+async function isSubscribed(last_param){
 
-    return fetch("/api/sub/verify/" + common_URL_get_last_param(), {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({})
-    }).then((res) => {
+    return common_fetch("/api/sub/verify/" + common_URL_get_last_param(), "POST", {}, []).then((data) => {
 
-        if(res.status == 200){
-            return res.json()
-        }else{
-            return false
+        if(data){
+            if(data.subscribed){
+                $("#sub_subscribe").hide();
+                $("#sub_unsubscribe").show();
+            }else{
+                $("#sub_subscribe").show();
+                $("#sub_unsubscribe").hide();
+            }
+
+            return data.subscribed;
         }
 
-    }).then((data) => {
-
-        return data.subscribed;
-
-    }).catch((err) => {
-        console.log(err);
-        return false;
     })
 
 }
 
-function isOver(){
+async function isOver(last_param){
 
-    //Verify if event is over
-    return fetch("/api/events/by_name/" + common_URL_get_last_param(), {
-
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-
-    }).then((res) => {
-
-        if(res.status == 200){
-            return res.json()
-        }else{
-            return false
-        }
-
-    }).then((data) => {
+    return common_fetch("/api/events/by_name/" + common_URL_get_last_param(), "GET", {}, []).then((data) => {
 
         if(data){
-            if(common_date_ISOToUnix(data.endDate) < Date.now()){return true;}
+            if(common_date_ISOToUnix(data.endDate) < Date.now()){
+                $("#sub_subscribe").hide();
+                $("#sub_unsubscribe").hide();
+                $("#sub_warning").text("This event is over.");
+                return true;
+            }
+
+            return false;
+
         }
 
-    }).catch((err) => {
-        console.log(err);
-        return false;
     })
 
 }

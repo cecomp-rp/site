@@ -2,7 +2,7 @@ $('document').ready(function() {
 
     var event_name = get_last_param_from_URL();
 
-    isSubscribed().then(function(result) {
+    isSubscribed(event_name).then(function(result) {
 
         if(result){
             $('#sub_your_activities').show();
@@ -15,16 +15,9 @@ $('document').ready(function() {
 
 function sub_your_activities_load(event_name){
 
-    fetch('/api/actv/' + event_name, {
+    common_fetch('/api/actv/' + event_name, 'GET').then((data) => {
 
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json'
-        }
-
-    }).then(function(response) {
-
-        response.json().then(function(data) {
+        if(data){
 
             data.forEach(function(actv) {
 
@@ -39,11 +32,7 @@ function sub_your_activities_load(event_name){
 
             });
 
-        }).catch(function(err) {
-                
-            console.log(err);
-    
-        });
+        }
 
     });
 

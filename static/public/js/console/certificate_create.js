@@ -4,7 +4,6 @@ $('document').ready(function () {
         cert_create_create();
     });
 
-
 });
 
 function cert_create_create(){
@@ -19,27 +18,11 @@ function cert_create_create(){
         content: content
     }
 
-    fetch('/api/certificates', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
+    common_fetch('/api/certificates', 'POST', data, ['cert_create_message']).then((data) => {
 
-        body: JSON.stringify(data)
-
-    }).then((response) => {
-
-        if(response.status == 201){
+        if(data){
             $('#cert_create_email').val('');
-            $('#cert_create_message').text('Certificado criado com sucesso!');
-        }else{
-            $('#cert_create_message').text('Erro ao criar certificado!');
         }
-
-    }).catch((error) => {
-        
-        console.log(error);
-        $('#cert_create_message').text('Erro ao criar certificado!');
 
     });
 

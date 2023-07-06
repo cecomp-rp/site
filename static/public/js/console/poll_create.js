@@ -81,24 +81,6 @@ function poll_create_submit(){
         endDate
     }
 
-    fetch("/api/polls", {
-        method: "POST",
-        cache: "default", 
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data), 
-
-    }).then((response) => {
-
-        if(response.status == 201) {
-            $('#poll_create_message').text("Success!")
-        } else {
-            $('#poll_create_message').text("Poll creation failed!")
-        }
-
-    }).catch((err) => {
-        console.log(err)
-    })
+    common_fetch('/api/polls', 'POST', data, ['poll_create_message'])
 
 }

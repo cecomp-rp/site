@@ -1,20 +1,11 @@
 $(document).ready(function(){
 
-    fetch("/api/transparency/summary", {
-        method: "GET",
-        cache: "default", 
-        headers: {
-            "Content-Type": "application/json",
+    common_fetch("/api/transparency/summary", "GET" ).then((data) => {
+
+        if(data){
+            $("#transparency_summary_total_cash").text(data.total)
         }
-
-    }).then((response) => {response.json().then((data) => {
-           
-        $("#transparency_summary_total_cash").text(data.total)
-
-
-    })}).catch((err) => {
-        console.log(err)
-    })
-     
+    
+    });
 
 });

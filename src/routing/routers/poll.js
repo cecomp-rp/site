@@ -2,151 +2,235 @@ const express               = require("express")
 const logged                = require("../../middleware/logged")
 const Poll                  = require("../../database/models/Poll")
 const User                  = require("../../database/models/User")
+const commonRes             = require("../../utils/io/commonRes")
+const filterObject          = require("../../utils/other/filterObject")
+
 
 const router = new express.Router()
 
 //GET polls (multiple by page)
-router.get("/api/polls/by_page/:page", logged(['bcc_member_functions']), (req, res) => {
+router.get("/api/polls/by_page/:page", logged(['bcc_member_functions']), async (req, res) => {
     
-    //page is the page number
-    //return 5 news per page
-    //return news in descending order of createdAt
-
     const page_limit = 5;
+    const page = req.params.page
 
-    Poll.find({})
+    const polls = await Poll.find({})
     .sort({createdAt: -1})
-    .skip((req.params.page - 1) * page_limit)
+    .skip((page - 1) * page_limit)
     .limit(page_limit)
     .lean()
     .exec()
-    .then((polls) => {
+    .catch((error) => {})
 
-        const polls_with_nick = polls.map(async (element) => {
+    if(!polls){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
+    
+    const polls_with_nick_aux = polls.map(async (element) => {
 
-            //Get authors nicknames
-            const user = await User.findOne({_id: element.author_id})
+        //Get authors nicknames
+        const user = await User.findOne({_id: element.author_id})
+        .catch((error) => {})
+        
+        if(user){
             element.author_id = user.nick
+        }else{
+            element.author_id = "Unknown"
+        }
+        
+        //Verify if user already voted in each poll
+        const testVote = element.whoVoted.includes(req.user._id.toString());
+        if(testVote){element.alreadyVoted = true} else {element.alreadyVoted = false}
 
-            //Verify if user already voted in each poll
-            const testVote = element.whoVoted.includes(req.user._id.toString());
-            if(testVote){element.alreadyVoted = true} else {element.alreadyVoted = false}
-
-            //Remove whoVoted array from response
-            element.whoVoted = undefined
-
-            return element
-        })
-
-        Promise.all(polls_with_nick).then((polls) => { 
-            res.status(200).json(polls)
-        })
-
-    }).catch((error) => {
-        console.log(error)
-        res.status(400).send()
-        return;
+        return element
     })
+
+    const polls_with_nick = await Promise.all(polls_with_nick_aux)
+
+    const content = filterObject(
+        polls_with_nick, //object
+        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'author_id', 'alreadyVoted', 'endDate', 'options'], //allowed atributes
+        {} //rename atributes
+    );
+
+    commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content
+    }); return;
 
 })
 
 //GET polls (single by id)
-router.get("/api/polls/by_id/:id", logged(['bcc_member_functions']), (req, res) => {
+router.get("/api/polls/by_id/:id", logged(['bcc_member_functions']), async (req, res) => {
 
-    Poll.findOne({_id: req.params.id})
+    const id = req.params.id
+
+    const poll = await Poll.findOne({_id: id})
     .lean()
-    .then((poll) => {
-            
-            //Verify if user already voted in poll
-            const testVote = poll.whoVoted.includes(req.user._id.toString());
-            if(testVote){poll.alreadyVoted = true} else {poll.alreadyVoted = false}
+    .exec()
+    .catch((error) => {})
+    
+    //Verify if user already voted in poll
+    const testVote = poll.whoVoted.includes(req.user._id.toString());
+    if(testVote){
+        poll.alreadyVoted = true
+    }else{
+        poll.alreadyVoted = false
+    }
 
-            //Get authors nicknames
-            User.findOne({_id: poll.author_id})
-            .then((user) => {
-                
-                poll.author_id = user.nick
-                poll.whoVoted = undefined
+    //Get authors nicknames
+    const user = User.findOne({_id: poll.author_id})
+    .catch((error) => {})
+    if(user){
+        poll.author_id = user.nick
+    }else{
+        poll.author_id = "Unknown"
+    }
 
-                res.status(200).json(poll)
+    const content = filterObject(
+        poll, //object
+        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'author_id', 'alreadyVoted', 'endDate', 'options'], //allowed atributes
+        {} //rename atributes
+    );
 
-            })
-
-
-    }).catch((error) => {
-        console.log(error)
-        res.status(400).send()
-        return;
-    })
+    commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content
+    }); return; 
 
 })
 
 //POST polls (vote)
 router.post("/api/polls/vote/:id", logged(['bcc_member_functions']), async (req, res) => {
 
-    //Each option is identified by its _id
+    const id = req.params.id
+    const option = req.body.option
 
     //Check if user already voted
-    const poll = await Poll.findOne({_id: req.params.id})
-    if(poll.whoVoted.includes(req.user._id)){return res.status(400).send()} 
+    const poll = await Poll.findOne({_id: id})
+    .catch((error) => {})
+
+    if(!poll){
+        commonRes(res, {
+            error: "Poll not found.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
+
+    if(poll.whoVoted.includes(req.user._id)){
+        commonRes(res, {
+            error: "Already voted.",
+            message: undefined,
+            content: undefined
+        }); return;
+    } 
 
     //Check if option exists
     var check = false;
-    poll.options.forEach((option) => {
-        if(option._id == req.body.option){check = true}
+    poll.options.forEach((elem) => {
+        if(elem._id == option){check = true}
     })
-    if(check == false){return res.status(400).send()}
+
+    if(check == false){
+        commonRes(res, {
+            error: "Option not found.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
     //Check if poll is still open
     poll_date = new Date(poll.endDate);
-    if(poll_date.getTime() < Date.now()){return res.status(400).send()}
+    if(poll_date.getTime() < Date.now()){
+        commonRes(res, {
+            error: "Poll out of date.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
     //Add vote and whoVoted
-    poll.options.forEach((option) => {
-        if(option._id == req.body.option){
-            option.numberOfVotes += 1
+    poll.options.forEach((elem) => {
+        if(elem._id == option){
+            elem.numberOfVotes += 1
         }
     })
     poll.whoVoted.push(req.user._id)
 
     //Save poll
-    poll.save().then(() => {
-        res.status(200).send()
-    }).catch((error) => {
-        console.log(error)
-        res.status(400).send()
-        return;
-    })
+    const newPoll = Poll.findOneAndUpdate({_id: id}, poll)
+    .catch((error) => {})
+
+    if(!newPoll){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }else{
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content: undefined
+        }); return;
+    }
 
 })
 
 //POST polls (create)
 router.post("/api/polls", logged(['admin']), async (req, res) => {
 
-    req.body.author_id = req.user._id
+    const poll = req.body
 
-    Poll.create(req.body)
-    .then((poll) => {
-        res.status(201).send()
-    }).catch((error) => {
-        console.log(error)
-        res.status(400).send()
-        return;
-    })
+    poll.author_id = req.user._id
+
+    const newPoll = Poll.create(poll)
+    .catch((error) => {})
+
+    if(!newPoll){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }else{
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content: undefined
+        }); return;
+    }
 
 })
 
 //DELETE polls (single by id)
 router.delete("/api/polls/:id", logged(['admin']), async (req, res) => {
 
-    Poll.findOneAndDelete({_id: req.params.id})
-    .then((poll) => {
-        res.status(200).send()
-    }).catch((error) => {
-        console.log(error)
-        res.status(400).send()
-        return;
-    })
+    const id = req.params.id
+
+    const poll = await Poll.findOneAndDelete({_id: id})
+    .catch((error) => {})
+
+    if(!poll){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }else{
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content: undefined
+        }); return;
+    }
 
 })
 
