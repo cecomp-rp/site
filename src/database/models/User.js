@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema({
         }
 
     }]
-    
+
 })
 
 userSchema.plugin(timestamps);

@@ -28,6 +28,7 @@ const subscriptionsSchema = new mongoose.Schema({
             type: Boolean,
             default: true
         },
+        
         enable_email_sharing: {
             type: Boolean,
             default: true

@@ -158,7 +158,7 @@ router.post("/api/events", logged(['admin']), async (req, res) => {
     }
 
     //Verify event dates
-    if( (event.startDate > event.endDate) || (event.startDate < Date.now())){
+    if(event.startDate > event.endDate){
         commonRes(res, {
             error: "Invalid dates.",
             message: undefined,

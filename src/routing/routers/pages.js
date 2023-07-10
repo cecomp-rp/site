@@ -112,5 +112,10 @@ router.get("/console/transparency", logged(['admin']), (req, res) => {
     res.render("console-transparency")
 });
 
+//Console (emails) Page
+router.get("/console/emails", logged(['admin']), (req, res) => {
+    res.render("console-emails")
+});
+
 
 module.exports = router
