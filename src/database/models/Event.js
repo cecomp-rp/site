@@ -48,6 +48,26 @@ const eventsSchema = new mongoose.Schema({
 
     }],
 
+    emails: [{
+
+        type: { 
+            type: String,
+            enum: ["event_subscribe", "event_unsubscribe", "event_update", "event_reminder", "atv_subscribe"],
+            required: true
+        },
+        
+        subject: {
+            type: String,
+            required: true
+        },
+
+        content: {
+            type: String,
+            required: true
+        }
+
+    }],
+
 },{
     timestamps: true
 })

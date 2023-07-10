@@ -33,7 +33,7 @@ const subscriptionsSchema = new mongoose.Schema({
         },
 
     }
-    
+
 },{
     timestamps: true
 })

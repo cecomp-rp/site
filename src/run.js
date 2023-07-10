@@ -10,8 +10,6 @@ const hbs                   = require("hbs")
 const passport              = require('passport')
 const cookieSession         = require("cookie-session")
 
-require("./utils/mail/sendMail")
-
 //Open database connection
 require("./database/database")
 
