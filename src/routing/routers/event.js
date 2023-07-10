@@ -328,5 +328,37 @@ router.delete("/api/events/:id", logged(['admin']), async (req, res) => {
 
 })
 
+//GET activity (unique by id)
+router.get("/api/actv/by_id/:id", logged(['admin']), async (req, res) => {
+
+    const id = req.params.id;
+
+    //Find event with activity id
+    const event = await Event.findOne({"activities._id": id})
+    .catch((error) => {})
+
+    if(!event){
+        commonRes(res, {
+            error: "No activity found.",
+            message: undefined,
+            content: {}
+        }); return;
+    }
+
+    //Filter activity with filterObject
+    const activity = filterObject(
+        event.activities.id(id), //object
+        ['title', 'description', 'startDate', 'duration', '_id'], //allowed atributes
+        {} //rename atributes
+    );
+
+    commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content: activity
+    }); return;
+    
+});
+
 
 module.exports = router

@@ -108,7 +108,7 @@ function event_edit_activity_add(){
     <div id="${uniq}">
         <input type="text" id="${uniq}_title" placeholder="Title (required)"></input>
         <textarea id="${uniq}_description" placeholder="Description"></textarea>
-        <input type="date" id="${uniq}_date" placeholder="Date"></input>
+        <input type="datetime-local" id="${uniq}_date" placeholder="Date"></input>
         <input type="number" id="${uniq}_duration" placeholder="Duration"></input>
         <button onclick="event_edit_activity_remove('${uniq}')">Remove</button>
     </div>
