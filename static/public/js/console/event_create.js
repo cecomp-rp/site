@@ -17,16 +17,16 @@ function event_create_submit(){
 
     $('#event_create_activity_div').children().each(function () {
 
-        var id          = $(this).attr('id');
-        var title       = $(`#${id}_title`).val();
-        var description = $(`#${id}_description`).val();
-        var date        = $(`#${id}_date`).val();
-        var duration    = $(`#${id}_duration`).val();
+        var id              = $(this).attr('id');
+        var title           = $(`#${id}_title`).val();
+        var description     = $(`#${id}_description`).val();
+        var startDate_ev    = $(`#${id}_date`).val();
+        var duration        = $(`#${id}_duration`).val();
 
         activities.push({
             title,
             description,
-            date,
+            startDate: common_date_ISOToUnix(startDate_ev),
             duration
         })
 
@@ -35,8 +35,8 @@ function event_create_submit(){
     var data = {
         name,
         description,
-        startDate,
-        endDate,
+        startDate: common_date_ISOToUnix(startDate),
+        endDate: common_date_ISOToUnix(endDate),
         activities
     }
 

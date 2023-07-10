@@ -157,8 +157,8 @@ router.post("/api/events", logged(['admin']), async (req, res) => {
         }); return;
     }
 
-    //Verify dates
-    if(event.startDate > event.endDate){
+    //Verify event dates
+    if( (event.startDate > event.endDate) || (event.startDate < Date.now())){
         commonRes(res, {
             error: "Invalid dates.",
             message: undefined,
@@ -166,9 +166,32 @@ router.post("/api/events", logged(['admin']), async (req, res) => {
         }); return;
     }
 
+    //Verify activities dates
+    var invalid_activities = false;
+    event.activities.forEach((activity) => {
+        
+        //Activity - Event 
+        var atv_endDate = activity.startDate + activity.duration * 60 * 60 * 1000; //Duration is in hours
+        if( (atv_endDate > event.endDate) || (activity.startDate < event.startDate) ){
+            invalid_activities = true;
+        }
+
+    })
+
+    if(invalid_activities){
+        commonRes(res, {
+            error: "Invalid activities dates.",
+            message: undefined,
+            content: {}
+        }); return;
+    }
+
     //Create
     const eventDb = await Event.create(event)
-    .catch((error) => {})
+    .catch((error) => {
+        console.log(error)
+    
+    })
 
     if(!eventDb){
         commonRes(res, {
@@ -232,12 +255,32 @@ router.patch("/api/events/:id", logged(['admin']), async (req, res) => {
         if(activity._id == ''){activity._id = undefined}
     })
         
-    //Verify dates
+    //Verify event dates
     if(event.startDate > event.endDate){
         commonRes(res, {
             error: "Invalid dates.",
             message: undefined,
             content: {} 
+        }); return;
+    }
+
+    //Verify activities dates
+    var invalid_activities = false;
+    event.activities.forEach((activity) => {
+        
+        //Activity - Event 
+        var atv_endDate = activity.startDate + activity.duration * 60 * 60 * 1000; //Duration is in hours
+        if( (atv_endDate > event.endDate) || (activity.startDate < event.startDate) ){
+            invalid_activities = true;
+        }
+
+    })
+
+    if(invalid_activities){
+        commonRes(res, {
+            error: "Invalid activities dates.",
+            message: undefined,
+            content: {}
         }); return;
     }
 

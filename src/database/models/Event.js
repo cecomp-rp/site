@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const timestamps = require('mongoose-unix-timestamp');
 
 const eventsSchema = new mongoose.Schema({
     
@@ -17,12 +18,12 @@ const eventsSchema = new mongoose.Schema({
     },
 
     startDate: {
-        type: Date,
+        type: Number, // unix timestamp
         required: true
     },
 
     endDate: {
-        type: Date,
+        type: Number, // unix timestamp
         required: true
     },
 
@@ -37,12 +38,13 @@ const eventsSchema = new mongoose.Schema({
             type: String,
         },
 
-        date: {
-            type: Date
+        startDate: {
+            type: Number, // unix timestamp
+            required: true
         },
 
         duration: {
-            type: Number,
+            type: Number, // in hours
             default: 0
         }
 
@@ -68,9 +70,9 @@ const eventsSchema = new mongoose.Schema({
 
     }],
 
-},{
-    timestamps: true
 })
+
+eventsSchema.plugin(timestamps);
 
 const Event = mongoose.model('Event', eventsSchema)
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const timestamps = require('mongoose-unix-timestamp');
 
 const subscriptionsSchema = new mongoose.Schema({
     
@@ -34,9 +35,9 @@ const subscriptionsSchema = new mongoose.Schema({
 
     }
 
-},{
-    timestamps: true
 })
+
+subscriptionsSchema.plugin(timestamps);
 
 const Subscription = mongoose.model('Subscription', subscriptionsSchema)
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const timestamps = require('mongoose-unix-timestamp');
 
 const userSchema = new mongoose.Schema({
     
@@ -50,9 +51,9 @@ const userSchema = new mongoose.Schema({
 
     }]
     
-},{
-    timestamps: true
 })
+
+userSchema.plugin(timestamps);
 
 const User = mongoose.model('User', userSchema)
 

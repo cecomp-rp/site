@@ -32,6 +32,7 @@
     "jsdom": "^22.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.2",
+    "mongoose-unix-timestamp": "^1.0.6",
     "nodemailer": "^6.9.3",
     "openai": "^3.2.1",
     "passport": "0.4.1",

@@ -10,7 +10,8 @@ $('document').ready(function () {
             $('#poll_description').text(data.description)
             $('#poll_author').text(data.author_id)
             $('#poll_end_date').text(data.endDate)
-            $('#poll_start_date').text(data.createdAt)
+            $('#poll_start_date').text(data.startDate)
+            $('#poll_createdAt').text(data.createdAt)
 
             data.options.forEach((option) => {
 
@@ -34,10 +35,15 @@ $('document').ready(function () {
             }
 
             //Poll out of date?
-            var poll_date = Date.parse(data.endDate);
-            if(poll_date < Date.now()){
+            if(data.endDate < Date.now()){
                 $('.' + data._id + '_button').attr("disabled", true);
                 $('.' + data._id + '_button').text("Poll out of date");
+            }
+
+            //Poll not open yet?
+            if(data.startDate > Date.now()){
+                $('.' + data._id + '_button').attr("disabled", true);
+                $('.' + data._id + '_button').text("Poll not open yet");
             }
     
         }  

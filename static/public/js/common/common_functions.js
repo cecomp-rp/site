@@ -1,5 +1,5 @@
 function common_date_unixToISO(date){
-    return new Date(date).toISOString();
+    return new Date(date).toISOString().split('.')[0];
 }
 
 function common_date_ISOToUnix(date){

@@ -64,6 +64,7 @@ function poll_create_submit(){
 
     var title           = $("#poll_create_title").val();
     var description     = $("#poll_create_description").val();
+    var startDate       = $("#poll_create_start_date").val();
     var endDate         = $("#poll_create_end_date").val();
 
     var options = [];
@@ -78,7 +79,8 @@ function poll_create_submit(){
         title,
         description,
         options,
-        endDate
+        startDate: common_date_ISOToUnix(startDate),
+        endDate: common_date_ISOToUnix(endDate)
     }
 
     common_fetch('/api/polls', 'POST', data, ['poll_create_message'])

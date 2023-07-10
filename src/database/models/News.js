@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const timestamps = require('mongoose-unix-timestamp');
 
 const newsSchema = new mongoose.Schema({
     
@@ -21,9 +22,9 @@ const newsSchema = new mongoose.Schema({
         required: true
     },
 
-},{
-    timestamps: true
 })
+
+newsSchema.plugin(timestamps);
 
 const News = mongoose.model('News', newsSchema)
 

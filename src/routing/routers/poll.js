@@ -53,7 +53,7 @@ router.get("/api/polls/by_page/:page", logged(['bcc_member_functions']), async (
 
     const content = filterObject(
         polls_with_nick, //object
-        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'author_id', 'alreadyVoted', 'endDate', 'options'], //allowed atributes
+        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'author_id', 'alreadyVoted', 'startDate', 'endDate', 'options'], //allowed atributes
         {} //rename atributes
     );
 
@@ -94,7 +94,7 @@ router.get("/api/polls/by_id/:id", logged(['bcc_member_functions']), async (req,
 
     const content = filterObject(
         poll, //object
-        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'author_id', 'alreadyVoted', 'endDate', 'options'], //allowed atributes
+        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'author_id', 'alreadyVoted', 'endDate', 'startDate', 'options'], //allowed atributes
         {} //rename atributes
     );
 
@@ -146,16 +146,22 @@ router.post("/api/polls/vote/:id", logged(['bcc_member_functions']), async (req,
         }); return;
     }
 
-    //Check if poll is still open
-    poll_date = new Date(poll.endDate);
-    if(poll_date.getTime() < Date.now()){
+    //Check if poll is open (dates)
+    if(poll.startDate > Date.now()){
         commonRes(res, {
-            error: "Poll out of date.",
+            error: "Poll not open yet.",
             message: undefined,
             content: undefined
         }); return;
     }
-
+    if(poll.endDate < Date.now()){
+        commonRes(res, {
+            error: "Poll already closed.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
+    
     //Add vote and whoVoted
     poll.options.forEach((elem) => {
         if(elem._id == option){
@@ -190,6 +196,22 @@ router.post("/api/polls", logged(['admin']), async (req, res) => {
     const poll = req.body
 
     poll.author_id = req.user._id
+
+    //Verify dates
+    var invalid_dates = false;
+    if(poll.startDate < Date.now()){
+        invalid_dates = true;
+    }
+    if(poll.startDate > poll.endDate){
+        invalid_dates = true;
+    }
+    if(invalid_dates){
+        commonRes(res, {
+            error: "Invalid dates.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
     const newPoll = Poll.create(poll)
     .catch((error) => {})

@@ -20,6 +20,7 @@ function poll_fetch_list(poll_fetch_page){
                     <p>Title: ${poll.title}</p>
                     <p>Description: ${poll.description}</p>
                     <p>Author: ${poll.author_id}</p>
+                    <p>Start Date: ${poll.startDate}</p>
                     <p>End Date: ${poll.endDate}</p>
                     <p>Created At: ${poll.createdAt}</p>
                     <div id="${poll._id}_poll_options"></div>
@@ -53,10 +54,15 @@ function poll_fetch_list(poll_fetch_page){
                 }
 
                 //Poll out of date?
-                var poll_date = Date.parse(poll.endDate);
-                if(poll_date < Date.now()){
+                if(poll.endDate < Date.now()){
                     $('.' + poll._id + '_button').attr("disabled", true);
                     $('.' + poll._id + '_button').text("Poll out of date");
+                }
+
+                //Poll not started yet?
+                if(poll.startDate > Date.now()){
+                    $('.' + poll._id + '_button').attr("disabled", true);
+                    $('.' + poll._id + '_button').text("Poll not started yet");
                 }
 
             });

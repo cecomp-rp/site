@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const timestamps = require('mongoose-unix-timestamp');
 
 const transparencySchema = new mongoose.Schema({
     
@@ -17,13 +18,13 @@ const transparencySchema = new mongoose.Schema({
     },
 
     dateOfTransaction: {
-        type: Date,
+        type: Number, // unix timestamp
         required: true
     },
 
-},{
-    timestamps: true
 })
+
+transparencySchema.plugin(timestamps);
 
 const Transparency = mongoose.model('Transparency', transparencySchema)
 

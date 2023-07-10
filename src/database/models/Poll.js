@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const timestamps = require('mongoose-unix-timestamp');
 
 const pollSchema = new mongoose.Schema({
     
@@ -29,8 +30,13 @@ const pollSchema = new mongoose.Schema({
         type: String
     }],
 
-    endDate: {
-        type: Date,
+    startDate: { // unix timestamp
+        type: Number,
+        required: true
+    },
+
+    endDate: { // unix timestamp
+        type: Number,
         required: true
     },
 
@@ -39,9 +45,9 @@ const pollSchema = new mongoose.Schema({
         required: true
     },
 
-},{
-    timestamps: true
 })
+
+pollSchema.plugin(timestamps);
 
 const Poll = mongoose.model('Poll', pollSchema)
 

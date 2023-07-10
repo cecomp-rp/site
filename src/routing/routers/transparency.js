@@ -23,7 +23,7 @@ router.get("/api/transparency/item/:page", logged(['bcc_member_functions']), asy
 
     const content = filterObject(
         items, //object
-        ['_id', 'title', 'dateOfTransaction', 'value', 'description'], //allowed atributes
+        ['_id', 'title', 'dateOfTransaction', 'value', 'description', 'createdAt'], //allowed atributes
         {} //rename atributes
     );
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const timestamps = require('mongoose-unix-timestamp');
 
 const certificatesSchema = new mongoose.Schema({
     
@@ -26,9 +27,9 @@ const certificatesSchema = new mongoose.Schema({
         required: true
     }
 
-},{
-    timestamps: true
 })
+
+certificatesSchema.plugin(timestamps);
 
 const Certificate = mongoose.model('Certificate', certificatesSchema)
 
