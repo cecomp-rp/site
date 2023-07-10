@@ -11,7 +11,31 @@
     <!-- MAIN -->
     <div class="main ">
 
-        <p>Um forms anonimo aqui!</p>
+        <script src="\js/contact/contact_send.js"></script>
+
+        <h2>Contato</h2>
+
+        <p>Tipo de contato</p>
+        <select id="contact_type">
+            <option value="suggestion">Sugestão</option>
+            <option value="complaint">Reclamação / Denúncia</option>
+            <option value="doubt">Dúvida</option>
+            <option value="verify">Pedido de verificação para membro BCC</option>
+            <option value="commercial">Comercial / Parcerias</option>
+            <option value="institutional">Institucional</option>
+            <option value="other">Outro</option>
+        </select>
+
+        <p>Email de retorno (opcional)</p>
+        <input type="text" id="contact_email">
+
+        <p>Mensagem</p>
+        <textarea id="contact_content"></textarea>
+
+        <button id="contact_send">Enviar</button>
+
+        <p id="contact_msg"></p>
+
 
     </div>
 
