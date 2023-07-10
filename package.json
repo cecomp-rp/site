@@ -32,6 +32,7 @@
     "jsdom": "^22.0.0",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.2",
+    "nodemailer": "^6.9.3",
     "openai": "^3.2.1",
     "passport": "0.4.1",
     "passport-google-oauth20": "2.0.0",
