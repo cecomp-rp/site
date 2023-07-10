@@ -49,7 +49,21 @@ const userSchema = new mongoose.Schema({
             type: String,
         }
 
-    }]
+    }],
+
+    userSettings: {
+
+        enable_email_notifications: {
+            type: Boolean,
+            default: true
+        },
+        
+        enable_email_sharing: {
+            type: Boolean,
+            default: true
+        },
+        
+    }
 
 })
 

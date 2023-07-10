@@ -90,6 +90,41 @@ router.patch("/api/account/nick", logged(['basic_functions']), async (req, res) 
 
 })
 
+//GET Account settings
+router.get("/api/account/settings", logged(['basic_functions']), async (req, res) => {
+
+    const content = filterObject(
+        req.user, //object
+        ['userSettings'], //allowed atributes
+        {} //rename atributes
+    );
+
+    commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content: content.userSettings
+    }); return;
+
+})
+
+//PATCH Account settings
+router.patch("/api/account/settings", logged(['basic_functions']), async (req, res) => {
+
+    const userSettings = req.body
+
+    //Update the user settings
+    await User.findByIdAndUpdate(req.user._id, {userSettings})
+    .catch((err) => {})
+
+    commonRes(res, {
+        error: undefined,
+        message: "Settings updated.",
+        content: undefined
+    }); return;
+    
+})
+
+
 //GET/DELETE Sessions
 //In auth router
 

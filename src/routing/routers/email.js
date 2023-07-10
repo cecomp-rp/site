@@ -12,10 +12,10 @@ router.post("/api/emails/global", logged(['admin']), async (req, res) => {
     
     const data = req.body;
 
-    //Find all users
-    const users = await User.find({})
+    //Find all users userSettings.enable_email_notifications true
+    const users = await User.find({ "userSettings.enable_email_notifications": true })
     .catch((error) => {})
-
+    
     if(!users){
         commonRes(res, {
             error: "No users found.",

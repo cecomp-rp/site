@@ -40,8 +40,14 @@ router.get("/sub/:event_name", logged(['basic_functions']), async (req, res) => 
         return;
     }
 
+    //Set user settings
+    const userSettings = {
+        enable_email_notifications: req.user.userSettings.enable_email_notifications,
+        enable_email_sharing: req.user.userSettings.enable_email_sharing
+    }
+
     //Create subscription
-    const sub = await Subscription.create({user_id: req.user._id, event_id: event._id})
+    const sub = await Subscription.create({user_id: req.user._id, event_id: event._id, userSettings})
     .catch((err) => {})
 
     if(!sub){
