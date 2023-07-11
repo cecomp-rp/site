@@ -2,6 +2,7 @@ const Event         = require("../../database/models/Event");
 const Subscription  = require("../../database/models/Subscription");
 const User          = require("../../database/models/User");
 const Certificate   = require("../../database/models/Certificate");
+const addFields     = require("../other/addFields");
 
 async function createEventCertificate(user_id, event_id){
 
@@ -16,41 +17,21 @@ async function createEventCertificate(user_id, event_id){
     //Check if user is subscribed to event
     if(!sub){return;}
 
+    //Check if event was found
+    if(!event){return;}
+
+    //Check if event has certificate template
+    if(!event.certificate){return;}
+
     //Activities user did
     var activities = [];
     await sub.activities_done.forEach((activity) => {
         activities.push(event.activities.id(activity.activity_id));
     })
 
-    //Total hours
-    var totalHours = 0;
-    await activities.forEach((activity) => {
-        totalHours += activity.duration;
-    })
-
-    var certificate_content = `
-    <h2>~name participou do evento ${event.name} perfazendo um total de ${totalHours} horas.</h2>
-
-    <h3>${event.title}</h3>
-    <h3>${event.description}</h3>
-    <h3>${event.startDate} - ${event.endDate}</h3>
-
-    <h3>As atividades realizadas pelo usuário foram:</h3>
-    `;
-
-    await activities.forEach((activity) => {
-
-        var activities_content = `
-        <h3>${activity.title}</h3>
-        <h3>${activity.description}</h3>
-        <h3>${activity.date}</h3>
-        <h3>${activity.duration}</h3>
-        `;
-
-        certificate_content += activities_content;
-
-    });
-
+    //Add fields to certificate
+    var certificate_content = addFields(event.certificate, {user, event, activities});
+    
     //Create certificate and save it
     const new_cert =  await Certificate.create({
         owner_id: user_id,
@@ -80,41 +61,21 @@ async function updateEventCertificate(user_id, event_id){
     //Check if user is subscribed to event
     if(!sub){return cert;}
 
+    //Check if event was found
+    if(!event){return cert;}
+
+    //Check if event has certificate template
+    if(!event.certificate){return cert;}
+
     //Activities user did
     var activities = [];
     await sub.activities_done.forEach((activity) => {
         activities.push(event.activities.id(activity.activity_id));
     })
 
-    //Total hours
-    var totalHours = 0;
-    await activities.forEach((activity) => {
-        totalHours += activity.duration;
-    })
-
-    var certificate_content = `
-    <h2>~name participou do evento ${event.name} perfazendo um total de ${totalHours} horas.</h2>
-
-    <h3>${event.title}</h3>
-    <h3>${event.description}</h3>
-    <h3>${event.startDate} - ${event.endDate}</h3>
-
-    <h3>As atividades realizadas pelo usuário foram:</h3>
-    `;
-
-    await activities.forEach((activity) => {
-
-        var activities_content = `
-        <h3>${activity.title}</h3>
-        <h3>${activity.description}</h3>
-        <h3>${activity.date}</h3>
-        <h3>${activity.duration}</h3>
-        `;
-
-        certificate_content += activities_content;
-
-    });
-
+    //Add fields to certificate
+    var certificate_content = addFields(event.certificate, {user, event, activities});
+    
     //Update certificate
     cert.content = certificate_content;
     await cert.save();

@@ -52,7 +52,7 @@ router.get("/api/certificates/by_page_with_email/:email/:page", logged(['admin']
 
     //Add fields for each certificate
     certificates.forEach(element => {
-        element.content = addFields(element.content, user);
+        element.content = addFields(element.content, {user});
     });
 
     const content = filterObject(
@@ -92,7 +92,7 @@ router.get("/api/certificates/by_page/:page", logged(['basic_functions']), async
 
     //Add fields for each certificate
     certificates.forEach(element => {
-        element.content = addFields(element.content, req.user);
+        element.content = addFields(element.content, {user: req.user});
     });
 
     const content = filterObject(
@@ -131,7 +131,7 @@ router.get("/api/certificates/by_id/:id", async (req, res) => {
     }
 
     //Add fields for certificate
-    certificate.content = addFields(certificate.content, req.user);
+    certificate.content = addFields(certificate.content, {user: req.user});
             
     const content = filterObject(
         certificate, //object

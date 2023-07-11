@@ -25,7 +25,7 @@ async function sendMail (subject, to, content){
 
     if(user){
         //Add fields to content
-        content = addFields(content, user);
+        content = addFields(content, {user});
     }
 
     //Send email

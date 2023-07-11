@@ -92,7 +92,14 @@ function event_edit_fetch(id){
 
                 var uniq = 'id' + (new Date()).getTime() + parseInt(Math.random() * 1000);
                   
-                common_append('#event_edit_activity_div', 'con_event_atv.html', {uniq});
+                common_append('#event_edit_activity_div', 'con_event_atv.html', {uniq}).then(() => {
+
+                    $(`#${uniq}_title`).val(activity.title);
+                    $(`#${uniq}_description`).val(activity.description);
+                    $(`#${uniq}_date`).val(common_date_unixToISO(activity.startDate));
+                    $(`#${uniq}_duration`).val(activity.duration);
+
+                })
 
             })
 
