@@ -12,8 +12,6 @@ function event_remove_list(){
 
             data.forEach(element => {
 
-                console.log(element);
-
                 common_append("#event_remove_div", "con_event.html", element).then(() => {
 
                     //Append activities from element

@@ -54,12 +54,7 @@ const eventsSchema = new mongoose.Schema({
 
         type: { 
             type: String,
-            enum: ["event_subscribe", "event_unsubscribe", "event_update", "event_reminder", "atv_subscribe"],
-            required: true
-        },
-        
-        subject: {
-            type: String,
+            enum: ["event_subscribe", "event_unsubscribe", "event_update", "atv_subscribe"],
             required: true
         },
 
@@ -69,6 +64,10 @@ const eventsSchema = new mongoose.Schema({
         }
 
     }],
+
+    certificate: {
+        type: String
+    }
 
 })
 

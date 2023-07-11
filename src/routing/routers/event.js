@@ -47,7 +47,7 @@ router.get("/api/events/by_page/:page", logged(['basic_functions']), async (req,
 
     const content = filterObject(
         events, //object
-        ['name', 'title', 'startDate', 'endDate', 'activities', 'description', 'created_at', 'updated_at', '_id'], //allowed atributes
+        ['name', 'title', 'startDate', 'endDate', 'activities', 'description', 'created_at', 'updated_at', '_id', 'emails', 'certificate'], //allowed atributes
         {} //rename atributes
     );
 
@@ -79,7 +79,7 @@ router.get("/api/events/by_id/:id", logged(['admin']), async (req, res) => {
 
         const content = filterObject(
             event, //object
-            ['name', 'title', 'startDate', 'endDate', 'activities', 'description', 'created_at', 'updated_at', '_id'], //allowed atributes
+            ['name', 'title', 'startDate', 'endDate', 'activities', 'description', 'created_at', 'updated_at', '_id', 'emails', 'certificate'], //allowed atributes
             {} //rename atributes
         );
 

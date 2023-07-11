@@ -1,4 +1,38 @@
+//Quill Editor
+var options = {
+    modules: {
+        'syntax': true,
+        'toolbar': [
+          [ 'bold', 'italic', 'underline', 'strike' ],
+          [{ 'color': [] }, { 'background': [] }],
+          [{ 'script': 'super' }, { 'script': 'sub' }],
+          [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block' ],
+          [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
+          [ 'direction', { 'align': [] }],
+          [ 'link', 'image', 'video', 'formula' ],
+          [ 'clean' ]
+    ]
+    },
+    placeholder: 'Dream here...',
+    theme: 'snow'
+};
+
+var cert_event_edit_editor, email_subscribe_event_edit_editor, email_unsubscribe_event_edit_editor, email_update_event_edit_editor, email_atv_subscribe_event_edit_editor;
+var event_edit_editor_clipboard, email_subscribe_event_edit_editor_clipboard, email_unsubscribe_event_edit_editor_clipboard, email_update_event_edit_editor_clipboard, email_atv_subscribe_event_edit_editor_clipboard;
+
 $('document').ready(function(){
+
+    cert_event_edit_editor = new Quill('#event_edit_custom_certificate_quill', options);
+    email_subscribe_event_edit_editor = new Quill('#event_edit_custom_email_event_subscribe_quill', options);
+    email_unsubscribe_event_edit_editor = new Quill('#event_edit_custom_email_event_unsubscribe_quill', options);
+    email_update_event_edit_editor = new Quill('#event_edit_custom_email_event_update_quill', options);
+    email_atv_subscribe_event_edit_editor = new Quill('#event_edit_custom_email_atv_subscribe_quill', options);
+
+    cert_event_edit_editor_clipboard = cert_event_edit_editor.getModule('clipboard');
+    email_subscribe_event_edit_editor_clipboard = email_subscribe_event_edit_editor.getModule('clipboard');
+    email_unsubscribe_event_edit_editor_clipboard = email_unsubscribe_event_edit_editor.getModule('clipboard');
+    email_update_event_edit_editor_clipboard = email_update_event_edit_editor.getModule('clipboard');
+    email_atv_subscribe_event_edit_editor_clipboard = email_atv_subscribe_event_edit_editor.getModule('clipboard');
 
     //Fetch events by ID
     $("#event_edit_id").on('input', function(){
@@ -21,6 +55,26 @@ function event_edit_fetch(id){
     $("#event_edit_start_date").val("");
     $("#event_edit_end_date").val("");
     $("#event_edit_activity_div").empty();
+    
+    $("#event_edit_custom_certificate").hide();
+    $("#event_edit_custom_certificate_add").show();
+    $("#event_edit_custom_certificate_remove").hide();
+    
+    $("#event_edit_custom_email_event_subscribe").hide();
+    $("#event_edit_custom_email_event_subscribe_add").show();
+    $("#event_edit_custom_email_event_subscribe_remove").hide();
+    
+    $("#event_edit_custom_email_event_unsubscribe").hide();
+    $("#event_edit_custom_email_event_unsubscribe_add").show();
+    $("#event_edit_custom_email_event_unsubscribe_remove").hide();
+    
+    $("#event_edit_custom_email_event_update").hide();
+    $("#event_edit_custom_email_event_update_add").show();
+    $("#event_edit_custom_email_event_update_remove").hide();
+    
+    $("#event_edit_custom_email_atv_subscribe").hide();
+    $("#event_edit_custom_email_atv_subscribe_add").show();
+    $("#event_edit_custom_email_atv_subscribe_remove").hide();
 
     common_fetch('/api/events/by_id/' + id, 'GET', {}, []).then((data) => {
 
@@ -38,21 +92,52 @@ function event_edit_fetch(id){
 
                 var uniq = 'id' + (new Date()).getTime() + parseInt(Math.random() * 1000);
                   
-                var append_model =
-                `
-                <div id="${uniq}">
-                    <p id="${uniq}_oldId" style="display:none;">${activity._id}</p>
-                    <input type="text" id="${uniq}_title" placeholder="Title (required)" value="${activity.title}"></input>
-                    <textarea id="${uniq}_description" placeholder="Description">${activity.description}</textarea>
-                    <input type="datetime-local" id="${uniq}_date" placeholder="Date" value="${common_date_unixToISO(data.startDate)}"></input>
-                    <input type="number" id="${uniq}_duration" placeholder="Duration" value="${activity.duration}"></input>
-                    <button onclick="event_edit_activity_remove('${uniq}')">Remove</button>
-                </div>
-                `;
-
-                $('#event_edit_activity_div').append(append_model);
+                common_append('#event_edit_activity_div', 'con_event_atv.html', {uniq});
 
             })
+
+            if(data.emails){
+
+                data.emails.forEach((email) => {
+
+                    if(email.type == "event_subscribe"){
+                        $("#event_edit_custom_email_event_subscribe").show();
+                        $("#event_edit_custom_email_event_subscribe_add").hide();
+                        $("#event_edit_custom_email_event_subscribe_remove").show();
+                        email_subscribe_event_edit_editor_clipboard.dangerouslyPasteHTML(0, email.content);
+                    }
+
+                    if(email.type == "event_unsubscribe"){
+                        $("#event_edit_custom_email_event_unsubscribe").show();
+                        $("#event_edit_custom_email_event_unsubscribe_add").hide();
+                        $("#event_edit_custom_email_event_unsubscribe_remove").show();
+                        email_unsubscribe_event_edit_editor_clipboard.dangerouslyPasteHTML(0, email.content);
+                    }
+
+                    if(email.type == "event_update"){
+                        $("#event_edit_custom_email_event_update").show();
+                        $("#event_edit_custom_email_event_update_add").hide();
+                        $("#event_edit_custom_email_event_update_remove").show();
+                        email_update_event_edit_editor_clipboard.dangerouslyPasteHTML(0, email.content);
+                    }
+
+                    if(email.type == "atv_subscribe"){
+                        $("#event_edit_custom_email_atv_subscribe").show();
+                        $("#event_edit_custom_email_atv_subscribe_add").hide();
+                        $("#event_edit_custom_email_atv_subscribe_remove").show();
+                        email_atv_subscribe_event_edit_editor_clipboard.dangerouslyPasteHTML(0, email.content);
+                    }
+
+                })
+            
+            }
+
+            if(data.certificate){
+                $("#event_edit_custom_certificate").show();
+                $("#event_edit_custom_certificate_add").hide();
+                $("#event_edit_custom_certificate_remove").show();
+                cert_event_edit_editor_clipboard.dangerouslyPasteHTML(0, data.certificate);
+            }
 
         }
 
@@ -70,7 +155,7 @@ function event_edit_submit(id){
 
     $('#event_edit_activity_div').children().each(function () {
 
-        var id          = $(this).attr('id');
+        var id              = $(this).attr('id');
 
         var oldId           = $(`#${id}_oldId`).text();
         var title           = $(`#${id}_title`).val();
@@ -88,12 +173,50 @@ function event_edit_submit(id){
 
     });
 
+    var emails = [];
+
+    if($("#event_edit_custom_email_event_subscribe").is(":visible")){
+        emails.push({
+            type: "event_subscribe",
+            content: email_subscribe_event_edit_editor.root.innerHTML
+        });
+    }
+
+    if($("#event_edit_custom_email_event_unsubscribe").is(":visible")){
+        emails.push({
+            type: "event_unsubscribe",
+            content: email_unsubscribe_event_edit_editor.root.innerHTML
+        });
+    }
+
+    if($("#event_edit_custom_email_event_update").is(":visible")){
+        emails.push({
+            type: "event_update",
+            content: email_update_event_edit_editor.root.innerHTML
+        });
+    }
+
+    if($("#event_edit_custom_email_atv_subscribe").is(":visible")){
+        emails.push({
+            type: "atv_subscribe",
+            content: email_atv_subscribe_event_edit_editor.root.innerHTML
+        });
+    }
+
+    var certificate = null;
+
+    if($("#event_edit_custom_certificate").is(":visible")){
+        certificate = cert_event_edit_editor.root.innerHTML
+    }
+
     var data = {
         name,
         description,
         startDate: common_date_ISOToUnix(startDate),
         endDate: common_date_ISOToUnix(endDate),
-        activities
+        activities,
+        emails,
+        certificate
     }
 
     common_fetch('/api/events/' + id, 'PATCH', data, ['event_edit_message'])
@@ -108,7 +231,66 @@ function event_edit_activity_add(){
 }
 
 function event_edit_activity_remove(id){
-
     $('#' + id).remove();
+}
 
+//Really specific functions
+function event_edit_custom_certificate_add(){ //Custom certificate
+    $("#event_edit_custom_certificate").show();
+    $("#event_edit_custom_certificate_add").hide();
+    $("#event_edit_custom_certificate_remove").show();
+}
+
+function event_edit_custom_certificate_remove(){
+    $("#event_edit_custom_certificate").hide();
+    $("#event_edit_custom_certificate_add").show();
+    $("#event_edit_custom_certificate_remove").hide();
+}
+
+function event_edit_custom_email_event_subscribe_add(){ //Custom email event subscribe
+    $("#event_edit_custom_email_event_subscribe").show();
+    $("#event_edit_custom_email_event_subscribe_add").hide();
+    $("#event_edit_custom_email_event_subscribe_remove").show();
+}
+
+function event_edit_custom_email_event_subscribe_remove(){
+    $("#event_edit_custom_email_event_subscribe").hide();
+    $("#event_edit_custom_email_event_subscribe_add").show();
+    $("#event_edit_custom_email_event_subscribe_remove").hide();
+}
+
+function event_edit_custom_email_event_unsubscribe_add(){ //Custom email event unsubscribe
+    $("#event_edit_custom_email_event_unsubscribe").show();
+    $("#event_edit_custom_email_event_unsubscribe_add").hide();
+    $("#event_edit_custom_email_event_unsubscribe_remove").show();
+}
+
+function event_edit_custom_email_event_unsubscribe_remove(){
+    $("#event_edit_custom_email_event_unsubscribe").hide();
+    $("#event_edit_custom_email_event_unsubscribe_add").show();
+    $("#event_edit_custom_email_event_unsubscribe_remove").hide();    
+}
+
+function event_edit_custom_email_event_update_add(){ //Custom email event update
+    $("#event_edit_custom_email_event_update").show();
+    $("#event_edit_custom_email_event_update_add").hide();
+    $("#event_edit_custom_email_event_update_remove").show();
+}
+
+function event_edit_custom_email_event_update_remove(){
+    $("#event_edit_custom_email_event_update").hide();
+    $("#event_edit_custom_email_event_update_add").show();
+    $("#event_edit_custom_email_event_update_remove").hide();
+}
+
+function event_edit_custom_email_atv_subscribe_add(){ //Custom email activity subscribe
+    $("#event_edit_custom_email_atv_subscribe").show();
+    $("#event_edit_custom_email_atv_subscribe_add").hide();
+    $("#event_edit_custom_email_atv_subscribe_remove").show();
+}
+
+function event_edit_custom_email_atv_subscribe_remove(){
+    $("#event_edit_custom_email_atv_subscribe").hide();
+    $("#event_edit_custom_email_atv_subscribe_add").show();
+    $("#event_edit_custom_email_atv_subscribe_remove").hide();
 }
