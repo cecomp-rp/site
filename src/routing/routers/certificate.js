@@ -1,6 +1,6 @@
 const express                       = require("express")
 const logged                        = require("../../middleware/logged")
-const addFields                     = require("../../utils/certificate/addFields")
+const addFields                     = require("../../utils/other/addFields")
 const { updateEventCertificate }    = require("../../utils/certificate/eventCertificate")
 const Certificate                   = require("../../database/models/Certificate")
 const User                          = require("../../database/models/User")
@@ -52,7 +52,7 @@ router.get("/api/certificates/by_page_with_email/:email/:page", logged(['admin']
 
     //Add fields for each certificate
     certificates.forEach(element => {
-        element = addFields(element, user);
+        element.content = addFields(element.content, user);
     });
 
     const content = filterObject(
@@ -92,7 +92,7 @@ router.get("/api/certificates/by_page/:page", logged(['basic_functions']), async
 
     //Add fields for each certificate
     certificates.forEach(element => {
-        element = addFields(element, req.user);
+        element.content = addFields(element.content, req.user);
     });
 
     const content = filterObject(
@@ -131,7 +131,7 @@ router.get("/api/certificates/by_id/:id", async (req, res) => {
     }
 
     //Add fields for certificate
-    certificate = addFields(certificate, req.user);
+    certificate.content = addFields(certificate.content, req.user);
             
     const content = filterObject(
         certificate, //object

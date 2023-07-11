@@ -1,4 +1,6 @@
-const nodemailer = require('nodemailer');
+const nodemailer    = require('nodemailer');
+const addFields     = require('../other/addFields');
+const User          = require('../../database/models/User');
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -17,6 +19,16 @@ transporter.verify().then(() => {
 
 async function sendMail (subject, to, content){
 
+    //Try to find user
+    const user = await User.findOne({email: to})
+    .catch((error) => {})
+
+    if(user){
+        //Add fields to content
+        content = addFields(content, user);
+    }
+
+    //Send email
     transporter.sendMail({
         from: process.env.GMAIL_TITLE + " <" + process.env.GMAIL_USER + ">", 
         to, // list of receivers
