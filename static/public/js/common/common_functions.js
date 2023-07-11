@@ -92,3 +92,30 @@ function common_fetch(url, method, data = {}, msg_objs = []){
     });
 
 }
+
+function common_append(where_to_append, file_to_append, attr_to_add = {}){
+
+    const regex = /{{(.*?)}}/g;
+
+    $.get("\append/" + file_to_append, function(data) {
+
+        //Replace all {{attr}} with attr_to_add[attr]
+        data = data.replace(regex, function(match, capture) {
+            return attr_to_add[capture];
+        });
+
+        //If $(where_to_append) is an id, append to the element with that id
+        if(where_to_append[0] == '#'){
+            $(where_to_append).append(data);
+        }
+
+         //If $(where_to_append) is a class or general tag, append to all elements with that class
+        else{
+            $(where_to_append).each(function(i){
+                $(this).append(data);
+            })
+        }
+
+    })
+
+}
