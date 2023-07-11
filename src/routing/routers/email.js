@@ -13,9 +13,9 @@ router.post("/api/emails/global", logged(['admin']), async (req, res) => {
     const data = req.body;
 
     //Find all users userSettings.enable_email_notifications true
-    const users = await User.find({ "userSettings.enable_email_notifications": true })
+    const users = await User.find({ "userSettings.enable_email_notifications": true})
     .catch((error) => {})
-    
+
     if(!users){
         commonRes(res, {
             error: "No users found.",
@@ -23,9 +23,24 @@ router.post("/api/emails/global", logged(['admin']), async (req, res) => {
             content: undefined
         }); return;
     }
-    
+
+    //Apply filters
+    const filters = data.filters;
+    if(filters.role == ''){ delete filters.role }
+
+    const users_filtered = users.filter((user) => {
+        var user_passed = true;
+        
+        //Roles
+        if(filters.role){
+           if(!user.roles.includes(filters.role)){ user_passed = false; }
+        }
+
+        return user_passed;
+    })
+
     //For each user, send email
-    users.forEach(async (user) => {
+    users_filtered.forEach(async (user) => {
 
         //Send email
         sendMail(data.subject, user.email, data.content)
@@ -79,8 +94,23 @@ router.post("/api/emails/event/:id", logged(['admin']), async (req, res) => {
         }); return;
     }
 
+    //Apply filters
+    const filters = data.filters;
+    if(filters.role == ''){ delete filters.role }
+
+    const users_filtered_again = users_filtered.filter((user) => {
+        var user_passed = true;
+        
+        //Roles
+        if(filters.role){
+           if(!user.roles.includes(filters.role)){ user_passed = false; }
+        }
+
+        return user_passed;
+    })
+
     //For each user, send email
-    users_filtered.forEach(async (user) => {
+    users_filtered_again.forEach(async (user) => {
 
         //Send email
         sendMail(data.subject, user.email, data.content)
@@ -134,8 +164,23 @@ router.post("/api/emails/actv/:id", logged(['admin']), async (req, res) => {
         }); return;
     }
 
+    //Apply filters
+    const filters = data.filters;
+    if(filters.role == ''){ delete filters.role }
+
+    const users_filtered_again = users_filtered.filter((user) => {
+        var user_passed = true;
+        
+        //Roles
+        if(filters.role){
+           if(!user.roles.includes(filters.role)){ user_passed = false; }
+        }
+
+        return user_passed;
+    })
+
     //For each user, send email
-    users_filtered.forEach(async (user) => {
+    users_filtered_again.forEach(async (user) => {
 
         //Send email
         sendMail(data.subject, user.email, data.content)

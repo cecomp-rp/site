@@ -17,9 +17,13 @@ function email_event_send(){
     const event_id = $('#email_event_id').val();
     const subject = $('#email_event_subject').val();
     const content = $('#email_event_content').val();
+    const filters = {
+        role: $('#email_event_filter_role').val(),
+    }
 
     const data = {
         subject,
+        filters,
         content
     }
 

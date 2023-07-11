@@ -17,9 +17,13 @@ function email_atv_send(){
     const atv_id = $('#email_atv_id').val();
     const subject = $('#email_atv_subject').val();
     const content = $('#email_atv_content').val();
+    const filters = {
+        role: $('#email_atv_filter_role').val(),
+    }
 
     const data = {
         subject,
+        filters,
         content
     }
 
