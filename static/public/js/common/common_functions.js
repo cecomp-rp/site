@@ -121,8 +121,27 @@ function common_replaceAttr(html, attr_to_add){
     
     for(var attr in attr_to_add){
         
+        //Not obj and not array
+        if(typeof attr_to_add[attr] != 'object' && !Array.isArray(attr_to_add[attr])){
+            html = html.replace(regex, function(match, p1, offset, string) {
+                if(p1 == attr){
+                    return attr_to_add[attr];
+                }
+                else{
+                    return match;
+                }
+            });
+
+        }
+
+        //Is it array?
+        else if(Array.isArray(attr_to_add[attr])){
+            //Do nothing
+            continue;
+        }
+
         //Is it object?
-        if(typeof attr_to_add[attr] == 'object'){
+        else if(typeof attr_to_add[attr] == 'object'){
 
             var mod_html = html.replace(regex, function(match, p1, offset, string) {
 
@@ -138,26 +157,7 @@ function common_replaceAttr(html, attr_to_add){
 
             html = common_replaceAttr(mod_html, attr_to_add[attr]);
         }
-
-        //Is it array?
-        else if(Array.isArray(attr_to_add[attr])){
-            //Do nothing
-            continue;
-        }
-
-        //Else => Replace where it matches
-        else{
-            html = html.replace(regex, function(match, p1, offset, string) {
-                if(p1 == attr){
-                    return attr_to_add[attr];
-                }
-                else{
-                    return match;
-                }
-            });
-
-        }
-            
+       
     }
 
     return html;

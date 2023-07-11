@@ -12,13 +12,17 @@ function event_remove_list(){
 
             data.forEach(element => {
 
-                common_append("#event_remove_div", "con_event.html", element);
-    
-                //Append activities from element
-                element.activities.forEach(activity => {
-    
-                    common_append("#" + element._id + "_activities", "con_event_atv2.html", activity);
-    
+                console.log(element);
+
+                common_append("#event_remove_div", "con_event.html", element).then(() => {
+
+                    //Append activities from element
+                    element.activities.forEach(activity => {
+
+                        common_append("#" + element._id + "_activities", "con_event_atv2.html", activity)
+        
+                    });
+
                 });
                 
             });
