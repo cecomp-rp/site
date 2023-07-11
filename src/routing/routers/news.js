@@ -17,7 +17,7 @@ router.get("/api/news/by_page/:page", async (req, res) => {
     const page = req.params.page
 
     const news = await News.find({})
-    .sort({createdAt: -1})
+    .sort({created_at: -1})
     .skip((page - 1) * page_limit)
     .limit(page_limit)
     .lean()
@@ -34,7 +34,7 @@ router.get("/api/news/by_page/:page", async (req, res) => {
 
     const content = filterObject(
         news_with_nick, //object
-        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'author_id'], //allowed atributes
+        ['_id', 'title', 'created_at', 'updated_at', 'description', 'author_id'], //allowed atributes
         {} //rename atributes
     );
 
@@ -72,7 +72,7 @@ router.get("/api/news/by_id/:id", async (req, res) => {
     
     const content = filterObject(
         news, //object
-        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'author_id', 'content'], //allowed atributes
+        ['_id', 'title', 'created_at', 'updated_at', 'description', 'author_id', 'content'], //allowed atributes
         {} //rename atributes
     );
 

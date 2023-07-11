@@ -14,38 +14,14 @@ function poll_remove_list(poll_remove_page){
 
             data.forEach(element => {
 
-                var append_model = 
-                `
-                <div id="${element._id}">
-                    <p>ID: ${element._id}</p>
-                    <p>Title: ${element.title}</p>
-                    <p>Description: ${element.description}</p>
-                    <p>Author: ${element.author_id}</p>
-                    <p>End Date: ${element.endDate}</p>
-                    <p>Created At: ${element.createdAt}</p>
-                    <div id="${element._id}_poll_options"></div>
+                common_append('#poll_remove_div', 'con_poll.html', element).then(() => {
     
-                    <a href="/polls/${element._id}">See more</a>
-                    <button onclick="poll_remove_delete('${element._id}')">Delete</button>
-                </div>
-                
-                `;
-    
-                $('#poll_remove_div').append(append_model);
-    
-                element.options.forEach((option, i) => {
-    
-                    var append_model_options = 
-                    `
-                    <div id="${element._id}_${i}_option">
-                        <p>Option ${i})</p>
-                        <div id="${element._id}_${i}_content">${option.content}</div>
-                        <p id="${element._id}_${i}_vote_count">${option.numberOfVotes}</p>
-                    </div>
-                    `;
-    
-                    $(`#${element._id}_poll_options`).append(append_model_options);
-    
+                    element.options.forEach((option, i) => {
+
+                        common_append(`#${element._id}_poll_options`, 'con_poll_opt2.html', {element, option, i})
+        
+                    });
+
                 });
 
             });

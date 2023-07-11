@@ -14,20 +14,7 @@ function news_list_list(page){
 
             data.forEach(element => {
 
-                var item_template = 
-                `
-                <div id=${element._id}>
-                    <p class="news_list_title">Title: ${element.title}</p>
-                    <p class="news_list_description">Description: ${element.description}</p>
-                    <p class="news_list_id">ID: ${element._id}</p>
-                    <p class="news_list_author_id">Author: ${element.author_id}</p>
-                    <p class="news_list_createdAt">Created At: ${element.createdAt}</p>
-                    <p class="news_list_updatedAt">Updated At: ${element.updatedAt}</p>
-                    <a href="/news/${element._id}">Read more...</a>
-                </div>
-                `;	
-    
-                $("#news_list_div").append(item_template);
+                common_append("#news_list_div", "index_news.html", element);
     
             });
 

@@ -36,7 +36,7 @@ router.get("/api/certificates/by_page_with_email/:email/:page", logged(['admin']
     }
 
     const certificates = await Certificate.find({owner_id: user._id})
-    .sort({createdAt: -1})
+    .sort({created_at: -1})
     .skip((page - 1) * page_limit)
     .limit(page_limit)
     .exec()
@@ -57,7 +57,7 @@ router.get("/api/certificates/by_page_with_email/:email/:page", logged(['admin']
 
     const content = filterObject(
         certificates, //object
-        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'owner_id', 'is_event_certificate', 'event_id', 'content'], //allowed atributes
+        ['_id', 'title', 'created_at', 'updated_at', 'description', 'owner_id', 'is_event_certificate', 'event_id', 'content'], //allowed atributes
         {} //rename atributes
     );
 
@@ -76,7 +76,7 @@ router.get("/api/certificates/by_page/:page", logged(['basic_functions']), async
     const page = req.params.page
 
     const certificates = await Certificate.find({owner_id: req.user._id})
-    .sort({createdAt: -1})
+    .sort({created_at: -1})
     .skip((page - 1) * page_limit)
     .limit(page_limit)
     .exec()
@@ -97,7 +97,7 @@ router.get("/api/certificates/by_page/:page", logged(['basic_functions']), async
 
     const content = filterObject(
         certificates, //object
-        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'owner_id', 'is_event_certificate', 'event_id', 'content'], //allowed atributes
+        ['_id', 'title', 'created_at', 'updated_at', 'description', 'owner_id', 'is_event_certificate', 'event_id', 'content'], //allowed atributes
         {} //rename atributes
     );
 
@@ -135,7 +135,7 @@ router.get("/api/certificates/by_id/:id", async (req, res) => {
             
     const content = filterObject(
         certificate, //object
-        ['_id', 'title', 'createdAt', 'event_name', 'updatedAt', 'description', 'owner_id', 'is_event_certificate', 'event_id', 'content'], //allowed atributes
+        ['_id', 'title', 'created_at', 'event_name', 'updated_at', 'description', 'owner_id', 'is_event_certificate', 'event_id', 'content'], //allowed atributes
         {} //rename atributes
     );
 

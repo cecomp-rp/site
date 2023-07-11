@@ -1,0 +1,12 @@
+<div id="${_id}">
+    <p>ID: ${_id}</p>
+    <p>Title: ${title}</p>
+    <p>Description: ${description}</p>
+    <p>Author: ${author_id}</p>
+    <p>End Date: ${endDate}</p>
+    <p>Created At: ${createdAt}</p>
+    <div id="${_id}_poll_options"></div>
+
+    <a href="/polls/${_id}">See more</a>
+    <button onclick="poll_remove_delete('${_id}')">Delete</button>
+</div>

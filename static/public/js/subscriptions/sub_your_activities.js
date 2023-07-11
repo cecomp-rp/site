@@ -21,14 +21,7 @@ function sub_your_activities_load(event_name){
 
             data.forEach(function(actv) {
 
-                var append_model = 
-                `
-                <p>${actv.title}</p>
-                <p>${actv.description}</p>
-                <br>
-                `;
-
-                $('#sub_actv_list').append(append_model);
+                common_append('#sub_actv_list', 'sub_atv.html', actv);
 
             });
 

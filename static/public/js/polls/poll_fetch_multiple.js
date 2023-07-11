@@ -14,56 +14,35 @@ function poll_fetch_list(poll_fetch_page){
 
             data.forEach(poll => {
 
-                var append_model = 
-                `
-                <div id="${poll._id}">
-                    <p>Title: ${poll.title}</p>
-                    <p>Description: ${poll.description}</p>
-                    <p>Author: ${poll.author_id}</p>
-                    <p>Start Date: ${poll.startDate}</p>
-                    <p>End Date: ${poll.endDate}</p>
-                    <p>Created At: ${poll.createdAt}</p>
-                    <div id="${poll._id}_poll_options"></div>
+               common_append('#poll_fetch_div', 'poll_poll.html', poll).then(() => {
 
-                    <a href="/polls/${poll._id}">See page...</a>
-                </div>
-                
-                `;
+                    poll.options.forEach((option, i) => {
 
-                $('#poll_fetch_div').append(append_model);
+                        common_append(`#${poll._id}_poll_options`, 'poll_opt.html', {poll, option, i}).then(() => {
 
-                poll.options.forEach((option, i) => {
+                            //User already voted?
+                            if(poll.alreadyVoted == true){
+                                $('.' + poll._id + '_button').attr("disabled", true);
+                                $('.' + poll._id + '_button').text("Already voted");
+                            }
 
-                    var append_model_options = 
-                    `
-                    <div id="${option._id}">
-                        <div>${option.content}</div>
-                        <p id="${option._id}_counter">${option.numberOfVotes}</p>
-                        <button class="${poll._id}_button" onclick="poll_vote('${option._id}','${poll._id}')">Vote</button>
-                    </div>
-                    `;
+                            //Poll out of date?
+                            if(poll.endDate < Date.now()){
+                                $('.' + poll._id + '_button').attr("disabled", true);
+                                $('.' + poll._id + '_button').text("Poll out of date");
+                            }
 
-                    $(`#${poll._id}_poll_options`).append(append_model_options);
+                            //Poll not started yet?
+                            if(poll.startDate > Date.now()){
+                                $('.' + poll._id + '_button').attr("disabled", true);
+                                $('.' + poll._id + '_button').text("Poll not started yet");
+                            }
 
-                });
+                        });
 
-                //User already voted?
-                if(poll.alreadyVoted == true){
-                    $('.' + poll._id + '_button').attr("disabled", true);
-                    $('.' + poll._id + '_button').text("Already voted");
-                }
+                    })
 
-                //Poll out of date?
-                if(poll.endDate < Date.now()){
-                    $('.' + poll._id + '_button').attr("disabled", true);
-                    $('.' + poll._id + '_button').text("Poll out of date");
-                }
-
-                //Poll not started yet?
-                if(poll.startDate > Date.now()){
-                    $('.' + poll._id + '_button').attr("disabled", true);
-                    $('.' + poll._id + '_button').text("Poll not started yet");
-                }
+               });
 
             });
 

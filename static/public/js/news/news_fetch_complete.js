@@ -11,8 +11,8 @@ $('document').ready(function () {
             
             $("#news_content").append(data.content)
 
-            $("#news_create_date").text(data.createdAt)
-            $("#news_update_date").text(data.updatedAt)
+            $("#news_create_date").text(data.created_at)
+            $("#news_update_date").text(data.updated_at)
             $("#news_author").text(data.author_id)
         
         }

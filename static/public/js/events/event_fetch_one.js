@@ -13,24 +13,14 @@ $('document').ready(function () {
             $("#event_endDate").text(data.endDate);
     
             //Created at and updated at
-            $("#event_createdAt").text(data.createdAt)
-            $("#event_updatedAt").text(data.updatedAt)
+            $("#event_createdAt").text(data.created_at)
+            $("#event_updatedAt").text(data.updated_at)
     
             //Activities
             data.activities.forEach((activity) => {
                 
-                var append_model = 
-                `
-                <br>
-                <p>Title: ${activity.title}</p>
-                <p>Description: ${activity.description}</p>
-                <p>End Date: ${activity.date}</p>
-                <p>Duration: ${activity.duration}</p>
-    
-                `;
-    
-                $("#event_activities").append(append_model);
-    
+                common_append("#event_activities", "event_atv.html", activity);
+
             })
 
         }

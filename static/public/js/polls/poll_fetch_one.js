@@ -15,16 +15,7 @@ $('document').ready(function () {
 
             data.options.forEach((option) => {
 
-                var append_model =
-                `
-                <div id="${option._id}">
-                    <div>${option.content}</div>
-                    <p id="${option._id}_counter">${option.numberOfVotes}</p>
-                    <button class="${data._id}_button" onclick="poll_vote('${option._id}')">Vote</button>
-                </div>
-                `;
-
-                $('#poll_options').append(append_model)
+                common_append('#poll_options', 'poll_opt.html', {poll: data, option})
 
             })
 

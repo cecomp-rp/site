@@ -35,20 +35,7 @@ function cert_fetch_list(page){
             //For each certificate
             data.forEach((certificate) => {
 
-                var append_model =
-                `
-                <div id="${certificate._id}">
-                    <p>ID: ${certificate._id}</p>
-                    <p>Owner ID: ${certificate.owner_id}</p>
-                    <p>Event ID: ${certificate.event_id}</p>
-                    <p>Is Event Certificate: ${certificate.is_event_certificate}</p>
-                    <p>Title: ${certificate.title}</p>
-
-                    <a href="/certificates/${certificate._id}">See page...</a>
-                </div>
-                `;
-
-                $("#cert_fetch_div").append(append_model);
+                common_append("#cert_fetch_div", "cert_certificate.html", certificate);
 
             });
 

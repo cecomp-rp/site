@@ -20,17 +20,7 @@ function acc_session_fetch(acc_session_page){
 
             //Other sessions
             data.other.forEach(element => {
-                var append_model = `
-                <div id="${element._id}">
-                    <p>${element.machine}</p>
-                    <p>${element.os}</p>
-                    <p>${element.ip}</p>
-                    <button onclick="acc_session_delete_one('${element._id}')">Delete</button>
-                </div>
-            
-                `;
-
-                $('#acc_session_other').append(append_model);
+                common_append('#acc_session_other', 'acc_session.html', element);
             });
 
         }

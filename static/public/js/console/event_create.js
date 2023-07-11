@@ -47,18 +47,7 @@ function event_create_submit(){
 function event_create_activity_add(){
     var uniq = 'id' + (new Date()).getTime() + parseInt(Math.random() * 1000);
 
-    var append_model =
-    `
-    <div id="${uniq}">
-        <input type="text" id="${uniq}_title" placeholder="Title (required)"></input>
-        <textarea id="${uniq}_description" placeholder="Description"></textarea>
-        <input type="datetime-local" id="${uniq}_date" placeholder="Date"></input>
-        <input type="number" id="${uniq}_duration" placeholder="Duration"></input>
-        <button onclick="event_create_activity_remove('${uniq}')">Remove</button>
-    </div>
-    `;
-
-    $('#event_create_activity_div').append(append_model);
+    common_append('#event_create_activity_div', 'con_event_atv.html', {uniq});
 
 }
 

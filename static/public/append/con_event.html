@@ -1,0 +1,22 @@
+<div id=${_id}>
+    <p class="event_remove_id">ID: ${_id}</p>
+    <p class="event_remove_title">Title: ${title}</p>
+    <p class="event_remove_name">Name: ${name}</p>
+    <p class="event_remove_description">Description: ${description}</p>
+
+    <p class="event_remove_start_date">Start Date: ${startDate}</p>
+    <p class="event_remove_end_date">End Date: ${endDate}</p>
+
+    <p class="event_remove_createdAt">Created At: ${created_at}</p>
+    <p class="event_remove_updatedAt">Updated At: ${updated_at}</p>
+    <p>Subscribe link: ${window.location.origin + "/sub/" + name} FIX ME</p>
+    
+    <br>
+    <div class="activities" id="${_id}_activities"></div>
+
+    <a href="/events/${name}">See page...</a>
+
+    <button onclick="event_remove_delete('${_id}')">Delete</button>
+    <button onclick="event_remove_edit('${_id}')">Edit</button>
+    <br>
+</div>

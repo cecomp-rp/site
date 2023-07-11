@@ -12,49 +12,12 @@ function event_remove_list(){
 
             data.forEach(element => {
 
-                var append_model = 
-                `
-                <div id=${element._id}>
-                    <p class="event_remove_id">ID: ${element._id}</p>
-                    <p class="event_remove_title">Title: ${element.title}</p>
-                    <p class="event_remove_name">Name: ${element.name}</p>
-                    <p class="event_remove_description">Description: ${element.description}</p>
-    
-                    <p class="event_remove_start_date">Start Date: ${element.startDate}</p>
-                    <p class="event_remove_end_date">End Date: ${element.endDate}</p>
-    
-                    <p class="event_remove_createdAt">Created At: ${element.createdAt}</p>
-                    <p class="event_remove_updatedAt">Updated At: ${element.updatedAt}</p>
-                    <p>Subscribe link: ${window.location.origin + "/sub/" + element.name}</p>
-                    
-                    <br>
-                    <div class="activities" id="${element._id}_activities"></div>
-    
-                    <a href="/events/${element.name}">See page...</a>
-    
-                    <button onclick="event_remove_delete('${element._id}')">Delete</button>
-                    <button onclick="event_remove_edit('${element._id}')">Edit</button>
-                    <br>
-                </div>
-                `;
-    
-                $("#event_remove_div").append(append_model);
+                common_append("#event_remove_div", "con_event.html", element);
     
                 //Append activities from element
                 element.activities.forEach(activity => {
     
-                    var append_activity = 
-                    `
-                    <p>Activity ID: ${activity._id}</p>
-                    <p>Title: ${activity.title}</p>
-                    <p>Description: ${activity.description}</p>
-                    <p>End Date: ${activity.date}</p>
-                    <p>Duration: ${activity.duration}</p>
-                    <p>Checkin link: ${window.location.origin + "/actv/" + activity._id}</p>
-                    <br>
-                    `;
-    
-                    $("#" + element._id + "_activities").append(append_activity);
+                    common_append("#" + element._id + "_activities", "con_event_atv2.html", activity);
     
                 });
                 

@@ -95,21 +95,16 @@ function common_fetch(url, method, data = {}, msg_objs = []){
 
 function common_append(where_to_append, file_to_append, attr_to_add = {}){
 
-    const regex = /{{(.*?)}}/g;
+    return $.get("/append/" + file_to_append, function(data) {
 
-    $.get("\append/" + file_to_append, function(data) {
-
-        //Replace all {{attr}} with attr_to_add[attr]
-        data = data.replace(regex, function(match, capture) {
-            return attr_to_add[capture];
-        });
+        data = common_replaceAttr(data, attr_to_add);
 
         //If $(where_to_append) is an id, append to the element with that id
         if(where_to_append[0] == '#'){
             $(where_to_append).append(data);
         }
 
-         //If $(where_to_append) is a class or general tag, append to all elements with that class
+        //If $(where_to_append) is a class or general tag, append to all elements with that class
         else{
             $(where_to_append).each(function(i){
                 $(this).append(data);
@@ -118,4 +113,53 @@ function common_append(where_to_append, file_to_append, attr_to_add = {}){
 
     })
 
+}
+
+function common_replaceAttr(html, attr_to_add){
+
+    const regex = /\${(.*?)}/g; //Matches ${anything}
+    
+    for(var attr in attr_to_add){
+        
+        //Is it object?
+        if(typeof attr_to_add[attr] == 'object'){
+
+            var mod_html = html.replace(regex, function(match, p1, offset, string) {
+
+                //Remove attr + dot from p1
+                if (p1.includes(attr + '.')){
+                    return "${" + p1.replace(attr + '.', '') + "}";
+                }
+                else{
+                    return match;
+                }
+
+            });
+
+            html = common_replaceAttr(mod_html, attr_to_add[attr]);
+        }
+
+        //Is it array?
+        else if(Array.isArray(attr_to_add[attr])){
+            //Do nothing
+            continue;
+        }
+
+        //Else => Replace where it matches
+        else{
+            html = html.replace(regex, function(match, p1, offset, string) {
+                if(p1 == attr){
+                    return attr_to_add[attr];
+                }
+                else{
+                    return match;
+                }
+            });
+
+        }
+            
+    }
+
+    return html;
+   
 }

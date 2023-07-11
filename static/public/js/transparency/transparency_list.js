@@ -14,22 +14,9 @@ function transparency_list_list(page){
 
             data.forEach(element => {
 
-                var item_template = 
-                `
-                <div id=${element._id}>
-                    <p id="transparency_list_title">Title: ${element.title}</p>
-                    <p id="transparency_list_description">Description: ${element.description}</p>
-                    <p id="transparency_list_value">Value: ${element.value}</p>
-                    <p id="transparency_list_dateOfTransaction">Date Of Transaction: ${element.dateOfTransaction}</p>
-                    <p id="transparency_list_dateOfTransaction">Date Of Addition: ${element.createdAt}</p>
-                    <p id="transparency_list_id">ID: ${element._id}</p>
-                </div>
-                `;	
-
-                $("#transparency_list_div").append(item_template);
+                common_append("#transparency_list_div", "transp_transparency.html", element);
 
             });
-
 
         }
 

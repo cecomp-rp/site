@@ -1,0 +1,11 @@
+<div id=${_id}>
+    <p class="news_remove_title">Title: ${title}</p>
+    <p class="news_remove_description">Description: ${description}</p>
+    <p class="news_remove_id">ID: ${_id}</p>
+    <p class="news_remove_author_id">Author: ${author_id}</p>
+    <p class="news_remove_createdAt">Created At: ${created_at}</p>
+    <p class="news_remove_updatedAt">Updated At: ${updated_at}</p>
+    <a href="/news/${_id}">Read more...</a>
+    <button onclick="news_remove_delete('${_id}')">Delete</button>
+    <button onclick="news_remove_edit('${_id}')">Edit</button>
+</div>

@@ -11,15 +11,7 @@ function sub_event_list_load(){
 
             data.forEach(function(event) {
 
-                var append_model = 
-                `
-                <p>${event.title}</p>
-                <p>${event.description}</p>
-                <a href="/events/${event.name}">See page...</a>
-                <br>
-                `;
-
-                $('#sub_event_list').append(append_model);
+                common_append('#sub_event_list', 'sub_event.html', event);
 
             });
 

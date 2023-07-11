@@ -15,7 +15,7 @@ router.get("/api/polls/by_page/:page", logged(['bcc_member_functions']), async (
     const page = req.params.page
 
     const polls = await Poll.find({})
-    .sort({createdAt: -1})
+    .sort({created_at: -1})
     .skip((page - 1) * page_limit)
     .limit(page_limit)
     .lean()
@@ -53,7 +53,7 @@ router.get("/api/polls/by_page/:page", logged(['bcc_member_functions']), async (
 
     const content = filterObject(
         polls_with_nick, //object
-        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'author_id', 'alreadyVoted', 'startDate', 'endDate', 'options'], //allowed atributes
+        ['_id', 'title', 'created_at', 'updated_at', 'description', 'author_id', 'alreadyVoted', 'startDate', 'endDate', 'options'], //allowed atributes
         {} //rename atributes
     );
 
@@ -94,7 +94,7 @@ router.get("/api/polls/by_id/:id", logged(['bcc_member_functions']), async (req,
 
     const content = filterObject(
         poll, //object
-        ['_id', 'title', 'createdAt', 'updatedAt', 'description', 'author_id', 'alreadyVoted', 'endDate', 'startDate', 'options'], //allowed atributes
+        ['_id', 'title', 'created_at', 'updated_at', 'description', 'author_id', 'alreadyVoted', 'endDate', 'startDate', 'options'], //allowed atributes
         {} //rename atributes
     );
 

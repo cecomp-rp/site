@@ -18,8 +18,8 @@ function cert_fetch(id){
             $('#cert_event_link').attr("href", "/events/" + data.event_name);
 
             $('#cert_id').text(data._id);
-            $('#cert_created_at').text(data.createdAt);
-            $('#cert_updated_at').text(data.updatedAt);
+            $('#cert_created_at').text(data.created_at);
+            $('#cert_updated_at').text(data.updated_at);
 
         }
     });

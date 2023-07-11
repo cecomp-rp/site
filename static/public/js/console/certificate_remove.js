@@ -57,23 +57,7 @@ function cert_remove_list(page){
             //For each certificate
             data.forEach((certificate) => {
 
-                var append_model =
-                `
-                <div id="${certificate._id}">
-                    <p>ID: ${certificate._id}</p>
-                    <p>Owner ID: ${certificate.owner_id}</p>
-                    <p>Event ID: ${certificate.event_id}</p>
-                    <p>Is Event Certificate: ${certificate.is_event_certificate}</p>
-                    <p>Title: ${certificate.title}</p>
-                    <p>Content: ${certificate.content}</p>
-
-                    <button onclick="cert_remove_remove('${certificate._id}')">Remove</button>
-                    <button onclick="cert_remove_edit('${certificate._id}')">Edit</button>
-                    <a href="/certificates/${certificate._id}">See page...</a>
-                </div>
-                `;
-
-                $("#cert_remove_div").append(append_model);
+                common_append("#cert_remove_div", "con_certificate.html", certificate);
 
             });
 

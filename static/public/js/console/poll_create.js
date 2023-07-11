@@ -32,21 +32,15 @@ var poll_create_editors = [];
 function poll_create_add_option(){
     var uniq = 'id' + (new Date()).getTime() + parseInt(Math.random() * 1000);
 
-    var append_model = 
-    `
-    <div id="${uniq}" class="poll_create_option">
-        <div id="${uniq}_editor"></div>
-        <button class="poll_create_remove_option" onclick="poll_create_remove_option('${uniq}')">Remove</button>
-    </div>
-    `;
+    common_append('#poll_create_options', 'con_poll_opt.html', {uniq}).then(() => {
 
-    $('#poll_create_options').append(append_model)
+        var new_editor = new Quill('#'+uniq+'_editor', options);
+        poll_create_editors.push({
+            id:     uniq,
+            editor: new_editor
+        })
 
-    var new_editor = new Quill('#'+uniq+'_editor', options);
-    poll_create_editors.push({
-        id:     uniq,
-        editor: new_editor
-    })
+    });
 
 }
 

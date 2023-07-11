@@ -1,0 +1,12 @@
+<div id="${_id}">
+    <p>ID: ${_id}</p>
+    <p>Owner ID: ${owner_id}</p>
+    <p>Event ID: ${event_id}</p>
+    <p>Is Event Certificate: ${is_event_certificate}</p>
+    <p>Title: ${title}</p>
+    <p>Content: ${content}</p>
+
+    <button onclick="cert_remove_remove('${_id}')">Remove</button>
+    <button onclick="cert_remove_edit('${_id}')">Edit</button>
+    <a href="/certificates/${_id}">See page...</a>
+</div>
