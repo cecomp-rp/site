@@ -25,8 +25,8 @@ router.get("/sub/:event_name", logged(['basic_functions']), async (req, res) => 
         return;
     }
 
-    //Is event over?
-    if(event.endDate < Date.now()){
+    //Is event over or not started?
+    if((event.endDate < Date.now()) || (event.startDate > Date.now())){
         res.redirect("/events/" + event.name);
         return;
     }
@@ -250,8 +250,8 @@ router.get("/actv/:actv_id", logged(['basic_functions']), async (req, res) => {
         return;
     }
 
-    //Is event over?
-    if(event.endDate < Date.now()){
+    //Is event over or not started?
+    if((event.endDate < Date.now()) || (event.startDate > Date.now())){
         res.redirect("/events/" + event.name);
         return;
     }
