@@ -1,11 +1,27 @@
+const cookieWarning = require('./cookieWarning.js');
+
 function commonRes(res, data) {
 
     //DATA FORMAT
     // {
     //     error: "",
     //     message: "",
-    //     content: {}
+    //     content: {},
+    //     warning: "id",
+    //     redirect: "url"
+    //
     // }
+
+    //Redirect set?
+    if(data.redirect){
+
+        //Warning set? > Set cookie warning
+        if(data.warning){
+            cookieWarning(res, data.warning);
+            data.warning = undefined;
+        }
+
+    }
     
     //Data.content cannot be undefined if there is no error
     if(data.content == undefined){

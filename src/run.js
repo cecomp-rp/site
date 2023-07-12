@@ -9,6 +9,7 @@ const loadApps              = require("../apps/apps")
 const hbs                   = require("hbs")
 const passport              = require('passport')
 const cookieSession         = require("cookie-session")
+const cookieParser          = require("cookie-parser")
 
 //Connect Gmail
 require("./utils/mail/sendMail")
@@ -36,6 +37,7 @@ const server = https.createServer(httpsOptions, exp)
 exp.use(redirectToHTTPS([], [], 301));
 exp.use(helmet({contentSecurityPolicy: false}))
 exp.use(express.json({limit: '20mb'}))
+exp.use(cookieParser(process.env.COOKIE_SECRET))
 
 //Session and passport
 const session = cookieSession({

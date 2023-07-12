@@ -45,6 +45,16 @@ function common_fetch(url, method, data = {}, msg_objs = []){
         if(response.status == 200 || response.status == 400){
             return response.json().then((data) => {
 
+                //Warning set?
+                if(data.warning){
+                    common_fetch_warning_aux(data.warning)
+                }
+
+                //Redirect set?
+                if(data.redirect){
+                    window.location.href = data.redirect;
+                }
+
                 //200 - OK
                 if(response.status == 200){
                     msg_objs.forEach((msg_obj) => {
@@ -64,7 +74,6 @@ function common_fetch(url, method, data = {}, msg_objs = []){
 
             }).catch((error) => {
                     //Erro de JSON
-                    console.log(error);
                     msg_objs.forEach((msg_obj) => {
                         $('#' + msg_obj).text('Erro!');
                     })
@@ -91,6 +100,19 @@ function common_fetch(url, method, data = {}, msg_objs = []){
         return undefined;
     });
 
+}
+
+function common_fetch_warning(id) {
+    return common_fetch("/api/warning/" + id, "GET")
+}
+
+function common_fetch_warning_aux(id){
+    common_fetch_warning(id).then((data) => {
+        if(data){
+            //Call a warning
+            common_warning_open(data);
+        }
+    })
 }
 
 function common_append(where_to_append, file_to_append, attr_to_add = {}){
