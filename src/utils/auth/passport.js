@@ -5,6 +5,7 @@ const GoogleStrategy    = require('passport-google-oauth20').Strategy;
 const User              = require("../../database/models/User")
 const getProfilePic                           = require("../profile/getProfilePicture")
 const {verifyUspMember, verifyBccMember}      = require("../other/verifyMember");
+const prettyPrint       = require("../other/prettyPrint")
 
 passport.serializeUser(async function(user, done) {
 
@@ -21,7 +22,8 @@ passport.serializeUser(async function(user, done) {
         done(null, token)
 
     }catch{
-      console.log('warning', 'Could not read cookie!')
+      prettyPrint("Auth", "Could not read cookie!", "warning")
+
       done(null, false, { message: 'Bad Session' })
     }
     
@@ -41,7 +43,7 @@ passport.deserializeUser( async function(token, done) {
         done(null, {...user.toObject(), token})
 
     }catch{
-      console.log('warning', 'Could not verify token!')
+      prettyPrint("Auth", "Could not verify token!", "warning")
 
       done(null, false, { message: 'Bad Session' })
     }
@@ -70,13 +72,13 @@ passport.use( new GoogleStrategy({
       //New user
       if(!userDb){
         const user = await User.create({googleId, email, name, roles: ['default'], profilePic: dataPic, nick: Date.now().toString(16)})
-        console.log('session', 'Created new user: ', email + " (Google)", '')
+        prettyPrint("Auth", `Created new user: ${email} (Google)`, "info")
         return cb(null, user)
       }
 
       //Existing user
       await User.updateOne({email}, {googleId, email, name, profilePic: dataPic})
-      console.log('session', 'Login: ', email + " (Google)", '')
+      prettyPrint("Auth", `Login: ${email} (Google)`, "info")
       return cb(null, userDb)
  
     }catch(e){cb(null, false, { message: 'Bad Session' })}

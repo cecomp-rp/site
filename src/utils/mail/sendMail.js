@@ -1,6 +1,7 @@
 const nodemailer    = require('nodemailer');
 const addFields     = require('../other/addFields');
 const User          = require('../../database/models/User');
+const prettyPrint   = require('../other/prettyPrint');
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
@@ -12,9 +13,9 @@ const transporter = nodemailer.createTransport({
 });
 
 transporter.verify().then(() => {
-    console.log('Email: Connected to Gmail!');
+    prettyPrint("Email", "Connected to Gmail.", "success");
 }).catch((err) => {
-    console.log('Email: Could not connect to Gmail! ' + err);
+    prettyPrint("Email", "Could not connect to Gmail.", "error");
 });
 
 async function sendMail (subject, to, content){
@@ -42,7 +43,7 @@ async function sendMail (subject, to, content){
     }).then(info => {
         return true;
     }).catch(err => {
-        console.log(err);
+        prettyPrint("Email", "Could not send email.", "error");
         return false;
     });
    

@@ -1,4 +1,5 @@
 const User              = require("../../database/models/User")
+const prettyPrint       = require("../../utils/other/prettyPrint")
 
 async function logout(req){
     const token = req.user.token
@@ -9,11 +10,11 @@ async function logout(req){
       })
       await User.updateOne({_id: req.user._id}, req.user)
     }catch(e){
-        console.log(e)
         return {status: 400, redirect: '/login'}
     }
 
-    console.log('session', 'Logout: ', req.user.nick, '')
+    prettyPrint("Auth", `User ${req.user.nick} logged out.`, "info")
+
     req.session = null
     req.logout()
 

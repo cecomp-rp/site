@@ -191,10 +191,7 @@ router.post("/api/events", logged(['admin']), async (req, res) => {
 
     //Create
     const eventDb = await Event.create(event)
-    .catch((error) => {
-        console.log(error)
-    
-    })
+    .catch((error) => {})
 
     if(!eventDb){
         commonRes(res, {

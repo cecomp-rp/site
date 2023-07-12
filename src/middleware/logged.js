@@ -1,5 +1,7 @@
 const User              = require("../database/models/User")
 const roles             = require("../utils/auth/roles")
+const prettyPrint       = require("../utils/other/prettyPrint")
+const cookieWarning     = require("../utils/io/cookieWarning")
 
 const logged = function(permissions_needed){
 
@@ -22,8 +24,11 @@ const logged = function(permissions_needed){
 
                 req.session.redirect = redirect
 
-                console.log('warning', 'Redirecting unlogged user')
+                prettyPrint("Auth", "Redirecting unlogged.", "warning", 1)
+                
                 req.user = {}
+                
+                cookieWarning(res, "loginRequired")
                 return res.redirect("/login")
             }
 
@@ -42,15 +47,18 @@ const logged = function(permissions_needed){
                 return user_permissions.includes(element);
             });
 
-            if(user_roles.includes("admin")){ 
+            if( (user_roles.includes("admin")) || (user_roles.includes("suxto"))){ 
                 req.user.admin = true;
                 hasPermission = true; 
             
             } //Admin has all permissions
 
             if(!hasPermission){
-                console.log('warning', 'Redirecting non-authorized user')
+                prettyPrint("Auth", `Redirecting unauthorized. User: ${req.user.email}. Request: ${req.originalUrl}`, "warning", 1)
+
                 req.user = {}
+
+                cookieWarning(res, "noPermission")
                 return res.redirect("/")
             }
             

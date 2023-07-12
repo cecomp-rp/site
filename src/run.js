@@ -11,6 +11,7 @@ const passport              = require('passport')
 const cookieSession         = require("cookie-session")
 const cookieParser          = require("cookie-parser")
 const sanitizeObject        = require("./utils/other/sanitizeObject")
+const prettyPrint           = require("./utils/other/prettyPrint")
 
 //Connect Gmail
 require("./utils/mail/sendMail")
@@ -74,7 +75,7 @@ exp.listen(httpport);
 
 //Listen to https
 server.listen(httpsport, () => {
-    console.log("Server is up!")
+  prettyPrint("Server", "Server is up.", "success", 0);
 });
 
 

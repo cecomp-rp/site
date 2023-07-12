@@ -1,4 +1,5 @@
 const fs = require('fs');
+const prettyPrint = require("../src/utils/other/prettyPrint")
 
 //Automatically load all apps in the apps folder
 //USE THE TEMPLATE!
@@ -12,7 +13,8 @@ const loadApps = async (exp) => {
         directoriesInDIrectory.forEach((directory) => {
             var app = require(`./${directory}/run`);
             app(exp);
-            console.log(`Loaded app: ${directory}`);
+
+            prettyPrint("Apps", `Loaded app: ${directory}`, "success");
         });
 
     });
