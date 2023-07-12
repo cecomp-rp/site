@@ -1,4 +1,8 @@
+var email_atv_editor;
+
 $('document').ready(function(){
+
+    email_atv_editor = common_quill_createEditor('#email_atv_content');
 
     $('#email_atv_send').attr('disabled', true);
 
@@ -16,7 +20,7 @@ function email_atv_send(){
 
     const atv_id = $('#email_atv_id').val();
     const subject = $('#email_atv_subject').val();
-    const content = $('#email_atv_content').val();
+    const content = common_quill_getContent(email_atv_editor);
     const filters = {
         role: $('#email_atv_filter_role').val(),
     }

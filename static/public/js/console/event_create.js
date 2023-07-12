@@ -1,31 +1,13 @@
-//Quill
-var options = {
-    modules: {
-        'syntax': true,
-        'toolbar': [
-          [ 'bold', 'italic', 'underline', 'strike' ],
-          [{ 'color': [] }, { 'background': [] }],
-          [{ 'script': 'super' }, { 'script': 'sub' }],
-          [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block' ],
-          [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
-          [ 'direction', { 'align': [] }],
-          [ 'link', 'image', 'video', 'formula' ],
-          [ 'clean' ]
-    ]
-    },
-    placeholder: 'Dream here...',
-    theme: 'snow'
-};
-
-var cert_event_create_editor, email_subscribe_event_create_editor, email_unsubscribe_event_create_editor, email_update_event_create_editor, email_atv_subscribe_event_create_editor;
+var desc_event_create_editor, cert_event_create_editor, email_subscribe_event_create_editor, email_unsubscribe_event_create_editor, email_update_event_create_editor, email_atv_subscribe_event_create_editor;
 
 $('document').ready(function(){
 
-    cert_event_create_editor = new Quill('#event_create_custom_certificate_quill', options);
-    email_subscribe_event_create_editor = new Quill('#event_create_custom_email_event_subscribe_quill', options);
-    email_unsubscribe_event_create_editor = new Quill('#event_create_custom_email_event_unsubscribe_quill', options);
-    email_update_event_create_editor = new Quill('#event_create_custom_email_event_update_quill', options);
-    email_atv_subscribe_event_create_editor = new Quill('#event_create_custom_email_atv_subscribe_quill', options);
+    desc_event_create_editor                = common_quill_createEditor('#event_create_description');
+    cert_event_create_editor                = common_quill_createEditor('#event_create_custom_certificate');
+    email_subscribe_event_create_editor     = common_quill_createEditor('#event_create_custom_email_event_subscribe');
+    email_unsubscribe_event_create_editor   = common_quill_createEditor('#event_create_custom_email_event_unsubscribe');
+    email_update_event_create_editor        = common_quill_createEditor('#event_create_custom_email_event_update');
+    email_atv_subscribe_event_create_editor = common_quill_createEditor('#event_create_custom_email_atv_subscribe');
 
     $("#event_create_submit").click(function(){
         event_create_submit();
@@ -36,7 +18,7 @@ $('document').ready(function(){
 function event_create_submit(){
 
     var name            = $("#event_create_name").val();
-    var description     = $("#event_create_description").val();
+    var description     = common_quill_getContent(desc_event_create_editor);
     var startDate       = $("#event_create_start_date").val();
     var endDate         = $("#event_create_end_date").val();
 
@@ -64,35 +46,35 @@ function event_create_submit(){
     if($("#event_create_custom_email_event_subscribe").is(":visible")){
         emails.push({
             type: "event_subscribe",
-            content: email_subscribe_event_create_editor.root.innerHTML
+            content: common_quill_getContent(email_subscribe_event_create_editor)
         });
     }
 
     if($("#event_create_custom_email_event_unsubscribe").is(":visible")){
         emails.push({
             type: "event_unsubscribe",
-            content: email_unsubscribe_event_create_editor.root.innerHTML
+            content: common_quill_getContent(email_unsubscribe_event_create_editor)
         });
     }
 
     if($("#event_create_custom_email_event_update").is(":visible")){
         emails.push({
             type: "event_update",
-            content: email_update_event_create_editor.root.innerHTML
+            content: common_quill_getContent(email_update_event_create_editor)
         });
     }
 
     if($("#event_create_custom_email_atv_subscribe").is(":visible")){
         emails.push({
             type: "atv_subscribe",
-            content: email_atv_subscribe_event_create_editor.root.innerHTML
+            content: common_quill_getContent(email_atv_subscribe_event_create_editor)
         });
     }
 
     var certificate = null;
 
     if($("#event_create_custom_certificate").is(":visible")){
-        certificate = cert_event_create_editor.root.innerHTML
+        certificate = common_quill_getContent(cert_event_create_editor);
     }
 
     var data = {

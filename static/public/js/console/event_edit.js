@@ -1,38 +1,13 @@
-//Quill Editor
-var options = {
-    modules: {
-        'syntax': true,
-        'toolbar': [
-          [ 'bold', 'italic', 'underline', 'strike' ],
-          [{ 'color': [] }, { 'background': [] }],
-          [{ 'script': 'super' }, { 'script': 'sub' }],
-          [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block' ],
-          [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
-          [ 'direction', { 'align': [] }],
-          [ 'link', 'image', 'video', 'formula' ],
-          [ 'clean' ]
-    ]
-    },
-    placeholder: 'Dream here...',
-    theme: 'snow'
-};
-
-var cert_event_edit_editor, email_subscribe_event_edit_editor, email_unsubscribe_event_edit_editor, email_update_event_edit_editor, email_atv_subscribe_event_edit_editor;
-var event_edit_editor_clipboard, email_subscribe_event_edit_editor_clipboard, email_unsubscribe_event_edit_editor_clipboard, email_update_event_edit_editor_clipboard, email_atv_subscribe_event_edit_editor_clipboard;
+var desc_event_edit_editor, cert_event_edit_editor, email_subscribe_event_edit_editor, email_unsubscribe_event_edit_editor, email_update_event_edit_editor, email_atv_subscribe_event_edit_editor;
 
 $('document').ready(function(){
 
-    cert_event_edit_editor = new Quill('#event_edit_custom_certificate_quill', options);
-    email_subscribe_event_edit_editor = new Quill('#event_edit_custom_email_event_subscribe_quill', options);
-    email_unsubscribe_event_edit_editor = new Quill('#event_edit_custom_email_event_unsubscribe_quill', options);
-    email_update_event_edit_editor = new Quill('#event_edit_custom_email_event_update_quill', options);
-    email_atv_subscribe_event_edit_editor = new Quill('#event_edit_custom_email_atv_subscribe_quill', options);
-
-    cert_event_edit_editor_clipboard = cert_event_edit_editor.getModule('clipboard');
-    email_subscribe_event_edit_editor_clipboard = email_subscribe_event_edit_editor.getModule('clipboard');
-    email_unsubscribe_event_edit_editor_clipboard = email_unsubscribe_event_edit_editor.getModule('clipboard');
-    email_update_event_edit_editor_clipboard = email_update_event_edit_editor.getModule('clipboard');
-    email_atv_subscribe_event_edit_editor_clipboard = email_atv_subscribe_event_edit_editor.getModule('clipboard');
+    desc_event_edit_editor                = common_quill_createEditor('#event_edit_description');
+    cert_event_edit_editor                = common_quill_createEditor('#event_edit_custom_certificate');
+    email_subscribe_event_edit_editor     = common_quill_createEditor('#event_edit_custom_email_event_subscribe');
+    email_unsubscribe_event_edit_editor   = common_quill_createEditor('#event_edit_custom_email_event_unsubscribe');
+    email_update_event_edit_editor        = common_quill_createEditor('#event_edit_custom_email_event_update');
+    email_atv_subscribe_event_edit_editor = common_quill_createEditor('#event_edit_custom_email_atv_subscribe');
 
     //Fetch events by ID
     $("#event_edit_id").on('input', function(){
@@ -51,7 +26,7 @@ $('document').ready(function(){
 function event_edit_fetch(id){
 
     $("#event_edit_name").val("");
-    $("#event_edit_description").val("");
+    common_quill_clearContent(desc_event_edit_editor);
     $("#event_edit_start_date").val("");
     $("#event_edit_end_date").val("");
     $("#event_edit_activity_div").empty();
@@ -83,7 +58,7 @@ function event_edit_fetch(id){
             if(data == null){ return; }//Necessário?
 
             $("#event_edit_name").val(data.title);
-            $("#event_edit_description").val(data.description);
+            common_quill_setContent(desc_event_edit_editor, data.description);
 
             $("#event_edit_start_date").val(common_date_unixToISO(data.startDate));
             $("#event_edit_end_date").val(common_date_unixToISO(data.endDate));
@@ -111,28 +86,28 @@ function event_edit_fetch(id){
                         $("#event_edit_custom_email_event_subscribe").show();
                         $("#event_edit_custom_email_event_subscribe_add").hide();
                         $("#event_edit_custom_email_event_subscribe_remove").show();
-                        email_subscribe_event_edit_editor_clipboard.dangerouslyPasteHTML(0, email.content);
+                        common_quill_setContent(email_subscribe_event_edit_editor, email.content);
                     }
 
                     if(email.type == "event_unsubscribe"){
                         $("#event_edit_custom_email_event_unsubscribe").show();
                         $("#event_edit_custom_email_event_unsubscribe_add").hide();
                         $("#event_edit_custom_email_event_unsubscribe_remove").show();
-                        email_unsubscribe_event_edit_editor_clipboard.dangerouslyPasteHTML(0, email.content);
+                        common_quill_setContent(email_unsubscribe_event_edit_editor, email.content);
                     }
 
                     if(email.type == "event_update"){
                         $("#event_edit_custom_email_event_update").show();
                         $("#event_edit_custom_email_event_update_add").hide();
                         $("#event_edit_custom_email_event_update_remove").show();
-                        email_update_event_edit_editor_clipboard.dangerouslyPasteHTML(0, email.content);
+                        common_quill_setContent(email_update_event_edit_editor, email.content);
                     }
 
                     if(email.type == "atv_subscribe"){
                         $("#event_edit_custom_email_atv_subscribe").show();
                         $("#event_edit_custom_email_atv_subscribe_add").hide();
                         $("#event_edit_custom_email_atv_subscribe_remove").show();
-                        email_atv_subscribe_event_edit_editor_clipboard.dangerouslyPasteHTML(0, email.content);
+                        common_quill_setContent(email_atv_subscribe_event_edit_editor, email.content);
                     }
 
                 })
@@ -143,7 +118,7 @@ function event_edit_fetch(id){
                 $("#event_edit_custom_certificate").show();
                 $("#event_edit_custom_certificate_add").hide();
                 $("#event_edit_custom_certificate_remove").show();
-                cert_event_edit_editor_clipboard.dangerouslyPasteHTML(0, data.certificate);
+                common_quill_setContent(cert_event_edit_editor, data.certificate);
             }
 
         }
@@ -154,7 +129,7 @@ function event_edit_fetch(id){
 function event_edit_submit(id){
 
     var name            = $("#event_edit_name").val();
-    var description     = $("#event_edit_description").val();
+    var description     = common_quill_getContent(desc_event_edit_editor);
     var startDate       = $("#event_edit_start_date").val();
     var endDate         = $("#event_edit_end_date").val();
 
@@ -185,35 +160,35 @@ function event_edit_submit(id){
     if($("#event_edit_custom_email_event_subscribe").is(":visible")){
         emails.push({
             type: "event_subscribe",
-            content: email_subscribe_event_edit_editor.root.innerHTML
+            content: common_quill_getContent(email_subscribe_event_edit_editor)
         });
     }
 
     if($("#event_edit_custom_email_event_unsubscribe").is(":visible")){
         emails.push({
             type: "event_unsubscribe",
-            content: email_unsubscribe_event_edit_editor.root.innerHTML
+            content: common_quill_getContent(email_unsubscribe_event_edit_editor)
         });
     }
 
     if($("#event_edit_custom_email_event_update").is(":visible")){
         emails.push({
             type: "event_update",
-            content: email_update_event_edit_editor.root.innerHTML
+            content: common_quill_getContent(email_update_event_edit_editor)
         });
     }
 
     if($("#event_edit_custom_email_atv_subscribe").is(":visible")){
         emails.push({
             type: "atv_subscribe",
-            content: email_atv_subscribe_event_edit_editor.root.innerHTML
+            content: common_quill_getContent(email_atv_subscribe_event_edit_editor)
         });
     }
 
     var certificate = null;
 
     if($("#event_edit_custom_certificate").is(":visible")){
-        certificate = cert_event_edit_editor.root.innerHTML
+        certificate = common_quill_getContent(cert_event_edit_editor);
     }
 
     var data = {

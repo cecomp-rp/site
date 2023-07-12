@@ -1,4 +1,8 @@
+var email_global_editor;
+
 $('document').ready(function(){
+
+    email_global_editor = common_quill_createEditor('#email_global_content');
 
     $('#email_global_send').click(function(){
 
@@ -11,7 +15,7 @@ $('document').ready(function(){
 function email_global_send(){
 
     const subject = $('#email_global_subject').val();
-    const content = $('#email_global_content').val();
+    const content = common_quill_getContent(email_global_editor);
     const filters = {
         role: $('#email_global_filter_role').val(),
     }

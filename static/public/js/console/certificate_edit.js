@@ -1,8 +1,12 @@
+var cert_edit_editor;
+
 $('document').ready(function () {
+
+    cert_edit_editor = common_quill_createEditor('#cert_edit_content');
 
     $('#cert_edit_id').on('input', function () {
         $('#cert_edit_title').val("");
-        $('#cert_edit_content').val("");
+        common_quill_clearContent(cert_edit_editor);
         $('#cert_edit_id_message').text("");
         $('#cert_edit_submit').prop('disabled', true);
         
@@ -33,7 +37,7 @@ function cert_edit_fetch(){
             }
 
             $('#cert_edit_title').val(data.title);
-            $('#cert_edit_content').val(data.content);
+            common_quill_setContent(cert_edit_editor, data.content);
 
         }
 
@@ -45,7 +49,7 @@ function cert_edit_edit(){
 
     const id = $('#cert_edit_id').val();
     const title = $('#cert_edit_title').val();
-    const content = $('#cert_edit_content').val();
+    const content = common_quill_getContent(cert_edit_editor);
     
     const data = {
         title: title,

@@ -1,22 +1,3 @@
-//Quill Editor
-var options = {
-    modules: {
-        'syntax': true,
-        'toolbar': [
-          [ 'bold', 'italic', 'underline', 'strike' ],
-          [{ 'color': [] }, { 'background': [] }],
-          [{ 'script': 'super' }, { 'script': 'sub' }],
-          [{ 'header': '1' }, { 'header': '2' }, 'blockquote', 'code-block' ],
-          [{ 'list': 'ordered' }, { 'list': 'bullet'}, { 'indent': '-1' }, { 'indent': '+1' }],
-          [ 'direction', { 'align': [] }],
-          [ 'link', 'image', 'video', 'formula' ],
-          [ 'clean' ]
-    ]
-    },
-    placeholder: 'Dream here...',
-    theme: 'snow'
-};
-
 //Startup
 $('document').ready(function() {
     
@@ -34,7 +15,7 @@ function poll_create_add_option(){
 
     common_append('#poll_create_options', 'con_poll_opt.html', {uniq}).then(() => {
 
-        var new_editor = new Quill('#'+uniq+'_editor', options);
+        var new_editor = common_quill_createEditor(`#${uniq}_editor'`);
         poll_create_editors.push({
             id:     uniq,
             editor: new_editor
@@ -64,7 +45,7 @@ function poll_create_submit(){
     var options = [];
     for(var i = 0; i < poll_create_editors.length; i++){
         options.push({
-            content: poll_create_editors[i].editor.root.innerHTML,
+            content: common_quill_getContent(poll_create_editors[i].editor),
             numberOfVotes: 0
         })
     }

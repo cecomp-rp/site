@@ -1,6 +1,6 @@
 //Warning
 
-$(document).ready(function () {
+$('document').ready(function () {
 
     $("#warning").click(function () {
         common_warning_close()
