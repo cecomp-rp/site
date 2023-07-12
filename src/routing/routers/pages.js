@@ -117,5 +117,10 @@ router.get("/console/emails", logged(['admin']), (req, res) => {
     res.render("console-emails")
 });
 
+//Console (roles) Page
+router.get("/console/roles", logged(['admin']), (req, res) => {
+    res.render("console-roles")
+});
+
 
 module.exports = router
