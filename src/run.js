@@ -10,6 +10,7 @@ const hbs                   = require("hbs")
 const passport              = require('passport')
 const cookieSession         = require("cookie-session")
 const cookieParser          = require("cookie-parser")
+const sanitizeObject        = require("./utils/other/sanitizeObject")
 
 //Connect Gmail
 require("./utils/mail/sendMail")
@@ -38,6 +39,14 @@ exp.use(redirectToHTTPS([], [], 301));
 exp.use(helmet({contentSecurityPolicy: false}))
 exp.use(express.json({limit: '20mb'}))
 exp.use(cookieParser(process.env.COOKIE_SECRET))
+
+//Sanitize req.body, req.query and req.params
+exp.use((req, res, next) => {
+    req.body = sanitizeObject(req.body)
+    req.query = sanitizeObject(req.query)
+    req.params = sanitizeObject(req.params)
+    next()
+})
 
 //Session and passport
 const session = cookieSession({

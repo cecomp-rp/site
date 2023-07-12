@@ -1,6 +1,6 @@
 $(document).ready(function() {
   
-    var news_create_editor = common_quill_createEditor('#news_create_content');
+    var news_create_editor = common_quill_createEditor('#news_create_editor');
 
     //Submit news
     $("#news_create_submit").click(function(){

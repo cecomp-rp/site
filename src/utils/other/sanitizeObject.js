@@ -13,8 +13,7 @@ function sanitizeInput(input1){
 
 function sanitizeObject(data) {
 
-    //If data is not object or array, sanitize it and return
-    if(typeof data !== "object" || Array.isArray(data)) {
+    if(typeof data !== "object" && !Array.isArray(data)) {
         return sanitizeInput(data);
     }
 

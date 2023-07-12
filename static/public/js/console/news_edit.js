@@ -2,7 +2,7 @@ var news_edit_editor;
 
 $(document).ready(function() {
     
-    news_edit_editor = common_quill_createEditor('#news_edit_content');
+    news_edit_editor = common_quill_createEditor('#news_edit_editor');
 
     //Fetch news by ID
     $("#news_edit_id").on('input', function(){
