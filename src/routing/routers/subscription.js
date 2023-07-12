@@ -293,7 +293,7 @@ router.get("/actv/:actv_id", logged(['basic_functions']), async (req, res) => {
     }
 
     //Is event over or not started?
-    if((event.endDate < Date.now()) ){
+    if((event.endDate < Date.now()) || (event.startDate > Date.now())){
         res.redirect("/events/" + event.name);
         return;
     }
