@@ -28,7 +28,6 @@ function email_event_send(){
     }
 
     common_fetch('/api/emails/event/' + event_id, 'POST', data, ['email_event_msg']);
-
 }
 
 function email_event_id_check(){
