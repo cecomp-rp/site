@@ -21,6 +21,9 @@ function event_create_submit(){
     var description     = common_quill_getContent(desc_event_create_editor);
     var startDate       = $("#event_create_start_date").val();
     var endDate         = $("#event_create_end_date").val();
+    var roleRestriction = $("#event_create_role_restriction").val();
+
+    if(roleRestriction == ""){ roleRestriction = null; }
 
     var activities = [];
 
@@ -84,7 +87,8 @@ function event_create_submit(){
         endDate: common_date_ISOToUnix(endDate),
         activities,
         emails,
-        certificate
+        certificate,
+        roleRestriction
     }
 
     common_fetch('/api/events', 'POST', data, ['event_create_message'])

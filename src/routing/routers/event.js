@@ -43,14 +43,14 @@ router.get("/api/events/by_page/:page", logged(['basic_functions']), async (req,
     if(!req.user.admin){
         events = filterObject(
             events, //object
-            ['name', 'title', 'startDate', 'endDate', 'description', 'created_at', 'updated_at', '_id'], //allowed atributes
+            ['name', 'title', 'startDate', 'endDate', 'roleRestriction', 'description', 'created_at', 'updated_at', '_id'], //allowed atributes
             {} //rename atributes
         );
     }
 
     const content = filterObject(
         events, //object
-        ['name', 'title', 'startDate', 'endDate', 'activities', 'description', 'created_at', 'updated_at', '_id', 'emails', 'certificate'], //allowed atributes
+        ['name', 'title', 'startDate', 'endDate', 'roleRestriction', 'activities', 'description', 'created_at', 'updated_at', '_id', 'emails', 'certificate'], //allowed atributes
         {} //rename atributes
     );
 
@@ -82,7 +82,7 @@ router.get("/api/events/by_id/:id", logged(['admin']), async (req, res) => {
 
         const content = filterObject(
             event, //object
-            ['name', 'title', 'startDate', 'endDate', 'activities', 'description', 'created_at', 'updated_at', '_id', 'emails', 'certificate'], //allowed atributes
+            ['name', 'title', 'startDate', 'endDate', 'roleRestriction', 'activities', 'description', 'created_at', 'updated_at', '_id', 'emails', 'certificate'], //allowed atributes
             {} //rename atributes
         );
 
@@ -117,14 +117,14 @@ router.get("/api/events/by_name/:name", logged(['basic_functions']), async (req,
     if(!req.user.admin){
         event = filterObject(
             event, //object
-            ['name', 'title', 'startDate', 'endDate', 'description', 'created_at', 'updated_at', '_id'], //allowed atributes
+            ['name', 'title', 'startDate', 'endDate', 'roleRestriction', 'description', 'created_at', 'updated_at', '_id'], //allowed atributes
             {} //rename atributes
         );
     }
 
     const content = filterObject(
         event, //object
-        ['name', 'title', 'startDate', 'endDate', 'activities', 'description', 'created_at', 'updated_at', '_id'], //allowed atributes
+        ['name', 'title', 'startDate', 'endDate', 'roleRestriction', 'activities', 'description', 'created_at', 'updated_at', '_id'], //allowed atributes
         {} //rename atributes
     );
 

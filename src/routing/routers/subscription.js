@@ -7,6 +7,7 @@ const commonRes                                             = require("../../uti
 const filterObject                                          = require("../../utils/other/filterObject")
 const sendMail                                              = require("../../utils/mail/sendMail")
 const addFields                                             = require("../../utils/other/addFields")
+const cookieWarning                                         = require("../../utils/io/cookieWarning")
 
 const router = new express.Router()
 
@@ -40,6 +41,15 @@ router.get("/sub/:event_name", logged(['basic_functions']), async (req, res) => 
     if(alreadySub){
         res.redirect("/events/" + event_name);
         return;
+    }
+
+    //User has permission to subscribe?
+    if(event.roleRestriction != null){
+        if(!req.user.roles.includes(event.roleRestriction)){
+            cookieWarning(res, "noPermissionEvent");
+            res.redirect("/events/" + event_name);
+            return;
+        }
     }
 
     //Set user settings

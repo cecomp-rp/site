@@ -15,6 +15,11 @@
     <p>End date (required)</p>
     <input id="event_create_end_date" type="datetime-local"></input>
 
+    <p>Role restriction (for subscribing)</p>
+    <select id="event_create_role_restriction" class="load-roles">
+        <option value="">-</option>
+    </select>
+
     <p>Activities</p>
     <button id="event_create_activity_create" onclick="event_create_activity_add()">Add activity</button>
     <div id="event_create_activity_div"></div>

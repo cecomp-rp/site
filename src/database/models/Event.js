@@ -67,6 +67,10 @@ const eventsSchema = new mongoose.Schema({
 
     certificate: {
         type: String
+    },
+
+    roleRestriction: {
+        type: String,
     }
 
 })

@@ -30,6 +30,7 @@ function event_edit_fetch(id){
     $("#event_edit_start_date").val("");
     $("#event_edit_end_date").val("");
     $("#event_edit_activity_div").empty();
+    $("#event_edit_role_restriction").val("");
     
     $("#event_edit_custom_certificate").hide();
     $("#event_edit_custom_certificate_add").show();
@@ -62,6 +63,8 @@ function event_edit_fetch(id){
 
             $("#event_edit_start_date").val(common_date_unixToISO(data.startDate));
             $("#event_edit_end_date").val(common_date_unixToISO(data.endDate));
+
+            $("#event_edit_role_restriction").val(data.roleRestriction);
 
             data.activities.forEach((activity) => {
 
@@ -132,6 +135,9 @@ function event_edit_submit(id){
     var description     = common_quill_getContent(desc_event_edit_editor);
     var startDate       = $("#event_edit_start_date").val();
     var endDate         = $("#event_edit_end_date").val();
+    var roleRestriction = $("#event_edit_role_restriction").val();
+
+    if(roleRestriction == ""){ roleRestriction = null; }
 
     var activities = [];
 
@@ -198,7 +204,8 @@ function event_edit_submit(id){
         endDate: common_date_ISOToUnix(endDate),
         activities,
         emails,
-        certificate
+        certificate,
+        roleRestriction
     }
 
     common_fetch('/api/events/' + id, 'PATCH', data, ['event_edit_message'])
