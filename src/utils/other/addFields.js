@@ -1,5 +1,27 @@
 function addFields(body, data){
 
+    
+    /*
+    CERTIFICADO (not event)
+    user
+
+    CERTIFICADO (event)
+    user
+    event
+    activities (user did)
+
+    EVENTO
+    event
+
+    EMAIL (not event)
+    user
+
+    EMAIL (event)
+    user
+    event
+    */
+
+
     //GENERAL (user)
     if(data.user && data.user.email){
         //Test expression ~email
@@ -45,7 +67,7 @@ function addFields(body, data){
     }
 
 
-    //ACTIVITIES (activities, totalHours)
+    //ACTIVITIES (activities)
     if(data.activities){
         var totalHours = 0;
 

@@ -5,6 +5,8 @@ const Subscription                                          = require("../../dat
 const Event                                                 = require("../../database/models/Event")
 const commonRes                                             = require("../../utils/io/commonRes")
 const filterObject                                          = require("../../utils/other/filterObject")
+const sendMail                                              = require("../../utils/mail/sendMail")
+const addFields                                             = require("../../utils/other/addFields")
 
 const router = new express.Router()
 
@@ -25,8 +27,8 @@ router.get("/sub/:event_name", logged(['basic_functions']), async (req, res) => 
         return;
     }
 
-    //Is event over or not started?
-    if((event.endDate < Date.now()) || (event.startDate > Date.now())){
+    //Is event over?
+    if(event.endDate < Date.now()){
         res.redirect("/events/" + event.name);
         return;
     }
@@ -42,8 +44,8 @@ router.get("/sub/:event_name", logged(['basic_functions']), async (req, res) => 
 
     //Set user settings
     const userSettings = {
-        enable_email_notifications: req.user.userSettings.enable_email_notifications,
-        enable_email_sharing: req.user.userSettings.enable_email_sharing
+        enable_email_notifications: req.user.userSettings.enable_email_notifications_global,
+        enable_email_sharing: req.user.userSettings.enable_email_sharing_global
     }
 
     //Create subscription
@@ -57,6 +59,26 @@ router.get("/sub/:event_name", logged(['basic_functions']), async (req, res) => 
 
     //Create CERTIFICATE
     createEventCertificate(req.user._id, event._id);
+
+    //Verify if the user has email notifications enabled in sub
+    if(!sub.userSettings.enable_email_notifications){
+        res.redirect("/events/" + event_name);
+        return;
+    }
+
+    //Verify if the event has an email for event_subscribe
+    const email = event.emails.find((email) => {
+        return email.type == "event_subscribe"
+    })
+
+    if(email){
+        //Add fields to content
+        email.content = addFields(email.content, {user: req.user, event: event});
+
+        //Send email
+        sendMail("Inscrição no evento: " + event.name, req.user.email, email.content);
+    }
+    
     res.redirect("/events/" + event_name);
    
 })
@@ -92,11 +114,31 @@ router.get("/unsub/:event_name", logged(['basic_functions']), async (req, res) =
     const sub = await Subscription.deleteOne({user_id: req.user._id, event_id: event._id})
     .catch((err) => {})
 
-    if(sub){
-        res.redirect("/events/" + event_name);
-    }else{
+    if(!sub){
         res.redirect("/events");
+        return;
     }
+
+    //Verify if the user has email notifications enabled in sub
+    if(!alreadySub.userSettings.enable_email_notifications){
+        res.redirect("/events/" + event_name);
+        return;
+    }
+
+    //Verify if the event has an email for event_unsubscribe
+    const email = event.emails.find((email) => {
+        return email.type == "event_unsubscribe"
+    })
+
+    if(email){
+        //Add fields to content
+        email.content = addFields(email.content, {user: req.user, event: event});
+
+        //Send email
+        sendMail("Desinscrição no evento: " + event.name, req.user.email, email.content);
+    }
+    
+    res.redirect("/events/" + event_name);
 
 })
 
@@ -251,7 +293,7 @@ router.get("/actv/:actv_id", logged(['basic_functions']), async (req, res) => {
     }
 
     //Is event over or not started?
-    if((event.endDate < Date.now()) || (event.startDate > Date.now())){
+    if((event.endDate < Date.now()) ){
         res.redirect("/events/" + event.name);
         return;
     }
@@ -280,13 +322,37 @@ router.get("/actv/:actv_id", logged(['basic_functions']), async (req, res) => {
     const sub = await Subscription.updateOne({user_id: req.user._id, event_id: event._id}, alreadySub, {runValidators: true})
     .catch((err) => {})
 
-    if(sub){
-        res.redirect("/events/" + event.name);
-        return;
-    }else{
+    if(!sub){
         res.redirect("/events");
         return;
     }
+
+    //Verify if the user has email notifications enabled in sub
+    if(!alreadySub.userSettings.enable_email_notifications){
+        res.redirect("/events/" + event.name);
+        return;
+    }
+
+    //Verify if the event has an email for atv_subscribe
+    const email = event.emails.find((email) => {
+        return email.type == "atv_subscribe"
+    })
+
+    if(email){
+
+        //Get activity title
+        const actv = event.activities.find((actv) => {
+            return actv._id == actv_id
+        })
+
+        //Add fields to content
+        email.content = addFields(email.content, {user: req.user, event: event});
+
+        //Send email
+        sendMail("Inscrição na atividade: " + actv.title, req.user.email, email.content);
+    }
+
+    res.redirect("/events/" + event.name);
 
 })
 

@@ -2,8 +2,11 @@ const urlSlug                   = require("url-slug")
 const express                   = require("express")
 const logged                    = require("../../middleware/logged")
 const Event                     = require("../../database/models/Event")
+const Subscription              = require("../../database/models/Subscription")
 const commonRes                 = require("../../utils/io/commonRes")
 const filterObject              = require("../../utils/other/filterObject")
+const addFields                 = require("../../utils/other/addFields")
+const sendMail                  = require("../../utils/mail/sendMail")
 
 const router = new express.Router()
 
@@ -212,7 +215,7 @@ router.post("/api/events", logged(['admin']), async (req, res) => {
 //PATCH events (update)
 router.patch("/api/events/:id", logged(['admin']), async (req, res) => {
 
-    const event = req.body
+    var event = req.body
     const id = req.params.id
 
     //Copy name to title
@@ -294,7 +297,14 @@ router.patch("/api/events/:id", logged(['admin']), async (req, res) => {
             message: undefined,
             content: {}
         }); return;
-    }else{
+    }
+
+    //Verify if this event has has an email for event_update
+    const email = event.emails.find((email) => {
+        return email.type == "event_update"
+    })
+
+    if(!email){
         commonRes(res, {
             error: undefined,
             message: "Success.",
@@ -302,6 +312,35 @@ router.patch("/api/events/:id", logged(['admin']), async (req, res) => {
         }); return;
     }
 
+    //Get all users subscribed to this event with email notifications enabled
+    const subscriptions = await Subscription.find({event_id: id, "userSettings.enable_email_notifications": true})
+    .catch((error) => {})
+
+    if(!subscriptions){
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content: {}
+        }); return;
+    }
+
+    //Send email to all users
+    subscriptions.forEach((subscription) => {
+
+        //Add fields to content
+        email.content = addFields(email.content, {user: req.user, event: event});
+
+        //Send email to all users subscribed to this event
+        sendMail("Atualização no evento: " + new_name, req.user.email, email.content);
+    
+    })
+
+    commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content: {}
+    }); return;
+    
 })
 
 //DELETE events (delete)
