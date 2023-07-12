@@ -39,7 +39,9 @@ function role_update_add(){
 
 function role_update_remove(){
     var role = $('#role_update_select').val();
-    role_update_user_roles.splice(role_update_user_roles.indexOf(role), 1);
+    role_update_user_roles = role_update_user_roles.filter(function(value, index, arr){
+        return value != role;
+    });
 
     //Remove repeated roles
     role_update_user_roles = [...new Set(role_update_user_roles)];
