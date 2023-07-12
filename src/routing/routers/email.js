@@ -14,9 +14,9 @@ router.post("/api/emails/global/:page", logged(['admin']), async (req, res) => {
     const page = req.params.page;
     const page_limit = 100;
 
-    //Find all users userSettings.enable_email_notifications true
+    //Find all users userSettings.enable_email_sharing true and userSettings.enable_email_sharing_global true
     //Get email by page
-    const users = await User.find({ "userSettings.enable_email_notifications": true})
+    const users = await User.find({ "userSettings.enable_email_sharing": true, "userSettings.enable_email_sharing_global": true })
     .skip((page - 1) * page_limit)
     .limit(page_limit)
     .catch((error) => {})
@@ -28,7 +28,7 @@ router.post("/api/emails/global/:page", logged(['admin']), async (req, res) => {
             content: undefined
         }); return;
     }
-
+    
     const users_filtered = filterObject(
         users,
         ["email"],
@@ -66,9 +66,9 @@ router.post("/api/emails/event/:id/:page", logged(['admin']), async (req, res) =
         }); return;
     }
 
-    //For each subscription with enable_email_notifications true, find user
+    //For each subscription with enable_email_sharing true, find user
     const users = await Promise.all(subscriptions.map(async (subscription) => {
-        if(subscription.userSettings.enable_email_notifications){
+        if(subscription.userSettings.enable_email_sharing){
             return await User.findById(subscription.user_id)
             .catch((error) => {})
         }
@@ -87,11 +87,16 @@ router.post("/api/emails/event/:id/:page", logged(['admin']), async (req, res) =
         }); return;
     }
 
+    //Filter users thtat have enable_email_sharing_global true
+    const users_filtered_again = users_filtered.filter((user) => {
+        return user.userSettings.enable_email_sharing_global;
+    })
+
     //Apply filters
     const filters = data.filters;
     if(filters && filters.role && filters.role == ''){ delete filters.role }
 
-    const users_filtered_again = users_filtered.filter((user) => {
+    const users_filtered_again_again = users_filtered_again.filter((user) => {
         var user_passed = true;
         
         //Roles
@@ -102,7 +107,7 @@ router.post("/api/emails/event/:id/:page", logged(['admin']), async (req, res) =
         return user_passed;
     })
 
-    const users_filtered_again_again = filterObject(
+    const users_filtered_again_again_again = filterObject(
         users_filtered_again,
         ["email"],
         {}
@@ -118,7 +123,7 @@ router.post("/api/emails/event/:id/:page", logged(['admin']), async (req, res) =
         commonRes(res, {
             error: undefined,
             message: "Success.",
-            content: users_filtered_again_again
+            content: users_filtered_again_again_again
         }); return;
     }
 
@@ -147,9 +152,9 @@ router.post("/api/emails/actv/:id/:page", logged(['admin']), async (req, res) =>
         }); return;
     }
 
-    //For each subscription with enable_email_notifications true, find user
+    //For each subscription with enable_email_sharing true, find user
     const users = await Promise.all(subscriptions.map(async (subscription) => {
-        if(subscription.userSettings.enable_email_notifications){
+        if(subscription.userSettings.enable_email_sharing){
             return await User.findById(subscription.user_id)
             .catch((error) => {})
         }
@@ -168,11 +173,16 @@ router.post("/api/emails/actv/:id/:page", logged(['admin']), async (req, res) =>
         }); return;
     }
 
+    //Filter users thtat have enable_email_sharing_global true
+    const users_filtered_again = users_filtered.filter((user) => {
+        return user.userSettings.enable_email_sharing_global;
+    })
+
     //Apply filters
     const filters = data.filters;
     if(filters && filters.role && filters.role == ''){ delete filters.role }
 
-    const users_filtered_again = users_filtered.filter((user) => {
+    const users_filtered_again_again = users_filtered_again.filter((user) => {
         var user_passed = true;
         
         //Roles
@@ -183,8 +193,8 @@ router.post("/api/emails/actv/:id/:page", logged(['admin']), async (req, res) =>
         return user_passed;
     })
 
-    const users_filtered_again_again = filterObject(
-        users_filtered_again,
+    const users_filtered_again_again_again = filterObject(
+        users_filtered_again_again,
         ["email"],
         {}
     );
@@ -199,7 +209,7 @@ router.post("/api/emails/actv/:id/:page", logged(['admin']), async (req, res) =>
         commonRes(res, {
             error: undefined,
             message: "Success.",
-            content: users_filtered_again_again
+            content: users_filtered_again_again_again
         }); return;
     }
 

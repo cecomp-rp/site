@@ -26,6 +26,11 @@ async function sendMail (subject, to, content){
     if(user){
         //Add fields to content
         content = addFields(content, {user});
+
+        //Check if user has email notifications enabled
+        if(!user.userSettings.enable_email_notifications_global){
+            return false;
+        }
     }
 
     //Send email
@@ -40,7 +45,7 @@ async function sendMail (subject, to, content){
         console.log(err);
         return false;
     });
-        
+   
 }
 
 module.exports = sendMail;

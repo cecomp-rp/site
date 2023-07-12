@@ -53,15 +53,26 @@ const userSchema = new mongoose.Schema({
 
     userSettings: {
 
-        enable_email_notifications: {
+        enable_email_notifications_global: { //General
+            type: Boolean,
+            default: true
+        },
+
+        enable_email_sharing_global: { //General
+            type: Boolean,
+            default: true
+        },
+
+        enable_email_notifications: { //CEComp
             type: Boolean,
             default: true
         },
         
-        enable_email_sharing: {
+        enable_email_sharing: { //Cecomp
             type: Boolean,
             default: true
         },
+        
         
     }
 
