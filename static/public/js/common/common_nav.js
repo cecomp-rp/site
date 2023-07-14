@@ -1,6 +1,9 @@
 $('document').ready(function () {
     nav_title();
     nav_info_fetch();
+
+    nav_animate_backgrounds();
+
 });
 
 function nav_title(){
@@ -29,5 +32,33 @@ function nav_info_fetch(){
         }
     
     })
+
+}
+
+//Animate background gradient
+var bg_main;
+function nav_animate_backgrounds(){
+
+    //Main background
+    bg_main = new Granim({
+        element: '#nav-canvas',
+        direction: 'top-bottom',
+        isPausedWhenNotInView: true,
+        image : {
+            source: '../img/bg/ocean.jpg',
+            blendingMode: 'multiply',
+            stretchMode: ['stretch', 'stretch']
+        },
+        states : {
+            "default-state": {
+                gradients: [
+                    ['#ffffff', '#9D50BB'],
+                    ['#9D50BB', '#6E48AA'],
+                    ['#4776E6', '#ffffff']
+                ],
+                transitionSpeed: 1000
+            }
+        }
+    });
 
 }

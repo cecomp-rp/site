@@ -1,12 +1,18 @@
 /*GENERAL*/
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Open Sans', sans-serif;
 
     background-color: #1d1d1d;
-    color: #e8e8e8;
+    color: #ffffff;
 
-    margin: 0;
     padding: 0;
+    margin: 0;
+
+    height: 100vh;
 }
 
 div {
@@ -16,22 +22,27 @@ div {
 
 h1 {
     font-family: 'Open Sans', sans-serif;
+    font-size: 60pt;
 }
 
 h2 {
     font-family: 'Open Sans', sans-serif;
+    font-size: 40pt;
 }
 
 h3 {
     font-family: 'Open Sans', sans-serif;
+    font-size: 30pt;
 }
 
 h4 {
     font-family: 'Open Sans', sans-serif;
+    font-size: 20pt;
 }
 
 p {
     font-family: 'Open Sans', sans-serif;
+    font-size: 14pt;
 }
 
 input {
@@ -45,156 +56,41 @@ textarea {
 button {
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
-    
-    width: 100px;
-    height: 30px;
+    font-size: 12pt;
 
-    border: none;
-    border-radius: 2px;
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 
-    color: #e8e8e8;
-    background-color: #343434;
+    border: white 2px solid;
+    border-radius: 4px;
+
+    color: #ffffff;
+    background-color: rgba(0,0,0,0);
 }
 
 button:hover {
     cursor: pointer;
-
-    background-color: #9500ff;
+    background-color: #8840b8;
+    border: #8840b8 2px solid;
 }
 
 a {
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
+    font-size: 14pt;
 
     text-decoration: none;
+    text-decoration: underline;
 
-    color: #e8e8e8;
+    color: #ffffff;
 }
 
 a:hover {
-    color: #9500ff;
+    color: #8840b8;
 }
 
 img {
     width: auto;
     height: 100%;
 }
-
-/*FLEX*/
-
-.flex {
-    display: flex;
-}
-
-.col {
-    flex-direction: column;
-}
-
-.row {
-    flex-direction: row;
-}
-
-.center {
-    justify-content: center;
-    align-items: center;
-}
-
-.start {
-    justify-content: flex-start;
-    align-items: flex-start;
-}
-
-.end {
-    justify-content: flex-end;
-    align-items: flex-end;
-}
-
-/*QUILL*/
-.ql-editor {
-    font-family: 'Open Sans', sans-serif;
-}
-
-/*STRUCT DIVS*/
-.main {
-    display: flex;
-    flex-direction: column;
-
-    margin: 10px;
-}
-
-/*NAV BAR*/
-.nav {
-    display: flex;
-    flex-direction: row;
-
-    position: fixed;
-
-    width: 100%;
-    height: 80px;
-
-    top: 0px;
-
-    margin: 0;
-    padding: 0;
-
-    background-color: #e8e8e8;
-
-    z-index: 10;
-}
-
-.nav-logo {
-    position: absolute;
-
-    width: auto;
-    height: 80px;
-
-    cursor: pointer;
-
-    top: 0;
-    left: calc( 50% - 40px );
-}
-
-.nav-user-area {
-    width: 100%;
-
-    text-align: right;
-
-    margin-right: 10px;
-
-    color: #9500ff;
-}
-
-.nav-label {
-    width: 100%;
-
-    margin-left: 10px;
-
-    color: #9500ff;
-}
-
-.nav-user-profilePic {
-    width: 40px;
-    height: 40px;
-
-    border-radius: 50%;
-
-    margin: 8px;
-}
-
-.nav-user-area h3 {
-    font-size: 11pt;
-
-    margin: 0;
-    padding: 0;
-
-    margin-bottom: 5px;
-    margin-right: 10px;
-
-}
-
-.nav-user-area a {
-    color: #9500ff;
-
-
-}
-

@@ -1,12 +1,13 @@
 Cinza
 
-#343434 (claro)
+#2f3333 (claro)
 #1d1d1d (escuro)
 
 Branco
 
-#e8e8e8 //mudar para ffffff
+#ffffff
 
 Roxo
 
-#9500ff
+#8840b8 (claro)
+#492a7a (escuro)

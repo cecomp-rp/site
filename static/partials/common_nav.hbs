@@ -1,11 +1,20 @@
-<div class="nav center">
+<div id="nav" class="nav flex center">
+
+    <!-- Canvas -->
+    <div id="nav-canvas-aux">
+        <canvas id="nav-canvas"></canvas>
+    </div> 
 
     <!-- Script -->
     <script src="\js/common/common_nav.js"></script>
 
     <!-- NAV LABEL -->
     <div class="nav-label start">
-        <h1 id="nav-title"></h1>
+
+        <div class="flex col center" style="height:100%; padding-left:10px;">
+            <button id="nav-options-click" class="color-1 button-1" style="transform: rotate(-45deg);" onclick="common_nav_overlay_open()">➤</button>
+        </div>
+    
     </div>
 
     <!-- NAV LOGO -->
@@ -14,14 +23,35 @@
     </div>
 
     <!-- NAV USER -->
-    <div class="nav-user-area nav-logged end" style="display: none;">
-        <img id="nav_user_profilePic" class="nav-user-profilePic" src="\img/mascot/mascot-light.png">
-        <a href="\account"><h3 id="nav_user_nick">not logged</h3></a>
-    </div>
-    <div class="nav-user-area nav-notlogged end">
-        <a href='\login'><h3 id="nav_user_nick">Login</h3></a>
-    </div>
+    <div class="nav-user-area logged flex row end">
+        <div class="flex row center" style="height:100%">
+           
+            <div class="flex col center" style="height:100%">
+                <div class="flex row end" style="width:100%;">
+                    <h3 id="nav_user_nick" class="text-1 color-2">not logged</h3>
+                </div>
 
+                <div class="flex row end" style="width:200px;">
+                    <a href="\account"><h3 class="text-3 color-2">Minha conta</h3></a>
+                    <h3 class="text-3 color-2">|</h3>
+                    <a href="\logout"><h3 class="text-3 color-2">Logout</h3></a>
+                </div>
+            </div>
+
+            <div class="flex row center" style="width:100%;">
+                <div class="flex col center" style="height:100%">
+                <img id="nav_user_profilePic" class="nav-user-profilePic" src="\img/mascot/mascot-light.png">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    
+    <div class="nav-user-area notlogged flex row end">
+        <div class="flex col center" style="height:100%">
+            <a href='\login'><button class="button-1" id="nav_user_nick">Login</button></a>
+        </div>
+    </div>
 
 </div>
 

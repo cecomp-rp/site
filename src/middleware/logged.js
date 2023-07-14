@@ -28,7 +28,15 @@ const logged = function(permissions_needed){
                 
                 req.user = {}
                 
-                cookieWarning(res, "loginRequired")
+                //Cookie warning exceptions
+                const excp_1 = [
+                    "/api/account"
+                ];
+
+                if(!excp_1.includes(req.originalUrl)){
+                    cookieWarning(res, "loginRequired")
+                }
+
                 return res.redirect("/login")
             }
 
@@ -58,7 +66,13 @@ const logged = function(permissions_needed){
 
                 req.user = {}
 
-                cookieWarning(res, "noPermission")
+                //Cookie warning exceptions
+                const excp_2 = [];
+
+                if(!excp_2.includes(req.originalUrl)){
+                    cookieWarning(res, "noPermission")
+                }
+                
                 return res.redirect("/")
             }
             

@@ -1,0 +1,110 @@
+/*QUILL*/
+.ql-editor {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*SIMPLE BAR*/
+.simplebar-track.simplebar-vertical .simplebar-scrollbar:before {
+    background: #8840b8;
+    opacity: 1;
+    margin-top: 85px;
+    margin-bottom: 5px;
+
+    z-index: 0;
+}
+
+.simplebar-track {
+    z-index: 0;
+}
+
+/*STRUCT DIVS*/
+.main {
+    display: flex;
+    flex-direction: column;
+
+    margin: 10px;
+}
+
+/*NAV BAR*/
+.nav {
+    display: flex;
+    flex-direction: row;
+
+    position: fixed;
+
+    width: 100%;
+    height: 80px;
+
+    top: 0px;
+
+    margin: 0;
+    padding: 0;
+
+    background-color: #ffffff;
+
+    z-index: 100;
+
+    box-shadow: 0px 0px 10px 0px rgba(255, 255, 255, 0.3);
+}
+
+.nav-logo {
+    position: absolute;
+
+    width: auto;
+    height: 80px;
+
+    cursor: pointer;
+
+    top: 0;
+    left: calc( 50% - 40px );
+
+    z-index: 101;
+}
+
+.nav-user-area {
+    width: 100%;
+
+    text-align: center;
+
+    margin-right: 10px;
+
+    color: #8840b8;
+
+    z-index: 100;
+}
+
+.nav-label {
+    width: 100%;
+
+    margin-left: 10px;
+
+    color: #8840b8;
+
+    z-index: 100;
+}
+
+.nav-user-profilePic {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    margin: 8px;
+}
+
+.nav-user-area h3 {
+    font-size: 11pt;
+
+    margin: 0;
+    padding: 0;
+
+    margin-bottom: 5px;
+    margin-right: 10px;
+
+}
+
+.nav-user-area a {
+    color: #8840b8;
+
+
+}

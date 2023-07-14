@@ -1,0 +1,110 @@
+/*TEXTS*/
+.text-1 {
+    font-size: 80pt;
+    color: #ffffff;
+
+    font-weight: 700;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.text-2 {
+    font-size: 35pt;
+    color: #ffffff;
+
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.text-3 {
+    font-size: 25pt;
+    color: #ffffff;
+
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.text-4 {
+    font-size: 20pt;
+    color: #ffffff;
+
+    font-weight: 300;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*TITLES*/
+.title-1 {
+    padding-left: 50px;
+    margin: 15px;
+}
+
+.title-2 {
+    padding-left: 100px;
+    margin: 15px;
+}
+
+.title-3 {
+    padding-left: 150px;
+    margin: 15px;
+}
+
+.title-4 {
+    padding-left: 200px;
+    margin: 15px;
+}
+
+/*Colors*/
+.color-1 {
+    color: #2f3333;
+}
+
+.color-2 {
+    color: #1d1d1d;
+}
+
+.color-3 {
+    color: #8840b8;
+}
+
+.color-4 {
+    color: #492a7a;
+}
+
+/*Fixed width*/
+.w-200 {
+    width: 200px;
+}
+
+.w-400 {
+    width: 300px;
+}
+
+.w-800 {
+    width: 600px;
+}
+
+/*Fixed height*/
+.h-200 {
+    height: 200px;
+}
+
+.h-400 {
+    height: 300px;
+}
+
+.h-800 {
+    height: 600px;
+}
+
+/*buttons*/
+
+.button-1 {
+    color: #1d1d1d;
+    border: #1d1d1d 2px solid;
+}
+
+.button-1:hover {
+    background-color: #1d1d1d;
+    color: #ffffff;
+    border: #1d1d1d 2px solid;
+}
+

@@ -1,0 +1,50 @@
+/*FLEX STD*/
+.flex {
+    display: flex;
+}
+
+.blocks {
+    flex-wrap:       wrap;
+    justify-content: center;
+}
+
+.center {
+    justify-content: center;
+}
+
+.end {
+    justify-content: flex-end;
+}
+
+.start {
+    justify-content: flex-start;
+}
+
+.row {
+    flex-direction: row;
+}
+
+.col {
+    flex-direction: column;
+}
+
+/*BOXES*/
+.box-1 { /*Base*/
+    width: 90vw;
+    border-radius: 30px;
+
+    margin: 20px;
+    padding: 20px;
+
+    background-color: #2f3333;
+}
+
+.box-2 { /*Nested in base*/
+    width: 90vw;
+    border-radius: 20px;
+
+    margin: 20px;
+    padding: 20px;
+
+    background-color: #8840b8;
+}

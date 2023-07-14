@@ -1,3 +1,7 @@
+$(document).ready(function() {
+    common_isLogged();
+});
+
 function common_date_unixToISO(date){
     return new Date(date).toISOString().split('.')[0];
 }
@@ -184,4 +188,19 @@ function common_replaceAttr(html, attr_to_add){
 
     return html;
    
+}
+
+function common_isLogged(){
+    common_fetch('/api/account', 'GET').then((data) => {
+    
+        if(data){
+            $('.logged').show();
+            $('.notlogged').hide();
+        }else{
+            $('.logged').hide();
+            $('.notlogged').show();
+        }
+
+    })
+
 }
