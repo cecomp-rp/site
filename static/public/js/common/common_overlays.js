@@ -10,10 +10,26 @@ $('document').ready(function () {
 function common_warning_open(msg) {
     $("#warning_inner").html(msg);
     $("#warning").show();
+
+    anime({
+        targets: '#warning',
+        opacity: 1,
+        duration: 200,
+        easing: 'easeOutCubic'
+    });
+
 }
 
 function common_warning_close() {
-    $("#warning").hide();
+    anime({
+        targets: '#warning',
+        opacity: 0,
+        duration: 200,
+        easing: 'easeOutCubic',
+        complete: function () {
+            $("#warning").hide();
+        }
+    });
 }
 
 //Confirm
@@ -28,15 +44,39 @@ function common_confirm_open(msg, callback_string) {
     confirm_callback_string = callback_string;
     $("#confirm_inner").html(msg);
     $("#confirm").show();
+
+    anime({
+        targets: '#confirm',
+        opacity: 1,
+        duration: 200,
+        easing: 'easeOutCubic'
+    });
 }
 
 function common_confirm_accept() {
-    $("#confirm").hide();
+    anime({
+        targets: '#confirm',
+        opacity: 0,
+        duration: 200,
+        easing: 'easeOutCubic',
+        complete: function () {
+            $("#confirm").hide();
+        }
+    });
+
     eval(confirm_callback_string);
 }
 
 function common_confirm_dismiss() {
-    $("#confirm").hide();
+    anime({
+        targets: '#confirm',
+        opacity: 0,
+        duration: 200,
+        easing: 'easeOutCubic',
+        complete: function () {
+            $("#confirm").hide();
+        }
+    });
 }
 
 //Loading

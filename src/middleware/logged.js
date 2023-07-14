@@ -22,8 +22,10 @@ const logged = function(permissions_needed){
                 //if redirect is starts with /api/*, redirect to / (REGEX)
                 if(redirect.match(/^\/api\/.*/)){redirect = "/"}
 
-                req.session.redirect = redirect
-
+                if(redirect != "/"){
+                    req.session.redirect = redirect
+                }
+                
                 prettyPrint("Auth", "Redirecting unlogged.", "warning", 1)
                 
                 req.user = {}
