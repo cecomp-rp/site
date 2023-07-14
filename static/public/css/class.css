@@ -1,6 +1,28 @@
 /*QUILL*/
 .ql-editor {
     font-family: 'Open Sans', sans-serif;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+
+    border-radius: 2px;
+}
+
+.ql-snow.ql-snow {
+    border: none !important;
+    margin-top: 2px !important;
+}
+
+div.ql-toolbar.ql-snow {  
+    background-color: #ffffff;
+    color: #8840b8;
+
+    height: 70px;
+
+    border-radius: 2px;
+}
+
+.ql-snow.ql-toolbar button svg {
+    width: 20px;
 }
 
 /*SIMPLE BAR*/

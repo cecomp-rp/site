@@ -1,16 +1,10 @@
 $('document').ready(function () {
-    nav_title();
     nav_info_fetch();
+    nav_set_title();
 
     nav_animate_backgrounds();
 
 });
-
-function nav_title(){
-
-    $('#nav-title').text(document.title)
-
-}
 
 function nav_info_fetch(){
 
@@ -33,6 +27,13 @@ function nav_info_fetch(){
     
     })
 
+}
+
+function nav_set_title(){
+    
+    //Set title
+    $('#nav-location').text(document.title);
+    
 }
 
 //Animate background gradient

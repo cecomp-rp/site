@@ -47,16 +47,131 @@ p {
 
 input {
     font-family: 'Open Sans', sans-serif;
+    font-size: 12pt;
+
+    color: #ffffff;
+    background-color: rgba(0,0,0,0);
+
+    min-height: 50px;
+    min-width: 200px;
+
+    border: white 2px solid;
+    border-radius: 4px;
+
+    padding: 10px;
+}
+
+input:focus {
+    outline: none;
+    border: #8840b8 2px solid;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+input[type=checkbox] {
+    min-height: 20px;
+    min-width: 20px;
+}
+
+input[type=checkbox]:focus {
+    outline: none;
+}
+
+input[type=button] {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    font-size: 12pt;
+
+    min-height: 50px;
+    min-width: 100px;
+
+    padding: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    border: white 2px solid;
+    border-radius: 4px;
+
+    color: #ffffff;
+    background-color: rgba(0,0,0,0);
+}
+
+input[type=button]:hover {
+    cursor: pointer;
+    background-color: #8840b8;
+    border: #8840b8 2px solid;
+}
+
+select {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12pt;
+
+    min-height: 50px;
+    min-width: 200px;
+
+    color: #ffffff;
+    background-color: rgba(0,0,0,0);
+
+    border: white 2px solid;
+    border-radius: 4px;
+
+    padding: 10px;
+}
+
+select:focus {
+    outline: none;
+    border: #8840b8 2px solid;
+}
+
+option {
+    background: #2f3333;
+    color: #fff;
+    
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12pt;
+
+    border: none;
+  }
+
+option:checked {
+    background: #8840b8;
+    color: #fff;
+}
+
+option:not(:checked) { 
+    background: #2f3333;
 }
 
 textarea {
     font-family: 'Open Sans', sans-serif;
+    font-size: 12pt;
+
+    background-color: rgba(0,0,0,0);
+    color: #ffffff;
+
+    min-height: 300px;
+
+    padding: 10px;
+
+    resize: none;
+
+    border: white 2px solid;
+    border-radius: 2px;
+}
+
+textarea:focus {
+    outline: none;
+    border: #8840b8 2px solid;
 }
 
 button {
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     font-size: 12pt;
+
+    min-height: 50px;
 
     padding: 20px;
     padding-top: 10px;
@@ -75,6 +190,12 @@ button:hover {
     border: #8840b8 2px solid;
 }
 
+button:disabled {
+    cursor: not-allowed;
+    background-color: #2f3333;
+    border: #1d1d1d 2px solid;
+}
+
 a {
     font-family: 'Open Sans', sans-serif;
     font-weight: bold;
@@ -84,10 +205,12 @@ a {
     text-decoration: underline;
 
     color: #ffffff;
+    transition: 0.1s;
 }
 
 a:hover {
-    color: #8840b8;
+    color: #ba30ff;
+    transition: 0.1s;
 }
 
 img {

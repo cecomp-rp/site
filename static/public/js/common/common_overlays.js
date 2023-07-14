@@ -1,5 +1,4 @@
 //Warning
-
 $('document').ready(function () {
 
     $("#warning").click(function () {
@@ -42,6 +41,24 @@ function common_confirm_dismiss() {
 
 //Loading
 
+$('document').ready(function () {
+
+    setTimeout(function () {
+
+        anime({
+            targets: '#loading',
+            opacity: 0,
+            duration: 100,
+            easing: 'easeOutCubic',
+            complete: function () {
+                $("#loading").hide();
+            }
+        });
+
+    }, 500);
+
+});
+
 function common_loading_open() {
     $("#loading").show();
 }
@@ -51,9 +68,13 @@ function common_loading_close() {
 }
 
 //Nav overlay
+
 $('#nav-overlay').ready(function () {
 
-    common_nav_overlay_item_scale();
+    //on open
+    $("#nav-options-click").click(function () {
+        common_nav_overlay_item_scale();
+    });
 
     //Close on click
     $("#nav-overlay").click(function () {
