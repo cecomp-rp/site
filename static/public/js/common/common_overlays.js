@@ -81,6 +81,12 @@ function common_confirm_dismiss() {
 
 //Loading
 
+window.addEventListener( "pageshow", function ( event ) { //On page show, close loading
+    setTimeout(function () { 
+        common_loading_close();
+    }, 200);
+});
+
 $('document').ready(function () {
 
     setTimeout(function () {
