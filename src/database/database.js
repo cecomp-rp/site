@@ -4,7 +4,8 @@ const prettyPrint   = require("../utils/other/prettyPrint")
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    family: 4 // Use IPv4, skip trying IPv6
+    family: 4, // Use IPv4, skip trying IPv6
+    authSource: "admin"
 }
 
 mongoose.connect(process.env.DATABASE_URL, options);
