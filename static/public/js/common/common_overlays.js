@@ -89,10 +89,6 @@ window.addEventListener( "pageshow", function ( event ) { //On page show, close 
 
 $('document').ready(function () {
 
-    setTimeout(function () {
-       common_loading_close();
-    }, 200);
-
     //On any a click
     $("a").click(function (event) {
 
