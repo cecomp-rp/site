@@ -158,6 +158,35 @@
 
 }
 
+/*Back*/
 
+#nav-back {
+
+    border-radius: 100px;
+
+    width: 60px;
+    height: 60px;
+
+    font-size: 12pt;
+    text-align: center;
+
+    color: white;
+
+    margin: 5px;
+    margin-top: 20px;
+
+    border: none;
+
+}
+
+#nav-back:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+/*Login options*/
+
+#login-box {
+    background-color: #1d1d1d;
+}
     
 

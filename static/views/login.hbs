@@ -4,13 +4,49 @@
 </head>
 
 <body>
-    <!-- Overlays -->
+<div data-simplebar>
+<div id="main" class="flex col center">
+
+    <!-- OVERLAYS -->
     {{>common_overlays}}
 
-    <h1>Login</h1>
-    
-    <div class="main">
-        <a href="/auth/google">Google</a>
+    <!-- Voltar -->
+    {{>common_back}}
+
+    <!-- CONTENT -->
+    <div id="content" class="flex col center" style="height:100vh;">
+
+        <!-- Login box -->
+        <div class="flex row center">
+            <div class="box-1 flex row center blocks">
+
+                <!-- Text -->
+                <div class="box-1 w-800 h-400">
+                    <h1 class="title-1 text-1">Login</h1>
+                    <h1 class="title-1 text-2">e cadastro.</h1>
+                    <p class="title-1 text-4">Se possível, utilize seu email usp.br!</p>
+                </div>
+                
+                <!-- Options -->
+                <div id="login-box" class="box-2 w-400 h-400">
+                <div class="flex row center" style="height: 100%;">
+                <div class="flex col center" style="width: 100%;">
+
+                    <!-- Google -->
+                    <button class="button-2" onclick="location.href='/auth/google'">Google</button>
+
+                </div>     
+                </div>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
+    <!-- FOOTER -->
+    {{>common_footer}}
+
+</div>
+</div>
 </body>
