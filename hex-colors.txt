@@ -11,3 +11,7 @@ Roxo
 
 #8840b8 (claro)
 #492a7a (escuro)
+
+Vermelho
+
+#ff6e6e

@@ -107,6 +107,14 @@ $('document').ready(function () {
 
     });
 
+    //On any button with class "a-like" click
+    $(".a-like").on('click', function (event) {
+
+        common_loading_open();
+
+    });
+
+
 });
 
 function common_loading_open() {

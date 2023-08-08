@@ -217,3 +217,11 @@ img {
     width: auto;
     height: 100%;
 }
+
+li {
+    color: #ffffff;
+
+    font-size: 15pt;
+    font-family: 'Open Sans', sans-serif;
+
+}

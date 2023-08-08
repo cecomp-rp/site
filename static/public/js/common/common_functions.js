@@ -62,6 +62,8 @@ function common_fetch(url, method, data = {}, msg_objs = []){
                 //200 - OK
                 if(response.status == 200){
                     msg_objs.forEach((msg_obj) => {
+                        $('#' + msg_obj).show();
+                        $('#' + msg_obj).attr('class', 'box-2');
                         $('#' + msg_obj).text(data.message);
                     })
                     return data.content;
@@ -71,6 +73,8 @@ function common_fetch(url, method, data = {}, msg_objs = []){
                 else if(response.status == 400){
                     console.log("Error: " + data.error);
                     msg_objs.forEach((msg_obj) => {
+                        $('#' + msg_obj).show();
+                        $('#' + msg_obj).attr('class', 'box-4');
                         $('#' + msg_obj).text(data.error);
                     })
                     return undefined;
@@ -79,6 +83,8 @@ function common_fetch(url, method, data = {}, msg_objs = []){
             }).catch((error) => {
                     //Erro de JSON
                     msg_objs.forEach((msg_obj) => {
+                        $('#' + msg_obj).show();
+                        $('#' + msg_obj).attr('class', 'box-4');
                         $('#' + msg_obj).text('Erro!');
                     })
                     return undefined;
@@ -136,6 +142,9 @@ function common_append(where_to_append, file_to_append, attr_to_add = {}){
                 $(this).append(data);
             })
         }
+
+        //Extras
+        common_format_dates();
 
     })
 

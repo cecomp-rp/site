@@ -6,7 +6,12 @@ $('document').ready(function () {
             $('#acc_name').text(data.name)
             $('#acc_email').text(data.email)
             $('#acc_nick').text(data.nick)
-            $('#acc_roles').text(data.roles)
+
+            //Roles (array)
+            data.roles.forEach((role) => {
+                $('#acc_roles').append(`<p>${role}</p>`)
+            })
+
             $('#acc_profilePic').attr('src', data.profilePic)
         }
         

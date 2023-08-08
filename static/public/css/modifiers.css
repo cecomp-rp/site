@@ -82,6 +82,10 @@
     width: 600px;
 }
 
+.w-max {
+    width: 100%;
+}
+
 /*Fixed height*/
 .h-200 {
     height: 200px;
@@ -93,6 +97,10 @@
 
 .h-800 {
     height: 600px;
+}
+
+.h-max {
+    height: 100%;
 }
 
 /*buttons*/
@@ -108,3 +116,22 @@
     border: #1d1d1d 2px solid;
 }
 
+.button-2 {
+    background-color: rgba(0,0,0,0);
+}
+
+.button-2:hover {
+    background-color: rgba(0,0,0,0.4);
+    border: rgba(0,0,0,0.1) 2px solid;
+}
+
+/*Conteiner jump*/
+.jump{
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.jump:hover {
+    transform: scale(1.08);
+    transition: 0.2s;
+}

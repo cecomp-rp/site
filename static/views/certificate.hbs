@@ -3,36 +3,87 @@
 </head>
 
 <body>
+<div data-simplebar>
+<div id="main" class="flex col center">
 
-    <!-- Overlays -->
+    <!-- OVERLAYS -->
     {{>common_overlays}}
 
     <!-- NAV -->
     {{>common_nav}}
 
-    <div>
+    <!-- CONTENT -->
+    <div id="content" class="flex col center">
+
         <script src="\js/certificate/certificate_fetch_one.js"></script>
 
-        <h1 id="cert_title"></h1>
-        <div id="cert_content"></div>
+        <!-- Certificate -->
+        <div class="flex row center">
+        <div class="box-1">
+        <div id="certificate" style="background-color: #2f3333; padding-bottom: 20px;">
 
-        <p>Certificate ID:</p>
-        <p id="cert_id"></p>
+            <div class="flex col center">
+                <div class="flex row center">
+                    <h1 class="text-2">Certificado de participação</h1>  
+                </div>
+                <div class="flex row center">
+                    <img src="\img/mascot/mascot-light.png" style="height: 150px;">
+                </div>
+            </div>
+            
+            <div class="box-5">
+                <h1 class="text-1" id="cert_title"></h1>
+                <div id="cert_content"></div>
+            </div>
 
-        <p>Created At</p>
-        <p id="cert_created_at"></p>
+            <div class="box-3">
+                <p class="text-4">A integridade deste certificado pode ser verificada digitalmente em:</p>
+                <a id="cert_link"></a>
+                <p class="text-4">ID:</p>
+                <p id="cert_id"></p> 
+            </div>
+            
+            <div class="box-3">
+                <p class="text-4">Data de criação</p>
+                <p class="format-date" id="cert_created_at"></p>
+                <p class="text-4">Data da última modificação</p>
+                <p class="format-date" id="cert_updated_at"></p>
+            </div>
 
-        <p>Updated At</p>
-        <p id="cert_updated_at"></p>
+        </div>
+        </div>
+        </div>
 
-        <p>Owner</p>
-        <p id="cert_owner"></p>
+        <!-- Download PDF -->
+        <div class="flex row center">
+        <div class="box-1">
+            
+            <div class="box-5">
+                <p class="text-4">Baixe seu certificado (PDF).</p>
+                <button id="cert_download" class="a-like" onclick="cert_download()">Download</button>
+            </div>
+            
+        </div>
+        </div>
 
-        <p>Event</p>
-        <p id="cert_is_event"></p>
-        <p id="cert_event_id"></p>
-        <a id="cert_event_link" href="">See event</a>
-  
+
+        <!-- Event cert -->
+        <div class="flex row center">
+        <div id="cert_evt" class="box-1" style="background-color: #8840b8; display: none;">
+
+            <div class="box-2">
+                <p class="text-4">Este é um certificado automático gerado por um evento.</p>
+                <a id="cert_event_link" href="">Ver evento</a>
+            </div>
+
+        </div>
+        </div>
+
     </div>
 
+    <!-- FOOTER -->
+    {{>common_footer}}
+
+</div>
+</div>
 </body>

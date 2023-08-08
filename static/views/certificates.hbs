@@ -1,27 +1,44 @@
 <head>
+    <title>Certificados</title>
     {{>common_head}}
 </head>
 
 <body>
+<div data-simplebar>
+<div id="main" class="flex col center">
 
-    <!-- Overlays -->
+    <!-- OVERLAYS -->
     {{>common_overlays}}
 
     <!-- NAV -->
     {{>common_nav}}
 
-    <div>
+    <!-- CONTENT -->
+    <div id="content">
+
+        <!-- Script -->
         <script src="\js/certificate/certificate_fetch_multiple.js"></script>
 
-        <h1>Your certificates</h1>
+        <!-- List -->
+        <div class="flex col center">
+            
+            <div class="box-1 flex col start">
+                <div id="cert_fetch_div" class="flex blocks"></div>
+            </div>
 
-        <button onclick="cert_fetch_next_page()">Next</button>
-        <p id="cert_fetch_page_display">1</p>
-        <button onclick="cert_fetch_previous_page()">Previous</button>
+            <div class="flex row center">
+                <button onclick="cert_fetch_previous_page()" style="width: 60px;"><</button>
+                <p id="cert_fetch_page_display" style="margin: 20px;">1</p>
+                <button onclick="cert_fetch_next_page()" style="width: 60px;">></button>
+            </div>
 
-        <div id="cert_fetch_div"></div>
-
+        </div>
 
     </div>
 
+    <!-- FOOTER -->
+    {{>common_footer}}
+
+</div>
+</div>
 </body>

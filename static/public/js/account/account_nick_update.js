@@ -11,6 +11,7 @@ $('document').ready(function () {
         if (!(nickRegex.test($('#acc_nickUp_field').val()))) {
             $('#acc_nickUp_btn').attr('disabled', true)
             $('#acc_nickUp_msg').text('Invalid nick!')
+            $('#acc_nickUp_msg').attr('class', 'box-4')
             return;
         }
 
@@ -19,8 +20,10 @@ $('document').ready(function () {
             if(data){
                 if(data.available == false){
                     $('#acc_nickUp_btn').attr('disabled', true)
+                    $('#acc_nickUp_msg').attr('class', 'box-4')
                 }else{
                     $('#acc_nickUp_btn').attr('disabled', false)
+                    $('#acc_nickUp_msg').attr('class', 'box-2')
                 }
             }
         })

@@ -1,10 +1,27 @@
-<div>
+<div style="margin-top: 80px;">
+    
     <script src="\js/account/account_nick_update.js"></script>
 
-    <h2>Update your nick</h2>
+    <h2 class="title-1 text-2">Altere seu apelido</h2>
 
-    <input id="acc_nickUp_field" type="text">
-    <button id="acc_nickUp_btn" onClick="acc_nickUp_fetch()">Update</button>
-    <p id="acc_nickUp_msg"></p>
+    <div class="box-1">
+
+        <div style="margin-top:60px; margin:20px;">
+            <li class="">De 3 a 15 caracteres</li>
+            <li class="">Sem espaços</li>
+            <li class="">A-Z, a-z, 0-9 e _</li>
+        </div>
+        
+        <div style="margin-top:60px; margin:20px;">
+            <input id="acc_nickUp_field" type="text">
+            <button id="acc_nickUp_btn" onClick="acc_nickUp_fetch()">Salvar</button>
+        </div>
+
+        <div class="flex row start" style="margin-top: 0px;">
+            <p class="" id="acc_nickUp_msg" style="display:none;"></p>
+        </div>
+
+    </div>
+    
 
 </div>

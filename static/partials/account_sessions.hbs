@@ -1,19 +1,40 @@
-<div>
+<div style="margin-top: 80px;">
+
     <script src="\js/account/account_sessions.js"></script>
 
-    <h2>Sessions</h2>
-    <h3>Your session</h3>
-    <p id="acc_session_current_machine"></p>
-    <p id="acc_session_current_os"></p>
-    <p id="acc_session_current_ip"></p>
+    <h2 class="title-1 text-2">Sessões</h2>
 
-    <h3>Other sessions</h3>
-    <button onclick="acc_session_next_page()">Next</button>
-    <p id="acc_session_page_display">1</p>
-    <button onclick="acc_session_previous_page()">Previous</button>
-    <div id="acc_session_other"></div>
+    <div class="box-1">
 
-    <h3>End all sessions</h3>
-    <button onclick="acc_session_delete_all()">End all sessions</button>
+        <h3 class="text-3">Atual</h3>
+
+        <div class="box-2">
+            <p class="text-4">Máquina</p>
+            <p id="acc_session_current_machine"></p>
+
+            <p class="text-4">OS</p>
+            <p id="acc_session_current_os"></p>
+
+            <p class="text-4">IP</p>
+            <p id="acc_session_current_ip"></p>
+        </div>
+
+        <h3 class="text-3" style="margin-bottom: 0px; margin-top:50px;">Outras</h3>
+
+        <div class="box-3">
+
+            <div id="acc_session_other" class="flex blocks"></div>
+
+            <div class="flex row center">
+                <button onclick="acc_session_previous_page()" style="width: 60px;"><</button>
+                <p id="acc_session_page_display" style="margin: 20px;">1</p>
+                <button onclick="acc_session_next_page()" style="width: 60px;">></button>
+            </div>
+
+        </div>
+        
+        <button onclick="acc_session_delete_all()" style="margin: 25px;">Encerrar todas as sessões</button>
+
+    </div>
 
 </div>

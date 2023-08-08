@@ -4,45 +4,58 @@
 </head>
 
 <body>
+<div data-simplebar>
+<div id="main" class="flex col center">
 
-    <!-- Overlays -->
+    <!-- OVERLAYS -->
     {{>common_overlays}}
 
     <!-- NAV -->
     {{>common_nav}}
 
-    <!-- MAIN -->
-    <div class="main ">
+    <!-- CONTENT -->
+    <div id="content">
 
+        <!-- Script -->
         <script src="\js/contact/contact_send.js"></script>
 
-        <h2>Contato</h2>
+        <!-- Form -->
+        <div class="flex row center">
+        <div class="box-1 flex col start">
 
-        <p>Tipo de contato</p>
-        <select id="contact_type">
-            <option value="suggestion">Sugestão</option>
-            <option value="complaint">Reclamação / Denúncia</option>
-            <option value="doubt">Dúvida</option>
-            <option value="verify">Pedido de verificação para membro BCC</option>
-            <option value="commercial">Comercial / Parcerias</option>
-            <option value="institutional">Institucional</option>
-            <option value="other">Outro</option>
-        </select>
+            <p class="text-4">Tipo de contato</p>
+            <select id="contact_type">
+                <option value="suggestion">Sugestão</option>
+                <option value="complaint">Reclamação / Denúncia</option>
+                <option value="doubt">Dúvida</option>
+                <option value="verify">Pedido de verificação para membro BCC</option>
+                <option value="commercial">Comercial / Parcerias</option>
+                <option value="institutional">Institucional</option>
+                <option value="other">Outro</option>
+            </select>
 
-        <p>Email de retorno (opcional)</p>
-        <input type="text" id="contact_email">
+            <p class="text-4">Email de retorno (opcional)</p>
+            <input type="text" id="contact_email">
 
-        <p>Mensagem</p>
-        <textarea id="contact_content"></textarea>
+            <p class="text-4">Mensagem</p>
+            <textarea id="contact_content"></textarea>
 
-        <button id="contact_send">Enviar</button>
-
-        <p id="contact_msg"></p>
-
+            <div class="flex row center" style="margin-top: 30px;">
+                <button id="contact_send" style="max-width: 400px; min-width: 200px;">Enviar</button> 
+            </div>
+            
+            <div class="flex row center" style="margin-top: 10px;">
+                <p class="" id="contact_msg" style="display:none;"></p>
+            </div>
+            
+        </div>
+        </div>
 
     </div>
 
     <!-- FOOTER -->
     {{>common_footer}}
 
+</div>
+</div>
 </body>

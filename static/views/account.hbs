@@ -4,27 +4,35 @@
 </head>
 
 <body>
+<div data-simplebar>
+<div id="main" class="flex col center">
 
-    <!-- Overlays -->
+    <!-- OVERLAYS -->
     {{>common_overlays}}
 
     <!-- NAV -->
     {{>common_nav}}
-    
-    <!--Buttons-->
-    <a href="/">home</a>
-    <a href="/logout">logout</a>
 
-    <!--Info-->
-    {{>account_info}}
+    <!-- CONTENT -->
+    <div id="content">
 
-    <!--Settings-->
-    {{>account_settings}}
+        <!--Info-->
+        {{>account_info}}
 
-    <!--Update nick-->
-    {{>account_nick_update}}
+        <!--Update nick-->
+        {{>account_nick_update}}
 
-    <!--Sessions-->
-    {{>account_sessions}}
+        <!--Settings-->
+        {{>account_settings}}
 
+        <!--Sessions-->
+        {{>account_sessions}}
+
+    </div>
+
+    <!-- FOOTER -->
+    {{>common_footer}}
+
+</div>
+</div>
 </body>

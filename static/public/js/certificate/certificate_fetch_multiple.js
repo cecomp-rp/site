@@ -35,12 +35,29 @@ function cert_fetch_list(page){
             //For each certificate
             data.forEach((certificate) => {
 
-                common_append("#cert_fetch_div", "cert_certificate.html", certificate);
+                common_append("#cert_fetch_div", "cert_certificate.html", certificate).then(() => {
 
+                    //Is event certificate?
+                    if(certificate.is_event_certificate == true){
+                        cert_mark_event_cert(certificate._id)
+                    }
+
+
+                });
+
+                
             });
 
         }
 
     });
+
+}
+
+//Test events for event certificates
+function cert_mark_event_cert(id){
+
+    //Make evt_cert div visible
+    $("#" + id + "_evt_cert").show();
 
 }

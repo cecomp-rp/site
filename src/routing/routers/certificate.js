@@ -114,7 +114,7 @@ router.get("/api/certificates/by_id/:id", async (req, res) => {
 
     const id = req.params.id
 
-    var certificate = await Certificate.findOne({_id: req.params.id})
+    var certificate = await Certificate.findOne({_id: id})
     .catch((error) => {})
 
     if(!certificate){
@@ -127,12 +127,12 @@ router.get("/api/certificates/by_id/:id", async (req, res) => {
 
     //Update if certificate is event certificate
     if(certificate.is_event_certificate){
-        certificate = await updateEventCertificate(certificate.owner_id, certificate.event_id)  
+        certificate = await updateEventCertificate(certificate.owner_id, certificate.event_id) 
     }
 
     //Add fields for certificate
     certificate.content = addFields(certificate.content, {user: req.user});
-            
+
     const content = filterObject(
         certificate, //object
         ['_id', 'title', 'created_at', 'event_name', 'updated_at', 'description', 'owner_id', 'is_event_certificate', 'event_id', 'content'], //allowed atributes

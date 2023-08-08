@@ -1,9 +1,15 @@
-<div id="${_id}">
-    <p>ID: ${_id}</p>
-    <p>Owner ID: ${owner_id}</p>
-    <p>Event ID: ${event_id}</p>
-    <p>Is Event Certificate: ${is_event_certificate}</p>
-    <p>Title: ${title}</p>
+<div id="${_id}" class="box-2 w-800 jump a-like" onclick="common_loading_open(); location.href = '/certificates/${_id}';">
+    
+    <div>
+        <p class="text-3" style="margin-bottom: 0px; margin-top: 10px;">${title}</p>
+        <a href="/certificates/${_id}">Ver certificado</a>
+    </div>
 
-    <a href="/certificates/${_id}">See page...</a>
+    <p class="format-date text-4">${created_at}</p>
+
+    <!-- Event cert-->
+    <div id="${_id}_evt_cert" class="box-6" style="display: none;">
+        <p>Certificado de evento.</p>
+    </div>
+
 </div>

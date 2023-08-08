@@ -40,11 +40,46 @@
 }
 
 .box-2 { /*Nested in base*/
-    width: 90vw;
     border-radius: 20px;
 
     margin: 20px;
     padding: 20px;
 
     background-color: #8840b8;
+}
+
+.box-3 { /*Nested in base*/
+    border-radius: 20px;
+
+    margin: 20px;
+    padding: 20px;
+
+    background-color: #1d1d1d;
+}
+
+.box-4 { /*Nested in base*/
+    border-radius: 20px;
+
+    margin: 20px;
+    padding: 20px;
+
+    background-color: #ff6e6e;
+}
+
+.box-5 { /*Nested in base*/
+    border-radius: 20px;
+
+    margin: 20px;
+    padding: 20px;
+
+    background-color: #2f3333;
+}
+
+.box-6 { /*Nested in base*/
+    border-radius: 20px;
+
+    margin: 20px;
+    padding: 20px;
+
+    background-color: #492a7a;
 }
