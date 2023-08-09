@@ -15,7 +15,8 @@ function poll_create_add_option(){
 
     common_append('#poll_create_options', 'con_poll_opt.html', {uniq}).then(() => {
 
-        var new_editor = common_quill_createEditor(`#${uniq}_editor'`);
+        var new_editor = common_quill_createEditor('#' + uniq +'_editor')
+        
         poll_create_editors.push({
             id:     uniq,
             editor: new_editor

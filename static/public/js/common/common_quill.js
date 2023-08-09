@@ -22,11 +22,12 @@ function common_quill_createEditor(div){
 
     $(div).append(`
     <div id=${uniq} class='editor'></div>
-    `);
+    `)
 
     var editor = new Quill(`#${uniq}`, options);
-
+    
     return editor;
+  
 }
 
 function common_quill_getContent(editor){

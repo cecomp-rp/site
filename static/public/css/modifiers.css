@@ -135,3 +135,8 @@
     transform: scale(1.08);
     transition: 0.2s;
 }
+
+/*Break words*/
+.break-word {
+    word-break: break-word;
+}

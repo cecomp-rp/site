@@ -70,7 +70,7 @@ router.get("/api/polls/by_id/:id", logged(['bcc_member_functions']), async (req,
 
     const id = req.params.id
 
-    const poll = await Poll.findOne({_id: id})
+    var poll = await Poll.findOne({_id: id})
     .lean()
     .exec()
     .catch((error) => {})
@@ -84,10 +84,11 @@ router.get("/api/polls/by_id/:id", logged(['bcc_member_functions']), async (req,
     }
 
     //Get authors nicknames
-    const user = User.findOne({_id: poll.author_id})
+    const user = await User.findOne({_id: poll.author_id})
     .catch((error) => {})
     if(user){
         poll.author_id = user.nick
+
     }else{
         poll.author_id = "Unknown"
     }

@@ -11,32 +11,34 @@ $('document').ready(function () {
             $('#poll_author').text(data.author_id)
             $('#poll_end_date').text(data.endDate)
             $('#poll_start_date').text(data.startDate)
-            $('#poll_createdAt').text(data.createdAt)
+            $('#poll_created_at').text(data.created_at)
 
             data.options.forEach((option) => {
 
-                common_append('#poll_options', 'poll_opt.html', {poll: data, option})
+                common_append('#poll_options', 'poll_opt.html', {poll: data, option}).then(() => {
+
+                     //User already voted?
+                    if(data.alreadyVoted == true){
+                        $('.' + data._id + '_button').attr("disabled", true);
+                        $('.' + data._id + '_button').text("Already voted");
+                    }
+
+                    //Poll out of date?
+                    if(data.endDate < Date.now()){
+                        $('.' + data._id + '_button').attr("disabled", true);
+                        $('.' + data._id + '_button').text("Poll out of date");
+                    }
+
+                    //Poll not open yet?
+                    if(data.startDate > Date.now()){
+                        $('.' + data._id + '_button').attr("disabled", true);
+                        $('.' + data._id + '_button').text("Poll not open yet");
+                    }
+                
+                })
 
             })
 
-            //User already voted?
-            if(data.alreadyVoted == true){
-                $('.' + data._id + '_button').attr("disabled", true);
-                $('.' + data._id + '_button').text("Already voted");
-            }
-
-            //Poll out of date?
-            if(data.endDate < Date.now()){
-                $('.' + data._id + '_button').attr("disabled", true);
-                $('.' + data._id + '_button').text("Poll out of date");
-            }
-
-            //Poll not open yet?
-            if(data.startDate > Date.now()){
-                $('.' + data._id + '_button').attr("disabled", true);
-                $('.' + data._id + '_button').text("Poll not open yet");
-            }
-    
         }  
     
     })

@@ -1,11 +1,43 @@
-<div id="${_id}">
-    <p>Title: ${title}</p>
-    <p>Description: ${description}</p>
-    <p>Author: ${author_id}</p>
-    <p>Start Date: ${startDate}</p>
-    <p>End Date: ${endDate}</p>
-    <p>Created At: ${createdAt}</p>
+<div id="${_id}" class="box-3" style="border: 2px solid rgb(255, 255, 255); margin: 50px;">
+    <div class="flex row center">
+        <div class="w-max flex row start">
+        <p class="title-1 text-2" style="word-break: break-all; ">${title}</p>
+        </div>
+
+        <div class="w-max flex row start">
+
+            <div class="flex col" style="margin-top: 20px;">
+                <p class="title-1 text-4" style="margin:0">Autor</p>
+                <p class="title-1 " style="margin:0">${author_id}</p>  
+            </div>
+
+            <div class="flex col" style="margin-top: 20px;">
+                <p class="title-1 text-4" style="margin:0">Criado em </p>
+                <p class="title-1 format-date" style="margin:0">${created_at}</p>
+            </div>
+            
+            <div class="flex col" style="margin-top: 20px;">
+                <p class="title-1 text-4" style="margin:0">Início</p>
+                <p class="title-1 format-date" style="margin:0">${startDate}</p>
+            </div>
+
+            <div class="flex col" style="margin-top: 20px;">
+                <p class="title-1 text-4" style="margin:0">Fim</p>
+                <p class="title-1 format-date" style="margin:0">${endDate}</p>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <div class="flex row box-3">
+        <p class="text-4 break-word" style="margin-left: 25px; margin-top: 0;">${description}</p>
+    </div>
+  
     <div id="${_id}_poll_options"></div>
 
-    <a href="/polls/${_id}">See page...</a>
+    <div class="flex row end box-3">
+        <a href="/polls/${_id}" >Ver página</a>
+    </div>
+
 </div>

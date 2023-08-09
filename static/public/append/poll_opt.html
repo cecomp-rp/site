@@ -1,5 +1,11 @@
-<div id="${option._id}">
+<div id="${option._id}" class="box-5" style="border: 1px solid white;">
     <div>${option.content}</div>
-    <p id="${option._id}_counter">${option.numberOfVotes}</p>
-    <button class="${poll._id}_button" onclick="poll_vote('${option._id}','${poll._id}')">Vote</button>
+
+    <div class="flex row">
+        <div class="flex col center">
+        <button class="${poll._id}_button" style="height: 60px;" onclick="poll_vote('${option._id}','${poll._id}')">Vote</button>
+        </div>
+
+        <p id="${option._id}_counter" class="text-4" style="margin-left: 20px;">${option.numberOfVotes}</p>
+    </div>
 </div>
