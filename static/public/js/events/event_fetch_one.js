@@ -8,14 +8,16 @@ $('document').ready(function () {
 
             $("#event_title").text(data.title);
             $("#event_name").text(data.name);
-            $("#event_description").text(data.description);
+            $("#event_description").html(data.description);
             $("#event_startDate").text(data.startDate);
             $("#event_endDate").text(data.endDate);
-    
+
             //Created at and updated at
             $("#event_createdAt").text(data.created_at)
             $("#event_updatedAt").text(data.updated_at)
     
+            common_format_dates();
+
             //Activities
             data.activities.forEach((activity) => {
                 

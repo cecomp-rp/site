@@ -1,18 +1,24 @@
-<div id="sub_prefereces" style="display: none;">
+<div id="sub_prefereces" style="display: none;" class="flex col box-2">
 
     <script src="\js/subscriptions/sub_preferences.js"></script>
 
-    <h2>Subscription preferences</h2>
+    <p class="text-4 title-2">Preferências</p>
 
-    <p>Enable email notifications</p>
-    <input id="sub_enable_email_notifications" type="checkbox"></input>
+    <div class="box-6">
+        <p class="text-4">Habilitar notificações por email para esse evento</p>
+        <input id="sub_enable_email_notifications" type="checkbox"></input>
 
-    <p>Enable email sharing</p>
-    <input id="sub_enable_email_sharing" type="checkbox"></input>
-    
-    <p></p>
-    <button id="sub_preferences_update">Update</button>
+        <p class="text-4">Habilitar o compartilhamento do seu email com os organizadores</p>
+        <input id="sub_enable_email_sharing" type="checkbox"></input>
+        
+    </div>
 
-    <p id="sub_preferences_message"></p>
+    <div class="flex row center" style="margin-top:50px;">
+        <button class="button-2" id="sub_preferences_update" style="width: 200px;">Salvar</button>
+    </div>
+
+    <div class="flex row center">
+        <p id="sub_preferences_message"></p>
+    </div>
 
 </div>

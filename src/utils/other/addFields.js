@@ -92,13 +92,12 @@ function addFields(body, data){
             
             append = append + 
             `
-                <div>
-                    <h3>${activity.title}</h3>
+                <div class="title-1" style="margin:30px">
+                    <h3 class="text-3" style="margin:0">${activity.title}</h3>
                     <p>${activity.description}</p>
-                    <p>${activity.startDate}</p>
-                    <p>${activity.duration}</p>
+                    <p>Realizada em: <label class="format-date">${activity.startDate}</label></p>
+                    <p>Duração: ${activity.duration} horas</p>
                 </div>
-                <br>
             `;
 
         })

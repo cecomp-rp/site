@@ -1,13 +1,15 @@
-<div id="sub_toggle">
+<div id="sub_toggle" class="flex col center">
 
     <script src="\js/subscriptions/sub_toggle.js"></script>
 
-    <h2>Subscription</h2>
-
-    <a id="sub_subscribe" href="">Subscribe</a>
-    <a id="sub_unsubscribe" href="">Unsubscribe</a>
-
-    <p id="sub_warning"></p>
-
+    <div class="flex row center" >
+        <a id="sub_subscribe" href="" style="display: none;"><button>Inscrever-se</button></a>
+        <a id="sub_unsubscribe" href="" style="display: none;"><button>Desinscrever-se</button></a> 
+    </div>
+    
+    <div class="flex row center" style="margin-bottom: 35px;">
+        <p id="sub_warning" class="text-4 box-5" style="display: none;"></p>  
+    </div>
+    
 </div>
 

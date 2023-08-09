@@ -1,30 +1,56 @@
-<div id="event_div">
-
-        <h2>Event data</h2>
+<div id="event_div" class="flex col center">
 
         <script src="\js/events/event_fetch_one.js"></script>
 
-        <p>Title:</p>
-        <p id="event_title"></p>
+        <div class="flex col center">
+                <div class="flex row center" style="height: 100%;">
+                <h1 id="event_title" class="text-1 " style="margin: 0;"></h1>        
+                </div>
+                
+                <div class="flex row center">
+                <div class="flex col end">
+                <p class="text-4" style="font-size: 30pt; margin: 0px; margin-bottom:30px;">(<label id="event_name"></label>)</p>     
+                </div>   
+                </div>
+        </div>
 
-        <p>Name:</p>
-        <p id="event_name"></p>
+        <div class="flex col center">
+                {{>subscription_toggle}}
+        </div>
+        
+        <div class="flex row title-2">
+                <div class="flex col">
+                <p class="text-4" style="margin:0">Início</p>
+                <p id="event_startDate" class="format-date"></p>       
+                </div>
+                
+                <div class="flex col" style="margin-left:50px;">
+                <p class="text-4" style="margin:0">Fim</p>
+                <p id="event_endDate" class="format-date"></p>           
+                </div>
+        </div>
 
-        <p>Description:</p>
-        <p id="event_description"></p>
-            
-        <p>Start Date:</p>
-        <p id="event_startDate"></p>
+        <div class="flex row title-2">
+                <div class="flex col">
+                <p class="text-4 " style="margin:0">Descrição</p>
+                <p id="event_description" class=""></p>  
+                </div>
+        </div>
 
-        <p>End Date:</p>
-        <p id="event_endDate"></p>
+        <div class="flex col box-5">
+                <p class="text-4 title-2">Atividades disponíveis</p>
+                <div id="event_activities" class="flex blocks"></div>
+        </div>
 
-        <p>Created At:</p>
-        <p id="event_createdAt"></p>
+        {{>subscription_your_activities}}
 
-        <p>Updated At:</p>
-        <p id="event_updatedAt"></p>
-
-        <div id="event_activities"></div>
+        {{>subscription_preferences}}
+        
+        <div class="box-5 title-2">
+                <p class="text-4">Data de criação</p>
+                <p id="event_createdAt" class="format-date-short"></p>
+                <p class="text-4">Data da última atualização</p>
+                <p id="event_updatedAt" class="format-date-short"></p>
+        </div>
 
 </div>

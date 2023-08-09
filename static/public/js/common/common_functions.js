@@ -130,6 +130,7 @@ function common_append(where_to_append, file_to_append, attr_to_add = {}){
     return $.get("/append/" + file_to_append, function(data) {
 
         data = common_replaceAttr(data, attr_to_add);
+        data = common_replaceRemainingAttr(data);
 
         //If $(where_to_append) is an id, append to the element with that id
         if(where_to_append[0] == '#'){
@@ -191,14 +192,21 @@ function common_replaceAttr(html, attr_to_add){
             });
 
             html = common_replaceAttr(mod_html, attr_to_add[attr]);
+    
         }
        
     }
 
-    //remove all ${anything} that are left
-    html = html.replace(regex, '-');
-
     return html;
+}
+
+function common_replaceRemainingAttr(html){
+
+    const regex = /\${(.*?)}/g; //Matches ${anything}
+    var mod_html = html.replace(regex, '-')
+
+    return mod_html;
+
 }
 
 function common_isLogged(){
