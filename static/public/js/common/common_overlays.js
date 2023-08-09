@@ -121,8 +121,14 @@ $('document').ready(function () {
         common_loading_open();
 
         setTimeout(function () {    
+            
             //redirect
+            if (href == undefined) {
+                common_loading_close();
+                return;
+            }
             window.location.href = href;
+
         }, 200);
      
     });

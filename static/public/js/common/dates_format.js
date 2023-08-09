@@ -1,7 +1,7 @@
 $('document').ready(function() {
 
     common_format_dates();
-  
+
 });
 
 function common_format_dates(){

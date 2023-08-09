@@ -37,32 +37,64 @@ function cert_download(){
     
     var cert = document.getElementById('certificate');
 
+    var scale = 2;
+    var compress_quality = 0.8;
+
     //Get certificate image (dom-to-image)
-    domtoimage.toPng(cert)
-    .then(function (dataUrl) {
+    domtoimage.toBlob(cert, 
+        {
+            width: cert.clientWidth * scale,
+            height: cert.clientHeight * scale,
+            style: {
+                transform: 'scale('+scale+')',
+                transformOrigin: 'top left'
+            }
+        }
 
-        //Create image
-        var img = new Image();
-        img.src = dataUrl;
+    ).then(function (blob) {
 
-        //Get div size
-        var img_width = cert.offsetWidth;
-        var img_height = cert.offsetHeight;
+        //Set orientation based on width and height
+        var p_or_l;
+        if(cert.clientWidth > cert.clientHeight){
+            p_or_l = 'l';
+        }else{
+            p_or_l = 'p';
+        }
 
-        //Create pdf (proportional to content size)
-        var pdf = new jsPDF('p', 'pt', [img_width, img_height]);
+        //Create pdf
+        var pdf = new jsPDF(p_or_l, 'px', [cert.clientWidth, cert.clientHeight]);
+        var width = pdf.internal.pageSize.getWidth();
+        var height = pdf.internal.pageSize.getHeight();
 
-        //Add image to pdf
-        pdf.addImage(img, 'PNG', 0, 0, img_width, img_height);
+        //Compress with Compressor.js
+        new Compressor(blob, {
+            quality: compress_quality,
 
-        //Download pdf
-        pdf.save("Certificado.pdf");
+            success(new_blob) {
+                
+                //blob to base64
+                var reader = new FileReader();
+                reader.readAsDataURL(new_blob);
 
-        //Close loading
-        common_loading_close()
+                reader.onloadend = function() {
+                    base64data = reader.result;
 
-    })
+                    //Create image
+                    var img = new Image();
+                    img.src = base64data;
 
+                    //Add image
+                    pdf.addImage(img, 'PNG', 0, 0, width, height, undefined, 'FAST');
 
+                    //Download pdf
+                    pdf.save("certificate.pdf");
+                    
+                }
+
+            }
+
+        });
+
+    });
 
 }
