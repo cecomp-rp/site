@@ -195,8 +195,10 @@ function common_replaceAttr(html, attr_to_add){
        
     }
 
+    //remove all ${anything} that are left
+    html = html.replace(regex, '-');
+
     return html;
-   
 }
 
 function common_isLogged(){

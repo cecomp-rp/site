@@ -130,3 +130,9 @@ div.ql-toolbar.ql-snow {
 
 
 }
+
+/*A class*/
+
+.a:hover {
+    cursor: pointer;
+}

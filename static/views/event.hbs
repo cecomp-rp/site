@@ -3,17 +3,28 @@
 </head>
 
 <body>
+<div data-simplebar>
+<div id="main" class="flex col center">
 
-    <!-- Overlays -->
+    <!-- OVERLAYS -->
     {{>common_overlays}}
 
     <!-- NAV -->
     {{>common_nav}}
 
-    <h1>Event</h1>
-    {{>events_fetch_one}}
-    {{>subscription_toggle}}
-    {{>subscription_preferences}}
-    {{>subscription_your_activities}}
+    <!-- CONTENT -->
+    <div id="content">
 
+        {{>events_fetch_one}}
+        {{>subscription_toggle}}
+        {{>subscription_preferences}}
+        {{>subscription_your_activities}}
+
+    </div>
+
+    <!-- FOOTER -->
+    {{>common_footer}}
+
+</div>
+</div>
 </body>

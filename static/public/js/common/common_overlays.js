@@ -81,7 +81,9 @@ function common_confirm_dismiss() {
 
 //Loading
 
-window.addEventListener( "pageshow", function ( event ) { //On page show, close loading
+var is_loading = true;
+
+window.addEventListener("pageshow", function ( event ) { //On page show, close loading
     setTimeout(function () { 
         common_loading_close();
     }, 200);
@@ -90,7 +92,7 @@ window.addEventListener( "pageshow", function ( event ) { //On page show, close 
 $('document').ready(function () {
 
     //On any a click
-    $("a").click(function (event) {
+    $("body").on('click', 'a', function (event) {
 
         //prevent default
         event.preventDefault();
@@ -107,17 +109,30 @@ $('document').ready(function () {
 
     });
 
-    //On any button with class "a-like" click
-    $(".a-like").on('click', function (event) {
+    //On any button with class "a" click
+    $("body").on('click', '.a', function (event) {
+
+        //prevent default
+        event.preventDefault();
+
+        //find href in button
+        var href = $(this).attr("href");
 
         common_loading_open();
 
+        setTimeout(function () {    
+            //redirect
+            window.location.href = href;
+        }, 200);
+     
     });
-
 
 });
 
 function common_loading_open() {
+    if (is_loading) {return;}
+    is_loading = true;
+    
     $("#loading").show();
 
     anime({
@@ -129,6 +144,9 @@ function common_loading_open() {
 }
 
 function common_loading_close() {
+    if (!is_loading) {return;}
+    is_loading = false;
+
     anime({
         targets: '#loading',
         opacity: 0,
@@ -141,6 +159,8 @@ function common_loading_close() {
 }
 
 //Nav overlay
+
+var is_nav_overlay_open = false;
 
 $('#nav-overlay').ready(function () {
 
@@ -174,6 +194,9 @@ $('#nav-overlay').ready(function () {
 });
 
 function common_nav_overlay_open() {
+    if (is_nav_overlay_open) {return;}
+    is_nav_overlay_open = true;
+    
     $("#nav-overlay").show();
 
     anime({
@@ -186,6 +209,9 @@ function common_nav_overlay_open() {
 }
 
 function common_nav_overlay_close() {
+    if (!is_nav_overlay_open) {return;}
+    is_nav_overlay_open = false;
+    
     anime({
         targets: '#nav-overlay',
         opacity: 0,
