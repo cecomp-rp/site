@@ -1,8 +1,8 @@
-<div id=${element._id}>
-    <p id="transparency_list_title">Title: ${element.title}</p>
-    <p id="transparency_list_description">Description: ${element.description}</p>
-    <p id="transparency_list_value">Value: ${element.value}</p>
-    <p id="transparency_list_dateOfTransaction">Date Of Transaction: ${element.dateOfTransaction}</p>
-    <p id="transparency_list_dateOfTransaction">Date Of Addition: ${element.createdAt}</p>
-    <p id="transparency_list_id">ID: ${element._id}</p>
-</div>
+<tr id=${element._id} class="transparency-item">
+    <td data-simplebar><p id="transparency_list_title">${title}</p></td>
+    <td data-simplebar><p id="transparency_list_description">${description}</p></td>
+    <td data-simplebar><p id="transparency_list_value">${value}</p></td>
+    <td data-simplebar><p id="transparency_list_dateOfTransaction" class="format-date">${dateOfTransaction}</p></td>
+    <td data-simplebar><p id="transparency_list_dateOfTransaction" class="format-date">${created_at}</p></td>
+    <td data-simplebar><p id="transparency_list_id">${_id}</p></td>
+</tr>

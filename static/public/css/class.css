@@ -39,6 +39,13 @@ div.ql-toolbar.ql-snow {
     z-index: 0;
 }
 
+/*SIMPLE BAR INSIDE TABLES*/
+td .simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
+    background: #8840b8;
+    opacity: 1;
+}
+ 
+
 /*STRUCT DIVS*/
 .main {
     display: flex;
@@ -135,4 +142,10 @@ div.ql-toolbar.ql-snow {
 
 .a:hover {
     cursor: pointer;
+}
+
+/*Transparency*/
+
+.transparency-item {
+   width: 100%;
 }

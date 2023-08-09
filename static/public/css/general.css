@@ -45,6 +45,23 @@ p {
     font-size: 14pt;
 }
 
+table {
+    table-layout: fixed;
+    text-align: center;
+
+    border: 1px solid;
+    border-collapse: collapse;
+
+    width: 100%;
+}
+
+td{
+    border: 1px solid;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
 input {
     font-family: 'Open Sans', sans-serif;
     font-size: 12pt;

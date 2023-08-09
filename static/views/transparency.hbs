@@ -1,18 +1,27 @@
 <head>
+    <title>Transparência</title>
     {{>common_head}}
 </head>
 
 <body>
+<div data-simplebar>
+<div id="main" class="flex col center">
 
-    <!-- Overlays -->
+    <!-- OVERLAYS -->
     {{>common_overlays}}
 
     <!-- NAV -->
     {{>common_nav}}
 
-    <!-- Transparency Summary-->
-    <h1>Transparency</h1>
-    {{>transparency_summary}}
-    {{>transparency_list}}
+    <!-- CONTENT -->
+    <div id="content">
+        {{>transparency_summary}}
+        {{>transparency_list}}
+    </div>
 
+    <!-- FOOTER -->
+    {{>common_footer}}
+
+</div>
+</div>
 </body>
