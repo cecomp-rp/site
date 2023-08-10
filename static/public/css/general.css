@@ -13,6 +13,9 @@ body {
     margin: 0;
 
     height: 100vh;
+
+    word-break: break-word;
+    word-wrap: break-word;
 }
 
 div {

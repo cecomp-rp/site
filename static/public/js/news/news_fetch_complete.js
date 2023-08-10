@@ -9,12 +9,13 @@ $('document').ready(function () {
             $("#news_title").text(data.title)
             $("#news_description").text(data.description)
             
-            $("#news_content").append(data.content)
+            $("#news_content").html(data.content)
 
             $("#news_create_date").text(data.created_at)
             $("#news_update_date").text(data.updated_at)
             $("#news_author").text(data.author_id)
         
+            common_format_dates();
         }
 
     })

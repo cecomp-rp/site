@@ -1,14 +1,11 @@
 <head>
-    <title>Welcome</title>
+    <title>Boas-vindas</title>
     {{>common_head}}
 </head>
 
 <body>
 <div data-simplebar>
 <div id="main" class="flex col center">
-
-    <!-- FRONT JS -->
-    <script src="\js/index/front.js"></script>
 
     <!-- OVERLAYS -->
     {{>common_overlays}}
@@ -19,82 +16,82 @@
     <!-- CONTENT -->
     <div id="content">
 
-        <p class="title-1 text-1">My name is lucas, i'm a web dev</p> 
-        <p class="title-2 text-2">My name is lucas, i'm a web dev</p> 
-        <p class="title-3 text-3">My name is lucas, i'm a web dev</p> 
-        <p class="title-4 text-4">My name is lucas, i'm a web dev</p> 
+        <!-- Header -->
+        <div class="flex col center">
+        <div class="box-1 blocks flex" style="background-color: rgba(0,0,0,0)">
 
-        <div class="flex row center">
-            <div class="box-1 flex row start">
-                <p class="text-2">My name is lucas, i'm a web dev</p> 
+            <div class="box-3" style="width: 1000px;">
+                <h1 class="title-1 text-1">CEComp</h1> 
+                <h2 class="title-2 text-4" style="font-size: 30pt;">Centro Estudantil da Computação</h2> 
+                <h2 class="title-2 text-4">USP Ribeirão Preto</h2> 
+
+                <a href="/about" class="title-2">Sobre nós</a>
             </div>
+
+            <div class="flex col center">
+            <div class="flex row center">
+
+                <div class="flex col center" style="width: 240px; height: 240px;">
+                <img src="\img/mascot/mascot-light.png" style="width: auto; height: auto;">
+                </div>
+
+            </div>     
+            </div>
+
+        </div>
         </div>
 
-        <p class="title-1 text-1">Hello</p> 
-        <p class="title-2 text-2">My name is lucas, i'm a web dev</p> 
-        <p class="title-3 text-3">My name is lucas, i'm a web dev</p> 
-        <p class="title-4 text-4">My name is lucas, i'm a web dev</p> 
-
+        <!-- Redes socias -->
+        {{>index_news_list}}
+        
+        <!-- Redes socias -->
         <div class="flex row center">
-            <div class="box-1 flex blocks">
+        <div class="flex col center box-1 ">  
 
-                <div class="box-2 w-400 h-400">
+            <div class="flex row center">
+                <h2 class="text-2">Redes sociais</h2>    
+            </div>
+
+
+            <div class="flex blocks">
+                
+                <div class="box-2 w-200 h-200 a jump" > 
                     <p class="text-3">My name is lucas, i'm a web dev</p>
                 </div>
 
-                <div class="box-2 w-400 h-400">
-                    <p class="text-3">My name is lucas, i'm a web dev</p>
-                </div>
-
-                <div class="box-2 w-400 h-400">
-                    <p class="text-3">My name is lucas, i'm a web dev</p>
-                </div>
-
-                <div class="box-2 w-400 h-400">
-                    <p class="text-3">My name is lucas, i'm a web dev</p>
-                </div>
-
-                <div class="box-2 w-400 h-400">
-                    <p class="text-3">My name is lucas, i'm a web dev</p>
-                </div>
-
-                <div class="box-2 w-400 h-400">
-                    <p class="text-3">My name is lucas, i'm a web dev</p>
-                </div>
-
-                <div class="box-2 w-400 h-400">
-                    <p class="text-3">My name is lucas, i'm a web dev</p>
-                </div>
-
-                <div class="box-2 w-400 h-400">
-                    <p class="text-3">My name is lucas, i'm a web dev</p>
-                </div>
-
-                <div class="box-2 w-400 h-400">
-                    <p class="text-3">My name is lucas, i'm a web dev</p>
-                </div>
-
-                <div class="box-2 w-400 h-400">
+                <div class="box-2 w-200 h-200">
                     <p class="text-3">My name is lucas, i'm a web dev</p>
                 </div>
 
             </div>
+
+        </div>  
         </div>
 
-        <p class="title-1 text-1">Hello</p> 
-        <p class="title-2 text-2">My name is lucas, i'm a web dev</p> 
-        <p class="title-3 text-3">My name is lucas, i'm a web dev</p> 
-        <p class="title-4 text-4">My name is lucas, i'm a web dev</p> 
+        <!-- Serviços -->
+        <div class="flex row center">
+        <div class="flex col center box-1 ">  
 
-        <p class="title-1 text-1">Hello</p> 
-        <p class="title-2 text-2">My name is lucas, i'm a web dev</p> 
-        <p class="title-3 text-3">My name is lucas, i'm a web dev</p> 
-        <p class="title-4 text-4">My name is lucas, i'm a web dev</p> 
+            <div class="flex row center">
+                <h2 class="text-2">Serviços</h2>    
+            </div>
 
-        <p class="title-1 text-1">Hello</p> 
-        <p class="title-2 text-2">My name is lucas, i'm a web dev</p> 
-        <p class="title-3 text-3">My name is lucas, i'm a web dev</p> 
-        <p class="title-4 text-4">My name is lucas, i'm a web dev</p> 
+
+            <div class="flex blocks">
+                
+                <div class="box-2 w-200 h-200">
+                    <p class="text-3">My name is lucas, i'm a web dev</p>
+                </div>
+
+                <div class="box-2 w-200 h-200">
+                    <p class="text-3">My name is lucas, i'm a web dev</p>
+                </div>
+
+            </div>
+
+        </div>  
+        </div>
+
 
     </div>
             

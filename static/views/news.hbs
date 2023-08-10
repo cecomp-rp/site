@@ -3,26 +3,57 @@
 </head>
 
 <body>
+<div data-simplebar>
+<div id="main" class="flex col center">
 
-    <!-- Overlays -->
+    <!-- OVERLAYS -->
     {{>common_overlays}}
 
     <!-- NAV -->
     {{>common_nav}}
 
-    <div>
+    <!-- CONTENT -->
+    <div id="content" class="flex col">
+
         <script src="\js/news/news_fetch_complete.js"></script>
 
-        <h1 id="news_title"></h1>
-        
-        <h2 id="news_description"></h2>
-        <div id="news_content"></div>
+        <h1 id="news_title" class="title-1 text-1"></h1>
+        <h2 id="news_description" class="title-1 text-2"></h2>
 
-        <p id="news_create_date"></p>
-        <p id="news_update_date"></p>
-        <p id="news_author"></p>
+        <div class="flex row center">
+        <div class="box-1 flex" style="background-color: rgba(0,0,0,0)">
+           <div id="news_content"></div> 
+        </div>
+        </div>
+    
+        <div class="flex col" style="margin-top: 50px;">
+        <div class="flex row title-1">
+
+            <div class="flex col" style="margin-left:0px; margin-right: 25px;">
+            <p class="text-4" style="margin:0">Autor</p>
+            <p id="news_author" style="margin-bottom:5px;"></p>           
+            </div>
+
+            <div class="flex col" style="margin-left:25px; margin-right: 25px;">
+            <p class="text-4" style="margin:0">Data de publicação</p>
+            <p id="news_create_date" class="format-date" style="margin-bottom:5px;"></p>       
+            </div>
+            
+            <div class="flex col" style="margin-left:25px; margin-right: 25px;">
+            <p class="text-4" style="margin:0">Última edição</p>
+            <p id="news_update_date" class="format-date" style="margin-bottom:5px;"></p>           
+            </div>
+
+        </div>
+        </div>
+
     </div>
 
+    <!-- FOOTER -->
+    {{>common_footer}}
+
+</div>
+</div>
 </body>
 
 

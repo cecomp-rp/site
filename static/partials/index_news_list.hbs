@@ -1,13 +1,27 @@
-<div>
+<h2 class="text-2 title-2" style="margin-top: 100px;">Notícias</h2>    
+
+<div class="flex row center">
+<div class="flex col center box-1 ">  
+
     <script src="js/index/news_list.js"></script>
     
-    <h2>News</h2>
+    <div data-simplebar id="news_list_wrap" class="box-2" style="max-height: 800px; background-color: rgba(0,0,0,0)">
+    <div id="news_list_div"></div>
+    </div>
 
-    <button onclick="news_list_next_page()">Next</button>
-    <p id="news_list_page_display">1</p>
-    <button onclick="news_list_previous_page()">Previous</button>
-
-    <div id="news_list_div">
+    <div class="flex row center" >
+        <button onclick="news_list_previous_page()" style="width: 60px;"><</button>
+        <p id="news_list_page_display" style="margin: 20px;">1</p>
+        <button onclick="news_list_next_page()" style="width: 60px;">></button>
     </div>
 
 </div>
+</div>
+
+<style>
+    #news_list_wrap .simplebar-scrollbar:before {
+        background-color: #8840b87d;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+</style>

@@ -1,9 +1,31 @@
-<div id=${_id}>
-    <p class="news_list_title">Title: ${title}</p>
-    <p class="news_list_description">Description: ${description}</p>
-    <p class="news_list_id">ID: ${_id}</p>
-    <p class="news_list_author_id">Author: ${author_id}</p>
-    <p class="news_list_createdAt">Created At: ${created_at}</p>
-    <p class="news_list_updatedAt">Updated At: ${updated_at}</p>
-    <a href="/news/${_id}">Read more...</a>
+<div id=${_id} class="box-3" style="padding-left: 30px; padding-right: 30px;">
+
+    <p class="news_list_title text-3 word-break" style="margin-top: 5px;">${title}</p>
+
+    <p class="news_list_description text-4 word-break">${description}</p>
+
+    <div class="flex row center" style="height: 50px;">
+
+        <div class="flex row start w-max">
+
+            <div class="flex col center">
+            <a href="/news/${_id}">Ler mais</a>
+            </div>
+
+        </div>
+
+        <div class="flex row end w-max">
+
+            <div class="flex col center">
+            <p class="news_list_author_id" style="font-weight: bolder;">${author_id} &nbsp</p>
+            </div>
+
+            <div class="flex col center">
+            <p class="news_list_createdAt format-date-short">${created_at}</p>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
