@@ -24,7 +24,7 @@ function nav_info_fetch(){
             $('.nav-logged').hide();
             $('.nav-notlogged').show();
         }
-    
+
     })
 
 }
