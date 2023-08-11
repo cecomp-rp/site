@@ -36,6 +36,11 @@ router.get("/contact", (req, res) => {
     res.render("contact")
 });
 
+//Store Page
+router.get("/store", (req, res) => {
+    res.render("store")
+});
+
 //ALL MEMBERS - LOGGED ----------------------------
 
 //Account Page
