@@ -180,24 +180,32 @@ $('#nav-overlay').ready(function () {
         common_nav_overlay_close()
     });
 
-    //On scroll
+    //On scroll - desktop
     $("#nav-overlay").on('mousewheel', function (event) {
-
-        //Height based on delta
-        var current_height_inverse = $("#nav-overlay-scroll").scrollTop();
-        var current_height = $("#nav-overlay-scroll").prop('scrollHeight') - $("#nav-overlay-scroll").height() - current_height_inverse;
-
-        if (current_height < 10) {
-            //close
-            common_nav_overlay_close()
-        }
-
-        common_nav_overlay_item_scale()
-
+        common_nav_event(event)
     });
 
+    //On scroll - mobile
+    $("#nav-overlay").on('touchmove', function (event) {
+        common_nav_event(event)
+    });
 
 });
+
+function common_nav_event(event) {
+
+    //Height based on delta
+    var current_height_inverse = $("#nav-overlay-scroll").scrollTop();
+    var current_height = $("#nav-overlay-scroll").prop('scrollHeight') - $("#nav-overlay-scroll").height() - current_height_inverse;
+
+    if (current_height < 10) {
+        //close
+        common_nav_overlay_close()
+    }
+
+    common_nav_overlay_item_scale()
+
+}
 
 function common_nav_overlay_open() {
     if (is_nav_overlay_open) {return;}
