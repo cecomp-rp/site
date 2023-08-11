@@ -140,3 +140,8 @@
 .break-word {
     word-break: break-word;
 }
+
+/*Boxes*/
+.no-bg {
+    background-color: rgba(0,0,0,0);
+}

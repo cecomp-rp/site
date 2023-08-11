@@ -18,7 +18,7 @@
         <script src="\js/polls/poll_fetch_one.js"></script>
         
         <div class="flex roll center">
-        <div class="box-1" style="background-color: rgba(0,0,0,0)">
+        <div class="box-1 no-bg">
 
             <h1 id="poll_title" class="text-1 break-word" style="margin-bottom: 60px;"></h1>
             <h2 id="poll_description" class="text-2 break-word" style="margin: 0;"></h2>
@@ -26,34 +26,38 @@
         </div>
         </div>
 
-        <div class="flex row center">
-        <div class="box-1 flex row center" style="background-color: rgba(0,0,0,0)">
-
-            <div class="flex col">
-                <p class="title-1 text-4" style="margin:0">Autor</p>
-                <p id="poll_author" class="title-1 " style="margin:0"></p>  
-            </div>
-
-            <div class="flex col">
-                <p class="title-1 text-4" style="margin:0">Criado em </p>
-                <p id="poll_created_at" class="title-1 format-date" style="margin:0"></p>
-            </div>
-            
-            <div class="flex col">
-                <p class="title-1 text-4" style="margin:0">Início</p>
-                <p id="poll_start_date" class="title-1 format-date" style="margin:0"></p>
-            </div>
-
-            <div class="flex col">
-                <p class="title-1 text-4" style="margin:0">Fim</p>
-                <p id="poll_end_date" class="title-1 format-date" style="margin:0"></p>
-            </div>
-            
-        </div>
-        </div>
-        
         <div class="flex roll center" style="margin-bottom: 80px;">
-            <div id="poll_options" class="box-1"></div>
+            <div id="poll_options" class="box-1 no-bg"></div>
+        </div>
+
+        <div class="flex row center">
+        <div class="box-1 flex blocks no-bg">
+
+            <div class="flex row center box-2 w-800 no-bg">
+                <div class="flex col w-max" style="margin:20px;">
+                    <p class="text-4" style="margin:0">Autor</p>
+                    <p id="poll_author" class="" style="margin:0"></p>  
+                </div>
+
+                <div class="flex col w-max" style="margin:20px;">
+                    <p class="text-4" style="margin:0">Criado em </p>
+                    <p id="poll_created_at" class="format-date" style="margin:0"></p>
+                </div>
+            </div>
+            
+            <div class="flex row center box-2 w-800 no-bg">
+                <div class="flex col w-max" style="margin:20px;">
+                    <p class="text-4" style="margin:0">Início</p>
+                    <p id="poll_start_date" class="format-date" style="margin:0"></p>
+                </div>
+
+                <div class="flex col w-max" style="margin:20px;">
+                    <p class="text-4" style="margin:0">Fim</p>
+                    <p id="poll_end_date" class="format-date" style="margin:0"></p>
+                </div>
+            </div>
+            
+        </div>
         </div>
 
     </div>
