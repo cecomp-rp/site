@@ -247,8 +247,11 @@ function common_nav_overlay_item_scale(){
         //Calculate scale
         //If element_distance >= 200 then scale = 1
         //If element_distance < 200 then scale goes from 1 to 1.2, depending on element_distance to 0
-        if (element_distance < 300) {
-            var scale = 1 + (0.3 * (1 - (element_distance / 300)));
+        var distance_frame = (window.innerHeight / 10) * 4;
+        var scale_variance = 0.4;
+        
+        if (element_distance < distance_frame) {
+            var scale = 1 + (scale_variance * (1 - (element_distance / distance_frame)));
         } else {
             var scale = 1;
         }
@@ -257,8 +260,7 @@ function common_nav_overlay_item_scale(){
         anime({
             targets: this,
             scale,
-            duration: 200,
-            easing: 'easeOutCubic'
+            duration: 600
         });
   
     });

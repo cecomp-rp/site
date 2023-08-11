@@ -112,9 +112,15 @@
 }
 
 .nav-overlay-item {
-    width: 600px;
-    padding-bottom: 60px;
-    padding-top: 10px;
+    width: 100%;
+
+    padding: 20px;
+
+    margin: 40px 80px 40px 80px;
+
+    width: 300px;
+    height: 200px;
+
 }
 
 /*NAV*/
