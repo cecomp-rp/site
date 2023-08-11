@@ -167,6 +167,7 @@ function common_loading_close() {
 //Nav overlay
 
 var is_nav_overlay_open = false;
+var nav_scroll_block = false;
 
 $('#nav-overlay').ready(function () {
 
@@ -181,13 +182,8 @@ $('#nav-overlay').ready(function () {
     });
 
     //On scroll - desktop
-    $("#nav-overlay").on('mousewheel', function (event) {
-        common_nav_event(event)
-    });
-
-    //On scroll - mobile
-    $("#nav-overlay").on('touchmove', function (event) {
-        common_nav_event(event)
+    $("#nav-overlay-scroll").on('scroll', function (event) {
+        common_nav_event(event);
     });
 
 });
@@ -203,7 +199,15 @@ function common_nav_event(event) {
         common_nav_overlay_close()
     }
 
-    common_nav_overlay_item_scale()
+    if(!nav_scroll_block){
+        nav_scroll_block = true;
+        
+        common_nav_overlay_item_scale();
+
+        setTimeout(function () {
+            nav_scroll_block = false;
+        }, 50);
+    }
 
 }
 
@@ -241,7 +245,7 @@ function common_nav_overlay_close() {
 
 function common_nav_overlay_item_scale(){
 
-    $(".nav-overlay-item").each(function () {
+    return $(".nav-overlay-item").each(function () {
 
         //Screen center position
         var screen_center = $(window).height() / 2;
