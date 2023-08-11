@@ -4,21 +4,67 @@
 </head>
 
 <body>
+<div data-simplebar>
+<div id="main" class="flex col center">
 
-    <!-- Overlays -->
+    <!-- OVERLAYS -->
     {{>common_overlays}}
 
     <!-- NAV -->
     {{>common_nav}}
 
-    <!-- MAIN -->
-    <div class="main ">
+    <!-- CONTENT -->
+    <div id="content">
 
-        <p>Sobre nós aqui...</p>
+        <!-- Cecomp -->
+        <div class="flex row center">
+        <div style="margin-top: 40px;">
+        
+            <div class="box-1" style="background-color: rgba(0,0,0,0);">
+                <h2 class="title-1 text-1">O CEComp.</h2>
+                <p class="title-1 text-3">Somos o Centro Estudantil da Computação da USP Ribeirão Preto.</p>
+                <p class="title-1 text-4">
+                    Entre muitas, nossa função é defender os interesses dos alunos representando-os perante a universidade, criar conteúdo educacional,
+                    organizar e prover suporte à projetos.
+                </p>
+                <p class="title-1 text-4">
+                    Nossa organização é sem fins lucrativos e sempre está aberta a parcerias e colaborações.
+                </p>
+
+                <div class="box-3 flex row center">
+                <img src="\img/logo/logo.png" class="w-max" style="height: auto; max-width: 800px;">
+                </div>
+
+                <p class="title-1 text-4">
+                    Você pode compreender melhor o que fazemos e como fazemos aqui:
+                </p>
+
+                <div class="box-3 blocks flex row center">
+
+                    <div class="box-3">
+                        <button class="a" href="./files/estatuto.pdf" >Estatuto do CEComp</button>
+                    </div>
+
+                    <div class="box-3">
+                        <button class="a" href="https://drive.google.com/drive/u/0/folders/1wWdHWmhI58s7v4b9dzlGwn2N5vnGxxA5">Drive público</button>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+
+        </div>
+        </div>
+
+
+
 
     </div>
 
     <!-- FOOTER -->
     {{>common_footer}}
 
+</div>
+</div>
 </body>
