@@ -16,7 +16,7 @@ const router = new express.Router()
 router.get("/logout", logged(['basic_functions']), async (req, res) => {
   const codeRes = await logout(req) 
   if(codeRes.redirect){
-    res.redirect(codeRes.redirect)
+    res.redirect(req.cookies.redirect || "/")
   }
   res.status(codeRes.status).send()
 })

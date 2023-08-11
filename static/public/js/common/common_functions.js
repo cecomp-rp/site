@@ -226,22 +226,7 @@ function common_isLogged(){
 
 function common_goBack(){
 
-    
-
-    if(document.referrer){
-        location.href = document.referrer;
-    }
-
-    if(common_cookie_get('redirect')){
-        location.href = common_cookie_get('redirect');
-    }
-
-    else {
-        location.href = '/';
-    }
+    //Go back
+    location.href = '/';
 
 }
-
-$(document).ready(function() {
-    console.log(common_cookie_get('redirect'))
-});

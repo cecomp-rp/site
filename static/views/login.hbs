@@ -5,7 +5,7 @@
 
 <body>
 <div data-simplebar>
-<div id="main" class="flex col center">
+<div id="main" class="flex col center" style="overflow: hidden; height:100vh;" >
 
     <!-- OVERLAYS -->
     {{>common_overlays}}
@@ -14,32 +14,48 @@
     {{>common_back}}
 
     <!-- CONTENT -->
-    <div id="content" class="flex col center" style="height:100vh;">
+    <div id="content">
 
         <!-- Login box -->
         <div class="flex row center">
-            <div class="box-1 flex row center blocks">
+        <div class="flex col center" style="height:100vh;">
+        <div class="box-1 flex row center blocks">
 
                 <!-- Text -->
-                <div class="box-1 w-800 h-400">
+                <div class="box-2 no-bg w-800 h-400">
                     <h1 class="title-1 text-1">Login</h1>
                     <h1 class="title-1 text-2">e cadastro.</h1>
                     <p class="title-1 text-4">Se possível, utilize seu email usp.br!</p>
                 </div>
                 
-                <!-- Options -->
-                <div id="login-box" class="box-2 w-400 h-400">
-                <div class="flex row center" style="height: 100%;">
-                <div class="flex col center" style="width: 100%;">
+                <!-- Options MOBILE-->
+                <div class="box-2 no-bg flex row w-400 h-400 mobile" >    
 
                     <!-- Google -->
-                    <a href="/auth/google"><button class="button-2" style="width: 100%;">Google</button></a>
-
-                </div>     
+                    <div class="flex col center h-max w-max">
+                    <div class="flex row center w-max">    
+                    <button class="a w-max" href="/auth/google">Google</button>       
+                    </div>
+                    </div>
+            
                 </div>
+
+                <!-- Options DESKTOP-->
+                <div class="box-2 flex row w-400 h-400 desktop" style="background-color: #1d1d1d;">    
+
+                    <!-- Google -->
+                    <div class="flex col center h-max w-max" >
+                    <div class="flex row center w-max">    
+                    <button class="a w-max" href="/auth/google">Google</button>       
+                    </div>
+                    </div>
+            
                 </div>
 
-            </div>
+            
+
+        </div>
+        </div>
         </div>
 
     </div>

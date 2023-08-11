@@ -34,21 +34,25 @@
 /*TITLES*/
 .title-1 {
     padding-left: 50px;
+    padding-right: 50px;
     margin: 15px;
 }
 
 .title-2 {
     padding-left: 100px;
+    padding-right: 50px;
     margin: 15px;
 }
 
 .title-3 {
     padding-left: 150px;
+    padding-right: 50px;
     margin: 15px;
 }
 
 .title-4 {
     padding-left: 200px;
+    padding-right: 50px;
     margin: 15px;
 }
 

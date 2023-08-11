@@ -24,7 +24,6 @@ const logged = function(permissions_needed){
                 ];
 
                 if(!excp_1.includes(req.originalUrl)){
-                    console.log(req.originalUrl)
                     cookieWarning(res, "loginRequired")
                 }
 
