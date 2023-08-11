@@ -1,4 +1,5 @@
 //Warning
+
 $('document').ready(function () {
 
     $("#warning").click(function () {
@@ -103,8 +104,10 @@ $('document').ready(function () {
         common_loading_open();
 
         setTimeout(function () {
+    
             //redirect
             window.location.href = href;
+
         }, 200);
 
     });
@@ -121,7 +124,7 @@ $('document').ready(function () {
         common_loading_open();
 
         setTimeout(function () {    
-            
+
             //redirect
             if (href == undefined) {
                 common_loading_close();
@@ -206,7 +209,7 @@ function common_nav_event(event) {
 
         setTimeout(function () {
             nav_scroll_block = false;
-        }, 50);
+        }, 2);
     }
 
 }
@@ -272,7 +275,7 @@ function common_nav_overlay_item_scale(){
         anime({
             targets: this,
             scale,
-            duration: 600
+            duration: 100
         });
   
     });

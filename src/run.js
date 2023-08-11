@@ -12,6 +12,7 @@ const cookieSession         = require("cookie-session")
 const cookieParser          = require("cookie-parser")
 const sanitizeObject        = require("./utils/other/sanitizeObject")
 const prettyPrint           = require("./utils/other/prettyPrint")
+const { redirect }          = require("./middleware/redirect")
 
 //Connect Gmail
 require("./utils/mail/sendMail")
@@ -40,6 +41,7 @@ exp.use(redirectToHTTPS([], [], 301));
 exp.use(helmet({contentSecurityPolicy: false}))
 exp.use(express.json({limit: '20mb'}))
 exp.use(cookieParser(process.env.COOKIE_SECRET))
+exp.use((req, res, next) => redirect(req, res, next, exp))
 
 //Sanitize req.body, req.query and req.params
 exp.use((req, res, next) => {

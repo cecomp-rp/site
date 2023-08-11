@@ -2,6 +2,8 @@ const User              = require("../database/models/User")
 const roles             = require("../utils/auth/roles")
 const prettyPrint       = require("../utils/other/prettyPrint")
 const cookieWarning     = require("../utils/io/cookieWarning")
+const { setCookie }     = require("../utils/io/cookieSet")
+const { set_redirect }  = require("./redirect")
 
 const logged = function(permissions_needed){
 
@@ -9,36 +11,24 @@ const logged = function(permissions_needed){
 
         try {
 
-            if(!req.session.redirect){req.session.redirect = "/"}
-
+            //Logged in?
             if(!req.user){
 
-                //redirect system
-                var redirect
-                if(req.originalUrl){redirect = req.originalUrl}else{redirect = "/"}
-                if(redirect == "/login"){redirect = "/"}
-                if(redirect == "/logout"){redirect = "/"}
-
-                //if redirect is starts with /api/*, redirect to / (REGEX)
-                if(redirect.match(/^\/api\/.*/)){redirect = "/"}
-
-                if(redirect != "/"){
-                    req.session.redirect = redirect
-                }
-                
-                prettyPrint("Auth", "Redirecting unlogged.", "warning", 1)
-                
                 req.user = {}
-                
+                prettyPrint("Auth", "Redirecting unlogged.", "warning", 1)
+
                 //Cookie warning exceptions
                 const excp_1 = [
-                    "/api/account"
+                    "/api/account",
+                    "/logout"
                 ];
 
                 if(!excp_1.includes(req.originalUrl)){
+                    console.log(req.originalUrl)
                     cookieWarning(res, "loginRequired")
                 }
 
+                await set_redirect(req, res)
                 return res.redirect("/login")
             }
 
@@ -101,11 +91,13 @@ const logged = function(permissions_needed){
 
             //-----------------------------------------------------------------    
 
-
             next();
 
         }
-        catch (error) {res.redirect("/")}
+        catch (error) {
+            prettyPrint("Auth", "Error: " + error, "error", 1)
+            return res.redirect('/')
+        }
 
 
     }

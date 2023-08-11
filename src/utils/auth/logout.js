@@ -18,7 +18,7 @@ async function logout(req){
     req.session = null
     req.logout()
 
-    return {status: 200, redirect: '/'}
+    return {status: 200, redirect: '/login'}
 }
 
 module.exports = logout

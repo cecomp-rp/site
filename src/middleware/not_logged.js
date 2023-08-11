@@ -6,7 +6,6 @@ const notLogged = async (req, res, next) => {
     }
 
     next()
-
 }
 
 module.exports = notLogged

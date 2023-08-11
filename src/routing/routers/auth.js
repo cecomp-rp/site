@@ -4,7 +4,6 @@ const logged                                  = require("../../middleware/logged
 const logout                                  = require("../../utils/auth/logout.js")
 const User                                    = require("../../database/models/User")
 const commonRes                               = require("../../utils/io/commonRes")
-
 require("../../utils/auth/passport")
 
 const router = new express.Router()
@@ -17,7 +16,7 @@ const router = new express.Router()
 router.get("/logout", logged(['basic_functions']), async (req, res) => {
   const codeRes = await logout(req) 
   if(codeRes.redirect){
-      res.redirect(codeRes.redirect)
+    res.redirect(codeRes.redirect)
   }
   res.status(codeRes.status).send()
 })
@@ -111,8 +110,7 @@ router.get('/auth/google/redirect',
   logged(['basic_functions']),
   function(req, res) {
 
-    res.redirect(req.session.redirect);
-    req.session.redirect = "/"
+    res.redirect(req.cookies.redirect || "/");
 });
 
 //--------------------------------------------
