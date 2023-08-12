@@ -313,6 +313,7 @@ router.get("/actv/:actv_id", logged(['basic_functions']), async (req, res) => {
     .catch((err) => {})
 
     if(!alreadySub) {
+        cookieWarning(res, "notSubscribed");
         res.redirect("/events/" + event.name);
         return;
     }
@@ -336,6 +337,8 @@ router.get("/actv/:actv_id", logged(['basic_functions']), async (req, res) => {
         res.redirect("/events");
         return;
     }
+
+    cookieWarning(res, "activityAdded");
 
     //Verify if the user has email notifications enabled in sub
     if(!alreadySub.userSettings.enable_email_notifications){

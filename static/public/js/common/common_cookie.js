@@ -8,7 +8,7 @@ function common_cookieWarning_verify() {
     if (document.cookie.indexOf("cookieWarning") >= 0) {
         
         //Get cookie warning value
-        const cookieWarningId = document.cookie.split('; ').find(row => row.startsWith('cookieWarning')).split('=')[1];
+        const cookieWarningId = common_cookie_get('cookieWarning')
         
         //Fetch and display warning
         common_fetch_warning_aux(cookieWarningId)
@@ -32,7 +32,12 @@ function common_cookie_save(name, value){
 }
 
 function common_cookie_destroy(name){
-    document.cookie = name + "=; Max-Age=-99999999;";
+    
+    //Is it already set?
+    if (document.cookie.indexOf(name) >= 0) {
+        document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
 }
 
 function common_cookie_get(name){

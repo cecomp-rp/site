@@ -206,10 +206,7 @@ function common_nav_event(event) {
         nav_scroll_block = true;
         
         common_nav_overlay_item_scale();
-
-        setTimeout(function () {
-            nav_scroll_block = false;
-        }, 2);
+        nav_scroll_block = false;
     }
 
 }
@@ -262,7 +259,7 @@ function common_nav_overlay_item_scale(){
         //Calculate scale
         //If element_distance >= 200 then scale = 1
         //If element_distance < 200 then scale goes from 1 to 1.2, depending on element_distance to 0
-        var distance_frame = (window.innerHeight / 10) * 4;
+        var distance_frame = (window.innerHeight / 10) * 7;
         var scale_variance = 0.4;
         
         if (element_distance < distance_frame) {
@@ -275,7 +272,7 @@ function common_nav_overlay_item_scale(){
         anime({
             targets: this,
             scale,
-            duration: 100
+            duration: 1
         });
   
     });
