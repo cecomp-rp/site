@@ -60,4 +60,11 @@ async function isOver(){
 
 }
 
+async function event_unsub(){
+    common_loading_open();
+
+    var href = $('#sub_unsubscribe').attr("href");
+    location.href = href;
+
+}
 

@@ -60,12 +60,14 @@
 #confirm_inner{
     background-color: #1d1d1d; 
     
-    width: 700px; 
-    height: 400px;
+    padding: 150px;
+   
+    margin: 200px;
+    margin-bottom: 10px;
 
-    padding: 20px;
+    min-width: 500px;
 
-    border-radius: 2px;
+    border-radius: 20px;
 }
 
 #loading {

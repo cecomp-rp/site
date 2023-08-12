@@ -3,8 +3,11 @@
     <script src="\js/subscriptions/sub_toggle.js"></script>
 
     <div class="flex row center" >
-        <a id="sub_subscribe" href="" style="display: none;"><button>Inscrever-se</button></a>
-        <a id="sub_unsubscribe" href="" style="display: none;"><button>Desinscrever-se</button></a> 
+        
+        <button id="sub_subscribe" class="a">Inscrever-se</button>
+
+        <button id="sub_unsubscribe" onclick="uSure('event_unsub()')">Desinscrever-se</button>
+
     </div>
     
     <div class="flex row center" style="margin-bottom: 35px;">

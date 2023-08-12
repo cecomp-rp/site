@@ -9,7 +9,7 @@
 
         <div class="flex row center">  
         <div class="flex col center" style="height: 150px;">
-            <button onclick="common_warning_close()" style="min-width: 300px;">Fechar</button>
+            <button onclick="common_warning_close()" class="text-3" style="min-width: 300px;">❌</button>
         </div>
         </div>
 
@@ -19,18 +19,20 @@
 </div>
 
 <!-- Confirm Overlay -->
-<div id="confirm">
 
+<div id="confirm">
+    
     <div class="flex row center" style="height: 100%;">  
     <div class="flex col center" style="">     
         
         <div id="confirm_inner" class="flex col center">
-
         </div>
 
-        <div class="flex row center" style="height: 100px;">
-            <button id="confirm_accept" onclick="common_confirm_accept()" style="margin-right: 40px;">Proceed</button>
-            <button id="confirm_dismiss" onclick="common_confirm_dismiss()">Dismiss</button>
+        <div class="flex col center" style="height: 150px;">  
+        <div class="flex row center">
+            <button onclick="common_confirm_accept()" class="text-4" style=" margin: 50px;">✔️</button>
+            <button onclick="common_confirm_dismiss()" class="text-4" style=" margin: 50px;">❌</button>
+        </div>
         </div>
 
     </div>

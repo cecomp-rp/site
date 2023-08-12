@@ -23,8 +23,20 @@ const logged = function(permissions_needed){
                     "/logout"
                 ];
 
-                if(!excp_1.includes(req.originalUrl)){
+                if(
+                !excp_1.includes(req.originalUrl) && 
+                !excp_1.includes(req.cookies.redirect) &&
+                !excp_1.includes(req.cookies.previous)
+                ){
                     cookieWarning(res, "loginRequired")
+                }
+
+                //Clear logout from cookies
+                if(req.cookies.redirect == "/logout"){
+                    setCookie(res, "redirect", "/")
+                }
+                if(req.cookies.previous == "/logout"){
+                    setCookie(res, "previous", "/")
                 }
 
                 await set_redirect(req, res)

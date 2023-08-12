@@ -3,7 +3,7 @@
 
     <div class="flex row">
         <div class="flex col center">
-        <button class="${poll._id}_button" style="height: 60px;" onclick="poll_vote('${option._id}','${poll._id}')">Vote</button>
+        <button class="${poll._id}_button" style="height: 60px;" onclick='uSure( "poll_vote( \"${option._id}\" , \"${poll._id}\" ) ") '>Vote</button>
         </div>
 
         <p id="${option._id}_counter" class="text-4" style="margin-left: 20px;">${option.numberOfVotes}</p>

@@ -37,8 +37,10 @@ function common_warning_close() {
 
 var confirm_callback_string = "";
 
-function uSure(msg, callback_string){
-    common_confirm_open(msg, callback_string);
+function uSure(callback_string){
+    common_confirm_open(`
+    <p class='text-3'>Tem certeza que deseja prosseguir com esta ação?</p>
+    `, callback_string);
 }
 
 function common_confirm_open(msg, callback_string) {

@@ -1,7 +1,9 @@
 $('document').ready(function () {
 
     $('#contact_send').click(function () { 
-        contact_fetch()
+        
+        uSure('contact_fetch()')
+        
     })
 
 })

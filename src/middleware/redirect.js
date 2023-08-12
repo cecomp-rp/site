@@ -57,7 +57,6 @@ const redirect = async (req, res, next, exp) => {
 
             //Exceptions
             if(route.path == "/login"){return false}
-            if(route.path == "/logout"){return false}
 
             return route;
         });
