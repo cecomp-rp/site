@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(0, 23, 32);
+    background-color: rgb(26, 0, 49);
     color: white;
 }
 
@@ -31,24 +31,39 @@ h1 {
 
 #pg1 {
     height: 100vh;
+    
 }
 
 #pg2 {
-    background-color: rgb(0, 46, 69);
+    background-color: rgb(50, 0, 93);
 }
 
 #pg3 {
-    background-color: rgb(0, 74, 103);
+    background-color: rgb(82, 0, 154);
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 /*Boxes*/
 
 .box-1 {
-    background-color: rgba(0, 23, 32, 0.759);
+    background-color: rgba(20, 0, 32, 0.759);
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .box-2 {
     background-color: rgb(255, 255, 255);
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.box-3 {
+    background-color: rgb(50, 0, 93);
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    padding: 20px;;
 }
 
 
