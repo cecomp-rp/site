@@ -20,7 +20,8 @@ const logged = function(permissions_needed){
                 //Cookie warning exceptions
                 const excp_1 = [
                     "/api/account",
-                    "/logout"
+                    "/logout",
+                    "/semcomp"
                 ];
 
                 if(
