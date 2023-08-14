@@ -72,6 +72,7 @@ function event_edit_fetch(id){
                   
                 common_append('#event_edit_activity_div', 'con_event_atv.html', {uniq}).then(() => {
 
+                    $(`#${uniq}`).attr('oldId', activity._id);
                     $(`#${uniq}_title`).val(activity.title);
                     $(`#${uniq}_description`).val(activity.description);
                     $(`#${uniq}_date`).val(common_date_unixToISO(activity.startDate));
@@ -145,7 +146,7 @@ function event_edit_submit(id){
 
         var id              = $(this).attr('id');
 
-        var oldId           = $(`#${id}_oldId`).text();
+        var oldId           = $(`#${id}`).attr('oldId');
         var title           = $(`#${id}_title`).val();
         var description     = $(`#${id}_description`).val();
         var startDate_ev    = $(`#${id}_date`).val();

@@ -19,7 +19,6 @@ const loadApps = async (exp) => {
             }
             catch(e){
                 prettyPrint("Apps", `Failed to load app: ${directory}`, "error");
-                console.log(e);
             }
             
         });

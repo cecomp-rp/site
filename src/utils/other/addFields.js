@@ -21,7 +21,6 @@ function addFields(body, data){
     event
     */
 
-
     //GENERAL (user)
     if(data.user && data.user.email){
         //Test expression ~email
@@ -69,12 +68,22 @@ function addFields(body, data){
 
     //ACTIVITIES (activities)
     if(data.activities){
-        var totalHours = 0;
+        var totalHours;
 
         //For each activity in activities
         data.activities.forEach((activity) => {
-            //Add activity.duration to totalHours
-            totalHours += activity.duration;
+
+            if(activity) {
+
+                if(!activity.duration) {
+                    activity.duration = 0;
+                }
+
+                //Add activity.duration to totalHours
+                totalHours += activity.duration;
+
+            }
+           
         })
 
         //Test expression ~total_hours
@@ -90,15 +99,19 @@ function addFields(body, data){
         data.activities.forEach((activity) => {
             //Replace ~activities with activity.title, startDate, duration, description
             
-            append = append + 
-            `
-                <div class="title-1" style="margin:30px">
-                    <h3 class="text-3" style="margin:0">${activity.title}</h3>
-                    <p>${activity.description}</p>
-                    <p>Realizada em: <label class="format-date">${activity.startDate}</label></p>
-                    <p>Duração: ${activity.duration} horas</p>
-                </div>
-            `;
+            if(activity) {
+
+                append = append + 
+                `
+                    <div class="title-1" style="margin:30px">
+                        <h3 class="text-3" style="margin:0">${activity.title}</h3>
+                        <p>${activity.description}</p>
+                        <p>Realizada em: <label class="format-date">${activity.startDate}</label></p>
+                        <p>Duração: ${activity.duration} horas</p>
+                    </div>
+                `;
+
+            }
 
         })
 
