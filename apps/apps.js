@@ -11,10 +11,17 @@ const loadApps = async (exp) => {
             .map((item) => item.name);
 
         directoriesInDIrectory.forEach((directory) => {
-            var app = require(`./${directory}/run`);
-            app(exp);
-
-            prettyPrint("Apps", `Loaded app: ${directory}`, "success");
+            
+            try{
+                var app = require(`./${directory}/run`);
+                app(exp);
+                prettyPrint("Apps", `Loaded app: ${directory}`, "success");
+            }
+            catch(e){
+                prettyPrint("Apps", `Failed to load app: ${directory}`, "error");
+                console.log(e);
+            }
+            
         });
 
     });

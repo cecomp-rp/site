@@ -7,6 +7,7 @@ const commonRes                 = require("../../utils/io/commonRes")
 const filterObject              = require("../../utils/other/filterObject")
 const addFields                 = require("../../utils/other/addFields")
 const sendMail                  = require("../../utils/mail/sendMail")
+const {createEventCertificate}  = require("../../utils/certificate/eventCertificate")
 
 const router = new express.Router()
 
@@ -301,36 +302,38 @@ router.patch("/api/events/:id", logged(['admin']), async (req, res) => {
         return email.type == "event_update"
     })
 
-    if(!email){
-        commonRes(res, {
-            error: undefined,
-            message: "Success.",
-            content: {}
-        }); return;
-    }
-
     //Get all users subscribed to this event with email notifications enabled
     const subscriptions = await Subscription.find({event_id: id, "userSettings.enable_email_notifications": true})
     .catch((error) => {})
 
-    if(!subscriptions){
-        commonRes(res, {
-            error: undefined,
-            message: "Success.",
-            content: {}
-        }); return;
+    if(subscriptions && email){
+        
+        //Send email to all users
+        subscriptions.forEach((subscription) => {
+
+            //Add fields to content
+            email.content = addFields(email.content, {user: req.user, event: event});
+
+            //Send email to all users subscribed to this event
+            sendMail("Atualização no evento: " + new_name, req.user.email, email.content);
+        
+        })
+
     }
 
-    //Send email to all users
-    subscriptions.forEach((subscription) => {
+    //Create certificates that were not created yet
+    //Get all users subscribed to this event
+    const subscriptions_all = await Subscription.find({event_id: id})
+    .catch((error) => {})
 
-        //Add fields to content
-        email.content = addFields(email.content, {user: req.user, event: event});
+    if(subscriptions_all){
 
-        //Send email to all users subscribed to this event
-        sendMail("Atualização no evento: " + new_name, req.user.email, email.content);
+        //For each subscription
+        subscriptions_all.forEach((subscription) => {
+            createEventCertificate(subscription.user_id, id);
+        })
     
-    })
+    }
 
     commonRes(res, {
         error: undefined,
