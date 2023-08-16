@@ -25,21 +25,29 @@ div {
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-size: 60pt;
+
+    overflow-wrap: normal;
 }
 
 h2 {
     font-family: 'Open Sans', sans-serif;
     font-size: 40pt;
+
+    overflow-wrap: normal;
 }
 
 h3 {
     font-family: 'Open Sans', sans-serif;
     font-size: 30pt;
+
+    overflow-wrap: normal;
 }
 
 h4 {
     font-family: 'Open Sans', sans-serif;
     font-size: 20pt;
+    
+    overflow-wrap: normal;
 }
 
 p {
