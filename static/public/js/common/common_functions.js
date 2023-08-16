@@ -1,6 +1,10 @@
 $(document).ready(function() {
     common_isLogged();
-});
+
+    //New simple bar in body
+    new SimpleBar(document.getElementsByTagName("BODY")[0]);
+
+})
 
 function common_date_unixToISO(date){
     

@@ -1,10 +1,12 @@
+<!doctype html>
+<html>
+
 <head>
     <title>Votações</title>
     {{>common_head}}
 </head>
 
 <body>
-<div data-simplebar>
 <div id="main" class="flex col center">
 
     <!-- OVERLAYS -->
@@ -18,38 +20,36 @@
 
         <script src="\js/polls/poll_fetch_multiple.js"></script>
 
-        <div class="flex row w-max">
-        <div class="box-3">
-            <p class="title-1 text-4">
-                O sistema de votação segue um princípio semelhante ao da urna eletrônica,
-            </p>
-            <p class="title-1 text-4">
-                para garantir sua anonimidade, não é possível desfazer um voto.
-            </p>
-            <p class="title-1 text-4">
-                Escolha sabiamente.
-            </p>
-        </div>
-        </div>
-
-        <div class="flex row center w-max">
-        <div class="box-1 no-bg">
+        <p class="text-4 title-2 ">
+            O sistema de votação segue um princípio semelhante ao da urna eletrônica,
+        </p>
+        <p class="text-4 title-2 ">
+            para garantir sua anonimidade, não é possível desfazer um voto.
+        </p>
+        <p class="text-4 title-2 ">
+            Escolha sabiamente.
+        </p>
+        
+        <div class="flex row center">
+        <div class="flex col center box-1 no-bg border-2">
+            
             <div id="poll_fetch_div"></div>
-        </div>
-        </div>
 
-        <div class="flex row center" style="margin-bottom: 50px;">
-            <button onclick="poll_fetch_previous_page()" style="width: 60px;"><</button>
-            <p id="poll_fetch_page_display" style="margin: 20px;">1</p>
-            <button onclick="poll_fetch_next_page()" style="width: 60px;">></button>
+            <div class="flex row center">
+                <button onclick="poll_fetch_previous_page()" style="width: 60px;"><</button>
+                <p id="poll_fetch_page_display" style="margin: 20px;">1</p>
+                <button onclick="poll_fetch_next_page()" style="width: 60px;">></button>
+            </div>
+
+        </div>
         </div>
 
     </div>
  
-
     <!-- FOOTER -->
     {{>common_footer}}
 
 </div>
-</div>
 </body>
+
+</html>

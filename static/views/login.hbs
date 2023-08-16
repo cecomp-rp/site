@@ -1,10 +1,12 @@
+<!doctype html>
+<html>
+
 <head>
     <title>Login</title>
     {{>common_head}}
 </head>
 
 <body>
-<div data-simplebar>
 <div id="main" class="flex col center" style="overflow: hidden; height:100vh;" >
 
     <!-- OVERLAYS -->
@@ -21,38 +23,36 @@
         <div class="flex col center" style="height:100vh;">
         <div class="box-1 flex row center blocks">
 
-                <!-- Text -->
-                <div class="box-2 no-bg w-800 h-400">
-                    <h1 class="title-1 text-1">Login</h1>
-                    <h1 class="title-1 text-2">e cadastro.</h1>
-                    <p class="title-1 text-4">Se possível, utilize seu email usp.br!</p>
-                </div>
-                
-                <!-- Options MOBILE-->
-                <div class="box-2 no-bg flex row w-400 h-400 mobile" >    
-
-                    <!-- Google -->
-                    <div class="flex col center h-max w-max">
-                    <div class="flex row center w-max">    
-                    <button class="a w-max" href="/auth/google">Google</button>       
-                    </div>
-                    </div>
+            <!-- Text -->
+            <div class="box-2 no-bg w-800 h-400">
+                <h1 class="title-1 text-1">Login</h1>
+                <h1 class="title-1 text-2">e cadastro.</h1>
+                <p class="title-1 text-4">Se possível, utilize seu email usp.br!</p>
+            </div>
             
+            <!-- Options MOBILE-->
+            <div class="box-2 no-bg flex row w-400 h-400 mobile" >    
+
+                <!-- Google -->
+                <div class="flex col center h-max w-max">
+                <div class="flex row center w-max">    
+                <button class="a w-max" href="/auth/google">Google</button>       
                 </div>
-
-                <!-- Options DESKTOP-->
-                <div class="box-2 flex row w-400 h-400 desktop" style="background-color: #1d1d1d;">    
-
-                    <!-- Google -->
-                    <div class="flex col center h-max w-max" >
-                    <div class="flex row center w-max">    
-                    <button class="a w-max" href="/auth/google">Google</button>       
-                    </div>
-                    </div>
-            
                 </div>
+        
+            </div>
 
-            
+            <!-- Options DESKTOP-->
+            <div class="box-2 flex row w-400 h-400 desktop" style="background-color: #1d1d1d;">    
+
+                <!-- Google -->
+                <div class="flex col center h-max w-max" >
+                <div class="flex row center w-max">    
+                <button class="a w-max" href="/auth/google">Google</button>       
+                </div>
+                </div>
+        
+            </div>
 
         </div>
         </div>
@@ -64,5 +64,6 @@
     {{>common_footer}}
 
 </div>
-</div>
 </body>
+
+</html>

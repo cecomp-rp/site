@@ -112,6 +112,12 @@ $('document').ready(function () {
 
         }, 200);
 
+        setTimeout(function () {
+    
+            common_loading_close();
+
+        }, 5000);
+
     });
 
     //On any button with class "a" click

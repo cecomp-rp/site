@@ -1,12 +1,10 @@
 <div id="${_id}" class="box-5" style="margin: 50px;">
 
-        
-    <div class="w-max flex row start">
-        <p class="title-1 text-2" style="word-break: break-all; ">${title}</p>
+    <div class="flex row">
+    <div class="flex col center box-2 no-bg" style="margin-left: 30px;">
+        <p class="text-2" style="margin: 0;">${title}</p>
+        <p class="text-4" style="margin: 0;">${description}</p>
     </div>
-
-    <div class="flex row box-5">
-        <p class="text-4 break-word" style="margin-left: 25px; margin-top: 0;">${description}</p>
     </div>
   
     <div id="${_id}_poll_options"></div>
@@ -15,22 +13,22 @@
 
         <div class="w-max flex row start blocks" style="margin-left: 15px;">
 
-            <div class="flex col" style="margin-top: 20px; margin:10px;">
+            <div class="flex col box-2 no-bg" style="margin-top: 20px; margin:10px;">
                 <p class="text-4" style="margin:0">Autor</p>
                 <p class="" style="margin:0px;">${author_id}</p>  
             </div>
 
-            <div class="flex col" style="margin-top: 20px; margin:10px;">
+            <div class="flex col box-2 no-bg" style="margin-top: 20px; margin:10px;">
                 <p class="text-4" style="margin:0">Criado em </p>
                 <p class="format-date" style="margin:0">${created_at}</p>
             </div>
             
-            <div class="flex col" style="margin-top: 20px; margin:10px;">
+            <div class="flex col box-2 no-bg" style="margin-top: 20px; margin:10px;">
                 <p class="text-4" style="margin:0">Início</p>
                 <p class="format-date" style="margin:0">${startDate}</p>
             </div>
 
-            <div class="flex col" style="margin-top: 20px; margin:10px;">
+            <div class="flex col box-2 no-bg" style="margin-top: 20px; margin:10px;">
                 <p class="text-4" style="margin:0">Fim</p>
                 <p class="format-date" style="margin:0">${endDate}</p>
             </div>

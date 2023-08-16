@@ -1,10 +1,12 @@
+<!doctype html>
+<html>
+
 <head>
     <title>Certificados</title>
     {{>common_head}}
 </head>
 
 <body>
-<div data-simplebar>
 <div id="main" class="flex col center">
 
     <!-- OVERLAYS -->
@@ -20,20 +22,22 @@
         <script src="\js/certificate/certificate_fetch_multiple.js"></script>
 
         <!-- List -->
-        <div class="flex col center" style="margin-top: 50px; margin-bottom: 50px;">
+        <div class="flex row center">
+        <div class="flex col center box-1">
             
             <div class="flex row center">
-            <div class="box-1 flex col start">
+            <div class="flex col start">
                 <div id="cert_fetch_div" class="flex blocks"></div>
             </div>
             </div>
 
-            <div class="flex row center">
-                <button onclick="cert_fetch_previous_page()" style="width: 60px;"><</button>
-                <p id="cert_fetch_page_display" style="margin: 20px;">1</p>
-                <button onclick="cert_fetch_next_page()" style="width: 60px;">></button>
-            </div>
+        </div>
+        </div>
 
+        <div class="flex row center">
+            <button onclick="cert_fetch_previous_page()" style="width: 60px;"><</button>
+            <p id="cert_fetch_page_display" style="margin: 20px;">1</p>
+            <button onclick="cert_fetch_next_page()" style="width: 60px;">></button>
         </div>
 
     </div>
@@ -42,5 +46,6 @@
     {{>common_footer}}
 
 </div>
-</div>
 </body>
+
+</html>
