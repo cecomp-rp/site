@@ -1,21 +1,15 @@
-<div id=${_id} class="box-2 h-400 w-800 jump a" style="overflow: hidden;" href="/events/${name}">
+<div id=${_id} class="box-2 w-800 jump a" style="overflow: hidden; max-height: 800px;" href="/events/${name}">
 
-    <div class="flex row" style="height: 35px;">
+    <div class="flex row">
 
         <div style="width: 100%;">
-            <p class="event_title text-3" style="margin:0;">${title}</p>  
+            <p class="event_title text-3" style="margin: 0; margin-top: 5px; margin-right: 10px;">${title}</p>  
         </div>
 
         <div  style="width: 100%;">
-            <div class="flex row end" style="width: 100%;">
-            <div class="flex row start" style="height: 100%;">
+            <div class="flex row end">
+            <div class="flex row start">
                 <p class="event_name text-4" style="margin-top: 5px;">(${name})</p>    
-            </div> 
-            </div>
-
-            <div class="flex row end" style="width: 100%;">
-            <div class="flex row start" style="height: 100%;">
-                <a style="position: relative; top: 210px;">Ver evento</a>
             </div> 
             </div>
         </div>
@@ -24,14 +18,14 @@
 
     <div class="flex col" style="margin-top: 10px;">
         <div style="width: 100%;" >
-            <p class="event_date" style="margin: 0;">
+            <p class="event_date text-4" style="margin: 0;">
                 <label class="format-date-short ">${startDate}</label> até
                 <label class="format-date-short ">${endDate}</label>
             </p>
         </div>
 
         <div style="width: 100%;">
-            <p class="event_remove_roleRestriction " style="margin: 0;">Restrições: ${roleRestriction}</p>
+            <p class="event_remove_roleRestriction text-4" style="margin: 0; font-size: 15pt;">Restrições: ${roleRestriction}</p>
         </div>
 
     </div>

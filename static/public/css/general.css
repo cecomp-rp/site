@@ -222,6 +222,8 @@ button {
 
     color: #ffffff;
     background-color: rgba(0,0,0,0);
+
+    overflow-wrap: normal;
 }
 
 button:hover {

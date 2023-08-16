@@ -21,12 +21,14 @@
 #warning_inner{
     background-color: #1d1d1d; 
     
-    padding: 150px;
+    padding: 80px;
    
     margin: 200px;
     margin-bottom: 10px;
 
-    min-width: 500px;
+    max-width: 100%;
+    min-width: 300px;
+    overflow-wrap: normal;
 
     border-radius: 20px;
 }
@@ -60,12 +62,14 @@
 #confirm_inner{
     background-color: #1d1d1d; 
     
-    padding: 150px;
+    padding: 80px;
    
     margin: 200px;
     margin-bottom: 10px;
 
-    min-width: 500px;
+    max-width: 100%;
+    min-width: 300px;
+    overflow-wrap: normal;
 
     border-radius: 20px;
 }
