@@ -1,22 +1,26 @@
-<div>
-    <script src="\js/console/role_update.js"></script>
-    
-    <h2>Change user roles</h2>
+<script src="\js/console/role_update.js"></script>
 
-    <p>User email</p>
+<h2 class="text-2 title-2" >Change roles</h2>    
+<div class="flex row center" id="role_update">
+<div class="flex col center box-1">  
+
+    <p class="text-4">User email</p>
     <input id="role_update_email" type="text" >
     <p id="role_update_msg"></p>
 
-    <p>Current roles</p>
-    <div id="role_update_current_roles"></div>
+    <p class="text-4">Current roles</p>
+    <div id="role_update_current_roles" class="title-1 text-4" style="font-weight: bolder;"></div>
 
-    <p>Add/Remove</p>
+    <p class="text-4">Add/Remove</p>
     <select id="role_update_select" class="load-roles">
     </select>
 
-    <button onclick="role_update_add()">Add</button>
-    <button onclick="role_update_remove()">Remove</button>
-
+    <div class="box-5">
+        <button onclick="role_update_add()" style="margin-right: 20px;">Add</button>
+        <button onclick="role_update_remove()">Remove</button> 
+    </div>
+    
     <p id="role_update_msg2"></p>
 
+</div>
 </div>

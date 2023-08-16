@@ -1,14 +1,40 @@
-<div>
-    <script src="\js/console/transparency_remove.js"></script>
+<script src="\js/console/transparency_remove.js"></script>
+
+<h2 class="text-2 title-2" >List and remove transparency items</h2>    
+<div class="flex row center" id="transparency_remove">
+<div class="flex col center">    
     
-    <h2>Remove transparency items</h2>
+    <div class="flex row center">
+    <div class="flex col center box-1">
 
-    <button onclick="transparency_remove_next_page()">Next</button>
-    <p id="transparency_remove_page_display">1</p>
-    <button onclick="transparency_remove_previous_page()">Previous</button>
+        <table style="width: 100%;">
+            <tr class="transparency-item">
+                <td data-simplebar><p>Título</p></td>
+                <td data-simplebar><p>Descrição</p></td>
+                <td data-simplebar><p>Valor</p></td>
+                <td data-simplebar><p>Data de transação</p></td>
+                <td data-simplebar><p>Data de adição</p></td>
+                <td data-simplebar><p>ID</p></td>
+                <td data-simplebar><p>...</p></td>
+            </tr>
+        </table>
 
-    <div id="transparency_remove_div">  
+        <table id="transparency_remove_div"></table>
+
+    </div>
     </div>
 
+    <div class="flex row center">
+    <div class="flex col center box-1 no-bg">
 
+        <div class="flex row center">
+            <button onclick="transparency_remove_previous_page()" style="width: 60px;"><</button>
+            <p id="transparency_remove_page_display" style="margin: 20px;">1</p>
+            <button onclick="transparency_remove_next_page()" style="width: 60px;">></button>
+        </div>
+
+    </div>
+    </div>
+
+</div>
 </div>

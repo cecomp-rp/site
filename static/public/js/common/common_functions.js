@@ -3,11 +3,23 @@ $(document).ready(function() {
 });
 
 function common_date_unixToISO(date){
-    return new Date(date).toISOString().split('.')[0];
+    
+    var offset = new Date().getTimezoneOffset() * 60000;
+    return new Date(date - offset).toISOString().slice(0, 16);
+    
 }
 
 function common_date_ISOToUnix(date){
-    return new Date(date).getTime();
+
+    if(date.includes('T')){
+        return new Date(date).getTime(); //DATETIME
+    }
+    else{
+        return new Date(date + 'T00:00').getTime(); //DATE
+    }
+
+    //Yes, it has to have a T00:00 else it wont consider timezones
+
 }
 
 function common_URL_get_last_param(){
@@ -65,6 +77,12 @@ function common_fetch(url, method, data = {}, msg_objs = []){
                         $('#' + msg_obj).show();
                         $('#' + msg_obj).attr('class', 'box-2');
                         $('#' + msg_obj).text(data.message);
+
+                        //Message is ''?
+                        if(data.message == '' || data.message == undefined || data.message == null){
+                            $('#' + msg_obj).hide();
+                        }
+
                     })
                     return data.content;
                 }
@@ -76,6 +94,12 @@ function common_fetch(url, method, data = {}, msg_objs = []){
                         $('#' + msg_obj).show();
                         $('#' + msg_obj).attr('class', 'box-4');
                         $('#' + msg_obj).text(data.error);
+
+                        //Error is ''?
+                        if(data.error == '' || data.error == undefined || data.error == null){
+                            $('#' + msg_obj).hide();
+                        }
+                        
                     })
                     return undefined;
                 }
@@ -95,6 +119,8 @@ function common_fetch(url, method, data = {}, msg_objs = []){
         //There is no response json
         else{
             msg_objs.forEach((msg_obj) => {
+                $('#' + msg_obj).show();
+                $('#' + msg_obj).attr('class', 'box-4');
                 $('#' + msg_obj).text('Erro!');
             })
             return undefined;
@@ -146,6 +172,7 @@ function common_append(where_to_append, file_to_append, attr_to_add = {}){
 
         //Extras
         common_format_dates();
+        common_createQRcodes();
 
     })
 
@@ -228,5 +255,26 @@ function common_goBack(){
 
     //Go back
     location.href = '/';
+
+}
+
+function common_jumpTo(id){
+    
+    var container = document.querySelector('.simplebar-content-wrapper'); 
+    var element = document.getElementById(id);
+
+    //If element exists
+    if(element){
+
+        //Anime
+        anime({
+            targets: container,
+            scrollTop: element.offsetTop - 200,
+            duration: 500,
+            easing: 'easeInOutQuad'
+        });
+
+    }
+
 
 }

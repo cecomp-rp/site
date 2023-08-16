@@ -1,9 +1,11 @@
-<div id=${_id}>
-    <p class="transparency_remove_title">Title: ${title}</p>
-    <p class="transparency_remove_description">Description: ${description}</p>
-    <p class="transparency_remove_value">Value: ${value}</p>
-    <p class="transparency_remove_dateOfTransaction">Date Of Transaction: ${dateOfTransaction}</p>
-    <p class="transparency_remove_dateOfTransaction">Date Of Addition: ${createdAt}</p>
-    <p class="transparency_remove_id">ID: ${_id}</p>
-    <button onclick="transparency_remove_delete('${_id}')">Delete</button>
-</div>
+<tr id=${_id} class="transparency-item">
+    <td data-simplebar><p id="transparency_list_title">${title}</p></td>
+    <td data-simplebar><p id="transparency_list_description">${description}</p></td>
+    <td data-simplebar><p id="transparency_list_value">${value}</p></td>
+    <td data-simplebar><p id="transparency_list_dateOfTransaction" class="format-date-short">${dateOfTransaction}</p></td>
+    <td data-simplebar><p id="transparency_list_dateOfTransaction" class="format-date-short">${created_at}</p></td>
+    <td data-simplebar><p id="transparency_list_id">${_id}</p></td>
+    <td data-simplebar><p id="transparency_list_id">
+        <button onclick='uSure("transparency_remove_delete(\"${_id}\")")'>Delete</button>
+    </td>
+</tr>

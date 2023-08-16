@@ -47,7 +47,7 @@ async function isOver(){
     return common_fetch("/api/events/by_name/" + common_URL_get_last_param(), "GET", {}, []).then((data) => {
 
         if(data){
-            if(common_date_ISOToUnix(data.endDate) < Date.now()){
+            if(data.endDate < Date.now()){
                 $("#sub_warning").show();
                 $("#sub_warning").text("Este evento chegou ao fim.");
                 return true;

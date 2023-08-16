@@ -1,8 +1,31 @@
-<p>Activity ID: ${_id}</p>
-<p>Title: ${title}</p>
-<p>Description: ${description}</p>
-<p>Start Date: ${startDate}</p>
-<p>Duration: ${duration}</p>
-<p>Checkin link:</p> 
-<a href = "/actv/${_id}">Checkin</a>
-<br>
+<div class="box-5 border-1">
+
+    <div class="box-3">
+        <p>Activity ID: ${_id}</p>
+        <p class="text-4">${title}</p>
+        <p>${description}</p> 
+    </div>
+
+    <div class="flex blocks">
+
+        <div class="box-3 w-400">
+            <p class="text-4">Início</p>
+            <p class="format-date">${startDate}</p>
+            <p class="text-4">Duração</p>
+            <p>${duration} horas</p>
+        </div>
+
+        <div class="box-3 break-word w-400">
+            <p class="text-4">Link para marcar presença na atividade</p>
+            <a href = "${link}">${link}</a>
+
+            <div class="flex row center" style="margin: 15px;">
+                <div class="create-qrcode w-200 h-200">${link}</div>    
+            </div>
+        </div>
+
+    </div>
+    
+
+</div>
+

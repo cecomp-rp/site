@@ -1,25 +1,31 @@
-<div>
-    <script src="\js/console/email_atv_fetch.js"></script>
-    
-    <h2>Fetch emails - by activity</h2>
-    
-    <p>Activity ID</p>
+<script src="\js/console/email_atv_fetch.js"></script>
+
+<h2 class="text-2 title-2" >Fetch emails - by activity</h2>    
+<div class="flex row center" id="email_fetch_atv">
+<div class="flex col center box-1">  
+
+    <p class="text-4">Activity ID</p>
     <input type="text" id="email_fetch_atv_id" />
 
     <div id="email_fetch_atv_msg"></div>
 
-    <p>Filtros</p>
-    <p>- Role</p>
+    <p class="text-4">Filtros</p>
+    <p>Role</p>
     <select id="email_fetch_atv_filter_role" class="load-roles" value="">
         <option value="">-</option>
     </select>
 
-    <br>
-    <button onclick="email_fetch_atv_next_page()">Next</button>
-    <p id="email_fetch_atv_page_display">1</p>
-    <button onclick="email_fetch_atv_previous_page()">Previous</button>
-
-    <div id="email_fetch_atv_div">
+    <div class="flex row center">
+    <div class="box-1 flex col start">
+        <div id="email_fetch_atv_div" class="flex blocks"></div>
+    </div>
     </div>
 
+    <div class="flex row center">
+        <button onclick="email_fetch_atv_previous_page()" style="width: 60px;"><</button>
+        <p id="email_fetch_atv_page_display" style="margin: 20px;">1</p>
+        <button onclick="email_fetch_atv_next_page()" style="width: 60px;">></button>
+    </div>
+
+</div>
 </div>

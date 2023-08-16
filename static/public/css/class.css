@@ -1,10 +1,17 @@
 /*QUILL*/
+.editor {
+    height: auto !important;
+    padding-bottom: 20px;
+}
+
 .ql-editor {
     font-family: 'Open Sans', sans-serif;
     background-color: #ffffff;
     color: rgb(0, 0, 0);
 
     border-radius: 2px;
+
+    height: auto !important;
 }
 
 .ql-snow.ql-snow {

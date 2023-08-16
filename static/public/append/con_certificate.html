@@ -1,12 +1,20 @@
-<div id="${_id}">
+<div id="${_id}" class="box-2 w-800">
+
     <p>ID: ${_id}</p>
     <p>Owner ID: ${owner_id}</p>
-    <p>Event ID: ${event_id}</p>
-    <p>Is Event Certificate: ${is_event_certificate}</p>
-    <p>Title: ${title}</p>
-    <p>Content: ${content}</p>
+    
+    <div class="h-200 box-3" style="overflow: hidden; margin: 20px;">
+        <p class="text-3">${title}</p>
+        <p>${content}</p>
+    </div>
 
-    <button onclick="cert_remove_remove('${_id}')">Remove</button>
-    <button onclick="cert_remove_edit('${_id}')">Edit</button>
+    <div class="box-6" style="margin: 20px;">
+        <p>Is Event Certificate: ${is_event_certificate}</p>
+        <p>Event ID: ${event_id}</p>
+    </div>
+
+    <button class="button-2" onclick='uSure("cert_remove_remove(\"${_id}\")")'>Remove</button>
+    <button class="button-2" onclick="common_jumpTo('cert_edit'); cert_remove_edit('${_id}')">Edit</button>
     <a href="/certificates/${_id}">See page...</a>
+
 </div>

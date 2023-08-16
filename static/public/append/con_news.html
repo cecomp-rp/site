@@ -1,11 +1,28 @@
-<div id=${_id}>
-    <p class="news_remove_title">Title: ${title}</p>
-    <p class="news_remove_description">Description: ${description}</p>
+<div id=${_id} class="box-2 w-800">
     <p class="news_remove_id">ID: ${_id}</p>
-    <p class="news_remove_author_id">Author: ${author_id}</p>
-    <p class="news_remove_createdAt">Created At: ${created_at}</p>
-    <p class="news_remove_updatedAt">Updated At: ${updated_at}</p>
-    <a href="/news/${_id}">Read more...</a>
-    <button onclick="news_remove_delete('${_id}')">Delete</button>
-    <button onclick="news_remove_edit('${_id}')">Edit</button>
+    
+    <div class="box-3" style="max-height: 400px;">
+        <p class="news_remove_title text-3">${title}</p>
+        <p class="news_remove_description">${description}</p>
+    </div>
+
+    <div class="box-6">
+        <p class="text-4">Autor</p>
+        <p class="news_remove_author_id">Author: ${author_id}</p>
+        <p class="text-4">Data de publicação</p>
+        <p class="news_remove_createdAt">Created At: ${created_at}</p>
+        <p class="text-4">Última edição</p>
+        <p class="news_remove_updatedAt">Updated At: ${updated_at}</p>
+    </div>
+
+
+    <div class="box-2">
+        <a href="/news/${_id}">Read more...</a>    
+    </div>
+    
+    <div class="box-2">
+        <button class="button-2" onclick='uSure("news_remove_delete(\"${_id}\")")' style="margin-right: 20px;">Delete</button>
+        <button class="button-2" onclick="common_jumpTo('news_edit'); news_remove_edit('${_id}')">Edit</button>
+    </div>
+    
 </div>

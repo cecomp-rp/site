@@ -1,21 +1,29 @@
-<div>
-    <script src="\js/console/certificate_create.js"></script>
-    
-    <h2>Create certificates</h2>
+<script src="\js/console/certificate_create.js"></script>
 
-    <p>Email (required)</p>
+<h2 class="text-2 title-2" >Create certificates</h2>    
+<div class="flex row center" id="cert_create">
+<div class="flex col center box-1">  
+
+    <p class="text-4">Email (required)</p>
     <input id="cert_create_email" type="text"></input>
 
-    <p>Title (required)</p>
+    <p class="text-4">Title (required)</p>
     <input id="cert_create_title" type="text"></input>
 
-    <p>Content (required)</p>
+    <p class="text-4">Content (required)</p>
     <p>~name to add owner's name</p>
     <p>~email to add owner's email</p>
-    <div id="cert_create_content"> </div>
+    <div id="cert_create_content"></div>
 
-    <p></p>
-    <button id="cert_create_submit">Create certificate</button>
-    <p id="cert_create_message"></p>
-    
+    <div class="flex col end" >
+        <button id="cert_create_submit">Create certificate</button>
+        <p id="cert_create_message"></p>
+    </div>
+
 </div>
+</div>
+
+
+    
+
+

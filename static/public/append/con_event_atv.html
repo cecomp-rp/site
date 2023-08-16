@@ -1,7 +1,14 @@
-<div id="${uniq}">
-    <input type="text" id="${uniq}_title" placeholder="Title (required)"></input>
-    <textarea id="${uniq}_description" placeholder="Description"></textarea>
-    <input type="datetime-local" id="${uniq}_date" placeholder="Date"></input>
-    <input type="number" id="${uniq}_duration" placeholder="Duration"></input>
-    <button onclick="event_create_activity_remove('${uniq}')">Remove</button>
+<div id="${uniq}" class="box-2">
+    
+    <div class="box-6">
+        <input type="text" id="${uniq}_title" placeholder="Title (required)"></input>
+        <input type="datetime-local" id="${uniq}_date" placeholder="Date"></input>
+        <input type="number" id="${uniq}_duration" placeholder="Duration"></input>
+    </div>
+    
+    <div class="box-6">
+        <textarea id="${uniq}_description" placeholder="Description" class="w-max"></textarea>    
+    </div>
+    
+    <button class="button-2" onclick="event_create_activity_remove('${uniq}')">Remove</button>
 </div>

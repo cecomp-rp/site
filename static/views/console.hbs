@@ -4,39 +4,59 @@
 </head>
 
 <body>
+<div data-simplebar>
+<div id="main" class="flex col center">
 
-    <!-- Overlays -->
+    <!-- OVERLAYS -->
     {{>common_overlays}}
 
     <!-- NAV -->
     {{>common_nav}}
 
-    
-    <!-- MAIN -->
-    <div class="main ">
+    <!-- CONTENT -->
+    <div id="content">
 
-        <!-- Links -->
-        <a href="/console/certificates">Certificates</a>
-        <a href="/console/events">Events</a>
-        <a href="/console/news">News</a>
-        <a href="/console/polls">Polls</a>
-        <a href="/console/transparency">Transparency</a>
-        <a href="/console/emails">Emails</a>
-        <a href="/console/roles">Roles</a>
-        
+        <div class="flex row center">   
+        <div class="flex col center box-1">  
+        <div class="flex blocks">
+
+            <div href="/console/certificates" class="box-2 w-200 h-200 a jump" > 
+                <p class="text-3">Certificates</p>
+            </div>
+
+            <div href="/console/events" class="box-2 w-200 h-200 a jump" > 
+                <p class="text-3">Events</p>
+            </div>
+
+            <div href="/console/news" class="box-2 w-200 h-200 a jump" > 
+                <p class="text-3">News</p>
+            </div>
+
+            <div href="/console/polls" class="box-2 w-200 h-200 a jump" > 
+                <p class="text-3">Polls</p>
+            </div>
+
+            <div href="/console/transparency" class="box-2 w-200 h-200 a jump" > 
+                <p class="text-3">Transparency</p>
+            </div>
+
+            <div href="/console/emails" class="box-2 w-200 h-200 a jump" > 
+                <p class="text-3">Emails</p>
+            </div>
+
+            <div href="/console/roles" class="box-2 w-200 h-200 a jump" > 
+                <p class="text-3">Roles</p>
+            </div>
+
+        </div>
+        </div>
+        </div>
+
     </div>
 
     <!-- FOOTER -->
     {{>common_footer}}
 
-    
-
-    
-
-    
-
-    
-    
-
-    
+</div>
+</div>
 </body>

@@ -1,20 +1,25 @@
-<div>
-    <script src="\js/console/certificate_edit.js"></script>
-    
-    <h2>Edit certificates</h2>
+<script src="\js/console/certificate_edit.js"></script>
 
-    <p>Certificate ID:</p>
+<h2 class="text-2 title-2" >Edit certificates</h2>    
+<div class="flex row center" id="cert_edit">
+<div class="flex col center box-1">
+
+    <p class="text-4">Certificate ID:</p>
     <input type="text" id="cert_edit_id">
     <p id="cert_edit_id_message"></p>
 
-    <p>Title (required)</p>
+    <p class="text-4">Title (required)</p>
     <input id="cert_edit_title" type="text"></input>
 
-    <p>Content (required)</p>
-    <div id="cert_edit_content"> </div>
+    <p class="text-4">Content (required)</p>
+    <div id="cert_edit_content"></div>
 
-    <p></p>
-    <button id="cert_edit_submit">Update certificate</button>
-    <p id="cert_edit_message"></p>
+    <div class="flex col end" >
+        <button id="cert_edit_submit">Update certificate</button>
+        <p id="cert_edit_message"></p>
+    </div>
 
 </div>
+</div>
+
+

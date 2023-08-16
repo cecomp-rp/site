@@ -154,3 +154,13 @@
 .no-bg {
     background-color: rgba(0,0,0,0);
 }
+
+/*Borders*/
+
+.border-1 {
+    border: #ffffff 1px solid;
+}
+
+.border-2 {
+    border: #ffffff 2px solid;
+}

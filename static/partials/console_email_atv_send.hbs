@@ -1,25 +1,27 @@
-<div>
-    <script src="\js/console/email_atv_send.js"></script>
-    
-    <h2>Send emails - by activity</h2>
+<script src="\js/console/email_atv_send.js"></script>
 
-    <p>Activity ID</p>
+<h2 class="text-2 title-2" >Send emails - by activity</h2>    
+<div class="flex row center" id="email_send_atv">
+<div class="flex col center box-1">
+
+    <p class="text-4">Activity ID</p>
     <input type="text" id="email_atv_id" />
 
-    <p>Filtros</p>
-    <p>- Role</p>
+    <p class="text-4">Filtros</p>
+    <p>Role</p>
     <select id="email_atv_filter_role" class="load-roles" value="">
         <option value="">-</option>
     </select>
 
-    <p>Assunto</p>
+    <p class="text-4">Assunto</p>
     <input type="text" id="email_atv_subject" />
 
-    <p>Conteúdo</p>
+    <p class="text-4">Conteúdo</p>
     <div id="email_atv_content" rows="10" cols="50"></div>
 
     <button id="email_atv_send">Enviar</button>
 
     <p id="email_atv_msg"></p>
 
+</div>
 </div>

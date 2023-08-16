@@ -12,10 +12,17 @@ function event_remove_list(){
 
             data.forEach(element => {
 
+                //Link
+                var event_link = window.location.origin + "/sub/" + element.name;
+                element.link = event_link;
+
                 common_append("#event_remove_div", "con_event.html", element).then(() => {
 
                     //Append activities from element
                     element.activities.forEach(activity => {
+
+                        var activity_link = window.location.origin + "/actv/" + activity._id;
+                        activity.link = activity_link;
 
                         common_append("#" + element._id + "_activities", "con_event_atv2.html", activity)
         

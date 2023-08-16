@@ -1,25 +1,27 @@
-<div>
-    <script src="\js/console/email_event_send.js"></script>
-    
-    <h2>Send emails - by event</h2>
+<script src="\js/console/email_event_send.js"></script>
 
-    <p>Event ID</p>
+<h2 class="text-2 title-2" >Send emails - by event</h2>    
+<div class="flex row center" id="email_send_event">
+<div class="flex col center box-1">
+
+    <p class="text-4">Event ID</p>
     <input type="text" id="email_event_id" />
 
-    <p>Filtros</p>
-    <p>- Role</p>
+    <p class="text-4">Filtros</p>
+    <p>Role</p>
     <select id="email_event_filter_role" class="load-roles" value="">
         <option value="">-</option>
     </select>
 
-    <p>Assunto</p>
+    <p class="text-4">Assunto</p>
     <input type="text" id="email_event_subject" />
 
-    <p>Conteúdo</p>
+    <p class="text-4">Conteúdo</p>
     <div id="email_event_content" rows="10" cols="50"></div>
 
     <button id="email_event_send">Enviar</button>
 
     <p id="email_event_msg"></p>
 
+</div>
 </div>
