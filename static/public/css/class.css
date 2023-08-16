@@ -156,3 +156,23 @@ td .simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
 .transparency-item {
    width: 100%;
 }
+
+
+/*MOBILE/DESKTOP*/
+.mobile {
+    display: none;
+}
+
+.desktop {
+    display: none;
+}
+
+/*LOGGED/NOTLOGGED*/
+
+.logged {
+    display: none;
+}
+
+.notLogged {
+    display: none;
+}

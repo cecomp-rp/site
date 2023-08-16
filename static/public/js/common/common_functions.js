@@ -1,8 +1,10 @@
+var sb_body;
+
 $(document).ready(function() {
     common_isLogged();
 
     //New simple bar in body
-    new SimpleBar(document.getElementsByTagName("BODY")[0]);
+    sb_body = new SimpleBar(document.getElementsByTagName("BODY")[0]);
 
 })
 
@@ -244,11 +246,12 @@ function common_isLogged(){
     common_fetch('/api/account', 'GET').then((data) => {
     
         if(data){
-            $('.logged').show();
+            $('.logged').css('display', 'flex');
             $('.notlogged').hide();
         }else{
+
             $('.logged').hide();
-            $('.notlogged').show();
+            $('.notlogged').css('display', 'flex');
         }
 
     })

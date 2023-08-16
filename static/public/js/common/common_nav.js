@@ -4,6 +4,9 @@ $('document').ready(function () {
 
     nav_animate_backgrounds();
 
+    //Reload simplebar if needed
+    if(sb_body){sb_body.recalculate();}
+
 });
 
 function nav_info_fetch(){
@@ -14,15 +17,6 @@ function nav_info_fetch(){
         if(data){
             $('#nav_user_nick').text(data.nick)
             $('#nav_user_profilePic').attr('src', data.profilePic)
-    
-            $('.nav-logged').show();
-            $('.nav-notlogged').hide();
-        }
-
-        //Else
-        else{
-            $('.nav-logged').hide();
-            $('.nav-notlogged').show();
         }
 
     })

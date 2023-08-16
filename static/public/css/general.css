@@ -15,6 +15,13 @@ body {
     height: 100vh;
 
     overflow-wrap: anywhere;
+
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 div {
