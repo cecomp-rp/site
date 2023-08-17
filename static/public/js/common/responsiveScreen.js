@@ -15,15 +15,19 @@ function defineProportion(){
     if(proportion<maxProportion){
         $(".mobile").hide()
         $(".mobile").attr("visibility", "hidden")
+        $("#css-mobile").attr("disabled", "disabled")
 
         $(".desktop").show()
         $(".desktop").attr("visibility", "visible")
+        $("#css-desktop").removeAttr("disabled")
     }else{
         $(".mobile").show()
         $(".mobile").attr("visibility", "visible")
+        $("#css-mobile").removeAttr("disabled")
 
         $(".desktop").hide()
         $(".desktop").attr("visibility", "hidden")
+        $("#css-desktop").attr("disabled", "disabled")
     }
 
     block = 0

@@ -1,0 +1,67 @@
+/*GENERAL*/
+
+h1 {
+    font-size: 60pt;
+}
+
+h2 {
+    font-size: 40pt;
+}
+
+h3 {
+    font-size: 30pt;
+}
+
+h4 {
+    font-size: 20pt;
+}
+
+p {
+    font-size: 14pt;
+}
+
+.text-1 {
+    font-size: 65pt;
+    font-weight: 700;
+}
+
+.text-2 {
+    font-size: 30pt;
+    font-weight: 600;
+}
+
+.text-3 {
+    font-size: 25pt;
+    font-weight: 600;
+}
+
+.text-4 {
+    font-size: 20pt;
+    font-weight: 300;
+}
+
+/*MODIFIERS*/
+
+.title-1 {
+    padding-left: 40px;
+    padding-right: 50px;
+    margin: 15px;
+}
+
+.title-2 {
+    padding-left: 60px;
+    padding-right: 50px;
+    margin: 15px;
+}
+
+.title-3 {
+    padding-left: 80px;
+    padding-right: 50px;
+    margin: 15px;
+}
+
+.title-4 {
+    padding-left: 100px;
+    padding-right: 50px;
+    margin: 15px;
+}
