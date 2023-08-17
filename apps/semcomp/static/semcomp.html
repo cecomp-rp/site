@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="\css/semcomp.css">
 
     <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/simplebar@6.2.5/dist/simplebar.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/simplebar@6.2.5/dist/simplebar.min.css" rel="stylesheet">
 
@@ -35,8 +36,16 @@
 
 </head>
 
-<body data-simplebar>
+<body>
 <div id="main" class="flex col center">
+
+    <!-- JS -->
+    <script>
+    $(document).ready(function() {
+        //New simple bar in body
+        sb_body = new SimpleBar(document.getElementsByTagName("BODY")[0]);
+    })
+    </script>
 
     <!-- PAGINA 1: INSCREVA-SE -->
     <div id="pg1" style="height: 100%">
