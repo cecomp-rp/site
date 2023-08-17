@@ -1,20 +1,12 @@
 body {
     background-color: rgb(26, 0, 49);
     color: white;
+
+    font-family:'Open Sans', sans-serif;
 }
 
 button {
     font-size: 20pt;
-}
-
-h1 {
-    
-    font-weight: bolder !important;
-}
-
-h2 {
-    font-weight: bolder !important;
-
 }
 
 p {
@@ -124,5 +116,50 @@ p {
     border: 3px solid rgba(0, 0, 0, 0.365);
 }
 
+/*Modifiers*/
+.no-bg {
+    background-color: transparent;
+}
+
+.cron-item {
+   width: 600px;
+
+    padding: 30px;
+    margin: 10px;
+}
+
+.cron-item h1 {
+    font-size: 30pt;
+
+    margin-bottom: 0px;
+}
+
+.cron-item h2 {
+    font-size: 20pt;
+
+    margin-bottom: 0px;
+}
+
+.cron-item h3 {
+    font-size: 20pt;
+
+    font-weight: 300;
+}
+
+.cron-item p {
+    font-size: 15pt;
+
+    font-weight: 300;
+
+    margin-top: 0px;
+}
+
+.cron-item a {
+    font-size: 15pt;
+
+    font-weight: 500;
+
+    margin-top: 0px;
+}
 
 
