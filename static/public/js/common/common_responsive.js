@@ -2,6 +2,15 @@
 var block = 0
 var state = 3
 
+$(window).resize( function (){
+    if(block == 0){defineProportion()};
+    setTimeout(function() {/*Boo*/}, 150)
+});
+
+$(document).ready(function(){
+    defineProportion();
+})
+
 function defineProportion(){
 
     var maxProportion = 1;
@@ -33,14 +42,6 @@ function defineProportion(){
     block = 0
 }
     
-$(window).resize( function (){
-    if(block == 0){defineProportion()};
-    setTimeout(function() {/*Boo*/}, 150)
-});
-
-$(document).ready(function(){
-    defineProportion();
-})
 
 
 

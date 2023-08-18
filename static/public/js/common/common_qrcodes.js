@@ -1,7 +1,5 @@
 $(document).ready(function(){
-
     common_createQRcodes();
-
 });
 
 function common_createQRcodes(){

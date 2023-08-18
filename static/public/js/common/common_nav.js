@@ -51,7 +51,7 @@ function nav_animate_backgrounds(){
                     ['#9D50BB', '#6E48AA'],
                     ['#4776E6', '#ffffff']
                 ],
-                transitionSpeed: 1000
+                transitionSpeed: 5000
             }
         }
     });
