@@ -11,7 +11,11 @@ button {
 }
 
 p {
-    font-size: 20pt;
+    font-size: 25pt;
+}
+
+a {
+    font-size: 25pt;
 }
 
 /*SIMPLE BAR*/
@@ -136,19 +140,19 @@ p {
 }
 
 .cron-item h2 {
-    font-size: 20pt;
+    font-size: 25pt;
 
     margin-bottom: 0px;
 }
 
 .cron-item h3 {
-    font-size: 20pt;
+    font-size: 25pt;
 
     font-weight: 300;
 }
 
 .cron-item p {
-    font-size: 15pt;
+    font-size: 20pt;
 
     font-weight: 300;
 
@@ -156,7 +160,7 @@ p {
 }
 
 .cron-item a {
-    font-size: 15pt;
+    font-size: 20pt;
 
     font-weight: 500;
 
