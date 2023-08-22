@@ -190,3 +190,61 @@ td .simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
 .notLogged {
     display: none;
 }
+
+/*INDEX*/
+.index-block-item-deco {
+    height: 60px;
+    width: 60px;
+
+    padding: 3px;
+
+    margin-right: 20px;
+    margin-left: 0;
+
+    border-radius: 10px;
+
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.index-block-item {
+    padding-left: 12px;
+    margin: 30px;
+
+    min-width: 400px;
+
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 20px;
+
+    box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+
+    word-wrap: normal;
+    overflow: hidden;
+}
+
+.index-block-item:hover {
+    cursor: pointer;
+
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 20px;
+
+    box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    -webkit-box-sizing: border-box !important;
+    
+    background-color: #8840b8;
+}
+
+.index-block-item p{
+    font-size: 20pt;
+    font-weight: 100;
+
+    
+}
+
+.index-link-wrap {
+    border-radius: 20px;
+}
+
+

@@ -1,4 +1,4 @@
-<div class="box-5 border-1">
+<div class="box-5">
 
     <div class="box-3">
         <p>Activity ID: ${_id}</p>
@@ -8,19 +8,19 @@
 
     <div class="flex blocks">
 
-        <div class="box-3 w-400">
+        <div class="box-3 w-400 event-section-atv">
             <p class="text-4">Início</p>
             <p class="format-date">${startDate}</p>
             <p class="text-4">Duração</p>
             <p>${duration} horas</p>
         </div>
 
-        <div class="box-3 break-word w-400">
+        <div class="box-3 break-word w-400 event-section-atv">
             <p class="text-4">Link para marcar presença na atividade</p>
             <a href = "${link}">${link}</a>
 
             <div class="flex row center" style="margin: 15px;">
-                <div class="create-qrcode w-200 h-200">${link}</div>    
+                <div class="create-qrcode img-auto-w">${link}</div>    
             </div>
         </div>
 

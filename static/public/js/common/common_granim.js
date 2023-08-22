@@ -52,12 +52,22 @@ function common_granim_preset(div){
     switch(preset){
 
         case 1:
+            config = {
+                direction: 'diagonal',
+                states : {
+                    "default-state": {
+                        gradients: [
+                            ['#1d1d1d', '#492a7a'],
+                            ['#492a7a', '#2f3333'],
+                            ['#2f3333', '#1d1d1d']
+                        ],
+                        transitionSpeed: 5000
+                    }
+                }
+            }
             break;
 
         case 2:
-            break;
-        
-        case 3:
             config = {
                 direction: 'diagonal',
                 states : {
@@ -67,7 +77,40 @@ function common_granim_preset(div){
                             ['#8840b8', '#FFF333'],
                             ['#FFF333', '#492a7a']
                         ],
-                        transitionSpeed: 2000
+                        transitionSpeed: 5000
+                    }
+                }
+            }
+            break;
+        
+        case 3:
+            config = {
+                direction: 'diagonal',
+                states : {
+                    "default-state": {
+                        gradients: [
+                            ['#8840b8', '#8840b8'],
+                            ['#8840b8', '#ffffff'],
+                            ['#ffffff', '#8840b8']
+                        ],
+                        transitionSpeed: 5000
+                    }
+                }
+            }
+            break;
+
+        case 4:
+            config = {
+                direction: 'diagonal',
+                states : {
+                    "default-state": {
+                        gradients: [
+                            ['#8840b8', '#85E5E5'],
+                            ['#8840b8', '#8840b8'],
+                            ['#85E5E5', '#8840b8']
+                            
+                        ],
+                        transitionSpeed: 5000
                     }
                 }
             }
@@ -75,13 +118,13 @@ function common_granim_preset(div){
 
         default: 
             config = {
-                direction: 'top-bottom',
+                direction: 'diagonal',
                 states : {
                     "default-state": {
                         gradients: [
-                            ['#1d1d1d', '#492a7a'],
-                            ['#492a7a', '#2f3333'],
-                            ['#2f3333', '#1d1d1d']
+                            ['#8840b8', '#492a7a'],
+                            ['#492a7a', '#1d1d1d'],
+                            ['#1d1d1d', '#8840b8']
                         ],
                         transitionSpeed: 5000
                     }
@@ -100,7 +143,11 @@ function common_granim_update(div, canvas, granim){
 
     //Animation params
     const frame_rate = 30;
-    const anim_type = $(div).attr('granim-type')
+    var anim_type = $(div).attr('granim-type')
+
+    if(!anim_type){
+        anim_type = 'not_hover';
+    }
 
     //Animation
     common_granim_update_aux(div, canvas, granim)
@@ -129,7 +176,7 @@ function common_granim_update(div, canvas, granim){
 function common_granim_update_aux(div, canvas, granim){
     
     //Filters
-    canvas.filter = 'blur(100px)';
+    //canvas.filter = 'blur(100px)';
 
     dataUrl = $(canvas)[0].toDataURL();
 

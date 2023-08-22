@@ -152,10 +152,14 @@
 
 /*Boxes*/
 .no-bg {
-    background-color: rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0) !important;
 }
 
 /*Borders*/
+
+.no-border {
+    border: none !important;
+}
 
 .border-1 {
     border: #ffffff 1px solid;
@@ -164,3 +168,4 @@
 .border-2 {
     border: #ffffff 2px solid;
 }
+

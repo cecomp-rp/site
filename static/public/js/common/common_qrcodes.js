@@ -20,11 +20,11 @@ function common_createQRcodes(){
         //Create the QR code
         new QRCode(divId, {
             text: link,
-            width: 200,
-            height: 200,
+            width: 150,
+            height: 150,
             colorDark : "#000000",
             colorLight : "#ffffff",
-            correctLevel : QRCode.CorrectLevel.H
+            correctLevel : QRCode.CorrectLevel.H,
         });
 
         //Add class 'qrcode-created'
