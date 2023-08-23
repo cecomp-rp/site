@@ -39,11 +39,8 @@ div.ql-toolbar.ql-snow {
     visibility: hidden;
     z-index: -100;
 
-    width: 100%;
-    height: 100%;
-
-    width: 500px;
-    height: 500px;
+    width: 200px;
+    height: 200px;
 }
 
 /*SIMPLE BAR*/

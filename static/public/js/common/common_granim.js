@@ -107,8 +107,7 @@ function common_granim_preset(div){
                         gradients: [
                             ['#8840b8', '#85E5E5'],
                             ['#8840b8', '#8840b8'],
-                            ['#85E5E5', '#8840b8']
-                            
+                            ['#85E5E5', '#8840b8'] 
                         ],
                         transitionSpeed: 5000
                     }
@@ -140,6 +139,7 @@ function common_granim_preset(div){
 
 function common_granim_update(div, canvas, granim){
     var dataUrl;
+    var canvas = $(canvas)[0];
 
     //Animation params
     const frame_rate = 30;
@@ -173,23 +173,28 @@ function common_granim_update(div, canvas, granim){
 
 }
 
+var common_granim_update_block = false;
 function common_granim_update_aux(div, canvas, granim){
+
+    if(common_granim_update_block){return;}
+    common_granim_update_block = true;
+
+    var dataUrl = canvas.toDataURL();
+
+    //Preload image
+    var img = new Image();
+
+    img.onload = function () {
+        div.style.backgroundImage = 'url(' + dataUrl + ')';
+        div.style.backgroundSize = 'cover';
+        div.style.backgroundPosition = 'center';
+        div.style.backgroundRepeat = 'no-repeat';
+
+        common_granim_update_block = false;
+    };
+
+    //Set image
+    img.src = dataUrl;
     
-    //Filters
-    //canvas.filter = 'blur(100px)';
-
-    dataUrl = $(canvas)[0].toDataURL();
-
-    $(div).css({
-        'background': 'url(' + dataUrl + ')',
-        'background-position': 'center center',
-        'background-size': 'cover',
-        'background-repeat': 'no-repeat'
-    });
-
-    //Clear URL data
-    dataUrl = null;
-
-
 }
 
