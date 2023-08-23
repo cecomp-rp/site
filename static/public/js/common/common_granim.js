@@ -140,32 +140,35 @@ function common_granim_preset(div){
 }
 
 function common_granim_update(div, canvas, granim){
-    var dataUrl;
+    var dataUrl, div_visible;
     var canvas = $(canvas)[0];
 
     //Animation params
     const frame_rate = 24;
     var anim_type = $(div).attr('granim-type')
+    if(!anim_type){anim_type = 'not_hover';}
 
-    if(!anim_type){
-        anim_type = 'not_hover';
-    }
+    //Other params
+    const verify_interval = 200;
+
+    //Verify visibility
+    setInterval(function () {
+        div_visible = common_isVisible(div);
+    }, verify_interval);
 
     //Animation
     common_granim_update_aux(div, canvas, granim) //Start
-
     setInterval(function () {
 
         //Is div visible?
-        if(!common_isVisible(div)){
+        if(!div_visible){
             granim.pause();
             return;
         }
-
-        //Hover animation?
+        
+        //Hover?
         if(anim_type == 'hover'){
             
-            //Hover?
             if(!$(div).is(':hover')){
                 granim.pause();
                 return;
