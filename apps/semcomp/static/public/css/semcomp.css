@@ -6,10 +6,6 @@ body {
 
 }
 
-button {
-    font-size: 20pt;
-}
-
 p {
     font-size: 25pt;
 }
@@ -111,7 +107,7 @@ a {
 
 .botao {
 
-    font-size: 40pt;
+    font-size: 30pt;
 
     border: 3px solid white;
 
