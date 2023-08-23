@@ -152,9 +152,17 @@ function common_granim_update(div, canvas, granim){
     }
 
     //Animation
-    common_granim_update_aux(div, canvas, granim)
+    common_granim_update_aux(div, canvas, granim) //Start
+
     setInterval(function () {
 
+        //Is div visible?
+        if(!common_isVisible(div)){
+            granim.pause();
+            return;
+        }
+
+        //Hover animation?
         if(anim_type == 'hover'){
             
             //Hover?
