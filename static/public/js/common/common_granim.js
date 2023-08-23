@@ -1,3 +1,5 @@
+var common_granim_update_block = false;
+
 $(document).ready(function () {
     common_granim_find();
 });
@@ -142,7 +144,7 @@ function common_granim_update(div, canvas, granim){
     var canvas = $(canvas)[0];
 
     //Animation params
-    const frame_rate = 30;
+    const frame_rate = 24;
     var anim_type = $(div).attr('granim-type')
 
     if(!anim_type){
@@ -160,10 +162,7 @@ function common_granim_update(div, canvas, granim){
                 granim.pause();
                 return;
             }
-
-            //Resume
-            granim.play();
-
+            
         }
         
         //Update
@@ -173,11 +172,11 @@ function common_granim_update(div, canvas, granim){
 
 }
 
-var common_granim_update_block = false;
 function common_granim_update_aux(div, canvas, granim){
 
     if(common_granim_update_block){return;}
     common_granim_update_block = true;
+    granim.pause();
 
     var dataUrl = canvas.toDataURL();
 
@@ -191,10 +190,10 @@ function common_granim_update_aux(div, canvas, granim){
         div.style.backgroundRepeat = 'no-repeat';
 
         common_granim_update_block = false;
+        granim.play();
     };
 
     //Set image
     img.src = dataUrl;
     
 }
-
