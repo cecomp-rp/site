@@ -1,11 +1,20 @@
 const notLogged = async (req, res, next) => {
 
-    if(req.user){
-        req.user = {}
-        return res.redirect("/")
+    try {
+
+        if(req.user){
+            req.user = {}
+            return res.redirect("/")
+        }
+
+        next()
+
     }
 
-    next()
+    catch(err){
+        return res.redirect('/')
+    }
+
 }
 
 module.exports = notLogged

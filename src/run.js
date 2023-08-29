@@ -69,7 +69,6 @@ hbs.registerPartials(frontEndDirectory + "/partials");
 //Load routers
 const routers = loadRouters(exp)
 
-
 //Load apps
 const apps = loadApps(exp);
 

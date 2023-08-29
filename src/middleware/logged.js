@@ -106,16 +106,13 @@ const logged = function(permissions_needed){
             next();
 
         }
+
         catch (error) {
             prettyPrint("Auth", "Error: " + error, "error", 1)
             return res.redirect('/')
         }
 
-
     }
-
-
-
 
 }
 

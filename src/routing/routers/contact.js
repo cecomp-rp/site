@@ -10,23 +10,35 @@ const router = new express.Router()
 //POST contact (send email)
 router.post("/api/contact", async (req, res) => {
     
-    const data = req.body
+    try{
 
-    const subject   = "Contact - " + data.type;
-    const to        = process.env.GMAIL_USER;
-    const content   = "Email de retorno: " + data.email + "<br><br>" + data.content;
+        const data = req.body
 
-    const email = sendMail(subject, to, content)
+        const subject   = "Contact - " + data.type;
+        const to        = process.env.GMAIL_USER;
+        const content   = "Email de retorno: " + data.email + "<br><br>" + data.content;
 
-    if(email){
+        const email = sendMail(subject, to, content)
+
+        if(email){
+            commonRes(res, {
+                error: undefined,
+                message: "Contact form was sent.",
+                content: undefined
+            }); return;
+        }else{
+            commonRes(res, {
+                error: "Could not send contact form.",
+                message: undefined,
+                content: undefined
+            }); return;
+        }
+
+    }
+
+    catch(err){
         commonRes(res, {
-            error: undefined,
-            message: "Contact form was sent.",
-            content: undefined
-        }); return;
-    }else{
-        commonRes(res, {
-            error: "Could not send contact form.",
+            error: "Error.",
             message: undefined,
             content: undefined
         }); return;

@@ -14,63 +14,104 @@ const router = new express.Router()
 
 //Logout
 router.get("/logout", logged(['basic_functions']), async (req, res) => {
-  const codeRes = await logout(req) 
-  if(codeRes.redirect){
-    res.redirect(req.cookies.redirect || "/")
+  
+  try{
+
+    const codeRes = await logout(req) 
+    if(codeRes.redirect){
+      res.redirect(req.cookies.redirect || "/")
+    }
+    res.status(codeRes.status).send()
+
   }
-  res.status(codeRes.status).send()
+
+  catch(err){
+    commonRes(res, {
+      error: "Error.",
+      message: undefined,
+      content: undefined
+    }); return;
+  }
+
 })
 
 //GET Sessions (by page)
 router.get("/api/session/:page", logged(['basic_functions']), async (req, res) => {
-  const page_size = 5;
-  const page = parseInt(req.params.page)
+      
+  try{
 
-  var sessions = req.user.tokens
+    const page_size = 5;
+    const page = parseInt(req.params.page)
 
-  //filter sessions to remove token
-  sessions.forEach((session) => {
-      session.token = undefined
-  })
+    var sessions = req.user.tokens
 
-  //Remove the current session (last one)
-  const your_session = sessions.pop()
+    //filter sessions to remove token
+    sessions.forEach((session) => {
+        session.token = undefined
+    })
 
-  //filter page size
-  const start = (page - 1) * page_size
-  const end = page * page_size
-  other_sessions = sessions.slice(start, end)
+    //Remove the current session (last one)
+    const your_session = sessions.pop()
 
-  commonRes(res, {
+    //filter page size
+    const start = (page - 1) * page_size
+    const end = page * page_size
+    other_sessions = sessions.slice(start, end)
+
+    commonRes(res, {
       error: undefined,
       message: undefined,
       content: {
           current: your_session,
           other: other_sessions
-      }})
+      }
+    })
+
+  }
+
+  catch(err){
+    commonRes(res, {
+      error: "Error.",
+      message: undefined,
+      content: undefined
+    }); return;
+  }
 
 })
 
 //Remove One Session
 router.delete("/api/session/by_id/:id", logged(['basic_functions']), async (req, res) => {
-  const session_id = req.params.id
+    
+  try{
+  
+    const session_id = req.params.id
 
-  //Remove the session
-  const user = await User.findByIdAndUpdate(req.user._id, {$pull: {tokens: {_id: session_id}}})
-  .catch((e) => {})
+    //Remove the session
+    const user = await User.findByIdAndUpdate(req.user._id, {$pull: {tokens: {_id: session_id}}})
+    .catch((e) => {})
 
-  if(!user){
+    if(!user){
+      commonRes(res, {
+        error: "Error.",
+        message: undefined,
+        content: undefined
+      })
+    } else {
+      commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content: undefined
+      })
+    }
+
+  }
+
+  catch(err){
     commonRes(res, {
       error: "Error.",
       message: undefined,
       content: undefined
-    })
-  } else {
-    commonRes(res, {
-      error: undefined,
-      message: "Success.",
-      content: undefined
-    })
+    }); return;
   }
   
 })
@@ -78,22 +119,34 @@ router.delete("/api/session/by_id/:id", logged(['basic_functions']), async (req,
 //Remove All Sessions
 router.delete("/api/session/all", logged(['basic_functions']), async (req, res) => {
 
-  //Remove all sessions
-  const user = await User.findByIdAndUpdate(req.user._id, {tokens: []})
-  .catch((e) => {})
+  try{
 
-  if(!user){
+    //Remove all sessions
+    const user = await User.findByIdAndUpdate(req.user._id, {tokens: []})
+    .catch((e) => {})
+
+    if(!user){
+      commonRes(res, {
+        error: "Error.",
+        message: undefined,
+        content: undefined
+      })
+    } else {
+      commonRes(res, {
+        error: undefined,
+        message: "Success.",
+        content: undefined
+      })
+    }
+
+  }
+
+  catch(err){
     commonRes(res, {
       error: "Error.",
       message: undefined,
       content: undefined
-    })
-  } else {
-    commonRes(res, {
-      error: undefined,
-      message: "Success.",
-      content: undefined
-    })
+    }); return;
   }
 
 })
@@ -102,15 +155,14 @@ router.delete("/api/session/all", logged(['basic_functions']), async (req, res) 
 //----------------Google-----------------------
 
 router.get('/auth/google', 
-  passport.authenticate('google', { scope: ['profile','email']
-}))
+passport.authenticate('google', { scope: ['profile','email']}
+));
 
 router.get('/auth/google/redirect', 
-  passport.authenticate('google', { failureRedirect: '/logout' }), 
-  logged(['basic_functions']),
-  function(req, res) {
-
-    res.redirect(req.cookies.redirect || "/");
+passport.authenticate('google', { failureRedirect: '/logout' }), 
+logged(['basic_functions']),
+function(req, res) {
+  res.redirect(req.cookies.redirect || "/");
 });
 
 //--------------------------------------------

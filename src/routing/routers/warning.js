@@ -7,9 +7,10 @@ const router = new express.Router()
 //GET warning
 router.get("/api/warning/:id", async (req, res) => {
     
-    const id = req.params.id;
-
     try{
+        
+        const id = req.params.id;
+
         const warning = fs.readFileSync('static/etc/warning/' + id + '.html' , 'utf8')  
 
         commonRes(res, {

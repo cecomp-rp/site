@@ -13,41 +13,65 @@ const router = new express.Router()
 //GET Account info
 router.get("/api/account", logged(['basic_functions']), async (req, res) => {
 
-    const content = filterObject(
-        req.user, //object
-        ['name', 'email', 'nick', 'roles', 'profilePic'], //allowed atributes
-        {} //rename atributes
-    );
+    try{
 
-    commonRes(res, {
-        error: undefined,
-        message: "Success.",
-        content
-    }); return;
+        const content = filterObject(
+            req.user, //object
+            ['name', 'email', 'nick', 'roles', 'profilePic'], //allowed atributes
+            {} //rename atributes
+        );
+
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content
+        }); return;
+
+    }
+
+    catch(err){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
 })
 
 //POST Nick (check if the nick is already in use)
 router.post("/api/account/nick", logged(['basic_functions']), async (req, res) => {
 
-    const nick = req.body.nick
+    try{
 
-    const user = await User.findOne({nick})
-    .catch((err) => {})
+        const nick = req.body.nick
 
-    if(user){
-        commonRes(res, {
-            error: undefined,
-            message: "Nick already in use.",
-            content: {available: false}
-        }); return;
+        const user = await User.findOne({nick})
+        .catch((err) => {})
+
+        if(user){
+            commonRes(res, {
+                error: undefined,
+                message: "Nick already in use.",
+                content: {available: false}
+            }); return;
+        }
+        
+        else{
+            commonRes(res, {
+                error: undefined,
+                message: "Nick available.",
+                content: {available: true}
+            }); return;
+        }
+
     }
-    
-    else{
+
+    catch(err){
         commonRes(res, {
-            error: undefined,
-            message: "Nick available.",
-            content: {available: true}
+            error: "Error.",
+            message: undefined,
+            content: undefined
         }); return;
     }
 
@@ -56,71 +80,107 @@ router.post("/api/account/nick", logged(['basic_functions']), async (req, res) =
 //PATCH Nick
 router.patch("/api/account/nick", logged(['basic_functions']), async (req, res) => {
 
-    const nick = req.body.nick
+    try{
 
-    //Verify if the nick is already in use
-    const user = await User.findOne({nick})
-    .catch((err) => {})
-    if(user){
+        const nick = req.body.nick
+
+        //Verify if the nick is already in use
+        const user = await User.findOne({nick})
+        .catch((err) => {})
+        if(user){
+            commonRes(res, {
+                error: "Nick already in use.",
+                message: undefined,
+                content: undefined
+            }); return;
+        }
+
+        //Verify if the nick is valid (3-15 characters, only letters, numbers and _)
+        const nickRegex = /^[a-zA-Z0-9_]{3,15}$/
+        if(!nickRegex.test(nick)){
+            commonRes(res, {
+                error: "Invalid nick.",
+                message: undefined,
+                content: undefined
+            }); return;
+        }
+
+        //Update the nick
+        await User.findByIdAndUpdate(req.user._id, {nick})
+        .catch((err) => {})
         commonRes(res, {
-            error: "Nick already in use.",
+            error: undefined,
+            message: "Nick updated.",
+            content: undefined
+        }); return;
+
+    }
+
+    catch(err){
+        commonRes(res, {
+            error: "Error.",
             message: undefined,
             content: undefined
         }); return;
     }
-
-    //Verify if the nick is valid (3-15 characters, only letters, numbers and _)
-    const nickRegex = /^[a-zA-Z0-9_]{3,15}$/
-    if(!nickRegex.test(nick)){
-        commonRes(res, {
-            error: "Invalid nick.",
-            message: undefined,
-            content: undefined
-        }); return;
-    }
-
-    //Update the nick
-    await User.findByIdAndUpdate(req.user._id, {nick})
-    .catch((err) => {})
-    commonRes(res, {
-        error: undefined,
-        message: "Nick updated.",
-        content: undefined
-    }); return;
 
 })
 
 //GET Account settings
 router.get("/api/account/settings", logged(['basic_functions']), async (req, res) => {
 
-    const content = filterObject(
-        req.user, //object
-        ['userSettings'], //allowed atributes
-        {} //rename atributes
-    );
+    try{
 
-    commonRes(res, {
-        error: undefined,
-        message: "Success.",
-        content: content.userSettings
-    }); return;
+        const content = filterObject(
+            req.user, //object
+            ['userSettings'], //allowed atributes
+            {} //rename atributes
+        );
+
+        commonRes(res, {
+            error: undefined,
+            message: "Success.",
+            content: content.userSettings
+        }); return;
+
+    }
+
+    catch(err){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
 
 })
 
 //PATCH Account settings
 router.patch("/api/account/settings", logged(['basic_functions']), async (req, res) => {
 
-    const userSettings = req.body
+    try{
 
-    //Update the user settings
-    await User.findByIdAndUpdate(req.user._id, {userSettings})
-    .catch((err) => {})
+        const userSettings = req.body
 
-    commonRes(res, {
-        error: undefined,
-        message: "Settings updated.",
-        content: undefined
-    }); return;
+        //Update the user settings
+        await User.findByIdAndUpdate(req.user._id, {userSettings})
+        .catch((err) => {})
+
+        commonRes(res, {
+            error: undefined,
+            message: "Settings updated.",
+            content: undefined
+        }); return;
+    
+    }
+
+    catch(err){
+        commonRes(res, {
+            error: "Error.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
     
 })
 
