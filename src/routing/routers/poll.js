@@ -75,6 +75,14 @@ router.get("/api/polls/by_id/:id", logged(['bcc_member_functions']), async (req,
     .exec()
     .catch((error) => {})
     
+    if(!poll){
+        commonRes(res, {
+            error: "Poll not found.",
+            message: undefined,
+            content: undefined
+        }); return;
+    }
+
     //Verify if user already voted in poll
     const testVote = poll.whoVoted.includes(req.user._id.toString());
     if(testVote){

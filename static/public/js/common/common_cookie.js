@@ -2,6 +2,10 @@ $(document).ready(function () {
     common_cookieWarning_verify()
 });
 
+function common_cookieWarning_set(id) {
+    common_cookie_save('cookieWarning', id)
+}
+
 function common_cookieWarning_verify() {
     
     //Verify if cookieWarning is set

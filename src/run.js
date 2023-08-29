@@ -67,10 +67,20 @@ exp.set("views", frontEndDirectory + "/views");
 hbs.registerPartials(frontEndDirectory + "/partials");
 
 //Load routers
-loadRouters(exp);
+const routers = loadRouters(exp)
+
 
 //Load apps
-loadApps(exp);
+const apps = loadApps(exp);
+
+//Error handling
+Promise.all([routers, apps]).then(() => {
+
+  exp.use((req, res, next) => {
+      res.status(404).render("404")
+  })
+
+})
 
 //Listen to http and redirect to https
 exp.listen(httpport);

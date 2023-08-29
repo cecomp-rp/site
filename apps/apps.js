@@ -1,10 +1,13 @@
 const fs = require('fs');
+const { promisify } = require('util')
 const prettyPrint = require("../src/utils/other/prettyPrint")
+
+const readdir = promisify(fs.readdir);
 
 //Automatically load all apps in the apps folder
 //USE THE TEMPLATE!
 const loadApps = async (exp) => {
-    await fs.readdir("./apps", { withFileTypes: true }, (error, files) => {
+    return readdir("./apps", { withFileTypes: true }).then((files) => {
         
         const directoriesInDIrectory = files
             .filter((item) => item.isDirectory())

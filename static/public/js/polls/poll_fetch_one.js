@@ -39,7 +39,10 @@ $('document').ready(function () {
 
             })
 
-        }  
+        }else{
+            common_cookieWarning_set("pollNotFound")
+            window.location.href = "/polls"
+        }
     
     })
 

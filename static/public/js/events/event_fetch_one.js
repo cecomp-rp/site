@@ -25,6 +25,9 @@ $('document').ready(function () {
 
             })
 
+        }else{
+            common_cookieWarning_set("eventNotFound")
+            window.location.href = "/events"
         }
 
     })

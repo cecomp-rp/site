@@ -1,10 +1,14 @@
+const { promisify } = require('util')
 const fs = require('fs');
+
+const readdir = promisify(fs.readdir);
 
 //Automatically load all routers in the routers folder
 //USE THE TEMPLATE!
-const loadRouters = (exp) => {
+const loadRouters = async (exp) => {
 
-    fs.readdir("./src/routing/routers", { withFileTypes: true }, (error, files) => {
+    //Endpoints
+    return readdir("./src/routing/routers", { withFileTypes: true }).then((files) => {
 
         const directoriesInDIrectory = files
             .map((item) => item.name);
@@ -14,7 +18,7 @@ const loadRouters = (exp) => {
             exp.use(router);
         });
         
-    });
+    })
 
 }
 

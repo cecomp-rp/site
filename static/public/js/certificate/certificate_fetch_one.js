@@ -27,7 +27,11 @@ function cert_fetch(id){
             //Format dates
             common_format_dates();
 
+        }else{
+            common_cookieWarning_set("certificateNotFound");
+            window.location.href = "/certificates";
         }
+
     });
 
 }

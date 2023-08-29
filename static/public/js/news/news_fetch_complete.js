@@ -16,6 +16,10 @@ $('document').ready(function () {
             $("#news_author").text(data.author_id)
         
             common_format_dates();
+
+        }else{
+            common_cookieWarning_set("newsNotFound")
+            window.location.href = "/"
         }
 
     })
