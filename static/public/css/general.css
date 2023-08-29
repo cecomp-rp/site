@@ -145,7 +145,7 @@ input[type=button]:hover {
 }
 
 input[type=text]{
-    height: 50px;
+    min-height: 50px;
 
     padding: 1px;
     padding-left: 10px;

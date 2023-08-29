@@ -4,6 +4,11 @@
     padding-bottom: 20px;
 }
 
+.editor-paste {
+    background-color:rgba(0, 0, 0, 0) !important;
+    color: #ffffff !important;
+}
+
 .ql-editor {
     font-family: 'Open Sans', sans-serif;
     background-color: #ffffff;

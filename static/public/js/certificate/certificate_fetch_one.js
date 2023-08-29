@@ -10,7 +10,7 @@ function cert_fetch(id){
         if(data){
 
             $('#cert_title').text(data.title);
-            $('#cert_content').html(data.content);
+            common_quill_pasteContent('#cert_content', data.content);
             $('#cert_owner').text(data.owner_id);
 
             if(data.is_event_certificate){

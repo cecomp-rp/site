@@ -18,6 +18,8 @@ function poll_fetch_list(poll_fetch_page){
 
                     poll.options.forEach((option, i) => {
 
+                        option.content = common_quill_pasteContent('', option.content);
+
                         common_append(`#${poll._id}_poll_options`, 'poll_opt.html', {poll, option, i}).then(() => {
 
                             //User already voted?

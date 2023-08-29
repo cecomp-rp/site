@@ -43,3 +43,23 @@ function common_quill_clearContent(editor){
     editor.setText('');
 }
 
+function common_quill_pasteContent(div, content){
+    
+    const uniq = 'id' + (new Date()).getTime() + parseInt(Math.random() * 1000);
+
+    const append_model = `
+        <div class="ql-snow">
+        <div class="ql-editor editor-paste">
+        ${content}
+        </div> 
+        </div> 
+    `;
+
+    if(div != ''){
+        $(div).append(append_model)
+    }
+
+    return append_model
+
+}
+

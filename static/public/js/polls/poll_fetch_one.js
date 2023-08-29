@@ -15,6 +15,8 @@ $('document').ready(function () {
 
             data.options.forEach((option) => {
 
+                option.content = common_quill_pasteContent('', option.content);
+
                 common_append('#poll_options', 'poll_opt.html', {poll: data, option}).then(() => {
 
                      //User already voted?

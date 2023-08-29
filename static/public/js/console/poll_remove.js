@@ -18,6 +18,8 @@ function poll_remove_list(poll_remove_page){
     
                     element.options.forEach((option, i) => {
 
+                        option.content = common_quill_pasteContent('', option.content);
+
                         common_append(`#${element._id}_poll_options`, 'con_poll_opt2.html', {element, option, i})
         
                     });

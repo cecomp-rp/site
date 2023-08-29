@@ -11,6 +11,8 @@ function event_list(){
         if(data){
 
             data.forEach(element => {
+            
+                element.description = common_quill_pasteContent('', element.description);
 
                 common_append("#event_div", "event_event.html", element);
     

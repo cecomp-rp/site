@@ -8,7 +8,8 @@ $('document').ready(function () {
 
             $("#event_title").text(data.title);
             $("#event_name").text(data.name);
-            $("#event_description").html(data.description);
+            common_quill_pasteContent("#event_description", data.description)
+
             $("#event_startDate").text(data.startDate);
             $("#event_endDate").text(data.endDate);
 

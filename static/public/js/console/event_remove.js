@@ -16,6 +16,8 @@ function event_remove_list(){
                 var event_link = window.location.origin + "/sub/" + element.name;
                 element.link = event_link;
 
+                element.description = common_quill_pasteContent('', element.description);
+
                 common_append("#event_remove_div", "con_event.html", element).then(() => {
 
                     //Append activities from element

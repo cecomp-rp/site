@@ -13,8 +13,14 @@
         <p>Event ID: ${event_id}</p>
     </div>
 
-    <button class="button-2" onclick='uSure("cert_remove_remove(\"${_id}\")")'>Remove</button>
-    <button class="button-2" onclick="common_jumpTo('cert_edit'); cert_remove_edit('${_id}')">Edit</button>
-    <a href="/certificates/${_id}">See page...</a>
+    <div class="box-2 no-bg flex row" style="margin: 20px;">
+        <button class="button-2" onclick='uSure("cert_remove_remove(\"${_id}\")")' style="margin-right: 20px;">Remove</button>
+        <button class="button-2" onclick="common_jumpTo('cert_edit'); cert_remove_edit('${_id}')">Edit</button>
+
+        <div class="w-max flex row end">
+        <a href="/certificates/${_id}" style="margin-top: 30px;">See page...</a>
+        </div>
+
+    </div>
 
 </div>

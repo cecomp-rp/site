@@ -57,6 +57,8 @@ function cert_remove_list(page){
             //For each certificate
             data.forEach((certificate) => {
 
+                certificate.content = common_quill_pasteContent('', certificate.content);
+
                 common_append("#cert_remove_div", "con_certificate.html", certificate);
 
             });
