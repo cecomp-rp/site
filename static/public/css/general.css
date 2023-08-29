@@ -146,6 +146,10 @@ input[type=button]:hover {
 
 input[type=text]{
     height: 50px;
+
+    padding: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 select {

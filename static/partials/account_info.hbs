@@ -6,21 +6,28 @@
 <div class="flex row center">
 <div class="flex col center box-1">
     
-    <div class="box-2 no-bg">
-        <p class="text-4">Nome</p>
-        <p id="acc_name"></p>
+    <div class="box-2 no-bg blocks flex">
 
-        <p class="text-4">Email</p>
-        <p id="acc_email"></p>
+        <div class="acc_info_div w-800">
+            <p class="text-4">Informações gerais</p>
+            <div class="flex row center" style="margin: 20px;">
+                <div class="flex col center">
+                    <img id="acc_profilePic" class="border-1" src="" style="width: 180px; height: 180px; margin-right: 50px; border-radius: 20px;">    
+                </div>
+                <div class="flex col center w-max">
+                    <p id="acc_name" class="text-3" style="margin:0"></p>
+                    <p id="acc_email" style="margin:0; margin-bottom: 15px; font-size: 20pt;"></p>
+                    <p class="text-4" style="margin:0; font-size: 14pt;">a.k.a</p>
+                    <p id="acc_nick" class="text-4" style="margin:0; font-size: 18pt;"></p>
+                </div>
+            </div>
+        </div>
 
-        <p class="text-4">Apelido</p>
-        <p id="acc_nick"></p>
+        <div class="acc_info_div w-800">
+            <p class="text-4">Permissões</p>
+            <p class="box-3" id="acc_roles"></p>
+        </div>
 
-        <p class="text-4">Foto</p>
-        <img id="acc_profilePic" src="" style="width: 100px; height: 100px;">
-
-        <p class="text-4">Permissões</p>
-        <p class="box-3" id="acc_roles"></p>
     </div>
 
 </div>
