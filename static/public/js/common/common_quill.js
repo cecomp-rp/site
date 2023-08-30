@@ -2,6 +2,8 @@ function common_quill_createEditor(div){
 
     var options = {
         modules: {
+            imageResize: {},
+            imageDrop: true,
             'syntax': true,
             'toolbar': [
               [ 'bold', 'italic', 'underline', 'strike' ],
@@ -12,7 +14,8 @@ function common_quill_createEditor(div){
               [ 'direction', { 'align': [] }],
               [ 'link', 'image', 'video', 'formula' ],
               [ 'clean' ]
-        ]
+            ],
+            
         },
         placeholder: 'Dream here...',
         theme: 'snow'

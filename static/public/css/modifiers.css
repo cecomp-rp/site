@@ -177,3 +177,15 @@
     border: #ffffff 2px solid;
 }
 
+/*Img*/
+
+.img-w {
+    width: 100%;
+    height: auto;
+}
+
+.img-h {
+    width: auto;
+    height: 100%;
+}
+

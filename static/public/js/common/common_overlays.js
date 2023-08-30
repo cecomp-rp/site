@@ -97,6 +97,16 @@ $('document').ready(function () {
     //On any a click
     $("body").on('click', 'a', function (event) {
 
+        //Exceptions
+        const excp = [
+            '.editor'
+        ];
+        for (var i = 0; i < excp.length; i++) {
+            if ($(this).parents(excp[i]).length) {
+                return;
+            }
+        }
+
         //prevent default
         event.preventDefault();
 
