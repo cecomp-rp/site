@@ -31,6 +31,14 @@
     font-family: 'Open Sans', sans-serif;
 }
 
+.justify * {
+    text-align: justify;
+}
+
+.justify {
+    text-align: justify;
+}
+
 /*TITLES*/
 .title-1 {
     padding-left: 5%;

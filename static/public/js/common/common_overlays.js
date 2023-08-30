@@ -183,6 +183,8 @@ var nav_anim_block = false;
 var nav_endpage_block = false;
 var nav_endpage_count = 0;
 
+var last_height = 0;
+
 $('#nav-overlay').ready(function () {
 
     //on open
@@ -208,13 +210,31 @@ function common_nav_event(event) {
     var current_height_inverse = $("#nav-overlay-scroll").scrollTop();
     var current_height = $("#nav-overlay-scroll").prop('scrollHeight') - $("#nav-overlay-scroll").height() - current_height_inverse;
 
+    var current_height_percent = current_height / $("#nav-overlay-scroll").prop('scrollHeight');
+
+    //Delta movement
+    var elasticity = 1;
+
+    var delta = Math.abs(current_height - last_height);
+    last_height = current_height;
+
+    var delta_tolerance = 20;
+    if (delta < delta_tolerance) {delta = 0;}
+
+    var delta_max = 100;
+    if ((delta ^ elasticity) > delta_max) {delta = delta_max;}
+
+    var scroll_up = Math.abs((delta ^ elasticity) * (current_height_percent ^ elasticity));
+
+    var max_scroll_up = 50;
+    if (scroll_up > max_scroll_up) {scroll_up = max_scroll_up;}
+
     //Closing
     var down_trigger_height = 20;
-    var scroll_up = 100;
     var up_trigger_height = down_trigger_height + scroll_up + 50;
-        
-    if(current_height < down_trigger_height) {
     
+    if(current_height < down_trigger_height) {
+
         if(!nav_endpage_block && nav_endpage_count == 0){
             nav_endpage_block = true;
             nav_endpage_count = 1;
@@ -225,11 +245,11 @@ function common_nav_event(event) {
                 complete: function () {
                     nav_endpage_block = false;
                 }
-            }, 200);
+            }, 100);
 
             setTimeout(function () {
                 nav_endpage_block = false;
-            }, 200);
+            }, 100);
             
         }
 
@@ -244,11 +264,7 @@ function common_nav_event(event) {
         nav_endpage_count = 0;
     }
 
-    if(!nav_anim_block){
-        nav_anim_block = true;
-        common_nav_overlay_item_scale();
-        nav_anim_block = false;
-    }
+    common_nav_overlay_item_scale();
 
 }
 
