@@ -15,6 +15,7 @@ router.post("/api/emails/global/:page", logged(['admin']), async (req, res) => {
 
         const page = req.params.page;
         const page_limit = 100;
+        const data = req.body;
 
         //Find all users userSettings.enable_email_sharing true and userSettings.enable_email_sharing_global true
         //Get email by page
@@ -30,9 +31,24 @@ router.post("/api/emails/global/:page", logged(['admin']), async (req, res) => {
                 content: undefined
             }); return;
         }
-        
-        const users_filtered = filterObject(
-            users,
+
+        //Apply filters
+        const filters = data.filters;
+        if(filters && filters.role && filters.role == ''){ delete filters.role }
+
+        const users_filtered = users.filter((user) => {
+            var user_passed = true;
+            
+            //Roles
+            if(filters && filters.role){
+            if(!user.roles.includes(filters.role)){ user_passed = false; }
+            }
+
+            return user_passed;
+        })
+
+        const users_filtered_again = filterObject(
+            users_filtered,
             ["email"],
             {}
         );
@@ -40,7 +56,7 @@ router.post("/api/emails/global/:page", logged(['admin']), async (req, res) => {
         commonRes(res, {
             error: undefined,
             message: "Success.",
-            content: users_filtered
+            content: users_filtered_again
         }); return;
 
     }
