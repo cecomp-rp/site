@@ -68,7 +68,7 @@ function addFields(body, data){
 
     //ACTIVITIES (activities)
     if(data.activities){
-        var totalHours;
+        var totalHours = 0;
 
         //For each activity in activities
         data.activities.forEach((activity) => {
