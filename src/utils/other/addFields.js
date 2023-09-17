@@ -93,7 +93,7 @@ function addFields(body, data){
 
     if(data.activities){
         
-        var append = "";
+        var append = "<div class='flex col'>";
 
         //For each activity in activities
         data.activities.forEach((activity) => {
@@ -103,9 +103,9 @@ function addFields(body, data){
 
                 append = append + 
                 `
-                    <div class="title-1" style="margin:30px">
-                        <h3 class="text-3" style="margin:0">${activity.title}</h3>
-                        <p>${activity.description}</p>
+                    <div class="box-3 no-bg border-1 flex col" style="margin:0; margin-top:20px;">
+                        <h3 class="text-3" style="margin:0; padding:0; margin-bottom: 15px;">${activity.title}</h3>
+                        <p style="margin-bottom: 15px;">${activity.description}</p>
                         <p>Realizada em: <label class="format-date">${activity.startDate}</label></p>
                         <p>Duração: ${activity.duration} horas</p>
                     </div>
@@ -114,6 +114,8 @@ function addFields(body, data){
             }
 
         })
+
+        append = append + "</div>";
 
         //Test expression ~activities
         const regex7 = /~activities/gi;
