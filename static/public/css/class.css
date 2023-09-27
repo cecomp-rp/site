@@ -247,4 +247,14 @@ td .simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
     border-radius: 20px;
 }
 
+/*RETRACTABLE*/
+
+.retract-button {
+    margin: 15px;
+
+    border-radius: 5px;
+    width: 100px;
+
+    border: 1px solid #ffffff;
+}
 

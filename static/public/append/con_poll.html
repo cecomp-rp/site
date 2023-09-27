@@ -14,39 +14,43 @@
             <p class="text-4 break-word" style="margin-left: 25px; margin-top: 0;">${description}</p>
         </div>
     
-        <div id="${_id}_poll_options"></div>
+        <div class="create-retract">
 
-        <div class="flex row center">
+            <div id="${_id}_poll_options"></div>
 
-            <div class="w-max flex row start blocks" style="margin-left: 15px;">
+            <div class="flex row center">
 
-                <div class="flex col" style="margin-top: 20px; margin:10px;">
-                    <p class="text-4" style="margin:0">Autor</p>
-                    <p class="" style="margin:0px;">${author_id}</p>  
+                <div class="w-max flex row start blocks" style="margin-left: 15px;">
+
+                    <div class="flex col" style="margin-top: 20px; margin:10px;">
+                        <p class="text-4" style="margin:0">Autor</p>
+                        <p class="" style="margin:0px;">${author_id}</p>  
+                    </div>
+
+                    <div class="flex col" style="margin-top: 20px; margin:10px;">
+                        <p class="text-4" style="margin:0">Criado em </p>
+                        <p class="format-date" style="margin:0">${created_at}</p>
+                    </div>
+                    
+                    <div class="flex col" style="margin-top: 20px; margin:10px;">
+                        <p class="text-4" style="margin:0">Início</p>
+                        <p class="format-date" style="margin:0">${startDate}</p>
+                    </div>
+
+                    <div class="flex col" style="margin-top: 20px; margin:10px;">
+                        <p class="text-4" style="margin:0">Fim</p>
+                        <p class="format-date" style="margin:0">${endDate}</p>
+                    </div>
+
                 </div>
 
-                <div class="flex col" style="margin-top: 20px; margin:10px;">
-                    <p class="text-4" style="margin:0">Criado em </p>
-                    <p class="format-date" style="margin:0">${created_at}</p>
+                <div class="flex col end">
+                <div class="flex row end">
+                    <a href="/polls/${_id}" style="margin: 10px; width: 100px;">Ver página</a>
+                    
                 </div>
-                
-                <div class="flex col" style="margin-top: 20px; margin:10px;">
-                    <p class="text-4" style="margin:0">Início</p>
-                    <p class="format-date" style="margin:0">${startDate}</p>
                 </div>
 
-                <div class="flex col" style="margin-top: 20px; margin:10px;">
-                    <p class="text-4" style="margin:0">Fim</p>
-                    <p class="format-date" style="margin:0">${endDate}</p>
-                </div>
-
-            </div>
-
-            <div class="flex col end">
-            <div class="flex row end">
-                <a href="/polls/${_id}" style="margin: 10px; width: 100px;">Ver página</a>
-                
-            </div>
             </div>
 
         </div>

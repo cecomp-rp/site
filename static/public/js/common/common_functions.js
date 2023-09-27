@@ -179,6 +179,7 @@ function common_append(where_to_append, file_to_append, attr_to_add = {}){
         //Extras
         common_format_dates();
         common_createQRcodes();
+        common_createRetract();
 
     })
 

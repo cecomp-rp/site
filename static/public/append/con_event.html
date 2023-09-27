@@ -7,45 +7,50 @@
         <p class="event_remove_description">${description}</p>
     </div>
 
-    <div class="blocks flex">
+    <div class="create-retract">
+        <div class="blocks flex">
 
-        <div class="box-6 w-400 event-section">
-            <p class="text-4">Restrição de role:</p>
-            <p class="event_remove_roleRestriction">${roleRestriction}</p>
-        </div>
+            <div class="box-6 w-400 event-section">
+                <p class="text-4">Restrição de role:</p>
+                <p class="event_remove_roleRestriction">${roleRestriction}</p>
+            </div>
 
-        <div class="box-6 w-400 event-section">
-            <p class="text-4">Início:</p>
-            <p class="event_remove_start_date format-date">${startDate}</p>
-            <p class="text-4">Fim:</p>
-            <p class="event_remove_end_date format-date">${endDate}</p>
-        </div>
+            <div class="box-6 w-400 event-section">
+                <p class="text-4">Início:</p>
+                <p class="event_remove_start_date format-date">${startDate}</p>
+                <p class="text-4">Fim:</p>
+                <p class="event_remove_end_date format-date">${endDate}</p>
+            </div>
 
-        <div class="box-6 w-400 event-section">
-            <p class="text-4">Criado em:</p>
-            <p class="event_remove_createdAt format-date">${created_at}</p>
-            <p class="text-4">Última atualização:</p>
-            <p class="event_remove_updatedAt format-date">${updated_at}</p>  
+            <div class="box-6 w-400 event-section">
+                <p class="text-4">Criado em:</p>
+                <p class="event_remove_createdAt format-date">${created_at}</p>
+                <p class="text-4">Última atualização:</p>
+                <p class="event_remove_updatedAt format-date">${updated_at}</p>  
+            </div>
+            
+            <div class="box-6 border-2 w-400 event-section">
+                <p class="text-4">Link de inscrição do evento:</p>
+                <a href = "${link}">${link}</a>   
+            </div>
         </div>
         
-        <div class="box-6 border-2 w-400 event-section">
-            <p class="text-4">Link de inscrição do evento:</p>
-            <a href = "${link}">${link}</a>   
+        <div class="box-6 border-2">
+            <p class="text-4">Atividades:</p>
+            <div class="create-retract">
+                <div class="activities" id="${_id}_activities"></div>    
+            </div>
         </div>
+        
+        <div class="box-2">
+            <a href="/events/${name}">See page...</a>    
+        </div>
+        
+        <div class="box-2">
+            <button class="button-2" onclick='uSure("event_remove_delete(\"${_id}\")")' style="margin-right: 20px;">Delete</button>
+            <button class="button-2" onclick="common_jumpTo('event_edit'); event_remove_edit('${_id}')">Edit</button>    
+        </div>
+
     </div>
-    
-    <div class="box-6 border-2">
-        <p class="text-4">Atividades:</p>
-        <div class="activities" id="${_id}_activities"></div>    
-    </div>
-    
-    <div class="box-2">
-        <a href="/events/${name}">See page...</a>    
-    </div>
-    
-    <div class="box-2">
-        <button class="button-2" onclick='uSure("event_remove_delete(\"${_id}\")")' style="margin-right: 20px;">Delete</button>
-        <button class="button-2" onclick="common_jumpTo('event_edit'); event_remove_edit('${_id}')">Edit</button>    
-    </div>
- 
+
 </div>
