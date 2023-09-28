@@ -85,6 +85,11 @@ router.get("/transparency", logged(['bcc_member_functions']), (req, res) => {
     res.render("transparency")
 });
 
+//Internships Page
+router.get("/internships", logged(['bcc_member_functions']), (req, res) => {
+    res.render("internships")
+});
+
 //ADMIN ----------------------------------
 
 //Console Page
