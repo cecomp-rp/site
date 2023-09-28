@@ -61,3 +61,21 @@ p {
     width: 100%;
 }
 
+/*ID*/
+
+#subtitle1-index {
+    font-size: 18pt !important;
+    white-space: nowrap;
+}
+
+#subtitle2-index {
+    font-size: 18pt !important;
+    white-space: nowrap;
+}
+
+#index-logo {
+    width: 300px;
+
+    top: -90px;
+    right: -130px;
+}

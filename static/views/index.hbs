@@ -18,25 +18,25 @@
     {{>common_nav}}
 
     <!-- CONTENT -->
-    <div id="content">
+    <div id="content" style="padding-top: 0;">
 
         <!-- Header -->
-        <div class="flex col center">
-        <div class="box-1 flex center" style="background-color: rgba(0,0,0,0)">
+        <div id="index-header" class="flex col center granim float" granim="5">
+        <div class="box-1 flex center no-bg" style="margin-top:0; margin-bottom:0;">
 
-            <div class="box-3" style="width: 1000px;">
-                <h1 class="title-1 text-1" style="word-break:keep-all; padding-left: 0px;">CEComp</h1> 
-                <h2 class="title-2 text-4" style="font-size: 30pt; padding-left: 40px;">Centro Estudantil da Computação</h2> 
-                <h2 class="title-2 text-4" style="font-size: 30pt; padding-left: 40px;">USP Ribeirão Preto</h2> 
+            <div class="box-3 no-bg" style="width: 1000px; margin-top:0;" >
+                <h1 class="title-1 text-1" style="word-break:keep-all; padding-left: 0px; margin-top:0; margin-bottom:0;">CEC<label style="font-size:55pt;">OMP</label></h1> 
+                <h2 id="subtitle1-index" class="title-2 text-4" style="font-size: 30pt; padding-left: 40px; margin-top:0; margin-bottom:0;">Centro Estudantil da Computação</h2> 
+                <h2 id="subtitle1-index" class="title-2 text-4" style="font-size: 30pt; padding-left: 40px; margin-top:0; ">USP Ribeirão Preto</h2> 
 
                 <a href="/about" style=" padding-left: 40px;" class="title-2">Sobre nós</a>
             </div>
 
-            <div class="flex col center desktop">
+            <div class="flex col center">
             <div class="flex row center">
 
-                <div class="flex col center" style="width: 270px; height: 270px;">
-                <img src="\img/mascot/mascot-light.png" style="width: auto; height: auto; margin-top: 250px;">
+                <div class="flex col center">
+                <img id="index-logo" class="float-png" src="\img/mascot/mascot-light.png">
                 </div>
 
             </div>     
@@ -46,13 +46,14 @@
         </div>
 
         <!-- Just a spacer -->
-        <div style="height: 100px;"></div>
+        <div class="desktop" style="height: 60px;"></div>
+        <div class="mobile" style="height: 40px;"></div>
 
         <!-- Notícias -->
         {{>index_news_list}}
         
         <!-- Links -->
-        <h2 class="text-2 title-2" style="margin-top: 40px;">Links</h2>
+        <h2 class="text-2 title-2" style="margin-top: 30px;">Links</h2>
         <div class="flex row center">
         <div class="flex col center box-1 no-bg border-2">
 
@@ -203,7 +204,7 @@
         </div>
 
         <!-- Serviços -->
-        <h2 class="text-2 title-2" style="margin-top: 40px;">Serviços</h2>  
+        <h2 class="text-2 title-2" style="margin-top: 30px;">Serviços</h2>  
         <div class="flex row center">
         <div class="flex col center box-1 no-bg border-2">
 

@@ -94,7 +94,7 @@ td .simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
 
     z-index: 100;
 
-    box-shadow: 0px 0px 2px 0px rgba(255, 255, 255, 0.3);
+    /*box-shadow: 0px 0px 2px 0px rgba(255, 255, 255, 0.3);*/
 }
 
 .nav-logo {

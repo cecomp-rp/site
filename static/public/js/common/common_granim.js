@@ -117,6 +117,25 @@ function common_granim_preset(div){
             }
             break;
 
+        case 5:
+            config = {
+                direction: 'diagonal',
+                states : {
+                    "default-state": {
+
+                        // Purple, gray, black and just a libble bit of yellowish purple
+                        gradients: [
+                            ['#8840b8', '#492a7a'],
+                            ['#492a7a', '#3D1648'],
+                            ['#3D1648', '#8840b8']
+                        ],
+                        
+                        transitionSpeed: 10000
+                    }
+                }
+            }
+            break;
+
         default: 
             config = {
                 direction: 'diagonal',
