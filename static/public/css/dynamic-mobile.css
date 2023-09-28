@@ -45,10 +45,6 @@ p {
 
 /*CLASS*/
 
-.index-link-wrap {
-    width: 100%;
-}
-
 .event-section {
     width: 100%;
 }
@@ -59,6 +55,12 @@ p {
 
 .acc_info_div {
     width: 100%;
+}
+
+.index-grid-col {
+    width: 100%;
+    margin-top: 30px;
+    margin-left: 10%;
 }
 
 /*ID*/

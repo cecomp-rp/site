@@ -46,265 +46,203 @@
         </div>
 
         <!-- Just a spacer -->
-        <div class="desktop" style="height: 60px;"></div>
-        <div class="mobile" style="height: 40px;"></div>
+        <div style="height: 0px;" class="mobile"></div>
+        <div style="height: 30px;" class="desktop"></div>
 
-        <!-- Notícias -->
-        {{>index_news_list}}
-        
-        <!-- Links -->
-        <h2 class="text-2 title-2" style="margin-top: 30px;">Links</h2>
+        <!-- Grid -->
         <div class="flex row center">
-        <div class="flex col center box-1 no-bg border-2">
+        <div class="flex row center box-1 no-bg blocks">
 
-            <div class="flex blocks index-link-wrap-aux">
-
-                <!-- Destaques -->
-                <div class="index-link-wrap">
-
-                    <div class="flex row center">
-                        <h2 class="text-4">Destaques</h2>    
-                    </div>
-
-                    <div class="flex blocks">
-
-                        <div href="/semcomp" class="a jump index-block-item flex row granim no-border" granim="4">
-                            <div class="flex col center">
-                                <div class="index-block-item-deco no-bg" >
-                                    <img src="img/assets/semcomp.png" class="img-w">
-                                </div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Semcomp</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
+            <!-- 1 Coluna -->
+            <div class="flex col index-grid-col" style="margin-right: 50px;">
 
                 <!-- Loja -->
-                <div class="index-link-wrap">
+                <div class="flex row">
 
-                    <div class="flex row center">
-                        <h2 class="text-4">Loja</h2>    
-                    </div>
-
-                    <div class="flex blocks">
-
-                        <div href="/store" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Lojinha</p>
-                            </div>
+                    <div href="/store" class="a jump flex row" style="width: fit-content;">
+                        <div class="index-social-media granim" granim="4">
+                            <p class="fa fa-shopping-cart"></p>
                         </div>
-
                     </div>
+
+                    <p class="text-4" style="margin-left: 8px; margin-bottom: 0;">Loja</p>
 
                 </div>
 
-                <!-- Lives & Aulas -->
-                <div class="index-link-wrap">
-
-                    <div class="flex row center">
-                        <h2 class="text-4">Lives & Aulas</h2>    
-                    </div>
-
-                    <div class="flex blocks">
-
-                        <div href="https://www.youtube.com/@cecomp_rp" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Youtube</p>
-                            </div>
+                <!-- Semcomp -->
+                <div class="flex row">
+                    
+                    <div href="/semcomp" class="a jump flex row" style="width: fit-content;">
+                        <div class="index-social-media granim" granim="4">
+                            <img src="img/assets/semcomp.png" class="img-w" style="margin:12px; width: 36px;">
                         </div>
-
                     </div>
+
+                    <p class="text-4" style="margin-left: 8px; margin-bottom: 0;">Semcomp</p>
+
+                </div>
+
+                <!-- Octobit -->
+                <div class="flex row">
+
+                     <div href="/octobit" class="a jump flex row" style="width: fit-content;">
+                        <div class="index-social-media granim" granim="3">
+                            <img src="img/assets/octobit.png" class="img-w" style="margin:0px; width: 60px;">
+                        </div>
+                    </div>
+
+                    <p class="text-4" style="margin-left: 8px; margin-bottom: 0;">Octobit</p>
+
+                </div>
+
+            </div>
+
+            <!-- 2 Coluna -->
+            <div class="flex col index-grid-col">
+
+                <!-- Lives & Aulas -->
+                <div class="flex row">
+
+                    <div href="https://www.youtube.com/@cecomp_rp" class="a jump flex row" style="width: fit-content;">
+                        <div class="index-social-media color-youtube">
+                            <p class="fa fa-youtube"></p>
+                        </div>    
+                    </div>
+
+                    <p class="text-4" style="margin-left: 8px; margin-bottom: 0;">Lives & Aulas</p>
 
                 </div>
 
                 <!-- Redes socias -->
-                <div class="index-link-wrap">
+                <div class="flex row">
 
-                    <div class="flex row center">
-                        <h2 class="text-4">Redes sociais</h2>    
+                    <div href="https://www.instagram.com/cecomp.rp/" class="a jump flex row" style="width: fit-content;">
+                        <div class="index-social-media color-instagram">
+                            <p class="fa fa-instagram"></p>
+                        </div>
                     </div>
 
-                    <div class="flex blocks"> 
-
-                        <div href="https://www.instagram.com/cecomp.rp/" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Instagram</p>
-                            </div>
+                    <div href="https://www.facebook.com/cecomp.rp" class="a jump flex row" style="width: fit-content;">
+                        <div class="index-social-media color-facebook">
+                            <p class="fa fa-facebook"></p>
                         </div>
-
-                        <div href="https://www.facebook.com/cecomp.rp" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Facebook</p>
-                            </div>
-                        </div>
-
-                        <div href="https://twitter.com/cecomp_rp" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Twitter</p>
-                            </div>
-                        </div>
-
                     </div>
+
+                    <div href="https://twitter.com/cecomp_rp" class="a jump flex row" style="width: fit-content;">
+                        <div class="index-social-media color-twitter">
+                            <p class="fa fa-twitter"></p>
+                        </div>
+                    </div>
+
+                    <p class="text-4" style="margin-left: 8px; margin-bottom: 0;">Redes Sociais</p>
 
                 </div>
 
                 <!-- Profissional -->
-                <div class="index-link-wrap">
-
-                    <div class="flex row center">
-                        <h2 class="text-4">Profissional</h2>    
+                <div class="flex row">
+                    
+                    <div href="https://www.linkedin.com/in/cecomp-rp/" class="a jump flex row" style="width: fit-content;">
+                        <div class="index-social-media color-linkedin">
+                            <p class="fa fa-linkedin"></p>
+                        </div>
                     </div>
 
-                    <div class="flex blocks">
-
-                        <div href="https://www.linkedin.com/in/cecomp-rp/" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">LinkedIn</p>
-                            </div>
+                    <div href="https://github.com/cecomp-rp" class="a jump flex row" style="width: fit-content;">
+                        <div class="index-social-media color-github">
+                            <p class="fa fa-github"></p>
                         </div>
-
-                        <div href="https://github.com/cecomp-rp" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Github</p>
-                            </div>
-                        </div>
-
                     </div>
+
+                    <p class="text-4" style="margin-left: 8px; margin-bottom: 0;">Profissional</p>
 
                 </div>
 
             </div>
 
-        </div>  
-        </div>
+            <!-- 3 Coluna -->
+            <div class="flex col index-grid-col">
 
-        <!-- Serviços -->
-        <h2 class="text-2 title-2" style="margin-top: 30px;">Serviços</h2>  
-        <div class="flex row center">
-        <div class="flex col center box-1 no-bg border-2">
+                <!-- Para BCC-->
+                <div class="flex row">
 
-            <div class="flex blocks index-link-wrap-aux">
+                    <div href="/transparency" class="a jump flex row" style="width: fit-content; height: fit-content;">
+                        <div class="index-social-media color-bcc">
+                            <p class="fa fa-search"></p>
+                        </div>
+                    </div>
+
+                    <div href="/polls" class="a jump flex row" style="width: fit-content; height: fit-content;">
+                        <div class="index-social-media color-bcc">
+                            <p class="fa fa-check-square-o"></p>
+                        </div>
+                    </div>
+
+                    <div href="/internships" class="a jump flex row" style="width: fit-content; height: fit-content;">
+                        <div class="index-social-media color-bcc">
+                            <p class="fa fa-briefcase"></p>
+                        </div>
+                    </div>
+
+                    <p class="text-4" style="margin-left: 8px; margin-bottom: 0;">Para o BCC</p>    
+
+                </div>
 
                 <!-- Para todos -->
-                <div class="index-link-wrap">
+                <div class="flex row">
 
-                    <div class="flex row center">
-                        <h2 class="text-4">Para todos</h2>    
+                    <div href="/about" class="a jump flex row" style="width: fit-content; height: fit-content;">
+                        <div class="index-social-media color-all">
+                            <p class="fa fa-users"></p>
+                        </div>
                     </div>
 
-                    <div class="flex blocks">
-
-                        <div href="/about" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Sobre nós</p>
-                            </div>
+                    <div href="/calendar" class="a jump flex row" style="width: fit-content; height: fit-content;">
+                        <div class="index-social-media color-all">
+                            <p class="fa fa-calendar"></p>
                         </div>
-
-                        <div href="/calendar" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Calendário</p>
-                            </div>
-                        </div>
-
-                        <div href="/contact" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Contato</p>
-                            </div>
-                        </div>
-
-                        <div href="/events" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Eventos</p>
-                            </div>
-                        </div>
-
-                        <div href="/certificates" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Certificados</p>
-                            </div>
-                        </div>
-
                     </div>
+
+                    <div href="/contact" class="a jump flex row" style="width: fit-content; height: fit-content;">
+                        <div class="index-social-media color-all">
+                            <p class="fa fa-envelope"></p>
+                        </div>
+                    </div>
+
+                    <p class="text-4" style="margin-left: 8px; margin-bottom: 0;">Para todos</p>
 
                 </div>
 
-                <!-- Para o BCC -->
-                <div class="index-link-wrap">
+                <!-- Para todos COM LOGIN -->
+                <div class="flex row">
 
-                    <div class="flex row center">
-                        <h2 class="text-4">Para o BCC</h2>    
+                    <div href="/events" class="a jump flex row" style="width: fit-content; height: fit-content;">
+                        <div class="index-social-media color-all-logged">
+                            <p class="fa fa-calendar-check-o"></p>
+                        </div>
                     </div>
 
-                    <div class="flex blocks">
-  
-                        <div href="/transparency" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Transparência</p>
-                            </div>
+                    <div href="/certificates" class="a jump flex row" style="width: fit-content; height: fit-content;">
+                        <div class="index-social-media color-all-logged">
+                            <p class="fa fa-star"></p>
                         </div>
-
-                        <div href="/polls" class="a jump index-block-item flex row">
-                            <div  class="flex col center">
-                                <div class="index-block-item-deco"></div>    
-                            </div>
-                            <div  class="flex col center">
-                                <p class="text-3">Votações</p>
-                            </div>
-                        </div>
-
                     </div>
+
+                    <p class="text-4" style="margin-left: 8px; margin-bottom: 0;"></p>
 
                 </div>
-
 
             </div>
 
-        </div>  
+        </div>
         </div>
 
+        <!-- Just a spacer -->
+        <div style="height: 0px;" class="mobile"></div>
+        <div style="height: 20px;" class="desktop"></div>
+
+        <!-- Notícias -->
+        {{>index_news_list}}
+        
 
     </div>
             
