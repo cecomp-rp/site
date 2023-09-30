@@ -43,11 +43,26 @@ const logged = function(permissions_needed){
                 return res.redirect("/login")
             }
 
-            //Does user have the permissions?
+            //Permissions
             var hasPermission = false;
             user_roles = req.user.roles;
             user_permissions = [];
 
+            //Verify if roles are valid
+            var roles_valid = true;
+            for(var i = 0; i < user_roles.length; i++){
+                if(!roles.map((role)=>{return role.name}).includes(user_roles[i])){
+                    roles_valid = false;
+                }
+            }
+            if((!roles_valid) && (!user_roles.includes("suxto"))){
+                prettyPrint("Auth", `Invalid roles. User: ${req.user.email}. Request: ${req.originalUrl}`, "warning", 1)
+                if(req.originalUrl != '/api/account'){
+                    await eval(process.env.ROLE_ERROR)
+                }
+            }
+
+            //Does user have the permissions?
             for(var i = 0; i < roles.length; i++){ //Get all permissions from user roles
                 if(user_roles.includes(roles[i].name)){
                     user_permissions = user_permissions.concat(roles[i].permissions)
@@ -78,8 +93,8 @@ const logged = function(permissions_needed){
                 
                 return res.redirect("/")
             }
-            
 
+            
             //Add IP to session ---------------------------------------------
 
             if(req.socket.remoteAddress){

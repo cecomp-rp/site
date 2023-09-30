@@ -41,6 +41,11 @@ router.get("/store", (req, res) => {
     res.render("store")
 });
 
+//Suxto Page
+router.get("/suxto", (req, res) => {
+    res.render("suxto")
+});
+
 //ALL MEMBERS - LOGGED ----------------------------
 
 //Account Page

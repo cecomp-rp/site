@@ -63,6 +63,15 @@ p {
     margin-left: 10%;
 }
 
+.reduce-margin {
+    margin: 10px !important;
+}
+
+.reduce-padding {
+    padding: 5px !important;
+}
+
+
 /*ID*/
 
 #subtitle1-index {
@@ -81,3 +90,6 @@ p {
     top: -90px;
     right: -130px;
 }
+
+/*CONTEINERS*/
+
