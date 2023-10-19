@@ -142,11 +142,11 @@ router.get("/api/events/by_name/:name", logged(['basic_functions']), async (req,
 
         //If user is not admin, remove activities ids
         if(!req.user.admin){
-            event = filterObject(
-                event, //object
-                ['name', 'title', 'startDate', 'endDate', 'roleRestriction', 'description', 'created_at', 'updated_at', '_id'], //allowed atributes
-                {} //rename atributes
-            );
+            
+            event.activities.forEach((activity) => {
+                activity._id = undefined;
+            })
+
         }
 
         const content = filterObject(

@@ -23,7 +23,8 @@ async function sendMail (subject, to, content){
     //Add footer
     const content_footer = `
     <br><br>
-    <p>Você pode desabilitar o recebimento de emails em: <p>
+    <p>----------------------------------------------------------</p>
+    <p>Você pode desabilitar o recebimento de emails em: </p>
     <a href='https://cecomp.com.br/account'>cecomp.com.br/account</a>
     `;
     content = content + content_footer;
