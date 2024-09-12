@@ -1,3 +1,6 @@
+require('dotenv').config({ path: './config/dev.env' });  // Para o ambiente de desenvolvimento
+// ou
+require('dotenv').config({ path: './config/prod.env' });  // Para o ambiente de produção
 const fs                    = require('fs');
 const https                 = require('https');
 const path                  = require('path');
@@ -55,8 +58,8 @@ exp.use((req, res, next) => {
 const session = cookieSession({
   name: 'session',
   keys: [process.env.SESSION_KEY_1, process.env.SESSION_KEY_1]
-})
-exp.use(session)
+});
+exp.use(session);
 exp.use(passport.initialize());
 exp.use(passport.session());
 
