@@ -1,5 +1,7 @@
 # CEComp's site
 
+NEVER commit the directly in the main branch. DO NOT change the code unless the full functionality of the app is confirmed. DO NOT overwrite the backup branch before the documentation is finished. If something goes wrong, the branch is there to restore the latest stable version. Respect the development process described in this readme, and futurely in the documentation.
+
 ## How to contribute
 ### Issues
 You can report a bug or request a new feature on the Issues tab.
