@@ -39,7 +39,7 @@
     "mongoose-unix-timestamp": "^1.0.6",
     "nodemailer": "^6.9.3",
     "openai": "^4.56.0",
-    "passport": "^0.7.0",
+    "passport": "0.4.1",
     "passport-google-oauth20": "2.0.0",
     "path-to-regexp": "^6.2.1",
     "python-shell": "^5.0.0",
